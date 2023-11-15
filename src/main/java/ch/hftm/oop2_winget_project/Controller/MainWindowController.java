@@ -1,9 +1,9 @@
-package ch.hftm.oop2_winget_project;
+package ch.hftm.oop2_winget_project.Controller;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
-public class HelloController {
+public class MainWindowController {
     @FXML
     private Label welcomeText;
 

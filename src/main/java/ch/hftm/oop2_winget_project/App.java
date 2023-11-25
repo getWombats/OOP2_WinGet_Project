@@ -1,5 +1,6 @@
 package ch.hftm.oop2_winget_project;
 
+import ch.hftm.oop2_winget_project.Features.WinGetQuery;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -14,8 +15,9 @@ public class App extends Application
     {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Views/MainWindow.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 1180, 480);
-        stage.setTitle("WinGet Project OOP2 blubb");
+        stage.setTitle("WinGet Project");
         stage.setScene(scene);
+        WinGetQuery.setWinGetLanguage(); // Get system language and set
         stage.show();
     }
 

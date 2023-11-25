@@ -5,15 +5,16 @@ import ch.hftm.oop2_winget_project.Features.WinGetQuery;
 import ch.hftm.oop2_winget_project.Models.WinGetPackage;
 import ch.hftm.oop2_winget_project.Api.TableViewModificationable;
 import ch.hftm.oop2_winget_project.Utils.PromptExitCode;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyCode;
 
 import java.net.URL;
-import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class SearchPackagesController implements TableViewModificationable, Initializable
@@ -30,46 +31,36 @@ public class SearchPackagesController implements TableViewModificationable, Init
     private TableColumn<WinGetPackage, String> versionColumn;
     @FXML
     private TextField keywordTextField;
+    @FXML
+    private Label tableViewPlaceholderLabel;
 
-    private static ObservableList<WinGetPackage> packageList;
+    private static ObservableList<WinGetPackage> packageList = FXCollections.observableArrayList();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
+        tableViewPlaceholderLabel = new Label();
+
         setTableViewData();
         setTableViewSource();
 
-        searchTableView.setPlaceholder(new Label("Software suchen"));
+        tableViewPlaceholderLabel.setText("Suchbegriff eingeben und Pakete suchen");
+        searchTableView.setPlaceholder(tableViewPlaceholderLabel);
+
+        keywordTextField.setOnKeyPressed( event -> {
+            if( event.getCode() == KeyCode.ENTER )
+            {
+                searchPackages();
+            }
+        } );
     }
 
     @FXML
-    void searchKeywordButtonClick(ActionEvent event)
+    private void searchButtonClick(ActionEvent event)
     {
-        String searchKeyword = keywordTextField.getText().trim();
-
-        if(!searchKeyword.isEmpty())
-        {
-            packageList = FXCollections.observableArrayList(Objects.requireNonNull(WinGetQuery.QueryToList(QueryType.SEARCH, searchKeyword)));
-
-            if(WinGetQuery.getPromptExitCode() == PromptExitCode.OK.getValue())
-            {
-                refreshTableViewContent();
-            }
-            else
-            {
-                if(searchTableView.getItems() != null)
-                {
-                    searchTableView.getItems().clear();
-                }
-
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setHeaderText("Keine Pakete mit dem Suchbegriff '" + searchKeyword + "' gefunden");
-                alert.setTitle("");
-                alert.show();
-
-            }
-        }
+        searchPackages();
     }
+
     @Override
     public void setTableViewData()
     {
@@ -96,5 +87,35 @@ public class SearchPackagesController implements TableViewModificationable, Init
     public WinGetPackage getObjectFromSelection()
     {
         return searchTableView.getSelectionModel().getSelectedItem();
+    }
+
+    private void searchPackages()
+    {
+        String searchKeyword = keywordTextField.getText().trim();
+
+        if (!searchKeyword.isEmpty())
+        {
+            if (searchTableView.getItems() != null)
+            {
+                searchTableView.getItems().clear();
+            }
+
+            tableViewPlaceholderLabel.setText("Pakete werden geladen...");
+
+            new Thread(() -> {
+                WinGetQuery.QueryToList(QueryType.SEARCH, searchKeyword, packageList);
+
+                Platform.runLater(() -> {
+                    if (WinGetQuery.getPromptExitCode() == PromptExitCode.OK.getValue())
+                    {
+                        refreshTableViewContent();
+                    }
+                    else
+                    {
+                        tableViewPlaceholderLabel.setText("Keine Pakete gefunden");
+                    }
+                });
+            }).start();
+        }
     }
 }

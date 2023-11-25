@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+
+
+<BorderPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity"
+            minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/20.0.1"
+            fx:controller="ch.hftm.oop2_winget_project.Controller.SearchPackagesController">
+   <top>
+      <HBox prefHeight="50.0" spacing="50.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox prefHeight="200.0" spacing="20.0">
+               <children>
+                  <TextField fx:id="keywordTextField" prefWidth="220.0" promptText="Suchbegriff eingeben" />
+                  <Button mnemonicParsing="false" onAction="#searchKeywordButtonClick" text="Suchen" />
+               </children>
+            </HBox>
+         </children>
+      </HBox>
+   </top>
+   <center>
+      <TableView fx:id="searchTableView" prefHeight="200.0" BorderPane.alignment="CENTER">
+        <columns>
+          <TableColumn fx:id="nameColumn" minWidth="220.0" prefWidth="-1.0" text="Name" />
+          <TableColumn fx:id="idColumn" minWidth="220.0" prefWidth="-1.0" text="ID" />
+            <TableColumn fx:id="versionColumn" minWidth="350.0" prefWidth="-1.0" text="Version" />
+            <TableColumn fx:id="sourceColumn" minWidth="130.0" prefWidth="-1.0" text="Quelle" />
+        </columns>
+      </TableView>
+   </center>
+</BorderPane>

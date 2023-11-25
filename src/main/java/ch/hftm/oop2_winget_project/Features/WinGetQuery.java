@@ -58,6 +58,13 @@ public class WinGetQuery
             ProcessBuilder processBuilder = new ProcessBuilder("winget", queryType.toString(), keyWord);
             processBuilder.redirectErrorStream(true);
             Process process = processBuilder.start();
+
+            if(!process.isAlive())
+            {
+                consoleExitCode = 66;
+                return;
+            }
+
             BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
 
             String readerLine;
@@ -138,20 +145,20 @@ public class WinGetQuery
                 }
             }
         }
-        catch (IOException | InterruptedException e)
+        catch (IOException | InterruptedException ex)
         {
             // Exceptionhandler?
         }
-        catch (IndexOutOfBoundsException e)
+        catch (IndexOutOfBoundsException ex)
         {
-            // Exceptionhandler?
+            System.out.println("Index fail");
         }
     }
 
     // Unicode Han = Asia
-    public static boolean containsHanScript(String s)
+    public static boolean containsHanScript(String line)
     {
-        return s.codePoints().anyMatch(
+        return line.codePoints().anyMatch(
                 codepoint ->
                         Character.UnicodeScript.of(codepoint) == Character.UnicodeScript.HAN);
     }

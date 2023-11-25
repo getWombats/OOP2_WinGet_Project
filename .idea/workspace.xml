@@ -6,9 +6,12 @@
   <component name="ChangeListManager">
     <list default="true" id="f4e04fd4-4100-4b0d-af91-9dcce810067d" name="Changes" comment="Layout test">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ch/hftm/oop2_winget_project/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/hftm/oop2_winget_project/App.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ch/hftm/oop2_winget_project/Controller/MainWindowController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/hftm/oop2_winget_project/Controller/MainWindowController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ch/hftm/oop2_winget_project/Controller/SearchPackagesController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/hftm/oop2_winget_project/Controller/SearchPackagesController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ch/hftm/oop2_winget_project/Features/QueryType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/hftm/oop2_winget_project/Features/QueryType.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ch/hftm/oop2_winget_project/Features/WinGetQuery.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/hftm/oop2_winget_project/Features/WinGetQuery.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/ch/hftm/oop2_winget_project/Views/SearchPackages.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ch/hftm/oop2_winget_project/Views/SearchPackages.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/ch/hftm/oop2_winget_project/Views/MainWindow.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ch/hftm/oop2_winget_project/Views/MainWindow.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,7 +54,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "last_opened_file_path": "D:/Dev/Repos/OOP2_WinGet_Project",
+    "last_opened_file_path": "D:/Dev/Repos/wingetinstaller",
     "project.structure.last.edited": "Project",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.24379562",

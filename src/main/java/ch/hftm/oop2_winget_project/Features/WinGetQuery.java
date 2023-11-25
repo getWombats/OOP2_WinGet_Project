@@ -2,6 +2,7 @@ package ch.hftm.oop2_winget_project.Features;
 
 import ch.hftm.oop2_winget_project.Models.WinGetPackage;
 import ch.hftm.oop2_winget_project.Utils.PromptExitCode;
+import javafx.collections.ObservableList;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -48,11 +49,10 @@ public class WinGetQuery
         }
     }
 
-    public static List<WinGetPackage> QueryToList(QueryType queryType, String keyWord)
+    public static void QueryToList(QueryType queryType, String keyWord, ObservableList<WinGetPackage> packageList)
     {
         try
         {
-            List<WinGetPackage> packageList = new ArrayList<>();
             List<String> rawDataList = new ArrayList<>();
 
             ProcessBuilder processBuilder = new ProcessBuilder("winget", queryType.toString(), keyWord);
@@ -136,12 +136,6 @@ public class WinGetQuery
                         packageList.add(winGetPackage);
                     }
                 }
-
-                return packageList;
-            }
-            else
-            {
-                return packageList;
             }
         }
         catch (IOException | InterruptedException e)
@@ -152,8 +146,6 @@ public class WinGetQuery
         {
             // Exceptionhandler?
         }
-
-        return null;
     }
 
     // Unicode Han = Asia

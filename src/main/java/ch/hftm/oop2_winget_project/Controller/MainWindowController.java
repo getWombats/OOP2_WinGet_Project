@@ -17,7 +17,24 @@ public class MainWindowController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
-        WinGetQuery.setWinGetLanguage();
         StageAndSceneManager.loadFxmlToBorderPaneCenter(mainWindowBorderPane, "Views/SearchPackages");
+    }
+
+    @FXML
+    private void menuSearchButtonClick()
+    {
+        StageAndSceneManager.loadFxmlToBorderPaneCenter(mainWindowBorderPane, "Views/SearchPackages");
+    }
+
+    @FXML
+    private void menuUpdateButtonClick()
+    {
+//        StageAndSceneManager.loadFxmlToBorderPaneCenter(mainWindowBorderPane, "Views/UpdatePackages");
+    }
+
+    @FXML
+    private void menuInstalledPackagesButtonClick()
+    {
+//        StageAndSceneManager.loadFxmlToBorderPaneCenter(mainWindowBorderPane, "Views/InstalledPackages");
     }
 }

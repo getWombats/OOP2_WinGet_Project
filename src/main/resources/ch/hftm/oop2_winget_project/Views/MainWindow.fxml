@@ -9,11 +9,13 @@
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="780.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.hftm.oop2_winget_project.Controller.MainWindowController">
    <BorderPane prefHeight="200.0" prefWidth="200.0">
       <left>
-         <VBox prefHeight="200.0" BorderPane.alignment="CENTER">
+         <VBox prefHeight="200.0" spacing="25.0" BorderPane.alignment="CENTER">
             <padding>
                <Insets top="100.0" />
             </padding>
-            <Button mnemonicParsing="false" prefWidth="100.0" text="Pakete Suchen" />
+            <Button mnemonicParsing="false" onAction="#menuSearchButtonClick" prefWidth="170.0" text="Pakete Suchen" />
+            <Button mnemonicParsing="false" onAction="#menuUpdateButtonClick" prefWidth="170.0" text="Updates suchen" />
+            <Button mnemonicParsing="false" onAction="#menuInstalledPackagesButtonClick" prefWidth="170.0" text="Installierte Pakete" />
          </VBox>
       </left>
       <center>

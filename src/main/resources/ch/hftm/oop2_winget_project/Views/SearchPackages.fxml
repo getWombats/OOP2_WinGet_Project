@@ -17,7 +17,7 @@
             <HBox prefHeight="200.0" spacing="20.0">
                <children>
                   <TextField fx:id="keywordTextField" prefWidth="220.0" promptText="Suchbegriff eingeben" />
-                  <Button mnemonicParsing="false" onAction="#searchKeywordButtonClick" text="Suchen" />
+                  <Button mnemonicParsing="false" onAction="#searchButtonClick" text="Suchen" />
                </children>
             </HBox>
          </children>

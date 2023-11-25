@@ -8,7 +8,6 @@ import ch.hftm.oop2_winget_project.Utils.PromptExitCode;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -33,8 +32,9 @@ public class SearchPackagesController implements TableViewModificationable, Init
     private TextField keywordTextField;
     @FXML
     private Label tableViewPlaceholderLabel;
-
+    private boolean isSearchThreadWorking;
     private static ObservableList<WinGetPackage> packageList = FXCollections.observableArrayList();
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
@@ -56,7 +56,7 @@ public class SearchPackagesController implements TableViewModificationable, Init
     }
 
     @FXML
-    private void searchButtonClick(ActionEvent event)
+    private void searchButtonClick()
     {
         searchPackages();
     }
@@ -93,7 +93,7 @@ public class SearchPackagesController implements TableViewModificationable, Init
     {
         String searchKeyword = keywordTextField.getText().trim();
 
-        if (!searchKeyword.isEmpty())
+        if (!searchKeyword.isEmpty() && !isSearchThreadWorking)
         {
             if (searchTableView.getItems() != null)
             {
@@ -102,6 +102,7 @@ public class SearchPackagesController implements TableViewModificationable, Init
 
             tableViewPlaceholderLabel.setText("Pakete werden geladen...");
 
+            isSearchThreadWorking = true;
             new Thread(() -> {
                 WinGetQuery.QueryToList(QueryType.SEARCH, searchKeyword, packageList);
 
@@ -109,6 +110,7 @@ public class SearchPackagesController implements TableViewModificationable, Init
                     if (WinGetQuery.getPromptExitCode() == PromptExitCode.OK.getValue())
                     {
                         refreshTableViewContent();
+                        isSearchThreadWorking = false;
                     }
                     else
                     {

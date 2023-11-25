@@ -15,5 +15,12 @@ public enum QueryType
         {
             return "list";
         }
+    },
+    INSTALL {
+        @Override
+        public String toString()
+        {
+            return "install";
+        }
     }
 }

@@ -1,7 +1,6 @@
 package ch.hftm.oop2_winget_project;
 
 import ch.hftm.oop2_winget_project.Features.WinGetQuery;
-import ch.hftm.oop2_winget_project.Utils.Languages;
 import ch.hftm.oop2_winget_project.Utils.SystemLanguage;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

@@ -2,6 +2,7 @@ package ch.hftm.oop2_winget_project.Features;
 
 import ch.hftm.oop2_winget_project.Models.WinGetPackage;
 import ch.hftm.oop2_winget_project.Utils.PromptExitCode;
+import ch.hftm.oop2_winget_project.Utils.SystemLanguage;
 import javafx.collections.ObservableList;
 
 import java.io.BufferedReader;

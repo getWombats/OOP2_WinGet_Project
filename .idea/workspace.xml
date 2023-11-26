@@ -5,13 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f4e04fd4-4100-4b0d-af91-9dcce810067d" name="Changes" comment="Layout test">
+      <change afterPath="$PROJECT_DIR$/src/main/java/ch/hftm/oop2_winget_project/Utils/Languages.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ch/hftm/oop2_winget_project/Utils/SystemLanguage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ch/hftm/oop2_winget_project/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/hftm/oop2_winget_project/App.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ch/hftm/oop2_winget_project/Controller/MainWindowController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/hftm/oop2_winget_project/Controller/MainWindowController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ch/hftm/oop2_winget_project/Controller/SearchPackagesController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/hftm/oop2_winget_project/Controller/SearchPackagesController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ch/hftm/oop2_winget_project/Features/QueryType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/hftm/oop2_winget_project/Features/QueryType.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ch/hftm/oop2_winget_project/Features/WinGetQuery.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/hftm/oop2_winget_project/Features/WinGetQuery.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/ch/hftm/oop2_winget_project/Views/MainWindow.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ch/hftm/oop2_winget_project/Views/MainWindow.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,16 +53,21 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "dev",
     "last_opened_file_path": "D:/Dev/Repos/wingetinstaller",
     "project.structure.last.edited": "Project",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.24379562",
-    "settings.editor.selected.configurable": "project.propVCSSupport.DirectoryMappings"
+    "settings.editor.selected.configurable": "preferences.keymap"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\lucab\Repositories\OOP2_WinGet_Project\src\main\java\ch\hftm\oop2_winget_project\Utils" />
       <recent name="D:\Dev\Repos\OOP2_WinGet_Project\src\main\resources\ch\hftm\oop2_winget_project\Views" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="ch.hftm.oop2_winget_project.Utils" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -92,5 +96,15 @@
     </ignored-roots>
     <MESSAGE value="Layout test" />
     <option name="LAST_COMMIT_MESSAGE" value="Layout test" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.lang.StringIndexOutOfBoundsException" package="java.lang" />
+          <option name="timeStamp" value="1" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

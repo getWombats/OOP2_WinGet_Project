@@ -1,0 +1,222 @@
+package ch.hftm.oop2_winget_project.Utils;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+public enum LanguagesCopy {
+
+
+    EN {
+        public static String getColumnHeaderIdText()
+        {
+            return "id";
+        }
+        public static String getColumnHeaderVersionText()
+        {
+            return "version";
+        }
+        public static String getColumnHeaderAvailableText()
+        {
+            return "match";
+        }
+        public static String getColumnHeaderMatchText()
+        {
+            return "available";
+        }
+        public static String getColumnHeaderSourceText()
+        {
+            return "source";
+        }
+
+    },
+    DE {
+        public static String getColumnHeaderIdText()
+        {
+            return "id";
+        }
+        public static String getColumnHeaderVersionText()
+        {
+            return "version";
+        }
+        public static String getColumnHeaderAvailableText()
+        {
+            return "übereinstimmung";
+        }
+        public static String getColumnHeaderMatchText()
+        {
+            return "verfügbar";
+        }
+        public static String getColumnHeaderSourceText()
+        {
+            return "quelle";
+        }
+    },
+    FR {
+        public static String getColumnHeaderIdText()
+        {
+            return "id";
+        }
+        public static String getColumnHeaderVersionText()
+        {
+            return "version";
+        }
+        public static String getColumnHeaderAvailableText()
+        {
+            return "concordance";
+        }
+        public static String getColumnHeaderMatchText()
+        {
+            return "disponsible";
+        }
+        public static String getColumnHeaderSourceText()
+        {
+            return "source";
+        }
+    };
+
+    public static LanguagesCopy getPrefferedLanguage(){
+        try
+        {
+            String prefferedLanguage = "en";
+            ProcessBuilder processBuilder = new ProcessBuilder("REG QUERY \"HKEY_Current_User\\Control Panel\\International\\User Profile\" /v Languages /t REG_MULTI_SZ /se _");
+            processBuilder.redirectErrorStream(true);
+            Process process_getPrefLang = processBuilder.start();
+
+            BufferedReader reader = new BufferedReader(new InputStreamReader(process_getPrefLang.getInputStream()));
+
+            String rawDataStream;
+
+            while ((rawDataStream = reader.readLine()) != null) {
+                System.out.println(rawDataStream);
+            }
+
+            reader.close();
+            System.out.println(rawDataStream);
+//            consoleExitCode = process_getPrefLang.waitFor();
+
+            if (process_getPrefLang.waitFor() == 0) {
+                String preferedLanguages = rawDataStream.substring(rawDataStream.indexOf("REG_MULTI_SZ") + "REG_MULTI_SZ".length()).trim();
+                System.out.println(preferedLanguages);
+                prefferedLanguage = preferedLanguages.substring(0, 2);
+            }
+
+            switch (preferredLanguage) {
+//                case "ar": // Arabic
+//                    return Languages.AR;
+//                case "eu": // Basque
+//                    return Languages.EU;
+//                case "bg": // Bulgarian
+//                    return Languages.BG;
+//                case "ca": // Catalan
+//                    return Languages.CA;
+//                case "zh": // Chinese
+//                    return Languages.ZH;
+//                case "hr": // Croatian
+//                    return Languages.HR;
+//                case "cs": // Czech
+//                    return Languages.CS;
+//                case "da": // Danish
+//                    return Languages.DA;
+//                case "nl": // Dutch
+//                    return Languages.NL;
+                case "en": // English
+                    return LanguagesCopy.EN;
+//                case "et": // Estonian
+//                    return Languages.ET;
+//                case "fi": // Finnish
+//                    return Languages.FI;
+                case "fr": // French
+                    return LanguagesCopy.FR;
+//                case "gl": // Galician
+//                    return Languages.GL;
+                case "de": // German
+                    return LanguagesCopy.DE;
+//                case "el": // Greek
+//                    return Languages.EL;
+//                case "he": // Hebrew
+//                    return Languages.HE;
+//                case "hu": // Hungarian
+//                    return Languages.HU;
+//                case "id": // Indonesian
+//                    return Languages.ID;
+//                case "it": // Italian
+//                    return Languages.IT;
+//                case "ja": // japanese
+//                    return Languages.JA;
+//                case "ko": // Korean
+//                    return Languages.KO;
+//                case "lv": // Latvian
+//                    return Languages.LV;
+//                case "lt": // Lithuanian
+//                    return Languages.LT;
+//                case "nb": // Norwegian
+//                    return Languages.NB;
+//                case "pl": // Polish
+//                    return Languages.PL;
+//                case "pt": // Portuguese
+//                    return Languages.PT;
+//                case "ro": // Romanian
+//                    return Languages.RO;
+//                case "ru": // Russian
+//                    return Languages.RU;
+//                case "sr": // Serbian
+//                    return Languages.SR;
+//                case "sk": // Slovak
+//                    return Languages.SK;
+//                case "es": // Spanish
+//                    return Languages.ES;
+//                case "sv": // Swedish
+//                    return Languages.SV;
+//                case "th": // Thai
+//                    return Languages.TH;
+//                case "tr": // Turkish
+//                    return Languages.TR;
+//                case "uk": // Ukranian
+//                    return Languages.UK;
+//                case "vi": // Vietnamese
+//                    return Languages.VI;
+                default:
+                    return LanguagesCopy.EN;
+
+            }
+        }
+        catch (IOException | InterruptedException ex) {
+            ex.fillInStackTrace();
+        }
+    }
+}
+
+
+
+// Method- get user preffered language
+//public static void getPreferedLanguage() {
+//    try {
+//        String prefferedLanguage = "en";
+//        ProcessBuilder processBuilder = new ProcessBuilder("REG QUERY \"HKEY_Current_User\\Control Panel\\International\\User Profile\" /v Languages /t REG_MULTI_SZ /se _");
+//        processBuilder.redirectErrorStream(true);
+//        Process process_getPrefLang = processBuilder.start();
+//
+//        BufferedReader reader = new BufferedReader(new InputStreamReader(process_getPrefLang.getInputStream()));
+//
+//        String rawDataStream;
+//
+//        while ((rawDataStream = reader.readLine()) != null) {
+//            System.out.println(rawDataStream);
+//        }
+//
+//        reader.close();
+//        System.out.println(rawDataStream);
+//
+//        consoleExitCode = process_getPrefLang.waitFor();
+//
+//        if (process_getPrefLang.waitFor() == 0) {
+//            String preferedLanguages = rawDataStream.substring(rawDataStream.indexOf("REG_MULTI_SZ") + "REG_MULTI_SZ".length()).trim();
+//            System.out.println(preferedLanguages);
+//            prefferedLanguage = preferedLanguages.substring(0, 2);
+//        }
+//    }
+//    catch (IOException | InterruptedException ex) {
+//        ex.fillInStackTrace();
+//    }
+//}

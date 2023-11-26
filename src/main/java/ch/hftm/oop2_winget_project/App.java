@@ -18,7 +18,6 @@ public class App extends Application
         Scene scene = new Scene(fxmlLoader.load(), 1180, 480);
         stage.setTitle("WinGet Project");
         stage.setScene(scene);
-        System.out.println(SystemLanguage.getPreferedLanguage());
         WinGetQuery.setWinGetLanguage(); // Get system language and set
         stage.show();
     }

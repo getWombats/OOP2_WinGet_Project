@@ -33,11 +33,9 @@ public class SystemLanguage {
 
             while ((readerLine = reader.readLine()) != null) {
                 rawDataList.add(readerLine);
-                System.out.println(readerLine);
             }
 
             reader.close();
-            System.out.println(rawDataList);
 
             consoleExitCode = process_getPrefLang.waitFor();
 
@@ -46,7 +44,6 @@ public class SystemLanguage {
             {
                 if(isLanguageLine(line)){
                     String preferedLanguages = line.substring(line.indexOf("REG_MULTI_SZ") + "REG_MULTI_SZ".length()).trim();
-                    System.out.println(preferedLanguages);
                     prefferedLanguage = preferedLanguages.substring(0, 2);
                 }
             }

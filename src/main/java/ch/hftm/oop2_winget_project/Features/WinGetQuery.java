@@ -96,19 +96,19 @@ public class WinGetQuery
                     if(isHeaderLine(line))
                     {
                         columnSeparatorIndexId = line.toLowerCase().indexOf(columnHeaderIdText);
-                        System.out.println("columnSeparatorIndexId:" + columnSeparatorIndexId);
+                        // System.out.println("columnSeparatorIndexId:" + columnSeparatorIndexId);
                         columnSeparatorIndexVersion = line.toLowerCase().indexOf(columnHeaderVersionText);
-                        System.out.println("columnSeparatorIndexVersion: " + columnSeparatorIndexVersion);
+                        // System.out.println("columnSeparatorIndexVersion: " + columnSeparatorIndexVersion);
 
                         if(line.toLowerCase().contains(columnHeaderMatchText))
                         {
                             columnSeparatorIndexAvailableOrMatch = line.toLowerCase().indexOf(columnHeaderMatchText);
-                            System.out.println("columnSeparatorIndexAvailableOrMatch - Match: " + columnSeparatorIndexAvailableOrMatch);
+                            // System.out.println("columnSeparatorIndexAvailableOrMatch - Match: " + columnSeparatorIndexAvailableOrMatch);
                         }
                         else if (line.toLowerCase().contains(columnHeaderAvailableText))
                         {
                             columnSeparatorIndexAvailableOrMatch = line.toLowerCase().indexOf(columnHeaderAvailableText);
-                            System.out.println("columnSeparatorIndexAvailableOrMatch - Avaiable: " + columnSeparatorIndexAvailableOrMatch);
+                            // System.out.println("columnSeparatorIndexAvailableOrMatch - Avaiable: " + columnSeparatorIndexAvailableOrMatch);
                         }
 
                         columnSeparatorIndexSource = line.toLowerCase().indexOf(columnHeaderSourceText);
@@ -160,8 +160,6 @@ public class WinGetQuery
         catch (IndexOutOfBoundsException ex)
         {
             ex.printStackTrace();
-            System.out.println("Index fail");
-
         }
     }
 
@@ -175,14 +173,14 @@ public class WinGetQuery
 
     private static boolean isHeaderLine(String line)
     {
-        if (!(headerCounter == 0 && !line.isBlank() && !line.contains("-") && line.toLowerCase().contains(columnHeaderIdText))){
-        System.out.println("isHeaderLine == false:" + line);
-        }
-
-        if ((headerCounter == 0 && !line.isBlank() && !line.contains("-") && line.toLowerCase().contains(columnHeaderIdText))){
-            System.out.println("isHeaderLine == true:" + line);
-        }
-
+//        Code to test headders if multiple languages are implemented in the future.
+//        if (!(headerCounter == 0 && !line.isBlank() && !line.contains("-") && line.toLowerCase().contains(columnHeaderIdText))){
+//        System.out.println("isHeaderLine == false:" + line);
+//        }
+//
+//        if ((headerCounter == 0 && !line.isBlank() && !line.contains("-") && line.toLowerCase().contains(columnHeaderIdText))){
+//            System.out.println("isHeaderLine == true:" + line);
+//        }
         return headerCounter == 0 && !line.isBlank() && !line.contains("-") && !line.contains("\\") && !line.contains("|") && line.toLowerCase().contains(columnHeaderIdText);
     }
 

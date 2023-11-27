@@ -8,6 +8,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Locale;
 
 public class App extends Application
 {
@@ -18,6 +19,15 @@ public class App extends Application
         Scene scene = new Scene(fxmlLoader.load(), 1180, 480);
         stage.setTitle("WinGet Project");
         stage.setScene(scene);
+        Locale defaultLocale = Locale.getDefault();
+        System.out.println(defaultLocale);
+        String displayCountry = defaultLocale.getDisplayCountry();
+        System.out.println(displayCountry);
+        String language = defaultLocale.getLanguage();
+        System.out.println(language);
+        String country = defaultLocale.getCountry();
+        System.out.println(country);
+
         WinGetQuery.setWinGetLanguage(); // Get system language and set
         stage.show();
     }

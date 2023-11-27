@@ -181,7 +181,7 @@ public class WinGetQuery
 //        if ((headerCounter == 0 && !line.isBlank() && !line.contains("-") && line.toLowerCase().contains(columnHeaderIdText))){
 //            System.out.println("isHeaderLine == true:" + line);
 //        }
-        return headerCounter == 0 && !line.isBlank() && !line.contains("-") && !line.contains("\\") && !line.contains("|") && line.toLowerCase().contains(columnHeaderIdText);
+        return headerCounter == 0 && !line.isBlank() && !line.contains("-") && !line.contains("\\") && !line.contains("|") && !line.contains("▒") && !line.contains("█") && line.toLowerCase().contains(columnHeaderIdText);
     }
 
     private static boolean isPackageLine(String line)

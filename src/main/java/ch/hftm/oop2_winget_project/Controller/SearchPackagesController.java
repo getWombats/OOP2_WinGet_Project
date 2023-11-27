@@ -110,12 +110,12 @@ public class SearchPackagesController implements TableViewModificationable, Init
                     if (WinGetQuery.getPromptExitCode() == PromptExitCode.OK.getValue())
                     {
                         refreshTableViewContent();
-                        isSearchThreadWorking = false;
                     }
                     else
                     {
                         tableViewPlaceholderLabel.setText("Keine Pakete gefunden");
                     }
+                    isSearchThreadWorking = false;
                 });
             }).start();
         }

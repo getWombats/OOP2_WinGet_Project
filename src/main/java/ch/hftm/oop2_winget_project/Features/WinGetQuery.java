@@ -186,7 +186,7 @@ public class WinGetQuery
 
     private static boolean isPackageLine(String line)
     {
-        return !line.contains("-") && !line.toLowerCase().contains(columnHeaderIdText) && !line.isBlank();
+        return !line.contains("-") && !line.toLowerCase().contains(columnHeaderIdText) && !line.isBlank() && !line.contains("▒") && !line.contains("█");
     }
 
     public static long getPromptExitCode()

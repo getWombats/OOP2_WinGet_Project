@@ -33,7 +33,7 @@ public class SearchPackagesController implements TableViewModificationable, Init
     @FXML
     private Label tableViewPlaceholderLabel;
     private boolean isSearchThreadWorking;
-    private static ObservableList<WinGetPackage> packageList = FXCollections.observableArrayList();
+    private static final ObservableList<WinGetPackage> packageList = FXCollections.observableArrayList();
 
 
     @Override

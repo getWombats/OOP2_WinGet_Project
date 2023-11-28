@@ -32,7 +32,7 @@ public class SearchPackagesController implements TableViewModificationable, Init
     private TextField keywordTextField;
     @FXML
     private Label tableViewPlaceholderLabel;
-    private boolean isSearchThreadWorking;
+    private boolean isThreadWorking;
     private static final ObservableList<WinGetPackage> packageList = FXCollections.observableArrayList();
 
 
@@ -93,7 +93,7 @@ public class SearchPackagesController implements TableViewModificationable, Init
     {
         String searchKeyword = keywordTextField.getText().trim();
 
-        if (!searchKeyword.isEmpty() && !isSearchThreadWorking)
+        if (!searchKeyword.isEmpty() && !isThreadWorking)
         {
             if (searchTableView.getItems() != null)
             {
@@ -102,7 +102,7 @@ public class SearchPackagesController implements TableViewModificationable, Init
 
             tableViewPlaceholderLabel.setText("Pakete werden geladen...");
 
-            isSearchThreadWorking = true;
+            isThreadWorking = true;
             new Thread(() -> {
                 WinGetQuery query = new WinGetQuery();
                 query.QueryToList(QueryType.SEARCH, searchKeyword, packageList);
@@ -116,7 +116,7 @@ public class SearchPackagesController implements TableViewModificationable, Init
                     {
                         tableViewPlaceholderLabel.setText("Keine Pakete gefunden");
                     }
-                    isSearchThreadWorking = false;
+                    isThreadWorking = false;
                 });
             }).start();
         }

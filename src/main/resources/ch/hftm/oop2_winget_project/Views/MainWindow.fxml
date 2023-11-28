@@ -6,8 +6,8 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="780.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.hftm.oop2_winget_project.Controller.MainWindowController">
-   <BorderPane prefHeight="200.0" prefWidth="200.0">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.hftm.oop2_winget_project.Controller.MainWindowController">
+   <BorderPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
       <left>
          <VBox prefHeight="200.0" spacing="25.0" BorderPane.alignment="CENTER">
             <padding>
@@ -19,14 +19,14 @@
          </VBox>
       </left>
       <center>
-         <BorderPane fx:id="mainWindowBorderPane" BorderPane.alignment="CENTER">
-            <BorderPane.margin>
-               <Insets />
-            </BorderPane.margin>
+         <BorderPane fx:id="mainWindowBorderPane" minHeight="450.0" minWidth="800.0" style="-fx-background-color: gray;" BorderPane.alignment="TOP_LEFT">
             <padding>
                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
             </padding>
          </BorderPane>
       </center>
+      <top>
+         <AnchorPane prefHeight="30.0" style="-fx-background-color: black;" BorderPane.alignment="CENTER" />
+      </top>
    </BorderPane>
 </AnchorPane>

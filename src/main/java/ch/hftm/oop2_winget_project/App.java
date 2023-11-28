@@ -19,6 +19,7 @@ public class App extends Application
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("WinGet Project");
         stage.setScene(scene);
+        stage.setResizable(false);
 //        Locale defaultLocale = Locale.getDefault();
 //        System.out.println(defaultLocale);
 //        String displayCountry = defaultLocale.getDisplayCountry();

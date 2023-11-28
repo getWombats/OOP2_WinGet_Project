@@ -1,10 +1,10 @@
 package ch.hftm.oop2_winget_project.Controller;
 
 import ch.hftm.oop2_winget_project.Features.QueryType;
-import ch.hftm.oop2_winget_project.Features.WinGetQuery;
+import ch.hftm.oop2_winget_project.Models.WinGetQuery;
 import ch.hftm.oop2_winget_project.Models.WinGetPackage;
 import ch.hftm.oop2_winget_project.Api.TableViewModificationable;
-import ch.hftm.oop2_winget_project.Utils.PromptExitCode;
+import ch.hftm.oop2_winget_project.Utils.ConsoleExitCode;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -104,10 +104,11 @@ public class SearchPackagesController implements TableViewModificationable, Init
 
             isSearchThreadWorking = true;
             new Thread(() -> {
-                WinGetQuery.QueryToList(QueryType.SEARCH, searchKeyword, packageList);
+                WinGetQuery query = new WinGetQuery();
+                query.QueryToList(QueryType.SEARCH, searchKeyword, packageList);
 
                 Platform.runLater(() -> {
-                    if (WinGetQuery.getPromptExitCode() == PromptExitCode.OK.getValue())
+                    if (query.getConsoleExitCode() == ConsoleExitCode.OK.getValue())
                     {
                         refreshTableViewContent();
                     }

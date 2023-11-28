@@ -1,6 +1,5 @@
 package ch.hftm.oop2_winget_project.Controller;
 
-import ch.hftm.oop2_winget_project.Features.WinGetQuery;
 import ch.hftm.oop2_winget_project.Utils.StageAndSceneManager;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;

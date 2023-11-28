@@ -22,5 +22,12 @@ public enum QueryType
         {
             return "install";
         }
+    },
+    UNINSTALL {
+        @Override
+        public String toString()
+        {
+            return "uninstall";
+        }
     }
 }

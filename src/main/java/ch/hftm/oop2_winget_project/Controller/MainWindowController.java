@@ -16,6 +16,7 @@ public class MainWindowController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
+        // Start with search packages view
         StageAndSceneManager.loadFxmlToBorderPaneCenter(mainWindowBorderPane, "Views/SearchPackages");
     }
 

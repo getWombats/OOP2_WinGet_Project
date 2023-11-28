@@ -10,7 +10,7 @@ public class SystemLanguage
 {
     private static long consoleExitCode;
 
-    public static String getPreferedLanguage()
+    public static String getPreferredLanguage()
     {
         try
         {

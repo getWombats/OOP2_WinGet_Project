@@ -13,6 +13,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -105,7 +106,14 @@ public class SearchPackagesController implements TableViewModificationable, Init
             isThreadWorking = true;
             new Thread(() -> {
                 WinGetQuery query = new WinGetQuery();
-                query.QueryToList(QueryType.SEARCH, searchKeyword, packageList);
+                try
+                {
+                    query.queryToList(QueryType.SEARCH, searchKeyword, packageList);
+                }
+                catch (IOException | InterruptedException ex)
+                {
+                    System.out.println(ex.getMessage());
+                }
 
                 Platform.runLater(() -> {
                     if (query.getConsoleExitCode() == ConsoleExitCode.OK.getValue())

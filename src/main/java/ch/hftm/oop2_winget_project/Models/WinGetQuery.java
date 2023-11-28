@@ -23,8 +23,7 @@ public class WinGetQuery
     private final String columnHeaderSourceText = winGetSettings.getColumns().get("columnSource");
     private int headerCounter;
     private long consoleExitCode;
-    private final Pattern HEADERLINE_REGEX = Pattern.compile("[-▒█\\\\|]");
-    private final Pattern PACKAGELINE_REGEX = Pattern.compile("[-▒█]");
+    private final Pattern VALIDLINE_REGEX = Pattern.compile("[-▒█\\|]");
 
     public void QueryToList(QueryType queryType, String keyWord, ObservableList<WinGetPackage> packageList)
     {
@@ -50,7 +49,6 @@ public class WinGetQuery
             while ((readerLine = reader.readLine()) != null)
             {
                 rawDataList.add(readerLine);
-                System.out.println(readerLine);
             }
             reader.close();
 
@@ -137,13 +135,13 @@ public class WinGetQuery
 
     private boolean isHeaderLine(String line)
     {
-        Matcher matcher = HEADERLINE_REGEX.matcher(line);
+        Matcher matcher = VALIDLINE_REGEX.matcher(line);
         return headerCounter == 0 && !line.isBlank() && line.toLowerCase().contains(columnHeaderIdText) && !matcher.find();
     }
 
     private boolean isPackageLine(String line)
     {
-        Matcher matcher = PACKAGELINE_REGEX.matcher(line);
+        Matcher matcher = VALIDLINE_REGEX.matcher(line);
         return !line.isBlank() && !line.toLowerCase().contains(columnHeaderIdText) && !matcher.find();
     }
 

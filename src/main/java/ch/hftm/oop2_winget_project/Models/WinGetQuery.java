@@ -110,14 +110,18 @@ public class WinGetQuery
                                 line.substring(columnSeparatorIndexSource).trim() // Package Source
                         );
 
-                        packageList.add(winGetPackage);
+                        // Lock the list object
+                        synchronized(packageList)
+                        {
+                            packageList.add(winGetPackage);
+                        }
                     }
                 }
             }
         }
         catch (IOException | InterruptedException ex)
         {
-            // Exceptionhandler?
+            // Exceptionhandler
         }
         catch (IndexOutOfBoundsException ex)
         {

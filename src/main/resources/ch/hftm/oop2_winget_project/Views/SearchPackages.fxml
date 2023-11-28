@@ -23,10 +23,10 @@
     <center>
         <TableView fx:id="searchTableView" minHeight="-Infinity" minWidth="-Infinity" BorderPane.alignment="TOP_LEFT">
             <columns>
-                <TableColumn fx:id="nameColumn" minWidth="220.0" prefWidth="-1.0" text="Name" />
-                <TableColumn fx:id="idColumn" minWidth="220.0" prefWidth="-1.0" text="ID" />
-                <TableColumn fx:id="versionColumn" minWidth="350.0" prefWidth="-1.0" text="Version" />
-                <TableColumn fx:id="sourceColumn" minWidth="130.0" prefWidth="-1.0" text="Quelle" />
+                <TableColumn fx:id="nameColumn" editable="false" minWidth="240.0" prefWidth="-1.0" resizable="false" text="Name" />
+                <TableColumn fx:id="idColumn" editable="false" minWidth="240.0" prefWidth="-1.0" resizable="false" text="ID" />
+                <TableColumn fx:id="versionColumn" editable="false" minWidth="300.0" prefWidth="-1.0" resizable="false" text="Version" />
+                <TableColumn fx:id="sourceColumn" editable="false" minWidth="130.0" prefWidth="-1.0" resizable="false" text="Quelle" />
             </columns>
         </TableView>
     </center>

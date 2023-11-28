@@ -16,7 +16,7 @@ public class SystemLanguage
         {
             List<String> rawDataList = new ArrayList<>();
 
-            String prefferedLanguage = "";
+            String preferredLanguage = "";
 
             ProcessBuilder processBuilderLanguage = new ProcessBuilder("cmd", "/C", "REG QUERY \"HKEY_Current_User\\Control Panel\\International\\User Profile\" /v Languages /t REG_MULTI_SZ /se _");
             processBuilderLanguage.redirectErrorStream(true);
@@ -39,12 +39,12 @@ public class SystemLanguage
             {
                 if(line.contains("Languages"))
                 {
-                    String preferedLanguages = line.substring(line.indexOf("REG_MULTI_SZ") + "REG_MULTI_SZ".length()).trim();
-                    prefferedLanguage = preferedLanguages.substring(0, 2);
+                    String preferredLanguages = line.substring(line.indexOf("REG_MULTI_SZ") + "REG_MULTI_SZ".length()).trim();
+                    preferredLanguage = preferredLanguages.substring(0, 2);
                     break;
                 }
             }
-            return prefferedLanguage;
+            return preferredLanguage;
         }
         catch (IOException ex)
         {

@@ -1,8 +1,9 @@
-package ch.hftm.oop2_winget_project.Features;
+package ch.hftm.oop2_winget_project.Models;
 
-import ch.hftm.oop2_winget_project.Models.WinGetPackage;
-import ch.hftm.oop2_winget_project.Utils.PromptExitCode;
-import ch.hftm.oop2_winget_project.Utils.SystemLanguage;
+import ch.hftm.oop2_winget_project.App;
+import ch.hftm.oop2_winget_project.Features.QueryType;
+import ch.hftm.oop2_winget_project.Features.SourceType;
+import ch.hftm.oop2_winget_project.Utils.ConsoleExitCode;
 import javafx.collections.ObservableList;
 
 import java.io.BufferedReader;
@@ -14,49 +15,18 @@ import java.util.regex.Pattern;
 
 public class WinGetQuery
 {
-    private static int headerCounter;
-    private static String columnHeaderIdText;
-    private static String columnHeaderVersionText;
-    private static String columnHeaderAvailableText;
-    private static String columnHeaderMatchText;
-    private static String columnHeaderSourceText;
-    private static long consoleExitCode;
-    private static final Pattern HEADERLINE_REGEX = Pattern.compile("[-▒█\\\\|]");
-    private static final Pattern PACKAGELINE_REGEX = Pattern.compile("[-▒█]");
+    private final WinGetSettings winGetSettings = App.winGetSettings;
+    private final String columnHeaderIdText = winGetSettings.getColumns().get("columnId");
+    private final String columnHeaderVersionText = winGetSettings.getColumns().get("columnVersion");
+    private final String columnHeaderAvailableText = winGetSettings.getColumns().get("columnAvailable");
+    private final String columnHeaderMatchText = winGetSettings.getColumns().get("columnMatch");
+    private final String columnHeaderSourceText = winGetSettings.getColumns().get("columnSource");
+    private int headerCounter;
+    private long consoleExitCode;
+    private final Pattern HEADERLINE_REGEX = Pattern.compile("[-▒█\\\\|]");
+    private final Pattern PACKAGELINE_REGEX = Pattern.compile("[-▒█]");
 
-
-    public static void setWinGetLanguage()
-    {
-        String current_language = SystemLanguage.getPreferedLanguage();
-
-            switch(current_language)
-            {
-                case "de":
-                    columnHeaderIdText = "id";
-                    columnHeaderVersionText = "version";
-                    columnHeaderMatchText = "übereinstimmung";
-                    columnHeaderAvailableText = "verfügbar";
-                    columnHeaderSourceText = "quelle";
-                    break;
-                case "en":
-                    columnHeaderIdText = "id";
-                    columnHeaderVersionText = "version";
-                    columnHeaderMatchText = "match";
-                    columnHeaderAvailableText = "available";
-                    columnHeaderSourceText = "source";
-                    break;
-                case "fr":
-                    columnHeaderIdText = "id";
-                    columnHeaderVersionText = "version";
-                    columnHeaderMatchText = "concordance";
-                    columnHeaderAvailableText = "disponsible";
-                    columnHeaderSourceText = "source";
-                    break;
-            }
-    }
-
-
-    public static void QueryToList(QueryType queryType, String keyWord, ObservableList<WinGetPackage> packageList)
+    public void QueryToList(QueryType queryType, String keyWord, ObservableList<WinGetPackage> packageList)
     {
         try
         {
@@ -86,7 +56,7 @@ public class WinGetQuery
 
             consoleExitCode = process.waitFor();
 
-            if(consoleExitCode != PromptExitCode.NO_PACKAGE_FOUND.getValue())
+            if(consoleExitCode != ConsoleExitCode.NO_PACKAGE_FOUND.getValue())
             {
                 for(String line : rawDataList)
                 {
@@ -158,26 +128,26 @@ public class WinGetQuery
     }
 
     // Unicode Han = Asia
-    public static boolean containsHanScript(String line)
+    private boolean containsHanScript(String line)
     {
         return line.codePoints().anyMatch(
                 codepoint ->
                         Character.UnicodeScript.of(codepoint) == Character.UnicodeScript.HAN);
     }
 
-    private static boolean isHeaderLine(String line)
+    private boolean isHeaderLine(String line)
     {
         Matcher matcher = HEADERLINE_REGEX.matcher(line);
         return headerCounter == 0 && !line.isBlank() && line.toLowerCase().contains(columnHeaderIdText) && !matcher.find();
     }
 
-    private static boolean isPackageLine(String line)
+    private boolean isPackageLine(String line)
     {
         Matcher matcher = PACKAGELINE_REGEX.matcher(line);
         return !line.isBlank() && !line.toLowerCase().contains(columnHeaderIdText) && !matcher.find();
     }
 
-    public static long getPromptExitCode()
+    public long getConsoleExitCode()
     {
         return consoleExitCode;
     }

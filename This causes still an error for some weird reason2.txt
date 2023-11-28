@@ -1,0 +1,133 @@
+"C:\Program Files\Java\jdk-21\bin\java.exe" "-javaagent:C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2023.1.2\lib\idea_rt.jar=55829:C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2023.1.2\bin" -Dfile.encoding=UTF-8 -Dsun.stdout.encoding=UTF-8 -Dsun.stderr.encoding=UTF-8 -classpath C:\Users\lucab\.m2\repository\org\openjfx\javafx-controls\21\javafx-controls-21.jar;C:\Users\lucab\.m2\repository\org\openjfx\javafx-graphics\21\javafx-graphics-21.jar;C:\Users\lucab\.m2\repository\org\openjfx\javafx-base\21\javafx-base-21.jar;C:\Users\lucab\.m2\repository\org\openjfx\javafx-fxml\21\javafx-fxml-21.jar -p C:\Users\lucab\.m2\repository\org\openjfx\javafx-controls\21\javafx-controls-21-win.jar;C:\Users\lucab\.m2\repository\org\openjfx\javafx-fxml\21\javafx-fxml-21-win.jar;C:\Users\lucab\Repositories\OOP2_WinGet_Project\target\classes;C:\Users\lucab\.m2\repository\org\openjfx\javafx-graphics\21\javafx-graphics-21-win.jar;C:\Users\lucab\.m2\repository\org\openjfx\javafx-base\21\javafx-base-21-win.jar -m ch.hftm.oop2_winget_project/ch.hftm.oop2_winget_project.App
+
+   - 
+   \ 
+                                                                                                                        
+
+  ██████▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  1024 KB / 4.63 MB
+  ████████████▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  2.00 MB / 4.63 MB
+  ███████████████████▒▒▒▒▒▒▒▒▒▒▒  3.00 MB / 4.63 MB
+  █████████████████████████▒▒▒▒▒  4.00 MB / 4.63 MB
+  ██████████████████████████████  4.63 MB / 4.63 MB
+                                                                                                                        
+
+  ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  0%
+  ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  0%
+  ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  1%
+  ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  2%
+  ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  3%
+  █▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  4%
+  █▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  5%
+  ██▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  9%
+  ██████▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  21%
+  ██████▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  23%
+  ████████▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  28%
+  ████████▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  28%
+  █████████▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  30%
+  █████████▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  31%
+  █████████▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  32%
+  █████████▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  33%
+  ██████████▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  34%
+  ██████████▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  35%
+  ██████████▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  36%
+  ███████████▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  37%
+  ███████████▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  38%
+  ███████████▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  39%
+  ████████████▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  40%
+  ████████████▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  41%
+  ████████████▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  42%
+  ████████████▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  43%
+  █████████████▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  44%
+  █████████████▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  45%
+  █████████████▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  46%
+  ██████████████▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  47%
+  ██████████████▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  48%
+  ██████████████▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  49%
+  ███████████████▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  50%
+  ███████████████▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  51%
+  ████████████████▒▒▒▒▒▒▒▒▒▒▒▒▒▒  54%
+  ████████████████▒▒▒▒▒▒▒▒▒▒▒▒▒▒  55%
+  ████████████████████▒▒▒▒▒▒▒▒▒▒  67%
+  █████████████████████▒▒▒▒▒▒▒▒▒  70%
+  █████████████████████▒▒▒▒▒▒▒▒▒  71%
+  █████████████████████▒▒▒▒▒▒▒▒▒  72%
+  █████████████████████▒▒▒▒▒▒▒▒▒  73%
+  ██████████████████████▒▒▒▒▒▒▒▒  74%
+  ██████████████████████▒▒▒▒▒▒▒▒  75%
+  ██████████████████████▒▒▒▒▒▒▒▒  76%
+  ███████████████████████▒▒▒▒▒▒▒  77%
+  ████████████████████████▒▒▒▒▒▒  82%
+  ████████████████████████▒▒▒▒▒▒  83%
+  █████████████████████████▒▒▒▒▒  84%
+  ███████████████████████████▒▒▒  90%
+  █████████████████████████████▒  99%
+  █████████████████████████████▒  99%
+  ██████████████████████████████  100%
+                                                                                                                        
+Name                               Id                                 Version        Match                       Source
+-----------------------------------------------------------------------------------------------------------------------
+ttth                               yafp.ttth                          1.8.0          Tag: google                 winget
+Gmail Desktop                      timche.gmail-desktop               2.25.3         Tag: google                 winget
+Kube Forwarder                     pixel-point.kube-forwarder         1.5.1          Tag: google                 winget
+Google Assistant Preview           Melvin-Abraham.Google-Assistant.P… 1.0.0-rc.2     Tag: google                 winget
+Google Assistant                   Melvin-Abraham.Google-Assistant    1.1.0          Tag: google                 winget
+OpenDrive                          liberodark.ODrive                  0.3.0          Tag: google                 winget
+Google Calendar                    klinker24.google-calendar-desktop  1.7.1          Tag: google                 winget
+Electronic Gmail                   jie17.electronic-gmail             0.0.18         Tag: google                 winget
+Voice Desktop                      jerrod-lankford.google-voice-desk… 1.3.1          Tag: google                 winget
+Infracost                          Infracost.Infracost                0.10.30        Tag: google                 winget
+Google Cloud SDK                   Google.CloudSDK                    431.0.0        Tag: google                 winget
+Chrome Remote Desktop Host         Google.ChromeRemoteDesktop         120.0.6099.8   Tag: google                 winget
+Google Chrome Dev                  Google.Chrome.Dev                  121.0.6115.2   Tag: google                 winget
+Google Chrome Canary               Google.Chrome.Canary               121.0.6128.2   Tag: google                 winget
+Crow Translate                     CrowTranslate.CrowTranslate        2.11.0         Tag: google                 winget
+比译                               Biyi.Biyi                          0.5.0+18       Tag: google                 winget
+G Desktop Suite                    alexkim205.g-desktop-suite         0.3.1          Tag: google                 winget
+Cerebro                            AlexandrSubbotin.Cerebro           0.11.0         Tag: google                 winget
+Google Play Games Beta             Google.PlayGames.Beta              23.9.1265.3    Tag: google                 winget
+google-chat-linux                  squalou.google-chat-linux          5.27.22-1                                  winget
+Simba ODBC Driver for Google BigQ… SimbaTechnologies.SimbaODBCDriver… 3.0.0.1001                                 winget
+Google Play Music Desktop Player   SamuelAttard.GooglePlayMusicDeskt… 4.7.1                                      winget
+Outlook Google Calendar Sync (Alp… PaulWoolcock.SyncOutlookandGoogle… 2.9.4-alpha                                winget
+Outlook Google Calendar Sync       PaulWoolcock.SyncOutlookandGoogle… 2.9.0-beta                                 winget
+VPN by Google One                  Google.VPNByGoogleOne              1.8.0.4                                    winget
+Terraformer                        Google.Terraformer                 0.8.24                                     winget
+Google Talk                        Google.Talk                        1.0.0.105                                  winget
+Platform Tools                     Google.PlatformTools               34.0.5                                     winget
+Perfetto                           Google.Perfetto                    34.0                                       winget
+Nearby Share                       Google.NearbyShare                 1.0.1184.0                                 winget
+Google 日本語入力                  Google.JapaneseIME                 2.28.4650.0                                winget
+IAP Desktop                        Google.IAPDesktop                  2.38.1281                                  winget
+Google Web Designer                Google.GoogleWebDesigner           12.2.0.0                                   winget
+Google Drive                       Google.GoogleDrive                 84.0.4.0                                   winget
+Google Desktop                     Google.GoogleDesktop               5.9.1005.12335                             winget
+Firebase CLI Tools                 Google.FirebaseCLI                 12.9.1                                     winget
+Google Earth Pro                   Google.EarthPro                    7.3.6.9345                                 winget
+Google Chrome Beta                 Google.Chrome.Beta                 120.0.6099.5                               winget
+Android Studio Canary              Google.AndroidStudio.Canary        2023.2.1.1                                 winget
+Android Studio Beta                Google.AndroidStudio.Beta          2023.1.1.17                                winget
+Android Studio                     Google.AndroidStudio               2022.3.1.20                                winget
+Android GPU Inspector 3.3.0        Google.AndroidGPUInspector         3.3.0                                      winget
+Chromium                           eloston.ungoogled-chromium         119.0.6045.159                             winget
+Unofficial Google Docs             CompLabs.GoogleDocs                2022.3.10                                  winget
+Google Meet                        arjun-g.google-meet-desktop        1.2.0                                      winget
+Google Chat Electron               ankurk91.GoogleChatElectron        2.18.0                                     winget
+Google Chrome                      Google.Chrome                      119.0.6045.160                             winget
+Wondershare InClowdz               Wondershare.InClowdz               2.0.9          Tag: google-drive           winget
+Serverless Framework               Serverless.Serverless              3.38.0         Tag: google-cloud-functions winget
+GAMADV-XTD3                        RossScroggs.GAMADV-XTD3            6.53.03        Tag: google-workspace       winget
+PremiumSoft Navicat Premium        PremiumSoft.NavicatPremium         16.1.15        Tag: google-cloud           winget
+SFTPGo                             drakkan.SFTPGo                     v2.5.5         Tag: google-cloud-storage   winget
+java.lang.StringIndexOutOfBoundsException: Range [-1, -1) out of bounds for length 5
+	at java.base/jdk.internal.util.Preconditions$1.apply(Preconditions.java:55)
+	at java.base/jdk.internal.util.Preconditions$1.apply(Preconditions.java:52)
+	at java.base/jdk.internal.util.Preconditions$4.apply(Preconditions.java:213)
+	at java.base/jdk.internal.util.Preconditions$4.apply(Preconditions.java:210)
+	at java.base/jdk.internal.util.Preconditions.outOfBounds(Preconditions.java:98)
+	at java.base/jdk.internal.util.Preconditions.outOfBoundsCheckFromToIndex(Preconditions.java:112)
+	at java.base/jdk.internal.util.Preconditions.checkFromToIndex(Preconditions.java:349)
+	at java.base/java.lang.String.checkBoundsBeginEnd(String.java:4861)
+	at java.base/java.lang.String.substring(String.java:2830)
+	at ch.hftm.oop2_winget_project/ch.hftm.oop2_winget_project.Models.WinGetQuery.QueryToList(WinGetQuery.java:105)
+	at ch.hftm.oop2_winget_project/ch.hftm.oop2_winget_project.Controller.SearchPackagesController.lambda$searchPackages$6(SearchPackagesController.java:108)
+	at java.base/java.lang.Thread.run(Thread.java:1583)

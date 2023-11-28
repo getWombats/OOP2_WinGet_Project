@@ -61,8 +61,6 @@ public class WinGetQuery
                     // Get index when each column begins as separator if line is table header, only executes once
                     if(isHeaderLine(line))
                     {
-                        System.out.println("After is Header Line()");
-                        System.out.println(line);
                         columnSeparatorIndexId = line.toLowerCase().indexOf(columnHeaderIdText);
                         columnSeparatorIndexVersion = line.toLowerCase().indexOf(columnHeaderVersionText);
 
@@ -84,8 +82,6 @@ public class WinGetQuery
                     // Get actual package information
                     if(isPackageLine(line))
                     {
-                        System.out.println("After is Package Line()");
-                        System.out.println(line);
                         // Fix some weird asia packages
                         if(containsHanScript(line))
                         {

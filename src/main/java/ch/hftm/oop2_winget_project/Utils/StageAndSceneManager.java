@@ -29,11 +29,11 @@ public class StageAndSceneManager
         return fxmlLoader.load();
     }
 
-    public static void loadFxmlToBorderPaneCenter(BorderPane borderPane, String fxmlName)
+    public static void loadFxmlToBorderPaneLeft(BorderPane borderPane, String fxmlName)
     {
         try
         {
-            borderPane.setCenter(loadFXML(fxmlName));
+            borderPane.setLeft(loadFXML(fxmlName));
         }
         catch(IOException e)
         {

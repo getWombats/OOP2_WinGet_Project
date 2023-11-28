@@ -23,7 +23,7 @@ public class WinGetQuery
     private final String columnHeaderSourceText = winGetSettings.getColumns().get("columnSource");
     private int headerCounter;
     private long consoleExitCode;
-    private final Pattern VALIDLINE_REGEX = Pattern.compile("[-▒█\\|]");
+    private final Pattern VALIDLINE_REGEX = Pattern.compile("[-▒█\\\\|]");
 
     public void QueryToList(QueryType queryType, String keyWord, ObservableList<WinGetPackage> packageList)
     {

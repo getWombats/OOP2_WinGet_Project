@@ -17,24 +17,24 @@ public class MainWindowController implements Initializable
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
         // Start with search packages view
-        StageAndSceneManager.loadFxmlToBorderPaneCenter(mainWindowBorderPane, "Views/SearchPackages");
+        StageAndSceneManager.loadFxmlToBorderPaneLeft(mainWindowBorderPane, "Views/SearchPackages");
     }
 
     @FXML
     private void menuSearchButtonClick()
     {
-        StageAndSceneManager.loadFxmlToBorderPaneCenter(mainWindowBorderPane, "Views/SearchPackages");
+        StageAndSceneManager.loadFxmlToBorderPaneLeft(mainWindowBorderPane, "Views/SearchPackages");
     }
 
     @FXML
     private void menuUpdateButtonClick()
     {
-//        StageAndSceneManager.loadFxmlToBorderPaneCenter(mainWindowBorderPane, "Views/UpdatePackages");
+//        StageAndSceneManager.loadFxmlToBorderPaneLeft(mainWindowBorderPane, "Views/UpdatePackages");
     }
 
     @FXML
     private void menuInstalledPackagesButtonClick()
     {
-//        StageAndSceneManager.loadFxmlToBorderPaneCenter(mainWindowBorderPane, "Views/InstalledPackages");
+//        StageAndSceneManager.loadFxmlToBorderPaneLeft(mainWindowBorderPane, "Views/InstalledPackages");
     }
 }

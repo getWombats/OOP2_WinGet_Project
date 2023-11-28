@@ -90,6 +90,12 @@ public class SearchPackagesController implements TableViewModificationable, Init
         return searchTableView.getSelectionModel().getSelectedItem();
     }
 
+    @Override
+    public void addButtonToTableView()
+    {
+
+    }
+
     private void searchPackages()
     {
         String searchKeyword = keywordTextField.getText().trim();

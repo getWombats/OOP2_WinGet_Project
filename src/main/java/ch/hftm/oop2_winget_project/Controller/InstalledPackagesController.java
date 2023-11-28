@@ -60,4 +60,10 @@ public class InstalledPackagesController implements TableViewModificationable, I
     {
         return null;
     }
+
+    @Override
+    public void addButtonToTableView()
+    {
+
+    }
 }

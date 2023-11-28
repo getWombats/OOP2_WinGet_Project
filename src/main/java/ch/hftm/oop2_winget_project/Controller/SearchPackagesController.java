@@ -8,10 +8,12 @@ import ch.hftm.oop2_winget_project.Utils.ConsoleExitCode;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
+import javafx.util.Callback;
 
 import java.io.IOException;
 import java.net.URL;
@@ -42,6 +44,7 @@ public class SearchPackagesController implements TableViewModificationable, Init
     {
         tableViewPlaceholderLabel = new Label();
 
+        addButtonToTableView();
         setTableViewData();
         setTableViewSource();
 
@@ -93,7 +96,52 @@ public class SearchPackagesController implements TableViewModificationable, Init
     @Override
     public void addButtonToTableView()
     {
+        WinGetPackage data = getObjectFromSelection();
+        TableColumn<WinGetPackage, Void> colBtn = new TableColumn("");
+        Callback<TableColumn<WinGetPackage, Void>, TableCell<WinGetPackage, Void>> cellFactory = new Callback<>()
+        {
+            @Override
+            public TableCell<WinGetPackage, Void> call(final TableColumn<WinGetPackage, Void> param)
+            {
+                final TableCell<WinGetPackage, Void> cell = new TableCell<>()
+                {
+                    private final Button btn = new Button("Action");
+                    {
+                        btn.setOnAction((ActionEvent event) -> {
+                            WinGetPackage data = getTableView().getItems().get(getIndex());
+                            System.out.println("selectedData: " + data.getPackageName());
+                        });
+                    }
 
+                    @Override
+                    public void updateItem(Void item, boolean empty)
+                    {
+                        super.updateItem(item, empty);
+                        if (empty)
+                        {
+                            setGraphic(null);
+                        }
+                        else
+                        {
+                            WinGetPackage data = getTableView().getItems().get(getIndex());
+                            if(data.getPackageID().equals("Brave.Brave")) // example
+                            {
+                                setGraphic(null);
+                            }
+                            else
+                            {
+                                setGraphic(btn);
+                            }
+
+                        }
+
+                    }
+                };
+                return cell;
+            }
+        };
+        colBtn.setCellFactory(cellFactory);
+        searchTableView.getColumns().add(colBtn);
     }
 
     private void searchPackages()

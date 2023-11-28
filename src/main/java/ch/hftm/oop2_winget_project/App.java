@@ -20,14 +20,6 @@ public class App extends Application
         stage.setTitle("WinGet Project");
         stage.setScene(scene);
         stage.setResizable(false);
-//        Locale defaultLocale = Locale.getDefault();
-//        System.out.println(defaultLocale);
-//        String displayCountry = defaultLocale.getDisplayCountry();
-//        System.out.println(displayCountry);
-//        String language = defaultLocale.getLanguage();
-//        System.out.println(language);
-//        String country = defaultLocale.getCountry();
-//        System.out.println(country);
 
         winGetSettings = new WinGetSettings();
         winGetSettings.setWinGetLanguage();

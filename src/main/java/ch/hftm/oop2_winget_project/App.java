@@ -19,7 +19,7 @@ public class App extends Application
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("WinGet Project");
         stage.setScene(scene);
-        stage.setResizable(false);
+        stage.setResizable(true);
 
         winGetSettings = new WinGetSettings();
         winGetSettings.setWinGetLanguage();

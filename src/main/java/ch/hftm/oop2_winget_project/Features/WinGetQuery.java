@@ -9,6 +9,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class WinGetQuery
 {
@@ -19,6 +21,9 @@ public class WinGetQuery
     private static String columnHeaderMatchText;
     private static String columnHeaderSourceText;
     private static long consoleExitCode;
+    private static final Pattern HEADERLINE_REGEX = Pattern.compile("[-▒█\\\\|]");
+    private static final Pattern PACKAGELINE_REGEX = Pattern.compile("[-▒█]");
+
 
     public static void setWinGetLanguage()
     {
@@ -162,12 +167,14 @@ public class WinGetQuery
 
     private static boolean isHeaderLine(String line)
     {
-        return headerCounter == 0 && !line.isBlank() && !line.contains("-") && !line.contains("\\") && !line.contains("|") && !line.contains("▒") && !line.contains("█") && line.toLowerCase().contains(columnHeaderIdText);
+        Matcher matcher = HEADERLINE_REGEX.matcher(line);
+        return headerCounter == 0 && !line.isBlank() && line.toLowerCase().contains(columnHeaderIdText) && !matcher.find();
     }
 
     private static boolean isPackageLine(String line)
     {
-        return !line.contains("-") && !line.toLowerCase().contains(columnHeaderIdText) && !line.isBlank() && !line.contains("▒") && !line.contains("█");
+        Matcher matcher = PACKAGELINE_REGEX.matcher(line);
+        return !line.isBlank() && !line.toLowerCase().contains(columnHeaderIdText) && !matcher.find();
     }
 
     public static long getPromptExitCode()

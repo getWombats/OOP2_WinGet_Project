@@ -1,10 +1,12 @@
 package ch.hftm.oop2_winget_project.Controller;
 
+import ch.hftm.oop2_winget_project.App;
 import ch.hftm.oop2_winget_project.Features.QueryType;
 import ch.hftm.oop2_winget_project.Models.WinGetQuery;
 import ch.hftm.oop2_winget_project.Models.WinGetPackage;
 import ch.hftm.oop2_winget_project.Api.TableViewModificationable;
 import ch.hftm.oop2_winget_project.Utils.ConsoleExitCode;
+import ch.hftm.oop2_winget_project.Utils.StageAndSceneManager;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -36,8 +38,7 @@ public class SearchPackagesController implements TableViewModificationable, Init
     @FXML
     private Label tableViewPlaceholderLabel;
     private boolean isThreadWorking;
-    private static final ObservableList<WinGetPackage> packageList = FXCollections.observableArrayList();
-
+//    private static final ObservableList<WinGetPackage> packageList = App.getListManager().getSearchPackageList();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
@@ -77,7 +78,7 @@ public class SearchPackagesController implements TableViewModificationable, Init
     @Override
     public void setTableViewSource()
     {
-        this.searchTableView.setItems(packageList);
+        this.searchTableView.setItems(App.getListManager().getSearchPackageList());
     }
 
     @Override
@@ -109,7 +110,9 @@ public class SearchPackagesController implements TableViewModificationable, Init
                     {
                         btn.setOnAction((ActionEvent event) -> {
                             WinGetPackage data = getTableView().getItems().get(getIndex());
-                            System.out.println("selectedData: " + data.getPackageName());
+//                            data.setInstalled(true); // Test
+//                            btn.setDisable(true); // Test
+                            System.out.println(data.getPackageName() + " [ID: " + data.getPackageID() + "]"); // Test
                         });
                     }
 
@@ -132,7 +135,7 @@ public class SearchPackagesController implements TableViewModificationable, Init
                             {
                                 setGraphic(btn);
                             }
-
+//                            setGraphic(btn);
                         }
 
                     }
@@ -162,7 +165,7 @@ public class SearchPackagesController implements TableViewModificationable, Init
                 WinGetQuery query = new WinGetQuery();
                 try
                 {
-                    query.queryToList(QueryType.SEARCH, searchKeyword, packageList);
+                    query.queryToList(QueryType.SEARCH, searchKeyword, App.getListManager().getSearchPackageList());
                 }
                 catch (IOException | InterruptedException ex)
                 {

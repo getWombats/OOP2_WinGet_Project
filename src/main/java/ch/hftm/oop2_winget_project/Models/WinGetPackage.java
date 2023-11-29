@@ -4,10 +4,10 @@ import javafx.beans.property.SimpleStringProperty;
 
 public class WinGetPackage
 {
-    private SimpleStringProperty packageName = new SimpleStringProperty();
-    private SimpleStringProperty packageID = new SimpleStringProperty();
-    private SimpleStringProperty packageVersion = new SimpleStringProperty();
-    private SimpleStringProperty packageSource = new SimpleStringProperty();
+    private final SimpleStringProperty packageName = new SimpleStringProperty();
+    private final SimpleStringProperty packageID = new SimpleStringProperty();
+    private final SimpleStringProperty packageVersion = new SimpleStringProperty();
+    private final SimpleStringProperty packageSource = new SimpleStringProperty();
     private boolean isFavorite;
     private boolean isInstalled;
 

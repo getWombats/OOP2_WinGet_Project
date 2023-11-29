@@ -8,6 +8,8 @@ public class WinGetPackage
     private SimpleStringProperty packageID = new SimpleStringProperty();
     private SimpleStringProperty packageVersion = new SimpleStringProperty();
     private SimpleStringProperty packageSource = new SimpleStringProperty();
+    private boolean isFavorite;
+    private boolean isInstalled;
 
     public WinGetPackage() {
     }
@@ -78,5 +80,25 @@ public class WinGetPackage
     private void setPackageSource(String packageSource)
     {
         this.packageSource.set(packageSource);
+    }
+
+    public boolean isFavorite()
+    {
+        return isFavorite;
+    }
+
+    public void setFavorite(boolean favorite)
+    {
+        isFavorite = favorite;
+    }
+
+    public boolean isInstalled()
+    {
+        return isInstalled;
+    }
+
+    public void setInstalled(boolean installed)
+    {
+        isInstalled = installed;
     }
 }

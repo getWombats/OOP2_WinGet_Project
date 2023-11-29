@@ -124,7 +124,7 @@ public class SearchPackagesController implements TableViewModificationable, Init
                         else
                         {
                             WinGetPackage data = getTableView().getItems().get(getIndex());
-                            if(data.getPackageID().equals("Brave.Brave")) // example
+                            if(data.isInstalled()) // example
                             {
                                 setGraphic(null);
                             }

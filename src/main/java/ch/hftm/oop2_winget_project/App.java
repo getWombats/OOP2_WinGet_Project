@@ -1,5 +1,6 @@
 package ch.hftm.oop2_winget_project;
 
+import ch.hftm.oop2_winget_project.Models.ListManager;
 import ch.hftm.oop2_winget_project.Models.WinGetSettings;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -10,7 +11,8 @@ import java.io.IOException;
 
 public class App extends Application
 {
-    public static WinGetSettings winGetSettings;
+    private static WinGetSettings winGetSettings;
+    private static ListManager listManager;
 
     @Override
     public void start(Stage stage) throws IOException
@@ -20,14 +22,24 @@ public class App extends Application
         stage.setTitle("WinGet Project");
         stage.setScene(scene);
         stage.setResizable(true);
-
         winGetSettings = new WinGetSettings();
         winGetSettings.setWinGetLanguage();
+        listManager = new ListManager();
         stage.show();
     }
 
     public static void main(String[] args)
     {
         launch();
+    }
+
+    public static WinGetSettings getWinGetSettings()
+    {
+        return winGetSettings;
+    }
+
+    public static ListManager getListManager()
+    {
+        return listManager;
     }
 }

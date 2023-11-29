@@ -1,10 +1,13 @@
 package ch.hftm.oop2_winget_project.Models;
 
 import ch.hftm.oop2_winget_project.App;
+import ch.hftm.oop2_winget_project.Controller.InstalledPackagesController;
 import ch.hftm.oop2_winget_project.Features.QueryType;
 import ch.hftm.oop2_winget_project.Features.SourceType;
 import ch.hftm.oop2_winget_project.Utils.ConsoleExitCode;
+import ch.hftm.oop2_winget_project.Utils.StageAndSceneManager;
 import javafx.collections.ObservableList;
+import javafx.fxml.FXMLLoader;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -13,9 +16,11 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static ch.hftm.oop2_winget_project.Utils.StageAndSceneManager.getFxmlRootDirectory;
+
 public class WinGetQuery
 {
-    private final WinGetSettings winGetSettings = App.winGetSettings;
+    private final WinGetSettings winGetSettings = App.getWinGetSettings();
     private final String columnHeaderIdText = winGetSettings.getColumns().get("columnId");
     private final String columnHeaderVersionText = winGetSettings.getColumns().get("columnVersion");
     private final String columnHeaderAvailableText = winGetSettings.getColumns().get("columnAvailable");
@@ -101,17 +106,43 @@ public class WinGetQuery
                         packageVersion = line.substring(columnSeparatorIndexVersion, columnSeparatorIndexSource).trim();
                     }
 
-                    WinGetPackage winGetPackage = new WinGetPackage(
-                            line.substring(0, columnSeparatorIndexId).trim(), // Package Name
-                            line.substring(columnSeparatorIndexId, columnSeparatorIndexVersion).trim(), // Package ID
-                            packageVersion,
-                            line.substring(columnSeparatorIndexSource).trim() // Package Source
-                    );
-
-                    // Lock the list object
-                    synchronized(packageList)
+                    if(queryType == QueryType.SEARCH)
                     {
-                        packageList.add(winGetPackage);
+                        WinGetPackage winGetPackage = new WinGetPackage(
+                                line.substring(0, columnSeparatorIndexId).trim(), // Package Name
+                                line.substring(columnSeparatorIndexId, columnSeparatorIndexVersion).trim(), // Package ID
+                                packageVersion,
+                                line.substring(columnSeparatorIndexSource).trim() // Package Source
+                        );
+
+                        for(WinGetPackage installedPackage : App.getListManager().getInstalledPackageList())
+                        {
+                            if(installedPackage.getPackageID().equals(winGetPackage.getPackageID()))
+                            {
+                                winGetPackage.setInstalled(true);
+                            }
+                        }
+
+                        // Lock the list object
+                        synchronized(packageList)
+                        {
+                            packageList.add(winGetPackage);
+                        }
+                    }
+                    else if (queryType == QueryType.LIST)
+                    {
+                        WinGetPackage winGetPackage = new WinGetPackage(
+                                line.substring(0, columnSeparatorIndexId).trim(), // Package Name
+                                line.substring(columnSeparatorIndexId, columnSeparatorIndexVersion).trim(), // Package ID
+                                packageVersion,
+                                line.substring(columnSeparatorIndexSource).trim() // Package Source
+                        );
+
+                        // Lock the list object
+                        synchronized(packageList)
+                        {
+                            packageList.add(winGetPackage);
+                        }
                     }
                 }
             }
@@ -134,8 +165,9 @@ public class WinGetQuery
 
     private boolean isPackageLine(String line)
     {
-        Matcher matcher = VALIDLINE_REGEX.matcher(line);
-        return !line.isBlank() && !line.toLowerCase().contains(columnHeaderIdText) && !matcher.find();
+//        Matcher matcher = VALIDLINE_REGEX.matcher(line);
+//        return !line.isBlank() && !line.toLowerCase().contains(columnHeaderIdText) && !matcher.find();
+        return !line.isBlank() && !line.toLowerCase().contains(columnHeaderIdText) && !line.trim().equals("-") && !line.trim().contains("---") && !line.trim().equals("\\") && !line.trim().contains("▒") && !line.trim().contains("█");
     }
 
     public long getConsoleExitCode()

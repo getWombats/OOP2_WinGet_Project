@@ -35,6 +35,6 @@ public class MainWindowController implements Initializable
     @FXML
     private void menuInstalledPackagesButtonClick()
     {
-//        StageAndSceneManager.loadFxmlToBorderPaneLeft(mainWindowBorderPane, "Views/InstalledPackages");
+        StageAndSceneManager.loadFxmlToBorderPaneLeft(mainWindowBorderPane, "Views/InstalledPackages");
     }
 }

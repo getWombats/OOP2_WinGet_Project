@@ -15,7 +15,7 @@ import java.io.IOException;
 
 public final class StageAndSceneManager
 {
-    private static final String FXML_ROOT = "/ch/hftm/oop2_Winget_project/Views/";
+    private static final String FXML_ROOT = "/Views/";
 
     public static String getFxmlRootDirectory()
     {
@@ -25,7 +25,7 @@ public final class StageAndSceneManager
 
     public static Parent loadFXML(String fxmlname) throws IOException
     {
-        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(getFxmlRootDirectory() + fxmlname + ".fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(FXML_ROOT + fxmlname + ".fxml"));
         return fxmlLoader.load();
     }
 

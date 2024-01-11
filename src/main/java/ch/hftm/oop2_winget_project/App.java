@@ -2,6 +2,7 @@ package ch.hftm.oop2_winget_project;
 
 import ch.hftm.oop2_winget_project.Model.ListManager;
 import ch.hftm.oop2_winget_project.Model.WinGetSettings;
+import ch.hftm.oop2_winget_project.Service.StageAndSceneManager;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -17,7 +18,7 @@ public class App extends Application
     @Override
     public void start(Stage stage) throws IOException
     {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Views/MainWindow.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(StageAndSceneManager.getFxmlRootDirectory() + "MainWindow.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("WinGet Project");
         stage.setScene(scene);

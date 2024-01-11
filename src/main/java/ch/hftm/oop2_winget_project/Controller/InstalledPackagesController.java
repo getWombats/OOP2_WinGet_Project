@@ -7,11 +7,11 @@ import ch.hftm.oop2_winget_project.Model.WinGetPackage;
 import ch.hftm.oop2_winget_project.Model.WinGetQuery;
 import ch.hftm.oop2_winget_project.Util.ConsoleExitCode;
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
+import javafx.util.Callback;
 
 import java.io.IOException;
 import java.net.URL;
@@ -30,6 +30,8 @@ public class InstalledPackagesController implements IControllerBase, Initializab
     @FXML
     private TableColumn<WinGetPackage, String> versionColumn;
     @FXML
+    private TableColumn<WinGetPackage, Void> actionColumn;
+    @FXML
     private Label tableViewPlaceholderLabel;
     private boolean isThreadWorking;
 
@@ -37,17 +39,16 @@ public class InstalledPackagesController implements IControllerBase, Initializab
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
         tableViewPlaceholderLabel = new Label();
+        tableViewPlaceholderLabel.setText("List all installed packages");
+        installedPackagesTableView.setPlaceholder(tableViewPlaceholderLabel);
 
         addButtonToTableView();
         setTableViewData();
         setTableViewSource();
-
-        tableViewPlaceholderLabel.setText("Liste installierter Pakete");
-        installedPackagesTableView.setPlaceholder(tableViewPlaceholderLabel);
     }
 
     @FXML
-    private void testButtonClick()
+    private void refreshButtonClick()
     {
         showInstalledPackages();
     }
@@ -83,7 +84,52 @@ public class InstalledPackagesController implements IControllerBase, Initializab
     @Override
     public void addButtonToTableView()
     {
+        Callback<TableColumn<WinGetPackage, Void>, TableCell<WinGetPackage, Void>> cellFactory = new Callback<>()
+        {
+            @Override
+            public TableCell<WinGetPackage, Void> call(final TableColumn<WinGetPackage, Void> param)
+            {
+                final TableCell<WinGetPackage, Void> cell = new TableCell<>()
+                {
+                    private final Button btn = new Button("Uninstall");
+                    {
+                        btn.setOnAction((ActionEvent event) -> {
+                            WinGetPackage data = getTableView().getItems().get(getIndex());
+                            data.setInstalled(false); // Set package as uninstalled
+                            System.out.println(data.getPackageName() + " [ID: " + data.getPackageID() + "] uninstalling package..."); // Test, execute here 'winget remove {packageId}'
+                            // Implement item removal from list here, track uninstall process possible?
+                        });
+                    }
 
+                    @Override
+                    public void updateItem(Void item, boolean empty)
+                    {
+                        super.updateItem(item, empty);
+                        if (empty)
+                        {
+                            setGraphic(null);
+                        }
+                        else
+                        {
+//                            WinGetPackage data = getTableView().getItems().get(getIndex());
+//                            if(data.isInstalled())
+//                            {
+//                                // Set cell content when package is installed already
+//                                Label installedLabel = new Label("installed");
+//                                setGraphic(installedLabel);
+//                            }
+//                            else
+//                            {
+//                                setGraphic(btn);
+//                            }
+                            setGraphic(btn);
+                        }
+                    }
+                };
+                return cell;
+            }
+        };
+        actionColumn.setCellFactory(cellFactory);
     }
 
     private void showInstalledPackages()
@@ -92,7 +138,7 @@ public class InstalledPackagesController implements IControllerBase, Initializab
         {
             installedPackagesTableView.getItems().clear();
 
-            tableViewPlaceholderLabel.setText("Installierte Pakete werden geladen...");
+            tableViewPlaceholderLabel.setText("Loading installed packages...");
 
             isThreadWorking = true;
             new Thread(() -> {
@@ -113,7 +159,7 @@ public class InstalledPackagesController implements IControllerBase, Initializab
                     }
                     else
                     {
-                        tableViewPlaceholderLabel.setText("Error oder so?");
+                        tableViewPlaceholderLabel.setText("Error loading packages");
                     }
                     isThreadWorking = false;
                 });

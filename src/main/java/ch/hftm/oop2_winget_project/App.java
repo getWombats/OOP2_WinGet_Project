@@ -7,6 +7,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.io.IOException;
 
@@ -20,9 +21,12 @@ public class App extends Application
     {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(StageAndSceneManager.getFxmlRootDirectory() + "MainWindow.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
-        stage.setTitle("WinGet Project");
+
+        stage.initStyle(StageStyle.UNDECORATED); // Window not dragable, implementation of WindowManager class pending
+//        stage.setX((windowManager.getPrimaryScreenBounds().getWidth() / 2) - (windowManager.getDEFAULT_SPLASHSCREEN_WIDTH() / 2.0)); // implement WindowManager class
+//        stage.setY((windowManager.getPrimaryScreenBounds().getHeight() / 2) - (windowManager.getDEFAULT_SPLASHSCREEN_HEIGHT() / 2.0)); // implement WindowManager class
         stage.setScene(scene);
-        stage.setResizable(true);
+        stage.getIcons().add(StageAndSceneManager.getTaskbarIcon());
         winGetSettings = new WinGetSettings();
         winGetSettings.setWinGetLanguage();
         listManager = new ListManager();

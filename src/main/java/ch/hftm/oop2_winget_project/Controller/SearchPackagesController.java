@@ -1,15 +1,13 @@
 package ch.hftm.oop2_winget_project.Controller;
 
 import ch.hftm.oop2_winget_project.App;
-import ch.hftm.oop2_winget_project.Features.QueryType;
-import ch.hftm.oop2_winget_project.Models.WinGetQuery;
-import ch.hftm.oop2_winget_project.Models.WinGetPackage;
-import ch.hftm.oop2_winget_project.Api.TableViewModificationable;
-import ch.hftm.oop2_winget_project.Utils.ConsoleExitCode;
-import ch.hftm.oop2_winget_project.Utils.StageAndSceneManager;
+import ch.hftm.oop2_winget_project.Util.QueryType;
+import ch.hftm.oop2_winget_project.Model.WinGetQuery;
+import ch.hftm.oop2_winget_project.Model.WinGetPackage;
+import ch.hftm.oop2_winget_project.Api.IControllerBase;
+import ch.hftm.oop2_winget_project.Util.ConsoleExitCode;
+import ch.hftm.oop2_winget_project.Service.InputValidator;
 import javafx.application.Platform;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -21,7 +19,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class SearchPackagesController implements TableViewModificationable, Initializable
+public class SearchPackagesController implements IControllerBase, Initializable
 {
     @FXML
     private TableView<WinGetPackage> searchTableView;
@@ -44,20 +42,23 @@ public class SearchPackagesController implements TableViewModificationable, Init
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
         tableViewPlaceholderLabel = new Label();
+        tableViewPlaceholderLabel.setText("Suchbegriff eingeben und Pakete suchen");
+        searchTableView.setPlaceholder(tableViewPlaceholderLabel);
 
         addButtonToTableView();
         setTableViewData();
         setTableViewSource();
 
-        tableViewPlaceholderLabel.setText("Suchbegriff eingeben und Pakete suchen");
-        searchTableView.setPlaceholder(tableViewPlaceholderLabel);
-
+        // Register event for enter key
         keywordTextField.setOnKeyPressed( event -> {
             if( event.getCode() == KeyCode.ENTER )
             {
                 searchPackages();
             }
         } );
+
+        // Set input validation
+        keywordTextField.setTextFormatter(InputValidator.createSpaceValidator());
     }
 
     @FXML
@@ -169,7 +170,7 @@ public class SearchPackagesController implements TableViewModificationable, Init
                 }
                 catch (IOException | InterruptedException ex)
                 {
-                    System.out.println(ex.getMessage());
+                    System.out.println(ex.getMessage()); // Replace with ExceptionHandler when implemented
                 }
 
                 Platform.runLater(() -> {

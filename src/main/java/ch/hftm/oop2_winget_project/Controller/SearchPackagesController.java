@@ -36,7 +36,6 @@ public class SearchPackagesController implements IControllerBase, Initializable
     @FXML
     private Label tableViewPlaceholderLabel;
     private boolean isThreadWorking;
-//    private static final ObservableList<WinGetPackage> packageList = App.getListManager().getSearchPackageList();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
@@ -48,17 +47,7 @@ public class SearchPackagesController implements IControllerBase, Initializable
         addButtonToTableView();
         setTableViewData();
         setTableViewSource();
-
-        // Register event for enter key
-        keywordTextField.setOnKeyPressed( event -> {
-            if( event.getCode() == KeyCode.ENTER )
-            {
-                searchPackages();
-            }
-        } );
-
-        // Set input validation
-        keywordTextField.setTextFormatter(InputValidator.createSpaceValidator());
+        registerInputServices();
     }
 
     @FXML
@@ -89,6 +78,20 @@ public class SearchPackagesController implements IControllerBase, Initializable
         setTableViewSource();
     }
 
+    private void registerInputServices()
+    {
+        // Register event for enter key
+        keywordTextField.setOnKeyPressed( event -> {
+            if( event.getCode() == KeyCode.ENTER )
+            {
+                searchPackages();
+            }
+        } );
+
+        // Set input validation
+        keywordTextField.setTextFormatter(InputValidator.createSpaceValidator());
+    }
+
     @Override
     public WinGetPackage getObjectFromSelection()
     {
@@ -98,8 +101,7 @@ public class SearchPackagesController implements IControllerBase, Initializable
     @Override
     public void addButtonToTableView()
     {
-        WinGetPackage data = getObjectFromSelection();
-        TableColumn<WinGetPackage, Void> colBtn = new TableColumn("");
+        TableColumn<WinGetPackage, Void> colBtn = new TableColumn("Action");
         Callback<TableColumn<WinGetPackage, Void>, TableCell<WinGetPackage, Void>> cellFactory = new Callback<>()
         {
             @Override
@@ -107,13 +109,13 @@ public class SearchPackagesController implements IControllerBase, Initializable
             {
                 final TableCell<WinGetPackage, Void> cell = new TableCell<>()
                 {
-                    private final Button btn = new Button("Action");
+                    private final Button btn = new Button("Install");
                     {
                         btn.setOnAction((ActionEvent event) -> {
                             WinGetPackage data = getTableView().getItems().get(getIndex());
-//                            data.setInstalled(true); // Test
-//                            btn.setDisable(true); // Test
-                            System.out.println(data.getPackageName() + " [ID: " + data.getPackageID() + "]"); // Test
+                            data.setInstalled(true); // Set package as installed
+                            btn.setDisable(true); // Disables button when clicked
+                            System.out.println(data.getPackageName() + " [ID: " + data.getPackageID() + "] will be installed..."); // Test, execute here 'winget install {packageId}'
                         });
                     }
 
@@ -128,15 +130,16 @@ public class SearchPackagesController implements IControllerBase, Initializable
                         else
                         {
                             WinGetPackage data = getTableView().getItems().get(getIndex());
-                            if(data.isInstalled()) // example
+                            if(data.isInstalled())
                             {
-                                setGraphic(null);
+                                // Set cell content when package is installed already
+                                Label installedLabel = new Label("installed");
+                                setGraphic(installedLabel);
                             }
                             else
                             {
                                 setGraphic(btn);
                             }
-//                            setGraphic(btn);
                         }
 
                     }
@@ -159,7 +162,7 @@ public class SearchPackagesController implements IControllerBase, Initializable
                 searchTableView.getItems().clear();
             }
 
-            tableViewPlaceholderLabel.setText("Pakete werden geladen...");
+            tableViewPlaceholderLabel.setText("Searching packages...");
 
             isThreadWorking = true;
             new Thread(() -> {
@@ -180,7 +183,7 @@ public class SearchPackagesController implements IControllerBase, Initializable
                     }
                     else
                     {
-                        tableViewPlaceholderLabel.setText("Keine Pakete gefunden");
+                        tableViewPlaceholderLabel.setText("No packages found");
                     }
                     isThreadWorking = false;
                 });

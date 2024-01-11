@@ -1,0 +1,261 @@
+.background {
+    -fx-background-color: #1d1d1d;
+}
+
+.label {
+    -fx-font-size: 10pt;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-text-fill: white;
+    -fx-opacity: 0.6;
+}
+
+.label-bright {
+    -fx-font-size: 10pt;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-text-fill: white;
+    -fx-opacity: 1;
+}
+
+.label-header {
+    -fx-font-size: 32pt;
+    -fx-font-family: "Segoe UI Light";
+    -fx-text-fill: white;
+    -fx-opacity: 1;
+}
+
+.table-view {
+    -fx-base: #1d1d1d;
+    -fx-control-inner-background: #1d1d1d;
+    -fx-background-color: #1d1d1d;
+    -fx-table-cell-border-color: transparent;
+    -fx-table-header-border-color: transparent;
+    -fx-padding: 5;
+}
+
+.table-view .column-header-background {
+    -fx-background-color: transparent;
+}
+
+.table-view .column-header, .table-view .filler {
+    -fx-size: 55;
+    -fx-border-width: 0 0 0 0;
+    -fx-background-color: transparent;
+    -fx-border-color:
+        transparent
+        transparent
+        derive(-fx-base, 80%)
+        transparent;
+    -fx-border-insets: 0 10 1 0;
+}
+
+.table-view .column-header .label {
+    -fx-font-size: 16pt;
+    -fx-font-family: "Segoe UI Light";
+    -fx-text-fill: #d8d8d8;
+    -fx-alignment: center-left;
+    -fx-opacity: 1;
+}
+
+.table-row-cell:filled:focused:selected {
+    -fx-background-color: #512bd4;
+    -fx-border-color: #512bd4;
+}
+
+.searchTableView .button {
+        -fx-padding: 5 22 5 35;
+        -fx-border-color: #1d1d1d;
+        -fx-border-width: 1;
+        -fx-background-radius: 0;
+        -fx-background-color: #1d1d1d;
+        -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+        -fx-font-size: 10pt;
+        -fx-text-fill: #d8d8d8;
+        -fx-background-insets: 0 0 0 0, 0, 1, 2;
+
+        -fx-background-image: url(Icons/download.png);
+        -fx-background-size: 12px;
+        -fx-background-repeat: no-repeat;
+        -fx-background-position: 10%;
+}
+
+.installedTableView .button {
+        -fx-padding: 5 22 5 35;
+        -fx-border-color: #1d1d1d;
+        -fx-border-width: 1;
+        -fx-background-radius: 0;
+        -fx-background-color: #1d1d1d;
+        -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+        -fx-font-size: 10pt;
+        -fx-text-fill: #d8d8d8;
+        -fx-background-insets: 0 0 0 0, 0, 1, 2;
+
+        -fx-background-image: url(Icons/delete.png);
+        -fx-background-size: 20px;
+        -fx-background-repeat: no-repeat;
+        -fx-background-position: 10%;
+}
+
+.installedTableView .button:hover {
+        -fx-background-color: #990000;
+}
+
+.searchTableView .button:hover {
+    -fx-background-color: #512bd4;
+}
+
+.table-row-cell:filled {
+    -fx-font-size: 10pt;
+}
+
+.table-view .table-cell{
+    -fx-alignment: CENTER-LEFT;
+    -fx-border-color: transparent;
+}
+
+.text-field {
+    -fx-background-color: #282828; /* #595959 */
+    -fx-border-color: #e2e2e2;
+    -fx-border-width: 1;
+    -fx-text-fill: #d8d8d8;
+    -fx-font-size: 10pt;
+    -fx-font-family: "Segoe UI Semibold";
+}
+
+/*
+.split-pane:horizontal > .split-pane-divider {
+    -fx-border-color: transparent #1d1d1d transparent #1d1d1d;
+    -fx-background-color: transparent, derive(#1d1d1d,20%);
+}
+
+.split-pane {
+    -fx-padding: 1 0 0 0;
+}
+
+.menu-bar {
+    -fx-background-color: derive(#1d1d1d,20%);
+}
+
+.context-menu {
+    -fx-background-color: derive(#1d1d1d,50%);
+}
+
+.menu-bar .label {
+    -fx-font-size: 14pt;
+    -fx-font-family: "Segoe UI Light";
+    -fx-text-fill: white;
+    -fx-opacity: 0.9;
+}
+
+.menu .left-container {
+	-fx-background-color: black;
+}*/
+
+.button {
+    -fx-padding: 5 22 5 22;
+    -fx-border-color: #e2e2e2;
+    -fx-border-width: 1;
+    -fx-background-radius: 0;
+    -fx-background-color: #1d1d1d;
+    -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+    -fx-font-size: 10pt;
+    -fx-text-fill: #d8d8d8;
+    -fx-background-insets: 0 0 0 0, 0, 1, 2;
+}
+
+.button:hover {
+    -fx-background-color: #4d4dff;
+}
+
+/*.button:pressed, .button:default:hover:pressed {
+  -fx-background-color: white;
+  -fx-text-fill: #1d1d1d;
+}*/
+
+.refreshButton {
+    -fx-padding: 5 22 5 40;
+    -fx-background-image: url(Icons/refresh.png);
+    -fx-background-size: 20px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: 10%;
+}
+
+.searchButton {
+    -fx-padding: 5 22 5 40;
+    -fx-background-image: url(Icons/search.png);
+    -fx-background-size: 20px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: 10%;
+}
+
+
+/*---------------------------------------------------*/
+/*                  Message                         */
+/*-------------------------------------------------*/
+
+ .dialog-pane{
+  -fx-border-color: #333333;
+  -fx-border-width: 1.0px;
+ }
+
+/**Costumization of The Bar where the buttons are located**/
+.dialog-pane > .button-bar > .container {
+  -fx-background-color: #1d1d1d;
+}
+
+.dialog-pane > .content.label {
+  -fx-padding: 0.5em 0.5em 0.5em 0.5em;
+  -fx-background-color:  #282828;
+  -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+  -fx-font-size: 10pt;
+  -fx-text-fill: white;
+}
+
+/**Costumization of DialogPane Header**/
+.dialog-pane:header .header-panel {
+  -fx-background-color:  #282828;
+}
+
+.dialog-pane:header .header-panel .label{
+  -fx-background-color:  #282828;
+  -fx-background-radius: 10px;
+  -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+  -fx-font-size: 12pt;
+  -fx-text-fill: white;
+}
+
+/**Costumization of Buttons**/
+.dialog-pane .button {
+    -fx-padding: 5 22 5 22;
+    -fx-border-color: #e2e2e2;
+    -fx-border-width: 1;
+    -fx-background-radius: 0;
+    -fx-background-color: #1d1d1d;
+    -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+    -fx-font-size: 10pt;
+    -fx-text-fill: white;
+    -fx-background-insets: 0 0 0 0, 0, 1, 2;
+ }
+
+.dialog-pane .button:hover {
+    -fx-background-color: #512bd4;
+ }
+
+/**Costumization of Icons**/
+.alert.warning.dialog-pane {
+    -fx-graphic: url(Icons/warning.png);
+    -fx-background-color: #282828;
+}
+
+.alert.error.dialog-pane {
+    -fx-graphic: url(Icons/error.png);
+    -fx-background-color: #282828;
+}
+
+.alert.confirmation.dialog-pane {
+   -fx-graphic: url(Icons/confirmation.png);
+   -fx-background-color: #282828;
+}
+
+.alert.information.dialog-pane {
+    -fx-graphic: url(Icons/information.png);
+    -fx-background-color: #282828;

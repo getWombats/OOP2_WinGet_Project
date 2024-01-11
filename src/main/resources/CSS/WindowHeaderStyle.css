@@ -1,0 +1,76 @@
+/* Window close button style  */
+.buttonWindowClose {
+    -fx-padding: 5 15 5 15;
+    -fx-border-color: #404040;
+    -fx-border-width: 0;
+    -fx-border-radius: 0;
+    -fx-background-radius: 0;
+    -fx-background-color: transparent;
+
+    -fx-background-image: url(Icons/closeWindow.png);
+    -fx-background-size: 20px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: 50%;
+}
+/* Window close button hover style */
+.buttonWindowClose:hover {
+    -fx-background-color: #ca0101;
+    -fx-border-color: #404040;
+    -fx-border-width: 0;
+    -fx-border-radius: 0;
+    -fx-background-radius: 0;
+}
+
+/* Window minimize & maximize button style  */
+.buttonWindowState {
+    -fx-padding: 5 15 5 15;
+    -fx-border-color: #333333;
+    -fx-border-width: 0;
+    -fx-border-radius: 0;
+    -fx-background-radius: 0;
+    -fx-background-color: transparent;
+
+    -fx-background-image: url(Icons/windowControlMinimize.png);
+    -fx-background-size: 15px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: 50%;
+}
+
+/* Window minimize & maximize button hover style */
+.buttonWindowState:hover {
+    -fx-background-color: #4d4dff; /* #039ED3 */
+    -fx-border-color: #333333;
+    -fx-border-width: 0;
+    -fx-border-radius: 0;
+    -fx-background-radius: 0;
+}
+
+
+.toggle-button {
+    -fx-padding: 5 20 5 20;
+    -fx-border-color: #333333;
+    -fx-border-width: 0;
+    -fx-border-radius: 0;
+    -fx-background-radius: 0;
+    -fx-background-color: transparent;
+
+    -fx-background-image: url(Icons/windowControlMax.png);
+    -fx-background-size: 15px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: 50%;
+}
+
+.toggle-button:selected {
+    -fx-background-image: url(Icons/windowControlMaxToggled.png);
+    -fx-background-size: 15px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: 50%;
+}
+
+.toggle-button:hover {
+    -fx-background-color: #4d4dff;
+    -fx-border-color: #333333;
+    -fx-border-width: 0;
+    -fx-border-radius: 0;
+    -fx-background-radius: 0;
+}

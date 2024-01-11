@@ -13,9 +13,9 @@
             <padding>
                <Insets top="100.0" />
             </padding>
-            <Button mnemonicParsing="false" onAction="#menuSearchButtonClick" prefWidth="170.0" text="Pakete Suchen" />
-            <Button mnemonicParsing="false" onAction="#menuUpdateButtonClick" prefWidth="170.0" text="Updates suchen" />
-            <Button mnemonicParsing="false" onAction="#menuInstalledPackagesButtonClick" prefWidth="170.0" text="Installierte Pakete" />
+            <Button mnemonicParsing="false" onAction="#menuSearchButtonClick" prefWidth="170.0" text="Search packages" />
+            <Button mnemonicParsing="false" onAction="#menuUpdateButtonClick" prefWidth="170.0" text="Update packages" />
+            <Button mnemonicParsing="false" onAction="#menuInstalledPackagesButtonClick" prefWidth="170.0" text="Installed packages" />
          </VBox>
       </left>
       <center>

@@ -33,7 +33,7 @@
                 <TableColumn fx:id="nameColumn" editable="false" minWidth="240.0" prefWidth="-1.0" resizable="false" text="Name" />
                 <TableColumn fx:id="idColumn" editable="false" minWidth="240.0" prefWidth="-1.0" resizable="false" text="ID" />
                 <TableColumn fx:id="versionColumn" editable="false" minWidth="300.0" prefWidth="-1.0" resizable="false" text="Version" />
-                <TableColumn fx:id="sourceColumn" editable="false" minWidth="130.0" prefWidth="-1.0" resizable="false" text="Quelle" />
+                <TableColumn fx:id="sourceColumn" editable="false" minWidth="130.0" prefWidth="-1.0" resizable="false" text="Source" />
             </columns>
         </TableView>
     </center>

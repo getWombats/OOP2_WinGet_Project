@@ -1,6 +1,7 @@
 package ch.hftm.oop2_winget_project.Controller;
 
 import ch.hftm.oop2_winget_project.Service.StageAndSceneManager;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.BorderPane;
@@ -36,5 +37,30 @@ public class MainWindowController implements Initializable
     private void menuInstalledPackagesButtonClick()
     {
         StageAndSceneManager.loadFxmlToBorderPaneLeft(mainWindowBorderPane, "InstalledPackages");
+    }
+
+    @FXML
+    private void minimizeWindowButtonClick()
+    {
+//        windowManager.minimizeWindow();
+    }
+
+    @FXML
+    private void maximizeWindowButtonClick()
+    {
+//        if(maximizeWindowButton.isSelected())
+//        {
+//            windowManager.maximizeWindow();
+//        }
+//        else
+//        {
+//            windowManager.restoreWindow();
+//        }
+    }
+
+    @FXML
+    private void closeWindowButtonClick()
+    {
+        Platform.exit();
     }
 }

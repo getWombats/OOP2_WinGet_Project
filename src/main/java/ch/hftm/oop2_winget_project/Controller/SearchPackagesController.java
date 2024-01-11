@@ -32,6 +32,9 @@ public class SearchPackagesController implements IControllerBase, Initializable
     @FXML
     private TableColumn<WinGetPackage, String> versionColumn;
     @FXML
+    private TableColumn<WinGetPackage, Void> actionColumn;
+
+    @FXML
     private TextField keywordTextField;
     @FXML
     private Label tableViewPlaceholderLabel;
@@ -101,7 +104,6 @@ public class SearchPackagesController implements IControllerBase, Initializable
     @Override
     public void addButtonToTableView()
     {
-        TableColumn<WinGetPackage, Void> colBtn = new TableColumn("Action");
         Callback<TableColumn<WinGetPackage, Void>, TableCell<WinGetPackage, Void>> cellFactory = new Callback<>()
         {
             @Override
@@ -141,14 +143,12 @@ public class SearchPackagesController implements IControllerBase, Initializable
                                 setGraphic(btn);
                             }
                         }
-
                     }
                 };
                 return cell;
             }
         };
-        colBtn.setCellFactory(cellFactory);
-        searchTableView.getColumns().add(colBtn);
+        actionColumn.setCellFactory(cellFactory);
     }
 
     private void searchPackages()

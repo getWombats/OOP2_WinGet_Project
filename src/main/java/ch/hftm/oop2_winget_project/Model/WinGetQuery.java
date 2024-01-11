@@ -1,13 +1,11 @@
-package ch.hftm.oop2_winget_project.Models;
+package ch.hftm.oop2_winget_project.Model;
 
 import ch.hftm.oop2_winget_project.App;
-import ch.hftm.oop2_winget_project.Controller.InstalledPackagesController;
-import ch.hftm.oop2_winget_project.Features.QueryType;
-import ch.hftm.oop2_winget_project.Features.SourceType;
-import ch.hftm.oop2_winget_project.Utils.ConsoleExitCode;
-import ch.hftm.oop2_winget_project.Utils.StageAndSceneManager;
+import ch.hftm.oop2_winget_project.Util.QueryType;
+import ch.hftm.oop2_winget_project.Util.SourceType;
+import ch.hftm.oop2_winget_project.Util.ConsoleExitCode;
+import ch.hftm.oop2_winget_project.Service.UniCodeChecker;
 import javafx.collections.ObservableList;
-import javafx.fxml.FXMLLoader;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -15,8 +13,6 @@ import java.io.InputStreamReader;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import static ch.hftm.oop2_winget_project.Utils.StageAndSceneManager.getFxmlRootDirectory;
 
 public class WinGetQuery
 {
@@ -26,9 +22,9 @@ public class WinGetQuery
     private final String columnHeaderAvailableText = winGetSettings.getColumns().get("columnAvailable");
     private final String columnHeaderMatchText = winGetSettings.getColumns().get("columnMatch");
     private final String columnHeaderSourceText = winGetSettings.getColumns().get("columnSource");
-    private int headerCounter;
     private long consoleExitCode;
-    private final Pattern VALIDLINE_REGEX = Pattern.compile("[-▒█\\\\|]");
+    private final Pattern VALIDLINE_REGEX = Pattern.compile("(.*[0-9a-zA-Z]+.*)");
+    private int packageLineCounter = 1; // Debug
 
     public void queryToList(QueryType queryType, String keyWord, ObservableList<WinGetPackage> packageList) throws IOException, InterruptedException
     {
@@ -42,7 +38,7 @@ public class WinGetQuery
 
         String readerLine;
 
-        headerCounter = 0;
+        int headerCounter = 0;
         int columnSeparatorIndexId = -1;
         int columnSeparatorIndexVersion = -1;
         int columnSeparatorIndexAvailableOrMatch = -1;
@@ -86,7 +82,7 @@ public class WinGetQuery
                 if(isPackageLine(line))
                 {
                     // Fix some weird asia packages
-                    if(containsHanScript(line))
+                    if(UniCodeChecker.containsHanScript(line))
                     {
                         int missingLength = maxPackageLineLength - line.length() - 1;
 
@@ -149,25 +145,18 @@ public class WinGetQuery
         }
     }
 
-    // Unicode Han = Asia
-    private boolean containsHanScript(String line)
-    {
-        return line.codePoints().anyMatch(
-                codepoint ->
-                        Character.UnicodeScript.of(codepoint) == Character.UnicodeScript.HAN);
-    }
-
     private boolean isHeaderLine(String line)
     {
         Matcher matcher = VALIDLINE_REGEX.matcher(line);
-        return headerCounter == 0 && !line.isBlank() && line.toLowerCase().contains(columnHeaderIdText) && !matcher.find();
+//        return headerCounter == 0 && !line.isBlank() && line.toLowerCase().contains(columnHeaderIdText) && !matcher.find();
+        return line.toLowerCase().contains(columnHeaderIdText) && line.toLowerCase().contains(columnHeaderVersionText) && line.toLowerCase().contains(columnHeaderSourceText) && matcher.find();
     }
 
     private boolean isPackageLine(String line)
     {
-//        Matcher matcher = VALIDLINE_REGEX.matcher(line);
-//        return !line.isBlank() && !line.toLowerCase().contains(columnHeaderIdText) && !matcher.find();
-        return !line.isBlank() && !line.toLowerCase().contains(columnHeaderIdText) && !line.trim().equals("-") && !line.trim().contains("---") && !line.trim().equals("\\") && !line.trim().contains("▒") && !line.trim().contains("█");
+        Matcher matcher = VALIDLINE_REGEX.matcher(line);
+//        return !line.isBlank() && !line.toLowerCase().contains(columnHeaderIdText) && !line.trim().equals("-") && !line.trim().contains("---") && !line.trim().equals("\\") && !line.trim().contains("▒") && !line.trim().contains("█");
+        return !line.toLowerCase().contains(columnHeaderIdText) && !line.toLowerCase().contains(columnHeaderVersionText) && !line.toLowerCase().contains(columnHeaderSourceText) && matcher.find() && !line.contains("▒") && !line.contains("█");
     }
 
     public long getConsoleExitCode()

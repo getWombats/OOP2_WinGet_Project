@@ -1,4 +1,4 @@
-package ch.hftm.oop2_winget_project.Models;
+package ch.hftm.oop2_winget_project.Model;
 
 import javafx.beans.property.SimpleStringProperty;
 

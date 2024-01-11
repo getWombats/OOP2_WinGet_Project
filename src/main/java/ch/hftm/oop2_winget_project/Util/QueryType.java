@@ -1,4 +1,4 @@
-package ch.hftm.oop2_winget_project.Features;
+package ch.hftm.oop2_winget_project.Util;
 
 public enum QueryType
 {

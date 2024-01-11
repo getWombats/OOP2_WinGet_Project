@@ -1,4 +1,4 @@
-package ch.hftm.oop2_winget_project.Utils;
+package ch.hftm.oop2_winget_project.Service;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -6,7 +6,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SystemLanguage
+public final class SystemLanguage
 {
     private static long consoleExitCode;
 

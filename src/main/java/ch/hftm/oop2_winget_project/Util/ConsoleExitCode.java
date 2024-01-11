@@ -1,4 +1,4 @@
-package ch.hftm.oop2_winget_project.Utils;
+package ch.hftm.oop2_winget_project.Util;
 
 public enum ConsoleExitCode
 {

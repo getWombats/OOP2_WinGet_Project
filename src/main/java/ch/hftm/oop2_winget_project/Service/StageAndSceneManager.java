@@ -1,4 +1,4 @@
-package ch.hftm.oop2_winget_project.Utils;
+package ch.hftm.oop2_winget_project.Service;
 
 import ch.hftm.oop2_winget_project.App;
 import javafx.event.ActionEvent;
@@ -13,9 +13,9 @@ import javafx.stage.StageStyle;
 
 import java.io.IOException;
 
-public class StageAndSceneManager
+public final class StageAndSceneManager
 {
-    private static final String FXML_ROOT = "/ch/hftm/oop2_winget_project/";
+    private static final String FXML_ROOT = "/ch/hftm/oop2_Winget_project/";
 
     public static String getFxmlRootDirectory()
     {

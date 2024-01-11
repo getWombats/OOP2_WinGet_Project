@@ -15,7 +15,7 @@ import java.io.IOException;
 
 public final class StageAndSceneManager
 {
-    private static final String FXML_ROOT = "/ch/hftm/oop2_Winget_project/";
+    private static final String FXML_ROOT = "/ch/hftm/oop2_Winget_project/Views/";
 
     public static String getFxmlRootDirectory()
     {

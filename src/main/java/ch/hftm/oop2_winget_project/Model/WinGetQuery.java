@@ -102,7 +102,7 @@ public class WinGetQuery
                         packageVersion = line.substring(columnSeparatorIndexVersion, columnSeparatorIndexSource).trim();
                     }
 
-                    if(queryType == QueryType.SEARCH)
+                    if(queryType == QueryType.SEARCH) // Search the internet
                     {
                         WinGetPackage winGetPackage = new WinGetPackage(
                                 line.substring(0, columnSeparatorIndexId).trim(), // Package Name
@@ -125,7 +125,7 @@ public class WinGetQuery
                             packageList.add(winGetPackage);
                         }
                     }
-                    else if (queryType == QueryType.LIST)
+                    else if (queryType == QueryType.LIST) // Show installed packages
                     {
                         WinGetPackage winGetPackage = new WinGetPackage(
                                 line.substring(0, columnSeparatorIndexId).trim(), // Package Name
@@ -148,7 +148,6 @@ public class WinGetQuery
     private boolean isHeaderLine(String line)
     {
         Matcher matcher = VALIDLINE_REGEX.matcher(line);
-//        return headerCounter == 0 && !line.isBlank() && line.toLowerCase().contains(columnHeaderIdText) && !matcher.find();
         return line.toLowerCase().contains(columnHeaderIdText) && line.toLowerCase().contains(columnHeaderVersionText) && line.toLowerCase().contains(columnHeaderSourceText) && matcher.find();
     }
 

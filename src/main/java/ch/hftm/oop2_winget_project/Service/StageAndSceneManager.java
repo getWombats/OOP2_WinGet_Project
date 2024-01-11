@@ -6,22 +6,24 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.io.IOException;
+import java.util.Objects;
 
 public final class StageAndSceneManager
 {
     private static final String FXML_ROOT = "/Views/";
-
+    private static final String ICONS_ROOT = "/Icons/";
     public static String getFxmlRootDirectory()
     {
         return FXML_ROOT;
     }
-
+    private static final Image taskbarIcon = new Image(Objects.requireNonNull(App.class.getResourceAsStream(ICONS_ROOT + "taskbarIcon_colorized.png")));
 
     public static Parent loadFXML(String fxmlname) throws IOException
     {
@@ -59,5 +61,10 @@ public final class StageAndSceneManager
         final Node source = (Node) event.getSource();
         final Stage stage = (Stage) source.getScene().getWindow();
         stage.close();
+    }
+
+    public static Image getTaskbarIcon()
+    {
+        return taskbarIcon;
     }
 }

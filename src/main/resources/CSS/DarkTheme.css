@@ -2,6 +2,14 @@
     -fx-background-color: #1d1d1d;
 }
 
+.borderPane {
+    -fx-background-color: #1d1d1d;
+}
+
+.vBoxMenu {
+    -fx-background-color: #282828;
+}
+
 .label {
     -fx-font-size: 10pt;
     -fx-font-family: "Segoe UI Semibold";
@@ -72,7 +80,7 @@
         -fx-text-fill: #d8d8d8;
         -fx-background-insets: 0 0 0 0, 0, 1, 2;
 
-        -fx-background-image: url(Icons/download.png);
+        -fx-background-image: url(../Icons/download.png);
         -fx-background-size: 12px;
         -fx-background-repeat: no-repeat;
         -fx-background-position: 10%;
@@ -89,7 +97,7 @@
         -fx-text-fill: #d8d8d8;
         -fx-background-insets: 0 0 0 0, 0, 1, 2;
 
-        -fx-background-image: url(Icons/delete.png);
+        -fx-background-image: url(../Icons/delete.png);
         -fx-background-size: 20px;
         -fx-background-repeat: no-repeat;
         -fx-background-position: 10%;
@@ -107,7 +115,7 @@
     -fx-font-size: 10pt;
 }
 
-.table-view .table-cell{
+.table-view .table-cell {
     -fx-alignment: CENTER-LEFT;
     -fx-border-color: transparent;
 }
@@ -173,7 +181,7 @@
 
 .refreshButton {
     -fx-padding: 5 22 5 40;
-    -fx-background-image: url(Icons/refresh.png);
+    -fx-background-image: url(../Icons/refresh.png);
     -fx-background-size: 20px;
     -fx-background-repeat: no-repeat;
     -fx-background-position: 10%;
@@ -181,7 +189,7 @@
 
 .searchButton {
     -fx-padding: 5 22 5 40;
-    -fx-background-image: url(Icons/search.png);
+    -fx-background-image: url(../Icons/search.png);
     -fx-background-size: 20px;
     -fx-background-repeat: no-repeat;
     -fx-background-position: 10%;
@@ -192,7 +200,7 @@
 /*                  Message                         */
 /*-------------------------------------------------*/
 
- .dialog-pane{
+ .dialog-pane {
   -fx-border-color: #333333;
   -fx-border-width: 1.0px;
  }
@@ -215,7 +223,7 @@
   -fx-background-color:  #282828;
 }
 
-.dialog-pane:header .header-panel .label{
+.dialog-pane:header .header-panel .label {
   -fx-background-color:  #282828;
   -fx-background-radius: 10px;
   -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
@@ -242,7 +250,7 @@
 
 /**Costumization of Icons**/
 .alert.warning.dialog-pane {
-    -fx-graphic: url(Icons/warning.png);
+    -fx-graphic: url(../Icons/warning.png);
     -fx-background-color: #282828;
 }
 
@@ -252,10 +260,11 @@
 }
 
 .alert.confirmation.dialog-pane {
-   -fx-graphic: url(Icons/confirmation.png);
+   -fx-graphic: url(../Icons/confirmation.png);
    -fx-background-color: #282828;
 }
 
 .alert.information.dialog-pane {
-    -fx-graphic: url(Icons/information.png);
+    -fx-graphic: url(../Icons/information.png);
     -fx-background-color: #282828;
+}

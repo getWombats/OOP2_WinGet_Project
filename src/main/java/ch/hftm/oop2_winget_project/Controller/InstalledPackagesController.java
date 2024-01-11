@@ -1,28 +1,23 @@
 package ch.hftm.oop2_winget_project.Controller;
 
-import ch.hftm.oop2_winget_project.Api.TableViewModificationable;
+import ch.hftm.oop2_winget_project.Api.IControllerBase;
 import ch.hftm.oop2_winget_project.App;
-import ch.hftm.oop2_winget_project.Features.QueryType;
-import ch.hftm.oop2_winget_project.Models.WinGetPackage;
-import ch.hftm.oop2_winget_project.Models.WinGetQuery;
-import ch.hftm.oop2_winget_project.Utils.ConsoleExitCode;
+import ch.hftm.oop2_winget_project.Util.QueryType;
+import ch.hftm.oop2_winget_project.Model.WinGetPackage;
+import ch.hftm.oop2_winget_project.Model.WinGetQuery;
+import ch.hftm.oop2_winget_project.Util.ConsoleExitCode;
 import javafx.application.Platform;
-import javafx.beans.binding.Bindings;
-import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.text.Text;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class InstalledPackagesController implements TableViewModificationable, Initializable
+public class InstalledPackagesController implements IControllerBase, Initializable
 {
     @FXML
     private TableView<WinGetPackage> installedPackagesTableView;

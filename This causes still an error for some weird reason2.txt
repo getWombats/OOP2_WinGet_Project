@@ -128,6 +128,6 @@ java.lang.StringIndexOutOfBoundsException: Range [-1, -1) out of bounds for leng
 	at java.base/jdk.internal.util.Preconditions.checkFromToIndex(Preconditions.java:349)
 	at java.base/java.lang.String.checkBoundsBeginEnd(String.java:4861)
 	at java.base/java.lang.String.substring(String.java:2830)
-	at ch.hftm.oop2_winget_project/ch.hftm.oop2_winget_project.Models.WinGetQuery.QueryToList(WinGetQuery.java:105)
+	at ch.hftm.oop2_winget_project/ch.hftm.oop2_winget_project.Model.WinGetQuery.QueryToList(WinGetQuery.java:105)
 	at ch.hftm.oop2_winget_project/ch.hftm.oop2_winget_project.Controller.SearchPackagesController.lambda$searchPackages$6(SearchPackagesController.java:108)
 	at java.base/java.lang.Thread.run(Thread.java:1583)

@@ -1,10 +1,11 @@
 package ch.hftm.oop2_winget_project.Model;
 
 import ch.hftm.oop2_winget_project.App;
+import ch.hftm.oop2_winget_project.Util.ListProvider;
 import ch.hftm.oop2_winget_project.Util.QueryType;
 import ch.hftm.oop2_winget_project.Util.SourceType;
 import ch.hftm.oop2_winget_project.Util.ConsoleExitCode;
-import ch.hftm.oop2_winget_project.Service.UniCodeChecker;
+import ch.hftm.oop2_winget_project.Util.UniCodeChecker;
 import javafx.collections.ObservableList;
 
 import java.io.BufferedReader;
@@ -16,15 +17,13 @@ import java.util.regex.Pattern;
 
 public class WinGetQuery
 {
-    private final WinGetSettings winGetSettings = App.getWinGetSettings();
-    private final String columnHeaderIdText = winGetSettings.getColumns().get("columnId");
-    private final String columnHeaderVersionText = winGetSettings.getColumns().get("columnVersion");
-    private final String columnHeaderAvailableText = winGetSettings.getColumns().get("columnAvailable");
-    private final String columnHeaderMatchText = winGetSettings.getColumns().get("columnMatch");
-    private final String columnHeaderSourceText = winGetSettings.getColumns().get("columnSource");
-    private long consoleExitCode;
+    private final String columnHeaderIdText = App.getAppInstance().getWinGetSettings().getColumns().get("columnId");
+    private final String columnHeaderVersionText = App.getAppInstance().getWinGetSettings().getColumns().get("columnVersion");
+    private final String columnHeaderAvailableText = App.getAppInstance().getWinGetSettings().getColumns().get("columnAvailable");
+    private final String columnHeaderMatchText = App.getAppInstance().getWinGetSettings().getColumns().get("columnMatch");
+    private final String columnHeaderSourceText = App.getAppInstance().getWinGetSettings().getColumns().get("columnSource");
     private final Pattern VALIDLINE_REGEX = Pattern.compile("(.*[0-9a-zA-Z]+.*)");
-    private int packageLineCounter = 1; // Debug
+    private long consoleExitCode;
 
     public void queryToList(QueryType queryType, String keyWord, ObservableList<WinGetPackage> packageList) throws IOException, InterruptedException
     {
@@ -102,43 +101,29 @@ public class WinGetQuery
                         packageVersion = line.substring(columnSeparatorIndexVersion, columnSeparatorIndexSource).trim();
                     }
 
-                    if(queryType == QueryType.SEARCH) // Search the internet
-                    {
-                        WinGetPackage winGetPackage = new WinGetPackage(
-                                line.substring(0, columnSeparatorIndexId).trim(), // Package Name
-                                line.substring(columnSeparatorIndexId, columnSeparatorIndexVersion).trim(), // Package ID
-                                packageVersion,
-                                line.substring(columnSeparatorIndexSource).trim() // Package Source
-                        );
+                    WinGetPackage winGetPackage = new WinGetPackage(
+                            line.substring(0, columnSeparatorIndexId).trim(), // Package Name
+                            line.substring(columnSeparatorIndexId, columnSeparatorIndexVersion).trim(), // Package ID
+                            packageVersion,
+                            line.substring(columnSeparatorIndexSource).trim() // Package Source
+                    );
 
-                        for(WinGetPackage installedPackage : App.getListManager().getInstalledPackageList())
+                    // Compare search results with installed packages to set relating packages as installed
+                    if(queryType == QueryType.SEARCH)
+                    {
+                        for(WinGetPackage installedPackage : ListProvider.getInstalledPackageList())
                         {
                             if(installedPackage.getPackageID().equals(winGetPackage.getPackageID()))
                             {
                                 winGetPackage.setInstalled(true);
                             }
                         }
-
-                        // Lock the list object
-                        synchronized(packageList)
-                        {
-                            packageList.add(winGetPackage);
-                        }
                     }
-                    else if (queryType == QueryType.LIST) // Show installed packages
-                    {
-                        WinGetPackage winGetPackage = new WinGetPackage(
-                                line.substring(0, columnSeparatorIndexId).trim(), // Package Name
-                                line.substring(columnSeparatorIndexId, columnSeparatorIndexVersion).trim(), // Package ID
-                                packageVersion,
-                                line.substring(columnSeparatorIndexSource).trim() // Package Source
-                        );
 
-                        // Lock the list object
-                        synchronized(packageList)
-                        {
-                            packageList.add(winGetPackage);
-                        }
+                    // Lock the list object for safe list populating when working on other threads
+                    synchronized(packageList)
+                    {
+                        packageList.add(winGetPackage);
                     }
                 }
             }

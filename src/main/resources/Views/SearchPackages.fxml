@@ -23,8 +23,9 @@
         </HBox>
     </top>
     <center>
-        <TableView fx:id="searchTableView" styleClass="searchTableView" stylesheets="@../CSS/DarkTheme.css" BorderPane.alignment="TOP_LEFT">
+        <TableView fx:id="searchTableView" editable="true" styleClass="searchTableView" stylesheets="@../CSS/DarkTheme.css" BorderPane.alignment="TOP_LEFT">
             <columns>
+                <TableColumn fx:id="favoriteColumn" minWidth="30.0" prefWidth="50.0" resizable="false" />
                 <TableColumn fx:id="nameColumn" editable="false" minWidth="220.0" prefWidth="-1.0" resizable="false" text="Package Name" />
                 <TableColumn fx:id="idColumn" editable="false" minWidth="220.0" prefWidth="-1.0" resizable="false" text="Package ID" />
                 <TableColumn fx:id="versionColumn" editable="false" minWidth="350.0" prefWidth="-1.0" resizable="false" text="Version" />

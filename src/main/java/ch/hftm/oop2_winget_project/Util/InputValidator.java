@@ -8,7 +8,7 @@ public class InputValidator
 {
     private static final Pattern INVALID_INPUT_REGEX = Pattern.compile("^[a-zA-Z0-9]+$");
 
-    public static TextFormatter<String> createSpaceValidator()
+    public static TextFormatter<String> createValidator()
     {
         return new TextFormatter<>(change -> {
             Matcher matcher = INVALID_INPUT_REGEX.matcher(change.getText());

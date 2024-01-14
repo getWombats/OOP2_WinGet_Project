@@ -9,10 +9,12 @@ import ch.hftm.oop2_winget_project.Api.IControllerBase;
 import ch.hftm.oop2_winget_project.Util.ConsoleExitCode;
 import ch.hftm.oop2_winget_project.Util.InputValidator;
 import javafx.application.Platform;
+import javafx.beans.property.BooleanProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.input.KeyCode;
 import javafx.util.Callback;
 
@@ -25,6 +27,8 @@ public class SearchPackagesController implements IControllerBase, Initializable
     @FXML
     private TableView<WinGetPackage> searchTableView;
     @FXML
+    private TableColumn<WinGetPackage, Void> favoriteColumn;
+    @FXML
     private TableColumn<WinGetPackage, String> idColumn;
     @FXML
     private TableColumn<WinGetPackage, String> nameColumn;
@@ -34,7 +38,6 @@ public class SearchPackagesController implements IControllerBase, Initializable
     private TableColumn<WinGetPackage, String> versionColumn;
     @FXML
     private TableColumn<WinGetPackage, Void> actionColumn;
-
     @FXML
     private TextField keywordTextField;
     @FXML
@@ -45,10 +48,11 @@ public class SearchPackagesController implements IControllerBase, Initializable
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
         tableViewPlaceholderLabel = new Label();
-        tableViewPlaceholderLabel.setText("Suchbegriff eingeben und Pakete suchen");
+        tableViewPlaceholderLabel.setText("Enter search keyword");
         searchTableView.setPlaceholder(tableViewPlaceholderLabel);
 
         addButtonToTableView();
+        addFavoriteToggleToTableView();
         setTableViewData();
         setTableViewSource();
         registerInputServices();
@@ -58,12 +62,12 @@ public class SearchPackagesController implements IControllerBase, Initializable
     private void testButtonClick()
     {
         // Test message
-        Message msg = new Message();
-        msg.show(Alert.AlertType.ERROR, "title", "headertext", "message");
+//        Message msg = new Message();
+//        msg.show(Alert.AlertType.ERROR, "title", "headertext", "message");
 
         // Test notification
-//        Message notify = new Message();
-//        notify.showNotification("title", "message");
+        Message notify = new Message();
+        notify.showNotification("title", "message");
     }
 
     @FXML
@@ -75,6 +79,8 @@ public class SearchPackagesController implements IControllerBase, Initializable
     @Override
     public void setTableViewData()
     {
+//        this.favoriteColumn.setCellFactory(CheckBoxTableCell.forTableColumn(favoriteColumn)); // Test with checkbox
+//        this.favoriteColumn.setCellValueFactory(cellData -> cellData.getValue().isFavoriteProperty()); // Test with checkbox
         this.nameColumn.setCellValueFactory(cellData -> cellData.getValue().packageNameProperty());
         this.idColumn.setCellValueFactory(cellData -> cellData.getValue().packageIDProperty());
         this.versionColumn.setCellValueFactory(cellData -> cellData.getValue().packageVersionProperty());
@@ -105,7 +111,7 @@ public class SearchPackagesController implements IControllerBase, Initializable
         } );
 
         // Set input validation
-        keywordTextField.setTextFormatter(InputValidator.createSpaceValidator());
+        keywordTextField.setTextFormatter(InputValidator.createValidator());
     }
 
     @Override
@@ -165,6 +171,45 @@ public class SearchPackagesController implements IControllerBase, Initializable
             }
         };
         actionColumn.setCellFactory(cellFactory);
+    }
+
+    public void addFavoriteToggleToTableView()
+    {
+        Callback<TableColumn<WinGetPackage, Void>, TableCell<WinGetPackage, Void>> cellFactory = new Callback<>()
+        {
+            @Override
+            public TableCell<WinGetPackage, Void> call(final TableColumn<WinGetPackage, Void> param)
+            {
+                final TableCell<WinGetPackage, Void> cell = new TableCell<>()
+                {
+                    private final ToggleButton btn = new ToggleButton("test");
+                    {
+                        btn.setOnAction((ActionEvent event) -> {
+                            WinGetPackage data = getTableView().getItems().get(getIndex());
+                            data.setFavorite(btn.isSelected()); // Set package as favorite
+                            System.out.println(data.getPackageName() + " is now favorite: " + data.isFavorite());
+                        });
+                    }
+
+                    @Override
+                    public void updateItem(Void item, boolean empty)
+                    {
+                        super.updateItem(item, empty);
+                        if (empty)
+                        {
+                            setGraphic(null);
+                        }
+                        else
+                        {
+                            WinGetPackage data = getTableView().getItems().get(getIndex());
+                            btn.setSelected(data.isFavorite());
+                        }
+                    }
+                };
+                return cell;
+            }
+        };
+        favoriteColumn.setCellFactory(cellFactory);
     }
 
     private void searchPackages()

@@ -120,6 +120,30 @@
     -fx-border-color: transparent;
 }
 
+/* Test checkbox in tableview */
+.searchTableView .check-box .box {
+    -fx-background-image: url(../Icons/favoriteUnchecked.png);
+}
+
+.searchTableView .check-box:selected .mark {
+    -fx-background-color: white;
+}
+
+.searchTableView .check-box:selected .box {
+    -fx-background-color: #28a3f4;
+}
+/* Test toggle button in tableview */
+.searchTableView .toggle-button {
+    /* -fx-background-image: url(../Icons/favoriteUnchecked.png); */
+}
+
+.searchTableView .toggle-button:selected {
+    /* -fx-background-image: url(../Icons/favoriteChecked.png); */
+}
+
+.searchTableView .toggle-button:selected:focused {
+}
+
 .text-field {
     -fx-background-color: #282828; /* #595959 */
     -fx-border-color: #e2e2e2;

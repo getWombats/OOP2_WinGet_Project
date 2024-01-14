@@ -1,5 +1,7 @@
 package ch.hftm.oop2_winget_project.Model;
 
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 public class WinGetPackage
@@ -8,6 +10,7 @@ public class WinGetPackage
     private final SimpleStringProperty packageID = new SimpleStringProperty();
     private final SimpleStringProperty packageVersion = new SimpleStringProperty();
     private final SimpleStringProperty packageSource = new SimpleStringProperty();
+//    private final BooleanProperty isFavorite = new SimpleBooleanProperty();
     private boolean isFavorite;
     private boolean isInstalled;
 
@@ -85,10 +88,17 @@ public class WinGetPackage
     public boolean isFavorite()
     {
         return isFavorite;
+//        return isFavorite.get();
     }
+
+//    public BooleanProperty isFavoriteProperty()
+//    {
+//        return isFavorite;
+//    }
 
     public void setFavorite(boolean favorite)
     {
+//        this.isFavorite.set(favorite);
         isFavorite = favorite;
     }
 

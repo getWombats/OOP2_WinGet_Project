@@ -1,12 +1,13 @@
 package ch.hftm.oop2_winget_project.Controller;
 
-import ch.hftm.oop2_winget_project.App;
+import ch.hftm.oop2_winget_project.Util.ListProvider;
+import ch.hftm.oop2_winget_project.Model.Message;
 import ch.hftm.oop2_winget_project.Util.QueryType;
 import ch.hftm.oop2_winget_project.Model.WinGetQuery;
 import ch.hftm.oop2_winget_project.Model.WinGetPackage;
 import ch.hftm.oop2_winget_project.Api.IControllerBase;
 import ch.hftm.oop2_winget_project.Util.ConsoleExitCode;
-import ch.hftm.oop2_winget_project.Service.InputValidator;
+import ch.hftm.oop2_winget_project.Util.InputValidator;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -54,6 +55,18 @@ public class SearchPackagesController implements IControllerBase, Initializable
     }
 
     @FXML
+    private void testButtonClick()
+    {
+        // Test message
+        Message msg = new Message();
+        msg.show(Alert.AlertType.ERROR, "title", "headertext", "message");
+
+        // Test notification
+//        Message notify = new Message();
+//        notify.showNotification("title", "message");
+    }
+
+    @FXML
     private void searchButtonClick()
     {
         searchPackages();
@@ -71,7 +84,7 @@ public class SearchPackagesController implements IControllerBase, Initializable
     @Override
     public void setTableViewSource()
     {
-        this.searchTableView.setItems(App.getListManager().getSearchPackageList());
+        this.searchTableView.setItems(ListProvider.getSearchPackageList());
     }
 
     @Override
@@ -118,6 +131,9 @@ public class SearchPackagesController implements IControllerBase, Initializable
                             data.setInstalled(true); // Set package as installed
                             btn.setDisable(true); // Disables button when clicked
                             System.out.println(data.getPackageName() + " [ID: " + data.getPackageID() + "] will be installed..."); // Test, execute here 'winget install {packageId}'
+
+                            // Update list
+                            ListProvider.getInstalledPackageList().add(data);
                         });
                     }
 
@@ -169,7 +185,7 @@ public class SearchPackagesController implements IControllerBase, Initializable
                 WinGetQuery query = new WinGetQuery();
                 try
                 {
-                    query.queryToList(QueryType.SEARCH, searchKeyword, App.getListManager().getSearchPackageList());
+                    query.queryToList(QueryType.SEARCH, searchKeyword, ListProvider.getSearchPackageList());
                 }
                 catch (IOException | InterruptedException ex)
                 {

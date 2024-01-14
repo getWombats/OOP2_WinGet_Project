@@ -1,6 +1,6 @@
 package ch.hftm.oop2_winget_project.Model;
 
-import ch.hftm.oop2_winget_project.Service.SystemLanguage;
+import ch.hftm.oop2_winget_project.Util.SystemLanguage;
 
 import java.util.HashMap;
 import java.util.Map;

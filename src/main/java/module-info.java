@@ -1,6 +1,7 @@
 module ch.hftm.oop2_winget_project {
     requires javafx.controls;
     requires javafx.fxml;
+    requires org.controlsfx.controls;
 
 
     opens ch.hftm.oop2_winget_project to javafx.fxml;

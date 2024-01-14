@@ -16,6 +16,7 @@
                     <children>
                         <TextField fx:id="keywordTextField" prefWidth="220.0" promptText="Enter Keyword" stylesheets="@../CSS/DarkTheme.css" />
                         <Button mnemonicParsing="false" onAction="#searchButtonClick" styleClass="searchButton" stylesheets="@../CSS/DarkTheme.css" text="Search package" />
+                  <Button mnemonicParsing="false" onAction="#testButtonClick" text="Test your function" />
                     </children>
                 </HBox>
             </children>

@@ -35,7 +35,7 @@
          </BorderPane>
       </center>
       <top>
-         <AnchorPane styleClass="titleBar" stylesheets="@../CSS/WindowTitleBarDarkTheme.css" BorderPane.alignment="CENTER">
+         <AnchorPane fx:id="titleBar" styleClass="titleBar" stylesheets="@../CSS/WindowTitleBarDarkTheme.css" BorderPane.alignment="CENTER">
             <children>
                <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="6.0" AnchorPane.topAnchor="3.0">
                   <image>
@@ -45,7 +45,7 @@
                <HBox alignment="TOP_RIGHT" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                   <children>
                      <Button mnemonicParsing="false" onAction="#minimizeWindowButtonClick" prefHeight="8.0" prefWidth="50.0" styleClass="buttonWindowState" stylesheets="@../CSS/WindowTitleBarDarkTheme.css" />
-                     <ToggleButton mnemonicParsing="false" onAction="#maximizeWindowButtonClick" prefWidth="50.0" />
+                     <ToggleButton fx:id="maximizeWindowButton" mnemonicParsing="false" onAction="#maximizeWindowButtonClick" prefWidth="50.0" />
                      <Button mnemonicParsing="false" onAction="#closeWindowButtonClick" prefWidth="50.0" styleClass="buttonWindowClose" stylesheets="@../CSS/WindowTitleBarDarkTheme.css" />
                   </children>
                </HBox>

@@ -1,4 +1,4 @@
-package ch.hftm.oop2_winget_project.Service;
+package ch.hftm.oop2_winget_project.Util;
 
 public final class UniCodeChecker
 {

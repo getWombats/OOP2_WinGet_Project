@@ -1,7 +1,7 @@
 package ch.hftm.oop2_winget_project.Controller;
 
 import ch.hftm.oop2_winget_project.Api.IControllerBase;
-import ch.hftm.oop2_winget_project.App;
+import ch.hftm.oop2_winget_project.Util.ListProvider;
 import ch.hftm.oop2_winget_project.Util.QueryType;
 import ch.hftm.oop2_winget_project.Model.WinGetPackage;
 import ch.hftm.oop2_winget_project.Model.WinGetQuery;
@@ -65,7 +65,7 @@ public class InstalledPackagesController implements IControllerBase, Initializab
     @Override
     public void setTableViewSource()
     {
-        this.installedPackagesTableView.setItems(App.getListManager().getInstalledPackageList());
+        this.installedPackagesTableView.setItems(ListProvider.getInstalledPackageList());
     }
 
     @Override
@@ -97,6 +97,9 @@ public class InstalledPackagesController implements IControllerBase, Initializab
                             WinGetPackage data = getTableView().getItems().get(getIndex());
                             data.setInstalled(false); // Set package as uninstalled
                             System.out.println(data.getPackageName() + " [ID: " + data.getPackageID() + "] uninstalling package..."); // Test, execute here 'winget remove {packageId}'
+
+                            // Update list
+                            ListProvider.getInstalledPackageList().remove(data);
                             // Implement item removal from list here, track uninstall process possible?
                         });
                     }
@@ -145,7 +148,7 @@ public class InstalledPackagesController implements IControllerBase, Initializab
                 WinGetQuery query = new WinGetQuery();
                 try
                 {
-                    query.queryToList(QueryType.LIST, "", App.getListManager().getInstalledPackageList());
+                    query.queryToList(QueryType.LIST, "", ListProvider.getInstalledPackageList());
                 }
                 catch (IOException | InterruptedException ex)
                 {

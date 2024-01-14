@@ -2,10 +2,8 @@
 <a name="readme-top"></a>
 <br />
 <div align="center">
-
-    image / logo here
-
-  <h3 align="center">WinGet</h3>
+    <img src="src/main/resources/Icons/taskbarIcon_colorized.png" alt="Logo" width="80" height="80">
+  <h3 align="center">OOP2 Project: WinGet UI</h3>
 </div>
 
 <!-- PROJECT DESCRIPTION -->
@@ -37,24 +35,6 @@ This project is intended to implement the contents of the course IN212 "object o
 - f) Use the possibilities of exceptions purposefully, in order to handle exceptions in your application cleanly. Make sure that an error can be analyzed in detail with the help of log data.
 
 - g) The project should be delivered as a Maven project and can be generated via the build process of Maven. An already compiled and directly executable version of the program should also be included in the delivery. Use packages to structure your classes according to a chosen architecture approach.
-
-
-<!-- ROADMAP -->
-## Roadmap
-
-### Backend
-
-- [ ] Inheritance
-- [ ] Interfaces
-- [ ] Abstract Classes
-- [ ] Casting
-- [ ] Unit Tests
-- [ ] Generics
-- [ ] Collections and sorting
-- [ ] Serialization
-- [ ] Exception Handling
-
-___
 
 
 <!-- MARKDOWN LINKS & IMAGES -->

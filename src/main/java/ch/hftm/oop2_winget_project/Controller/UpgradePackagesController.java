@@ -7,7 +7,6 @@ import javafx.scene.control.TableView;
 
 public class UpgradePackagesController
 {
-
     public TableView searchTableView;
     public TableColumn nameColumn;
     public TableColumn idColumn;

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane minHeight="650.0" minWidth="1320.0" style="-fx-border-width: 1; -fx-border-color: #333333;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.hftm.oop2_winget_project.Controller.MainWindowController">
+   <BorderPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <left>
+         <VBox prefHeight="200.0" spacing="25.0" styleClass="vBoxMenu" stylesheets="@../CSS/DarkTheme.css" BorderPane.alignment="CENTER">
+            <padding>
+               <Insets top="100.0" />
+            </padding>
+            <Button mnemonicParsing="false" onAction="#menuSearchButtonClick" prefHeight="70.0" prefWidth="170.0" styleClass="menuButton" stylesheets="@../CSS/MenuButtonStyle.css" text="Search packages" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Button>
+            <Button mnemonicParsing="false" onAction="#menuUpdateButtonClick" prefHeight="70.0" prefWidth="170.0" styleClass="menuButton" stylesheets="@../CSS/MenuButtonStyle.css" text="Update packages" />
+            <Button mnemonicParsing="false" onAction="#menuInstalledPackagesButtonClick" prefHeight="70.0" prefWidth="170.0" styleClass="menuButton" stylesheets="@../CSS/MenuButtonStyle.css" text="Installed packages" />
+            <Button mnemonicParsing="false" onAction="#menuFavouritePackagesButtonClick" prefHeight="70.0" prefWidth="170.0" styleClass="menuButton" stylesheets="@../CSS/MenuButtonStyle.css" text="Favourite packages" />
+            <Button mnemonicParsing="false" onAction="#menuUserListsButtonClick" prefHeight="70.0" prefWidth="170.0" styleClass="menuButton" stylesheets="@../CSS/MenuButtonStyle.css" text="User Lists" />
+         </VBox>
+      </left>
+      <center>
+         <BorderPane fx:id="mainWindowBorderPane" styleClass="borderPane" stylesheets="@../CSS/DarkTheme.css" BorderPane.alignment="TOP_LEFT">
+            <padding>
+               <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+            </padding>
+         </BorderPane>
+      </center>
+      <top>
+         <AnchorPane fx:id="titleBar" styleClass="titleBar" stylesheets="@../CSS/WindowTitleBarDarkTheme.css" BorderPane.alignment="CENTER">
+            <children>
+               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="6.0" AnchorPane.topAnchor="3.0">
+                  <image>
+                     <Image url="@../Icons/windowIcon_color.png" />
+                  </image>
+               </ImageView>
+               <HBox alignment="TOP_RIGHT" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <children>
+                     <Button mnemonicParsing="false" onAction="#minimizeWindowButtonClick" prefHeight="8.0" prefWidth="50.0" styleClass="buttonWindowState" stylesheets="@../CSS/WindowTitleBarDarkTheme.css" />
+                     <ToggleButton fx:id="maximizeWindowButton" mnemonicParsing="false" onAction="#maximizeWindowButtonClick" prefWidth="50.0" />
+                     <Button mnemonicParsing="false" onAction="#closeWindowButtonClick" prefWidth="50.0" styleClass="buttonWindowClose" stylesheets="@../CSS/WindowTitleBarDarkTheme.css" />
+                  </children>
+               </HBox>
+               <Label text="winget PackageManager GUI" textFill="WHITE" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="5.0" />
+            </children></AnchorPane>
+      </top>
+   </BorderPane>
+</AnchorPane>

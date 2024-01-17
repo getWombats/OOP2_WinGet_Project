@@ -1,19 +1,20 @@
 package ch.hftm.oop2_winget_project.Controller;
 
-import ch.hftm.oop2_winget_project.App;
-import ch.hftm.oop2_winget_project.Features.QueryType;
-import ch.hftm.oop2_winget_project.Models.WinGetQuery;
-import ch.hftm.oop2_winget_project.Models.WinGetPackage;
-import ch.hftm.oop2_winget_project.Api.TableViewModificationable;
-import ch.hftm.oop2_winget_project.Utils.ConsoleExitCode;
-import ch.hftm.oop2_winget_project.Utils.StageAndSceneManager;
+import ch.hftm.oop2_winget_project.Util.ListProvider;
+import ch.hftm.oop2_winget_project.Model.Message;
+import ch.hftm.oop2_winget_project.Util.QueryType;
+import ch.hftm.oop2_winget_project.Model.WinGetQuery;
+import ch.hftm.oop2_winget_project.Model.WinGetPackage;
+import ch.hftm.oop2_winget_project.Api.IControllerBase;
+import ch.hftm.oop2_winget_project.Util.ConsoleExitCode;
+import ch.hftm.oop2_winget_project.Util.InputValidator;
 import javafx.application.Platform;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import javafx.beans.property.BooleanProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.input.KeyCode;
 import javafx.util.Callback;
 
@@ -21,10 +22,12 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class SearchPackagesController implements TableViewModificationable, Initializable
+public class SearchPackagesController implements IControllerBase, Initializable
 {
     @FXML
     private TableView<WinGetPackage> searchTableView;
+    @FXML
+    private TableColumn<WinGetPackage, Void> favoriteColumn;
     @FXML
     private TableColumn<WinGetPackage, String> idColumn;
     @FXML
@@ -34,30 +37,37 @@ public class SearchPackagesController implements TableViewModificationable, Init
     @FXML
     private TableColumn<WinGetPackage, String> versionColumn;
     @FXML
+    private TableColumn<WinGetPackage, Void> actionColumn;
+    @FXML
     private TextField keywordTextField;
     @FXML
     private Label tableViewPlaceholderLabel;
     private boolean isThreadWorking;
-//    private static final ObservableList<WinGetPackage> packageList = App.getListManager().getSearchPackageList();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
         tableViewPlaceholderLabel = new Label();
-
-        addButtonToTableView();
-        setTableViewData();
-        setTableViewSource();
-
-        tableViewPlaceholderLabel.setText("Suchbegriff eingeben und Pakete suchen");
+        tableViewPlaceholderLabel.setText("Enter search keyword");
         searchTableView.setPlaceholder(tableViewPlaceholderLabel);
 
-        keywordTextField.setOnKeyPressed( event -> {
-            if( event.getCode() == KeyCode.ENTER )
-            {
-                searchPackages();
-            }
-        } );
+        addButtonToTableView();
+        addFavoriteToggleToTableView();
+        setTableViewData();
+        setTableViewSource();
+        registerInputServices();
+    }
+
+    @FXML
+    private void testButtonClick()
+    {
+        // Test message
+//        Message msg = new Message();
+//        msg.show(Alert.AlertType.ERROR, "title", "headertext", "message");
+
+        // Test notification
+        Message notify = new Message();
+        notify.showNotification("title", "message");
     }
 
     @FXML
@@ -69,6 +79,8 @@ public class SearchPackagesController implements TableViewModificationable, Init
     @Override
     public void setTableViewData()
     {
+//        this.favoriteColumn.setCellFactory(CheckBoxTableCell.forTableColumn(favoriteColumn)); // Test with checkbox
+//        this.favoriteColumn.setCellValueFactory(cellData -> cellData.getValue().isFavoriteProperty()); // Test with checkbox
         this.nameColumn.setCellValueFactory(cellData -> cellData.getValue().packageNameProperty());
         this.idColumn.setCellValueFactory(cellData -> cellData.getValue().packageIDProperty());
         this.versionColumn.setCellValueFactory(cellData -> cellData.getValue().packageVersionProperty());
@@ -78,7 +90,7 @@ public class SearchPackagesController implements TableViewModificationable, Init
     @Override
     public void setTableViewSource()
     {
-        this.searchTableView.setItems(App.getListManager().getSearchPackageList());
+        this.searchTableView.setItems(ListProvider.getSearchPackageList());
     }
 
     @Override
@@ -86,6 +98,20 @@ public class SearchPackagesController implements TableViewModificationable, Init
     {
         searchTableView.setItems(null);
         setTableViewSource();
+    }
+
+    private void registerInputServices()
+    {
+        // Register event for enter key
+        keywordTextField.setOnKeyPressed( event -> {
+            if( event.getCode() == KeyCode.ENTER )
+            {
+                searchPackages();
+            }
+        } );
+
+        // Set input validation
+        keywordTextField.setTextFormatter(InputValidator.createValidator());
     }
 
     @Override
@@ -97,8 +123,6 @@ public class SearchPackagesController implements TableViewModificationable, Init
     @Override
     public void addButtonToTableView()
     {
-        WinGetPackage data = getObjectFromSelection();
-        TableColumn<WinGetPackage, Void> colBtn = new TableColumn("");
         Callback<TableColumn<WinGetPackage, Void>, TableCell<WinGetPackage, Void>> cellFactory = new Callback<>()
         {
             @Override
@@ -106,13 +130,16 @@ public class SearchPackagesController implements TableViewModificationable, Init
             {
                 final TableCell<WinGetPackage, Void> cell = new TableCell<>()
                 {
-                    private final Button btn = new Button("Action");
+                    private final Button btn = new Button("Install");
                     {
                         btn.setOnAction((ActionEvent event) -> {
                             WinGetPackage data = getTableView().getItems().get(getIndex());
-//                            data.setInstalled(true); // Test
-//                            btn.setDisable(true); // Test
-                            System.out.println(data.getPackageName() + " [ID: " + data.getPackageID() + "]"); // Test
+                            data.setInstalled(true); // Set package as installed
+                            btn.setDisable(true); // Disables button when clicked
+                            System.out.println(data.getPackageName() + " [ID: " + data.getPackageID() + "] will be installed..."); // Test, execute here 'winget install {packageId}'
+
+                            // Update list
+                            ListProvider.getInstalledPackageList().add(data);
                         });
                     }
 
@@ -127,24 +154,62 @@ public class SearchPackagesController implements TableViewModificationable, Init
                         else
                         {
                             WinGetPackage data = getTableView().getItems().get(getIndex());
-                            if(data.isInstalled()) // example
+                            if(data.isInstalled())
                             {
-                                setGraphic(null);
+                                // Set cell content when package is installed already
+                                Label installedLabel = new Label("installed");
+                                setGraphic(installedLabel);
                             }
                             else
                             {
                                 setGraphic(btn);
                             }
-//                            setGraphic(btn);
                         }
-
                     }
                 };
                 return cell;
             }
         };
-        colBtn.setCellFactory(cellFactory);
-        searchTableView.getColumns().add(colBtn);
+        actionColumn.setCellFactory(cellFactory);
+    }
+
+    public void addFavoriteToggleToTableView()
+    {
+        Callback<TableColumn<WinGetPackage, Void>, TableCell<WinGetPackage, Void>> cellFactory = new Callback<>()
+        {
+            @Override
+            public TableCell<WinGetPackage, Void> call(final TableColumn<WinGetPackage, Void> param)
+            {
+                final TableCell<WinGetPackage, Void> cell = new TableCell<>()
+                {
+                    private final ToggleButton btn = new ToggleButton("test");
+                    {
+                        btn.setOnAction((ActionEvent event) -> {
+                            WinGetPackage data = getTableView().getItems().get(getIndex());
+                            data.setFavorite(btn.isSelected()); // Set package as favorite
+                            System.out.println(data.getPackageName() + " is now favorite: " + data.isFavorite());
+                        });
+                    }
+
+                    @Override
+                    public void updateItem(Void item, boolean empty)
+                    {
+                        super.updateItem(item, empty);
+                        if (empty)
+                        {
+                            setGraphic(null);
+                        }
+                        else
+                        {
+                            WinGetPackage data = getTableView().getItems().get(getIndex());
+                            btn.setSelected(data.isFavorite());
+                        }
+                    }
+                };
+                return cell;
+            }
+        };
+        favoriteColumn.setCellFactory(cellFactory);
     }
 
     private void searchPackages()
@@ -158,18 +223,18 @@ public class SearchPackagesController implements TableViewModificationable, Init
                 searchTableView.getItems().clear();
             }
 
-            tableViewPlaceholderLabel.setText("Pakete werden geladen...");
+            tableViewPlaceholderLabel.setText("Searching packages...");
 
             isThreadWorking = true;
             new Thread(() -> {
                 WinGetQuery query = new WinGetQuery();
                 try
                 {
-                    query.queryToList(QueryType.SEARCH, searchKeyword, App.getListManager().getSearchPackageList());
+                    query.queryToList(QueryType.SEARCH, searchKeyword, ListProvider.getSearchPackageList());
                 }
                 catch (IOException | InterruptedException ex)
                 {
-                    System.out.println(ex.getMessage());
+                    System.out.println(ex.getMessage()); // Replace with ExceptionHandler when implemented
                 }
 
                 Platform.runLater(() -> {
@@ -179,7 +244,7 @@ public class SearchPackagesController implements TableViewModificationable, Init
                     }
                     else
                     {
-                        tableViewPlaceholderLabel.setText("Keine Pakete gefunden");
+                        tableViewPlaceholderLabel.setText("No packages found");
                     }
                     isThreadWorking = false;
                 });

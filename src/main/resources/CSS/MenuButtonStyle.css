@@ -1,0 +1,36 @@
+/*****************************
+******** Button style ********
+*****************************/
+
+/* Standard button style  */
+.menuButton {
+    -fx-padding: 7 15 7 15;
+    -fx-background-color: #282828; /* #424242 */
+    -fx-background-radius: 0;
+    -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+    -fx-font-size: 12pt;
+    -fx-font-wight: bold;
+    -fx-text-fill: #d8d8d8;
+    -fx-background-insets: 0 0 0 0, 0, 1, 2;
+}
+
+/* MouseOver button style  */
+.menuButton:hover {
+    -fx-background-color: #512bd4;
+    /*-fx-text-fill: #F4A701;*/
+    -fx-border-width: 1;
+    -fx-background-radius: 0;
+}
+
+/* Pressed button style  */
+/*.menuButton:pressed, .button:default:hover:pressed {
+  -fx-background-color: #616161;
+  -fx-text-fill: white;
+}*/
+
+/* Disabled button style  */
+.menuButton:disabled, .button:default:disabled {
+    -fx-opacity: 0.2;
+    -fx-background-color: #1d1d1d;
+    -fx-text-fill: #e2e2e2;
+}

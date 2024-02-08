@@ -20,9 +20,9 @@ public class ListManagerController {
     private TableColumn<PackageList, String> nameColumn;
     @FXML
     private TableColumn<PackageList, Integer> listSizeColumn;
-    @FXML
-    private void initialize() {
-    }
+//    @FXML
+//    private void initialize() {
+//    }
     @FXML
     private void createPackageListButton_onAction(){
 

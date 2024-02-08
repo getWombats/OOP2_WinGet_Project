@@ -16,11 +16,11 @@ public class ListManager
         this.lists = new ArrayList<>();
     }
 
-
-
-
-
 //    Methods
+    public void createPackageList(String packageListName){
+        PackageList newPackageList = new PackageList(packageListName);
+        lists.add(newPackageList);
+    }
 
 
 // Existing Code

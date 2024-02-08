@@ -20,4 +20,8 @@ public class PackageList {
     public String getName(){
         return packageListName;
     }
+
+    public int getSize() {
+        return packages.size();
+    }
 }

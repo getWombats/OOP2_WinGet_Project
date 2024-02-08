@@ -28,4 +28,8 @@ public class PackageList {
     public void addPackage(WinGetPackage wgPkg) {
         packages.add(wgPkg);
     }
+
+    public void removePackage(WinGetPackage wgPkg) {
+        packages.remove(wgPkg);
+    }
 }

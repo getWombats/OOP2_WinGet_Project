@@ -24,4 +24,8 @@ public class PackageList {
     public int getSize() {
         return packages.size();
     }
+
+    public void addPackage(WinGetPackage wgPkg) {
+        packages.add(wgPkg);
+    }
 }

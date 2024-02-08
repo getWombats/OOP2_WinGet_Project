@@ -23,9 +23,17 @@ public class ListManagerController {
     private TableColumn<PackageList, String> nameColumn;
     @FXML
     private TableColumn<PackageList, Integer> listSizeColumn;
+
     @FXML
     private void initialize() {
         listManager = new ListManager();
+
+        // Set up the cell value factories for each column
+        nameColumn.setCellValueFactory(cellData -> cellData.getValue().getNameProperty());
+        listSizeColumn.setCellValueFactory(cellData -> cellData.getValue().getSizeProperty().asObject());
+
+        // Bind the data of listManager to the TableView
+        listManagerTableView.setItems(listManager.getLists());
     }
     @FXML
     private void createPackageListButton_onAction(){
@@ -38,5 +46,9 @@ public class ListManagerController {
 
     @FXML
     private void deletePackageListButton_onAction(){
+        PackageList selectedPackageList = listManagerTableView.getSelectionModel().getSelectedItem();
+        if (selectedPackageList != null) {
+            listManager.deletePackageList(selectedPackageList);
+        }
     }
 }

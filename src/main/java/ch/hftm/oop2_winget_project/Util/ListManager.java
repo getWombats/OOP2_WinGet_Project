@@ -9,11 +9,11 @@ import java.util.ArrayList;
 public class ListManager
 {
 //    Variables
-    public ArrayList<PackageList> lists;
+    private ObservableList<PackageList> lists;
 
 //    Constructors
     public ListManager() {
-        this.lists = new ArrayList<>();
+        this.lists = FXCollections.observableArrayList();
     }
 
 //    Methods
@@ -26,7 +26,7 @@ public class ListManager
         lists.remove(packageList);
     }
 
-    public ArrayList<PackageList> getLists() {
+    public ObservableList<PackageList> getLists() {
         return lists;
     }
 

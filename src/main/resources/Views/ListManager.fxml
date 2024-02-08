@@ -13,8 +13,8 @@
             <children>
                 <HBox prefHeight="200.0" spacing="20.0">
                     <children>
-                  <Button fx:id="createPackageListButton" mnemonicParsing="false" onAction="#createPackageListButton_onAction" stylesheets="@../CSS/DarkTheme.css" text="Create new List" />
-                  <Button fx:id="deletePackageListButton" mnemonicParsing="false" onAction="#deletePackageListButton_onAction" stylesheets="@../CSS/DarkTheme.css" text="Delete List" />
+                  <Button fx:id="button_createPackageList" mnemonicParsing="false" onAction="#createPackageListButton_onAction" stylesheets="@../CSS/DarkTheme.css" text="Create new List" />
+                  <Button fx:id="button_deletePackageList" mnemonicParsing="false" onAction="#deletePackageListButton_onAction" stylesheets="@../CSS/DarkTheme.css" text="Delete List" />
                   <TextField fx:id="textfield_PackageListName" promptText="Name for new List" stylesheets="@../CSS/DarkTheme.css" />
                     </children>
                 </HBox>

@@ -26,7 +26,9 @@ public class ListManager
 
 
 
-    public boolean create
+    public boolean createPackageList(listName) {
+
+    }
 // Existing Code
     private static final ObservableList<WinGetPackage> searchPackageList = FXCollections.observableArrayList();
     private static final ObservableList<WinGetPackage> installedPackageList = FXCollections.observableArrayList();

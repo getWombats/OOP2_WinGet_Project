@@ -1,6 +1,6 @@
 package ch.hftm.oop2_winget_project.Controller;
 
-import ch.hftm.oop2_winget_project.Util.ListProvider;
+import ch.hftm.oop2_winget_project.Util.ListManager;
 import ch.hftm.oop2_winget_project.Model.Message;
 import ch.hftm.oop2_winget_project.Util.QueryType;
 import ch.hftm.oop2_winget_project.Model.WinGetQuery;
@@ -9,12 +9,10 @@ import ch.hftm.oop2_winget_project.Api.IControllerBase;
 import ch.hftm.oop2_winget_project.Util.ConsoleExitCode;
 import ch.hftm.oop2_winget_project.Util.InputValidator;
 import javafx.application.Platform;
-import javafx.beans.property.BooleanProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.input.KeyCode;
 import javafx.util.Callback;
 
@@ -90,7 +88,7 @@ public class SearchPackagesController implements IControllerBase, Initializable
     @Override
     public void setTableViewSource()
     {
-        this.searchTableView.setItems(ListProvider.getSearchPackageList());
+        this.searchTableView.setItems(ListManager.getSearchPackageList());
     }
 
     @Override
@@ -139,7 +137,7 @@ public class SearchPackagesController implements IControllerBase, Initializable
                             System.out.println(data.getPackageName() + " [ID: " + data.getPackageID() + "] will be installed..."); // Test, execute here 'winget install {packageId}'
 
                             // Update list
-                            ListProvider.getInstalledPackageList().add(data);
+                            ListManager.getInstalledPackageList().add(data);
                         });
                     }
 
@@ -230,7 +228,7 @@ public class SearchPackagesController implements IControllerBase, Initializable
                 WinGetQuery query = new WinGetQuery();
                 try
                 {
-                    query.queryToList(QueryType.SEARCH, searchKeyword, ListProvider.getSearchPackageList());
+                    query.queryToList(QueryType.SEARCH, searchKeyword, ListManager.getSearchPackageList());
                 }
                 catch (IOException | InterruptedException ex)
                 {

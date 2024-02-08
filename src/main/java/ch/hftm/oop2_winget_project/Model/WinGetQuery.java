@@ -1,7 +1,7 @@
 package ch.hftm.oop2_winget_project.Model;
 
 import ch.hftm.oop2_winget_project.App;
-import ch.hftm.oop2_winget_project.Util.ListProvider;
+import ch.hftm.oop2_winget_project.Util.ListManager;
 import ch.hftm.oop2_winget_project.Util.QueryType;
 import ch.hftm.oop2_winget_project.Util.SourceType;
 import ch.hftm.oop2_winget_project.Util.ConsoleExitCode;
@@ -111,7 +111,7 @@ public class WinGetQuery
                     // Compare search results with installed packages to set relating packages as installed
                     if(queryType == QueryType.SEARCH)
                     {
-                        for(WinGetPackage installedPackage : ListProvider.getInstalledPackageList())
+                        for(WinGetPackage installedPackage : ListManager.getInstalledPackageList())
                         {
                             if(installedPackage.getPackageID().equals(winGetPackage.getPackageID()))
                             {

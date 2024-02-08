@@ -1,19 +1,14 @@
 package ch.hftm.oop2_winget_project.Controller;
 
 import ch.hftm.oop2_winget_project.App;
-import ch.hftm.oop2_winget_project.Model.Message;
-import ch.hftm.oop2_winget_project.Model.WinGetQuery;
 import ch.hftm.oop2_winget_project.Model.WindowManager;
 import ch.hftm.oop2_winget_project.Util.ResourceProvider;
-import ch.hftm.oop2_winget_project.Util.ListProvider;
-import ch.hftm.oop2_winget_project.Util.QueryType;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;

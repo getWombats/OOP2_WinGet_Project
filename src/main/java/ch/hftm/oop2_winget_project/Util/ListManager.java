@@ -4,7 +4,7 @@ import ch.hftm.oop2_winget_project.Model.WinGetPackage;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-public class ListProvider
+public class ListManager
 {
     private static final ObservableList<WinGetPackage> searchPackageList = FXCollections.observableArrayList();
     private static final ObservableList<WinGetPackage> installedPackageList = FXCollections.observableArrayList();

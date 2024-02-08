@@ -32,4 +32,8 @@ public class PackageList {
     public void removePackage(WinGetPackage wgPkg) {
         packages.remove(wgPkg);
     }
+
+    public List<WinGetPackage> getPackageList() {
+        return packages;
+    }
 }

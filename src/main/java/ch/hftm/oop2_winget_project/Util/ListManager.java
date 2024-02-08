@@ -10,11 +10,10 @@ public class ListManager
 {
 //    Variables
     private ArrayList<PackageList> lists;
-    private String listName;
 
 //    Constructors
     public ListManager() {
-        lists = new ArrayList<>();
+        this.lists = new ArrayList<>();
     }
 
 
@@ -24,11 +23,6 @@ public class ListManager
 //    Methods
 
 
-
-
-    public boolean createPackageList(listName) {
-
-    }
 // Existing Code
     private static final ObservableList<WinGetPackage> searchPackageList = FXCollections.observableArrayList();
     private static final ObservableList<WinGetPackage> installedPackageList = FXCollections.observableArrayList();

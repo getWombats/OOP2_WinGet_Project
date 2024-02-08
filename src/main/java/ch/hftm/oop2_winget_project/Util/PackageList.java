@@ -13,6 +13,7 @@ public class PackageList {
 //    Constructors
     public PackageList(String packageListName){
         this.packageListName = packageListName;
+        this.packages = new ArrayList<>();
     }
 
 

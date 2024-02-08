@@ -2,13 +2,18 @@ package ch.hftm.oop2_winget_project.Controller;
 
 import ch.hftm.oop2_winget_project.Util.ListManager;
 import ch.hftm.oop2_winget_project.Util.PackageList;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.util.Duration;
 
 
 public class ListManagerController {
 
     private ListManager listManager;
+    private Timeline countdownTimer;
     @FXML
     private Button button_createPackageList;
     @FXML
@@ -34,7 +39,20 @@ public class ListManagerController {
 
         // Bind the data of listManager to the TableView
         listManagerTableView.setItems(listManager.getLists());
+
+        countdownTimer = new Timeline(new KeyFrame(Duration.seconds(3), this::deletePackageList));
+        countdownTimer.setCycleCount(1); // Only run once
+        countdownTimer.setOnFinished(event -> countdownTimer.stop()); // Stop the timer when finished
+
     }
+
+    private void deletePackageList(ActionEvent actionEvent) {
+        PackageList selectedPackageList = listManagerTableView.getSelectionModel().getSelectedItem();
+        if (selectedPackageList != null) {
+            listManager.deletePackageList(selectedPackageList);
+        }
+    }
+
     @FXML
     private void createPackageListButton_onAction(){
         String name = textfield_PackageListName.getText();
@@ -46,9 +64,19 @@ public class ListManagerController {
 
     @FXML
     private void deletePackageListButton_onAction(){
-        PackageList selectedPackageList = listManagerTableView.getSelectionModel().getSelectedItem();
-        if (selectedPackageList != null) {
-            listManager.deletePackageList(selectedPackageList);
-        }
+//        PackageList selectedPackageList = listManagerTableView.getSelectionModel().getSelectedItem();
+//        if (selectedPackageList != null) {
+//            listManager.deletePackageList(selectedPackageList);
+//        }
     }
+    @FXML
+    private void deletePackageListButton_MousePressed(){
+        countdownTimer.play();
+    }
+
+    @FXML
+    private void deletePackageListButton_MouseReleased(){
+        countdownTimer.stop();
+    }
+
 }

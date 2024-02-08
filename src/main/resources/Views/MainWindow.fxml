@@ -26,7 +26,7 @@
             <Button mnemonicParsing="false" onAction="#menuUpdateButtonClick" prefHeight="70.0" prefWidth="170.0" styleClass="menuButton" stylesheets="@../CSS/MenuButtonStyle.css" text="Update packages" />
             <Button mnemonicParsing="false" onAction="#menuInstalledPackagesButtonClick" prefHeight="70.0" prefWidth="170.0" styleClass="menuButton" stylesheets="@../CSS/MenuButtonStyle.css" text="Installed packages" />
             <Button mnemonicParsing="false" onAction="#menuFavouritePackagesButtonClick" prefHeight="70.0" prefWidth="170.0" styleClass="menuButton" stylesheets="@../CSS/MenuButtonStyle.css" text="Favourite packages" />
-            <Button mnemonicParsing="false" onAction="#menuUserListsButtonClick" prefHeight="70.0" prefWidth="170.0" styleClass="menuButton" stylesheets="@../CSS/MenuButtonStyle.css" text="User Lists" />
+            <Button mnemonicParsing="false" onAction="#menuListManagerButtonClick" prefHeight="70.0" prefWidth="170.0" styleClass="menuButton" stylesheets="@../CSS/MenuButtonStyle.css" text="User Lists" />
          </VBox>
       </left>
       <center>

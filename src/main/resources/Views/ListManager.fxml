@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 
-<BorderPane xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.hftm.oop2_winget_project.Controller.InstalledPackagesController">
+<BorderPane xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.hftm.oop2_winget_project.Controller.ListManagerController">
     <top>
         <HBox prefHeight="50.0" BorderPane.alignment="CENTER">
             <children>
@@ -15,7 +15,7 @@
                     <children>
                   <Button fx:id="createPackageListButton" mnemonicParsing="false" onAction="#createPackageListButton_onAction" stylesheets="@../CSS/DarkTheme.css" text="Create new List" />
                   <Button fx:id="deletePackageListButton" mnemonicParsing="false" onAction="#deletePackageListButton_onAction" stylesheets="@../CSS/DarkTheme.css" text="Delete List" />
-                  <TextField fx:id="packageListNameTextField" promptText="Name for new List" stylesheets="@../CSS/DarkTheme.css" />
+                  <TextField fx:id="textfield_PackageListName" promptText="Name for new List" stylesheets="@../CSS/DarkTheme.css" />
                     </children>
                 </HBox>
             </children>

@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class ListManager
 {
 //    Variables
-    private ArrayList<PackageList> lists;
+    public ArrayList<PackageList> lists;
 
 //    Constructors
     public ListManager() {

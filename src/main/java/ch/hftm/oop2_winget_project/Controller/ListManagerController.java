@@ -17,8 +17,10 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class ListManagerController implements IControllerBase, Initializable
-{
+public class ListManagerController implements IControllerBase, Initializable {
+
+    @FXML
+    private Button 
     @FXML
     private TableView<WinGetPackage> installedPackagesTableView;
     @FXML
@@ -114,17 +116,6 @@ public class ListManagerController implements IControllerBase, Initializable
                         }
                         else
                         {
-//                            WinGetPackage data = getTableView().getItems().get(getIndex());
-//                            if(data.isInstalled())
-//                            {
-//                                // Set cell content when package is installed already
-//                                Label installedLabel = new Label("installed");
-//                                setGraphic(installedLabel);
-//                            }
-//                            else
-//                            {
-//                                setGraphic(btn);
-//                            }
                             setGraphic(btn);
                         }
                     }

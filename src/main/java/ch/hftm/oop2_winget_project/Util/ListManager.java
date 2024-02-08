@@ -22,6 +22,10 @@ public class ListManager
         lists.add(newPackageList);
     }
 
+    public void deletePackageList(PackageList packageList) {
+        lists.remove(packageList);
+    }
+
 
 // Existing Code
     private static final ObservableList<WinGetPackage> searchPackageList = FXCollections.observableArrayList();

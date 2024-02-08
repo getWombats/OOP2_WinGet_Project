@@ -13,6 +13,8 @@
                 <HBox prefHeight="200.0" spacing="20.0">
                     <children>
                         <Button mnemonicParsing="false" onAction="#refreshButtonClick" styleClass="refreshButton" stylesheets="@../CSS/DarkTheme.css" text="Refresh List" />
+                  <Button mnemonicParsing="false" styleClass="refreshButton" stylesheets="@../CSS/DarkTheme.css" text="Create new List" />
+                  <Button mnemonicParsing="false" styleClass="refreshButton" stylesheets="@../CSS/DarkTheme.css" text="Delete List" />
                     </children>
                 </HBox>
             </children>

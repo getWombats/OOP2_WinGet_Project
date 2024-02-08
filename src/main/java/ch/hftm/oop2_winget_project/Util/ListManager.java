@@ -30,6 +30,13 @@ public class ListManager
         return lists;
     }
 
+    public void printPackageListNames() {
+        System.out.println("Package Lists:");
+        for (PackageList packageList : lists) {
+            System.out.println("- " + packageList.getName());
+        }
+    }
+
 // Existing Code
     private static final ObservableList<WinGetPackage> searchPackageList = FXCollections.observableArrayList();
     private static final ObservableList<WinGetPackage> installedPackageList = FXCollections.observableArrayList();

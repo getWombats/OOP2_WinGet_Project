@@ -2,6 +2,8 @@ package ch.hftm.oop2_winget_project;
 
 import ch.hftm.oop2_winget_project.Model.WinGetSettings;
 import ch.hftm.oop2_winget_project.Model.WindowManager;
+import ch.hftm.oop2_winget_project.Util.ListManager;
+import ch.hftm.oop2_winget_project.Util.PackageList;
 import ch.hftm.oop2_winget_project.Util.ResourceProvider;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -28,6 +30,11 @@ public class App extends Application
 
     public static void main(String[] args)
     {
+        System.out.println("Test");
+        ListManager listA = new ListManager();
+        listA.createPackageList("testList1");
+        listA.createPackageList("testList2");
+        listA.printPackageListNames();
         launch();
     }
 

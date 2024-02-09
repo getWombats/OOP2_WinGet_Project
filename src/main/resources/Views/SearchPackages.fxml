@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
@@ -19,6 +20,8 @@
                   <Button mnemonicParsing="false" onAction="#testButtonClick" text="Test your function" />
                     </children>
                 </HBox>
+            <ComboBox fx:id="comboBox_selectList" prefWidth="150.0" promptText="Select List" />
+            <Button fx:id="button_addToList" mnemonicParsing="false" text="Add to List" />
             </children>
         </HBox>
     </top>

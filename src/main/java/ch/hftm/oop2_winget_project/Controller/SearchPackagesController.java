@@ -36,8 +36,6 @@ public class SearchPackagesController implements IControllerBase, Initializable
     private TextField keywordTextField;
     @FXML
     private Label tableViewPlaceholderLabel;
-
-
     @FXML
     ComboBox<PackageList> comboBox_selectPackageList; // The comboBox for PackageList selection
 
@@ -55,7 +53,7 @@ public class SearchPackagesController implements IControllerBase, Initializable
         setTableViewData();
         setTableViewSource();
         registerInputServices();
-//        initialize_comboBox_selectPackageList();
+        initialize_comboBox_selectPackageList();
     }
 
     @FXML
@@ -255,9 +253,11 @@ public class SearchPackagesController implements IControllerBase, Initializable
 
     public void initialize_comboBox_selectPackageList() {
         ListManager listManager = ListManager.getInstance();
+
+        // Set the ComboBox items to the ObservableList from ListManager
         comboBox_selectPackageList.setItems(listManager.getLists());
 
-        // Set a cell factory to display the PackageList name in the ComboBox
+        // Define how the items are displayed in the ComboBox
         comboBox_selectPackageList.setCellFactory(lv -> new ListCell<PackageList>() {
             @Override
             protected void updateItem(PackageList item, boolean empty) {
@@ -266,7 +266,7 @@ public class SearchPackagesController implements IControllerBase, Initializable
             }
         });
 
-        // Optionally, set a converter if you need to get the selected item as a PackageList instance.
+        // Optionally, if you want to display a selected item (when the ComboBox is not expanded)
         comboBox_selectPackageList.setConverter(new StringConverter<PackageList>() {
             @Override
             public String toString(PackageList object) {
@@ -275,9 +275,18 @@ public class SearchPackagesController implements IControllerBase, Initializable
 
             @Override
             public PackageList fromString(String string) {
-                // This is relevant if you allow users to input custom text into the ComboBox.
-                return null; // Implement logic as necessary
+                // This method is not needed for a ComboBox, but it must be overridden.
+                return null;
             }
         });
+
+        // Optional: Add a listener to react when the user selects a package list
+        comboBox_selectPackageList.valueProperty().addListener((obs, oldVal, newVal) -> {
+            if (newVal != null) {
+                System.out.println("Selected PackageList: " + newVal.getName());
+                // You can load the selected PackageList into another view/component here.
+            }
+        });
+
     }
 }

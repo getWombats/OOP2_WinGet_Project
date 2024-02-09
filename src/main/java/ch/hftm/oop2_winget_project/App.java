@@ -46,7 +46,7 @@ public class App extends Application
     @Override // Starts up the JavaFX UI. (main > init > star)
     public void start(Stage stage) throws IOException
     {
-        ListManager listManager = ListManager.getInstance(); // Instantiating ListManager
+        ListManager.getInstance(); // Instantiating ListManager
 
         windowManager = new WindowManager(stage);
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(ResourceProvider.FXML_ROOT + ResourceProvider.SPLASHSCREEN_VIEW_NAME));

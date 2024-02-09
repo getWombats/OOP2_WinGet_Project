@@ -31,7 +31,8 @@ public class ListManagerController {
 
     @FXML
     private void initialize() {
-        listManager = new ListManager();
+
+        listManager = ListManager.getInstance(); //Getting the single instance of ListManager.
 
         // Set up the cell value factories for each column
         nameColumn.setCellValueFactory(cellData -> cellData.getValue().getNameProperty());
@@ -43,7 +44,6 @@ public class ListManagerController {
         countdownTimer = new Timeline(new KeyFrame(Duration.seconds(3), this::deletePackageList));
         countdownTimer.setCycleCount(1); // Only run once
         countdownTimer.setOnFinished(event -> countdownTimer.stop()); // Stop the timer when finished
-
     }
 
     private void deletePackageList(ActionEvent actionEvent) {

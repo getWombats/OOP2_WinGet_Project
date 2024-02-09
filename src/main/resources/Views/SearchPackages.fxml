@@ -20,8 +20,8 @@
                   <Button mnemonicParsing="false" onAction="#testButtonClick" text="Test your function" />
                     </children>
                 </HBox>
-            <ComboBox fx:id="comboBox_selectList" prefWidth="150.0" promptText="Select List" />
-            <Button fx:id="button_addToList" mnemonicParsing="false" text="Add to List" />
+            <ComboBox fx:id="comboBox_PackageList" prefWidth="150.0" promptText="Select List" />
+            <Button fx:id="button_addTopackageList" mnemonicParsing="false" text="Add to List" />
             </children>
         </HBox>
     </top>

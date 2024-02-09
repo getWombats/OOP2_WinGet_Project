@@ -1,13 +1,10 @@
 package ch.hftm.oop2_winget_project.Controller;
 
-import ch.hftm.oop2_winget_project.Util.ListManager;
+import ch.hftm.oop2_winget_project.Util.*;
 import ch.hftm.oop2_winget_project.Model.Message;
-import ch.hftm.oop2_winget_project.Util.QueryType;
 import ch.hftm.oop2_winget_project.Model.WinGetQuery;
 import ch.hftm.oop2_winget_project.Model.WinGetPackage;
 import ch.hftm.oop2_winget_project.Api.IControllerBase;
-import ch.hftm.oop2_winget_project.Util.ConsoleExitCode;
-import ch.hftm.oop2_winget_project.Util.InputValidator;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -15,6 +12,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.util.Callback;
+import javafx.util.StringConverter;
 
 import java.io.IOException;
 import java.net.URL;
@@ -40,6 +38,11 @@ public class SearchPackagesController implements IControllerBase, Initializable
     private TextField keywordTextField;
     @FXML
     private Label tableViewPlaceholderLabel;
+
+
+    @FXML
+    ComboBox<PackageList> comboBox_selectPackageList; // The comboBox for PackageList selection
+
     private boolean isThreadWorking;
 
     @Override
@@ -54,6 +57,7 @@ public class SearchPackagesController implements IControllerBase, Initializable
         setTableViewData();
         setTableViewSource();
         registerInputServices();
+//        initialize_comboBox_selectPackageList();
     }
 
     @FXML
@@ -249,4 +253,33 @@ public class SearchPackagesController implements IControllerBase, Initializable
             }).start();
         }
     }
+
+
+//    public void initialize_comboBox_selectPackageList() {
+//        ListManager listManager = ListManager.getInstance();
+//        comboBox_selectPackageList.setItems(listManager.getLists());
+//
+//        // Set a cell factory to display the PackageList name in the ComboBox
+//        comboBox_selectPackageList.setCellFactory(lv -> new ListCell<PackageList>() {
+//            @Override
+//            protected void updateItem(PackageList item, boolean empty) {
+//                super.updateItem(item, empty);
+//                setText(empty ? "" : item.getName());
+//            }
+//        });
+//
+//        // Optionally, set a converter if you need to get the selected item as a PackageList instance.
+//        comboBox_selectPackageList.setConverter(new StringConverter<PackageList>() {
+//            @Override
+//            public String toString(PackageList object) {
+//                return object != null ? object.getName() : "";
+//            }
+//
+//            @Override
+//            public PackageList fromString(String string) {
+//                // This is relevant if you allow users to input custom text into the ComboBox.
+//                return null; // Implement logic as necessary
+//            }
+//        });
+//    }
 }

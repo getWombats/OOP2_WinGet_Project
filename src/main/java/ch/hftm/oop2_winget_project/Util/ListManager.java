@@ -4,15 +4,32 @@ import ch.hftm.oop2_winget_project.Model.WinGetPackage;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-import java.util.ArrayList;
+/**
+ * The ListManager class manages a list of PackageList objects.
+ * There is only one such list in the application.
+ * This list is observable, meaning it can update the UI automatically when items are added or removed.
+ * The class provides methods to add and remove PackageLists, and to
+ * get the entire list to use elsewhere.
+ */
 
-public class ListManager
-{
+public class ListManager {
+
+//    Instances
+    private static ListManager instance;
+
 //    Variables
     private ObservableList<PackageList> lists;
 
+//    Instantiation method
+    public static ListManager getInstance() {
+        if (instance == null) {
+            instance = new ListManager();
+        }
+        return instance;
+    }
+
 //    Constructors
-    public ListManager() {
+    private ListManager() {
         this.lists = FXCollections.observableArrayList();
     }
 

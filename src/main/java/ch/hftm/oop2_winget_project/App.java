@@ -28,17 +28,13 @@ public class App extends Application
     * 4. Execution MainWindowController class initialize() -> or whatever fxml will be loaded first
     * */
 
+    //Entry point for Java application. (main > init > start)
     public static void main(String[] args)
     {
-        System.out.println("Test");
-        ListManager listA = new ListManager();
-        listA.createPackageList("testList1");
-        listA.createPackageList("testList2");
-        listA.printPackageListNames();
         launch();
     }
 
-    @Override
+    @Override // Initializes the JavaFX elements. (main > init > start)
     public void init()
     {
         // Set application instance
@@ -48,9 +44,11 @@ public class App extends Application
         winGetSettings.setWinGetLanguage();
     }
 
-    @Override
+    @Override // Starts up the JavaFX UI. (main > init > star)
     public void start(Stage stage) throws IOException
     {
+        ListManager listManager = ListManager.getInstance(); // Instantiating ListManager
+
         windowManager = new WindowManager(stage);
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(ResourceProvider.FXML_ROOT + ResourceProvider.SPLASHSCREEN_VIEW_NAME));
         Scene scene = new Scene(fxmlLoader.load());
@@ -64,7 +62,6 @@ public class App extends Application
 
         // Init stage object
         mainStage = stage;
-
         stage.show();
     }
 

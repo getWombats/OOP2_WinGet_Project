@@ -2,8 +2,7 @@ package ch.hftm.oop2_winget_project;
 
 import ch.hftm.oop2_winget_project.Model.WinGetSettings;
 import ch.hftm.oop2_winget_project.Model.WindowManager;
-import ch.hftm.oop2_winget_project.Util.ListManager;
-import ch.hftm.oop2_winget_project.Util.PackageList;
+import ch.hftm.oop2_winget_project.Model.ListManager;
 import ch.hftm.oop2_winget_project.Util.ResourceProvider;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

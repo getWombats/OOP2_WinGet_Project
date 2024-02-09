@@ -1,11 +1,11 @@
-package ch.hftm.oop2_winget_project.Util;
+package ch.hftm.oop2_winget_project.Model;
 
 import ch.hftm.oop2_winget_project.Model.WinGetPackage;
+import javafx.beans.binding.Bindings;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class PackageList {
@@ -18,8 +18,10 @@ public class PackageList {
 //    Constructors
     public PackageList(String packageListName){
         this.packageListName = new SimpleStringProperty(packageListName);
-        this.packageListSize = new SimpleIntegerProperty();
+        this.packageListSize = new SimpleIntegerProperty(0);
         this.packages = new SimpleListProperty<>(FXCollections.observableArrayList());
+        // Bind the size property to the size of the packages observable list
+        this.packageListSize.bind(Bindings.size(this.packages).asObject());
     }
 
 

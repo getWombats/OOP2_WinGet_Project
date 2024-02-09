@@ -1,6 +1,5 @@
-package ch.hftm.oop2_winget_project.Util;
+package ch.hftm.oop2_winget_project.Model;
 
-import ch.hftm.oop2_winget_project.Model.WinGetPackage;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -72,4 +71,3 @@ public class ListManager {
         return favoritePackageList;
     }
 }
-

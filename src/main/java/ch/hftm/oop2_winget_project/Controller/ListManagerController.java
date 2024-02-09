@@ -1,7 +1,7 @@
 package ch.hftm.oop2_winget_project.Controller;
 
-import ch.hftm.oop2_winget_project.Util.ListManager;
-import ch.hftm.oop2_winget_project.Util.PackageList;
+import ch.hftm.oop2_winget_project.Model.ListManager;
+import ch.hftm.oop2_winget_project.Model.PackageList;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;

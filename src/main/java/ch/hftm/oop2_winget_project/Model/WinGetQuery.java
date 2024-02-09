@@ -1,7 +1,6 @@
 package ch.hftm.oop2_winget_project.Model;
 
 import ch.hftm.oop2_winget_project.App;
-import ch.hftm.oop2_winget_project.Util.ListManager;
 import ch.hftm.oop2_winget_project.Util.QueryType;
 import ch.hftm.oop2_winget_project.Util.SourceType;
 import ch.hftm.oop2_winget_project.Util.ConsoleExitCode;

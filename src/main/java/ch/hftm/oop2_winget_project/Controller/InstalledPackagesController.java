@@ -1,7 +1,7 @@
 package ch.hftm.oop2_winget_project.Controller;
 
 import ch.hftm.oop2_winget_project.Api.IControllerBase;
-import ch.hftm.oop2_winget_project.Util.ListManager;
+import ch.hftm.oop2_winget_project.Model.ListManager;
 import ch.hftm.oop2_winget_project.Util.QueryType;
 import ch.hftm.oop2_winget_project.Model.WinGetPackage;
 import ch.hftm.oop2_winget_project.Model.WinGetQuery;

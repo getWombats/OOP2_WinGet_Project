@@ -53,21 +53,5 @@ public class ListManager {
         }
     }
 
-// Existing Code
-    private static final ObservableList<WinGetPackage> searchPackageList = FXCollections.observableArrayList();
-    private static final ObservableList<WinGetPackage> installedPackageList = FXCollections.observableArrayList();
-    private static final ObservableList<WinGetPackage> favoritePackageList = FXCollections.observableArrayList();
 
-    public static ObservableList<WinGetPackage> getSearchPackageList()
-    {
-        return searchPackageList;
-    }
-    public static ObservableList<WinGetPackage> getInstalledPackageList()
-    {
-        return installedPackageList;
-    }
-    public static ObservableList<WinGetPackage> getFavoritePackageList()
-    {
-        return favoritePackageList;
-    }
 }

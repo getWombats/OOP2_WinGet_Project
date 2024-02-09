@@ -55,7 +55,7 @@ public class SearchPackagesController implements IControllerBase, Initializable
         setTableViewData();
         setTableViewSource();
         registerInputServices();
-        initialize_comboBox_selectPackageList();
+//        initialize_comboBox_selectPackageList();
     }
 
     @FXML
@@ -90,7 +90,7 @@ public class SearchPackagesController implements IControllerBase, Initializable
     @Override
     public void setTableViewSource()
     {
-        this.searchTableView.setItems(ListManager.getSearchPackageList());
+        this.searchTableView.setItems(PackageList.getSearchPackageList());
     }
 
     @Override
@@ -139,7 +139,7 @@ public class SearchPackagesController implements IControllerBase, Initializable
                             System.out.println(data.getPackageName() + " [ID: " + data.getPackageID() + "] will be installed..."); // Test, execute here 'winget install {packageId}'
 
                             // Update list
-                            ListManager.getInstalledPackageList().add(data);
+                            PackageList.getInstalledPackageList().add(data);
                         });
                     }
 
@@ -230,7 +230,7 @@ public class SearchPackagesController implements IControllerBase, Initializable
                 WinGetQuery query = new WinGetQuery();
                 try
                 {
-                    query.queryToList(QueryType.SEARCH, searchKeyword, ListManager.getSearchPackageList());
+                    query.queryToList(QueryType.SEARCH, searchKeyword, PackageList.getSearchPackageList());
                 }
                 catch (IOException | InterruptedException ex)
                 {

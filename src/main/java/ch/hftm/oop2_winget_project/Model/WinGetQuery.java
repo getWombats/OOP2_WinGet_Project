@@ -110,7 +110,7 @@ public class WinGetQuery
                     // Compare search results with installed packages to set relating packages as installed
                     if(queryType == QueryType.SEARCH)
                     {
-                        for(WinGetPackage installedPackage : ListManager.getInstalledPackageList())
+                        for(WinGetPackage installedPackage : PackageList.getInstalledPackageList())
                         {
                             if(installedPackage.getPackageID().equals(winGetPackage.getPackageID()))
                             {

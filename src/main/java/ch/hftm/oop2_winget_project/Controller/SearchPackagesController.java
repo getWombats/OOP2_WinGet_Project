@@ -37,9 +37,9 @@ public class SearchPackagesController implements IControllerBase, Initializable
     @FXML
     private Label tableViewPlaceholderLabel;
     @FXML
-    ComboBox<PackageList> comboBox_selectPackageList; // The comboBox for PackageList selection
+    private ComboBox<PackageList> comboBox_selectPackageList; // The comboBox for PackageList selection
     @FXML
-    Button button_addPackageToList;
+    private Button button_addPackageToList;
     private boolean isThreadWorking;
 
     @Override

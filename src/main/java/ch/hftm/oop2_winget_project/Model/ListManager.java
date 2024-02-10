@@ -2,6 +2,7 @@ package ch.hftm.oop2_winget_project.Model;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.TableRow;
 
 /**
  * The ListManager class manages a list of PackageList objects.
@@ -18,6 +19,7 @@ public class ListManager {
 
 //    Variables
     private ObservableList<PackageList> lists;
+    private PackageList selectesPackage;
 
 //    Instantiation method
     public static ListManager getInstance() {
@@ -54,4 +56,11 @@ public class ListManager {
     }
 
 
+    public void setSelectedPackageList(PackageList selectedPackage) {
+        this.selectesPackage = selectedPackage;
+    }
+
+    public PackageList getSelectedPackageList() {
+        return this.selectesPackage;
+    }
 }

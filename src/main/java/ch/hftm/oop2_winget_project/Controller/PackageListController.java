@@ -18,21 +18,26 @@ public class PackageListController {
     @FXML
     private TableColumn<WinGetPackage, String> column_name;
     @FXML
+    private TableColumn<WinGetPackage, String> column_id;
+    @FXML
     private TableColumn<WinGetPackage, String> column_version;
+    @FXML
+    private TableColumn<WinGetPackage, String> column_source;
 
-
-    public void setCurrentPackageList(PackageList packageList) {
-        this.currentPackageList = packageList;
-        tableView_Packages.setItems(packageList.getPackages());
-        // Initialize cell value factories, assuming WinGetPackage has appropriate properties
-        column_name.setCellValueFactory(cellData -> cellData.getValue().packageNameProperty());
-//        column_version.setCellValueFactory(cellData -> cellData.getValue().versionProperty());
-    }
 
     @FXML
     private void initialize() {
 
         listManager = ListManager.getInstance(); //Getting the single instance of ListManager.
         currentPackageList = listManager.getSelectedPackageList();
+        System.out.println(listManager.getSelectedPackageList());
+        System.out.println("Packages in the list: " + currentPackageList.getPackages().size());
+        tableView_Packages.setItems(currentPackageList.getPackages());
+        
+        // Initialize cell value factories, assuming WinGetPackage has appropriate properties
+        column_name.setCellValueFactory(cellData -> cellData.getValue().packageNameProperty());
+        column_id.setCellValueFactory(cellData -> cellData.getValue().packageIDProperty());
+        column_version.setCellValueFactory(cellData -> cellData.getValue().packageVersionProperty());
+        column_source.setCellValueFactory(cellData -> cellData.getValue().packageSourceProperty());
     }
 }

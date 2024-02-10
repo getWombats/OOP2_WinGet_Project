@@ -38,7 +38,8 @@ public class SearchPackagesController implements IControllerBase, Initializable
     private Label tableViewPlaceholderLabel;
     @FXML
     ComboBox<PackageList> comboBox_selectPackageList; // The comboBox for PackageList selection
-
+    @FXML
+    Button button_addPackageToList;
     private boolean isThreadWorking;
 
     @Override
@@ -289,4 +290,30 @@ public class SearchPackagesController implements IControllerBase, Initializable
         });
 
     }
+
+
+
+    @FXML
+    private void button_addPackageToList(ActionEvent event) {
+        WinGetPackage selectedPackage = searchTableView.getSelectionModel().getSelectedItem();
+        PackageList selectedList = comboBox_selectPackageList.getSelectionModel().getSelectedItem();
+
+        if (selectedPackage != null && selectedList != null) {
+            // Check if the selected package is already in the selected list
+            boolean packageExists = selectedList.getPackages().stream()
+                    .anyMatch(pkg -> pkg.getPackageID().equals(selectedPackage.getPackageID()));
+
+            if (!packageExists) {
+                // Add the package to the list
+                selectedList.getPackages().add(selectedPackage);
+                System.out.println("Package added to list: " + selectedPackage.getPackageName());
+            } else {
+                System.out.println("Package already exists in the list: " + selectedPackage.getPackageName());
+            }
+        } else {
+            // Handle cases where nothing is selected
+            System.out.println("No package or list selected.");
+        }
+    }
+
 }

@@ -17,7 +17,9 @@
         <TableView fx:id="tableView_Packages" prefHeight="200.0" styleClass="installedTableView" stylesheets="@../CSS/DarkTheme.css" BorderPane.alignment="TOP_LEFT">
             <columns>
                 <TableColumn fx:id="column_name" editable="false" minWidth="220.0" prefWidth="-1.0" resizable="false" text="Package Name" />
+                <TableColumn fx:id="column_id" editable="false" minWidth="220.0" prefWidth="-1.0" resizable="false" text="Package ID" />
                 <TableColumn fx:id="column_version" editable="false" minWidth="220.0" prefWidth="-1.0" resizable="false" text="Version" />
+                <TableColumn fx:id="column_source" editable="false" minWidth="150.0" prefWidth="-1.0" resizable="false" text="Source" />
             </columns>
          <columnResizePolicy>
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

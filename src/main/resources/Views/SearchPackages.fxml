@@ -21,6 +21,7 @@
                     </children>
                 </HBox>
             <ComboBox fx:id="comboBox_selectPackageList" prefWidth="150.0" promptText="Select List" />
+                <Button fx:id="button_addPackageToList" mnemonicParsing="false" onAction="#button_addPackageToList" text="Add to List" />
             </children>
         </HBox>
     </top>

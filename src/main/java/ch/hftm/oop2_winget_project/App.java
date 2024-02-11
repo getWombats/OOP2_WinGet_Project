@@ -1,11 +1,13 @@
 package ch.hftm.oop2_winget_project;
 
+import ch.hftm.oop2_winget_project.Controller.MainWindowController;
 import ch.hftm.oop2_winget_project.Model.WinGetSettings;
 import ch.hftm.oop2_winget_project.Model.WindowManager;
 import ch.hftm.oop2_winget_project.Model.ListManager;
 import ch.hftm.oop2_winget_project.Util.ResourceProvider;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -18,6 +20,8 @@ public class App extends Application
     private WindowManager windowManager;
     private static App appInstance;
     private static Stage mainStage;
+
+    private static MainWindowController mainWindowController;
 
     /*
     * Appication start order:
@@ -92,5 +96,15 @@ public class App extends Application
     public static Stage getAppStage()
     {
         return mainStage;
+    }
+
+    public static void setMainWindowControllerInstance(MainWindowController ctrl) // Gib mir das BorderPane
+    {
+        mainWindowController = ctrl;
+    }
+
+    public static MainWindowController GetMainWindowController() // Gib mir das BorderPane
+    {
+        return mainWindowController;
     }
 }

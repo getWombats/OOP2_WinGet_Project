@@ -74,6 +74,7 @@ public class SplashScreenController implements Initializable
 
                     // Pass new stage object to app instance
                     App.setAppStage(stage);
+                    App.setMainWindowControllerInstance(fxmlLoader.getController()); // Gib mir das BorderPane
 
                     // Show mainWindow
                     stage.show();

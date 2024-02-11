@@ -1,14 +1,18 @@
 package ch.hftm.oop2_winget_project.Controller;
 
+import ch.hftm.oop2_winget_project.App;
 import ch.hftm.oop2_winget_project.Model.*;
 import ch.hftm.oop2_winget_project.Util.*;
 import ch.hftm.oop2_winget_project.Api.IControllerBase;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
+import javafx.scene.layout.BorderPane;
 import javafx.util.Callback;
 import javafx.util.StringConverter;
 
@@ -65,8 +69,23 @@ public class SearchPackagesController implements IControllerBase, Initializable
 //        msg.show(Alert.AlertType.ERROR, "title", "headertext", "message");
 
         // Test notification
-        Message notify = new Message();
-        notify.showNotification("title", "message");
+//        Message notify = new Message();
+//        notify.showNotification("title", "message");
+
+        // GetMainWindowBorderPane
+//        StageAndSceneManager.loadFxmlToBorderPaneLeft(, ResourceProvider.INSTALLEDPACKAGES_VIEW_NAME);
+
+        try
+        {
+            StageAndSceneManager.loadFxmlToBorderPaneLeft(App.GetMainWindowController().getMainWindowBorderPane(), ResourceProvider.INSTALLEDPACKAGES_VIEW_NAME);  // Gib mir das BorderPane
+        }
+        catch(Exception ex)
+        {
+            System.out.println(ex.getCause());
+            System.out.println(ex.getLocalizedMessage());
+            ex.printStackTrace();
+        }
+
     }
 
     @FXML
@@ -181,12 +200,29 @@ public class SearchPackagesController implements IControllerBase, Initializable
             {
                 final TableCell<WinGetPackage, Void> cell = new TableCell<>()
                 {
-                    private final ToggleButton btn = new ToggleButton("test");
+                    private final Button btn = new Button("add Fav");
                     {
                         btn.setOnAction((ActionEvent event) -> {
-                            WinGetPackage data = getTableView().getItems().get(getIndex());
-                            data.setFavorite(btn.isSelected()); // Set package as favorite
-                            System.out.println(data.getPackageName() + " is now favorite: " + data.isFavorite());
+                            WinGetPackage selectedPackage = searchTableView.getSelectionModel().getSelectedItem();
+                            PackageList selectedList = comboBox_selectPackageList.getSelectionModel().getSelectedItem();
+
+                            if (selectedPackage != null && selectedList != null) {
+                                // Check if the selected package is already in the selected list
+                                boolean packageExists = selectedList.getPackages().stream()
+                                        .anyMatch(pkg -> pkg.getPackageID().equals(selectedPackage.getPackageID()));
+
+                                if (!packageExists) {
+                                    // Add the package to the list
+                                    selectedList.getPackages().add(selectedPackage);
+                                    selectedPackage.setFavorite(true);
+                                    System.out.println("Package added to list: " + selectedPackage.getPackageName());
+                                } else {
+                                    System.out.println("Package already exists in the list: " + selectedPackage.getPackageName());
+                                }
+                            } else {
+                                // Handle cases where nothing is selected
+                                System.out.println("No package or list selected.");
+                            }
                         });
                     }
 
@@ -201,7 +237,16 @@ public class SearchPackagesController implements IControllerBase, Initializable
                         else
                         {
                             WinGetPackage data = getTableView().getItems().get(getIndex());
-                            btn.setSelected(data.isFavorite());
+                            if(data.isFavorite())
+                            {
+                                // Set cell content when package is favorite already
+                                Label installedLabel = new Label("is fav");
+                                setGraphic(installedLabel);
+                            }
+                            else
+                            {
+                                setGraphic(btn);
+                            }
                         }
                     }
                 };
@@ -315,5 +360,4 @@ public class SearchPackagesController implements IControllerBase, Initializable
             System.out.println("No package or list selected.");
         }
     }
-
 }

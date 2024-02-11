@@ -160,5 +160,4 @@ public class MainWindowController implements Initializable
     {
         StageAndSceneManager.loadFxmlToBorderPaneLeft(mainWindowBorderPane, ResourceProvider.PACKAGELIST_VIEW_NAME);
     }
-
 }

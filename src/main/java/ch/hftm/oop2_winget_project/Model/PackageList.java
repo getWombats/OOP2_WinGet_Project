@@ -15,6 +15,7 @@ public class PackageList {
     private IntegerProperty packageListSize;
     private ListProperty<WinGetPackage> packages;
 
+
 //    Constructors
     public PackageList(String packageListName){
         this.packageListName = new SimpleStringProperty(packageListName);

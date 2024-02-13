@@ -7,10 +7,12 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.util.List;
+import java.util.UUID;
 
 public class PackageList {
 
 // Variables
+    private String packageListId;
     private StringProperty packageListName;
     private IntegerProperty packageListSize;
     private ListProperty<WinGetPackage> packages;
@@ -18,16 +20,23 @@ public class PackageList {
 
 //    Constructors
     public PackageList(String packageListName){
+        this.packageListId = UUID.randomUUID().toString(); // Create random UUID to identify List.
         this.packageListName = new SimpleStringProperty(packageListName);
         this.packageListSize = new SimpleIntegerProperty(0);
         this.packages = new SimpleListProperty<>(FXCollections.observableArrayList());
-        // Bind the size property to the size of the packages observable list
+        // Bind the size property to the size of the packages observable list.
         this.packageListSize.bind(Bindings.size(this.packages).asObject());
+
+        System.out.println("New Package: (UUID Name)\n" + getId() + " \"" + getName() + "\"");
     }
 
 
 //    Methods
 //    Manage PackageList Properties
+
+    public String getId() {
+        return packageListId;
+    }
     public String getName(){
         return packageListName.get();
     }

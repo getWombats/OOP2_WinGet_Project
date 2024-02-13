@@ -53,9 +53,9 @@ public class App extends Application
     {
         ListManager listManager = ListManager.getInstance(); // Instantiating ListManager
 
-        listManager.createPackageList("Favourites");
-        listManager.createPackageList("Web Browsers");
-        listManager.createPackageList("Office");
+        listManager.createPackageList("Favourites"); // Instantiating PackageList for Testing purposes.
+        listManager.createPackageList("Web Browsers"); // Instantiating PackageList for Testing purposes.
+        listManager.createPackageList("Office"); // Instantiating PackageList for Testing purposes.
 
         windowManager = new WindowManager(stage);
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(ResourceProvider.FXML_ROOT + ResourceProvider.SPLASHSCREEN_VIEW_NAME));

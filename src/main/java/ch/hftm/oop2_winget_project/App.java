@@ -1,6 +1,7 @@
 package ch.hftm.oop2_winget_project;
 
 import ch.hftm.oop2_winget_project.Controller.MainWindowController;
+import ch.hftm.oop2_winget_project.Model.PackageList;
 import ch.hftm.oop2_winget_project.Model.WinGetSettings;
 import ch.hftm.oop2_winget_project.Model.WindowManager;
 import ch.hftm.oop2_winget_project.Model.ListManager;
@@ -50,7 +51,11 @@ public class App extends Application
     @Override // Starts up the JavaFX UI. (main > init > star)
     public void start(Stage stage) throws IOException
     {
-        ListManager.getInstance(); // Instantiating ListManager
+        ListManager listManager = ListManager.getInstance(); // Instantiating ListManager
+
+        listManager.createPackageList("Favourites");
+        listManager.createPackageList("Web Browsers");
+        listManager.createPackageList("Office");
 
         windowManager = new WindowManager(stage);
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(ResourceProvider.FXML_ROOT + ResourceProvider.SPLASHSCREEN_VIEW_NAME));

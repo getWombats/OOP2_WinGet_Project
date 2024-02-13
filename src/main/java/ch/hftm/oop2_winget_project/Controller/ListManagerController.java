@@ -1,5 +1,6 @@
 package ch.hftm.oop2_winget_project.Controller;
 
+import ch.hftm.oop2_winget_project.App;
 import ch.hftm.oop2_winget_project.Model.ListManager;
 import ch.hftm.oop2_winget_project.Model.PackageList;
 import ch.hftm.oop2_winget_project.Util.StageAndSceneManager;
@@ -98,10 +99,19 @@ public class ListManagerController {
                 if (event.getClickCount() == 2 && (!row.isEmpty())) {
                     listManager.setSelectedPackageList(row.getItem());
                     System.out.println(listManager.getSelectedPackageList().toString());
+                    // Switch to PackageListView
+                    try {
+                        StageAndSceneManager.loadFxmlToBorderPaneLeft(App.GetMainWindowController().getMainWindowBorderPane(), ResourceProvider.PACKAGELIST_VIEW_NAME);  // Gib mir das BorderPane
+                    } catch(Exception ex) {
+                        System.out.println(ex.getCause());
+                        System.out.println(ex.getLocalizedMessage());
+                        ex.printStackTrace();
+                    }
                 }
             });
             return row;
         });
+
     }
 
 //    private BorderPane load1()

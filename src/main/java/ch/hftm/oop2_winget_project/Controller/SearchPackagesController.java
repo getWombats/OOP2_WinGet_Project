@@ -85,7 +85,6 @@ public class SearchPackagesController implements IControllerBase, Initializable
             System.out.println(ex.getLocalizedMessage());
             ex.printStackTrace();
         }
-
     }
 
     @FXML

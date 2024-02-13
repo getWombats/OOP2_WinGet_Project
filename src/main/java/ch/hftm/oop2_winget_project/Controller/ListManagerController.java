@@ -113,33 +113,4 @@ public class ListManagerController {
         });
 
     }
-
-//    private BorderPane load1()
-//    {
-//        try
-//        {
-//            FXMLLoader loader = new FXMLLoader(getClass().getResource("PackageList.fxml"));
-//            Parent root = loader.load();
-//            MainWindowController controller = loader.getController();
-//            return controller.getMainWindowBorderPane();
-//        }
-//        catch(IOException ex)
-//        {
-//            System.out.println(ex.getMessage());
-//        }
-//        return null;
-//    }
-
-
-//    public void loadPackageListView(String fxmlPath) {
-//        try {
-//            FXMLLoader loader = new FXMLLoader(getClass().getResource("/path/to/ListManagerView.fxml"));
-//            Parent listManagerView = loader.load();
-//            ListManagerController listManagerController = loader.getController();
-//            listManagerController.setMainWindowController(this);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//    }
-
 }

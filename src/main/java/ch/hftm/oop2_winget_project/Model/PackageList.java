@@ -6,12 +6,14 @@ import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.UUID;
 
-public class PackageList {
+public class PackageList implements Serializable {
 
 // Variables
+private static final long serialVersionUID = 1L; // UID resp. Version for serialization.
     private String packageListId;
     private StringProperty packageListName;
     private IntegerProperty packageListSize;

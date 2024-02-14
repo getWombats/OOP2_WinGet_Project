@@ -5,6 +5,7 @@ import ch.hftm.oop2_winget_project.Model.PackageList;
 import ch.hftm.oop2_winget_project.Model.WinGetSettings;
 import ch.hftm.oop2_winget_project.Model.WindowManager;
 import ch.hftm.oop2_winget_project.Model.ListManager;
+import ch.hftm.oop2_winget_project.Persistence.Serializer;
 import ch.hftm.oop2_winget_project.Util.ResourceProvider;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -52,6 +53,7 @@ public class App extends Application
     public void start(Stage stage) throws IOException
     {
         ListManager listManager = ListManager.getInstance(); // Instantiating ListManager
+//        Serializer.deserializeListManager();
 
         listManager.createPackageList("Favourites"); // Instantiating PackageList for Testing purposes.
         listManager.createPackageList("Web Browsers"); // Instantiating PackageList for Testing purposes.

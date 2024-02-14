@@ -2,7 +2,8 @@ package ch.hftm.oop2_winget_project.Model;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.control.TableRow;
+import ch.hftm.oop2_winget_project.Persistence.Serializer;
+import java.io.Serializable;
 
 /**
  * The ListManager class manages a list of PackageList objects.
@@ -12,12 +13,13 @@ import javafx.scene.control.TableRow;
  * get the entire list to use elsewhere.
  */
 
-public class ListManager {
+public class ListManager implements Serializable {
 
 //    Instances
     private static ListManager instance;
 
 //    Variables
+    private static final long serialVersionUID = 1L; // UID resp. Version for serialization.
     private ObservableList<PackageList> lists;
     private PackageList selectesPackage;
 
@@ -38,14 +40,20 @@ public class ListManager {
     public void createPackageList(String packageListName){
         PackageList newPackageList = new PackageList(packageListName);
         lists.add(newPackageList);
+//        Serializer.serializeListmanager(this);  // Save the ListManager to Disk.
     }
 
     public void deletePackageList(PackageList packageList) {
         lists.remove(packageList);
+//        Serializer.serializeListmanager(this); // Save the ListManager to Disk.
     }
 
     public ObservableList<PackageList> getLists() {
         return lists;
+    }
+
+    public void setLists(ObservableList<PackageList> lists) {
+        this.lists = lists;
     }
 
     public void printPackageListNames() {
@@ -55,12 +63,16 @@ public class ListManager {
         }
     }
 
-
     public void setSelectedPackageList(PackageList selectedPackage) {
         this.selectesPackage = selectedPackage;
     }
 
     public PackageList getSelectedPackageList() {
         return this.selectesPackage;
+    }
+
+    // This method ensures that the deserialized object is replaced with the singleton instance.
+    protected Object readResolve() {
+        return getInstance();
     }
 }

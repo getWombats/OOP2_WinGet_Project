@@ -4,8 +4,11 @@ import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 
-public class WinGetPackage
+import java.io.Serializable;
+
+public class WinGetPackage implements Serializable
 {
+    private static final long serialVersionUID = 1L; // UID resp. Version for serialization.
     private final SimpleStringProperty packageName = new SimpleStringProperty();
     private final SimpleStringProperty packageID = new SimpleStringProperty();
     private final SimpleStringProperty packageVersion = new SimpleStringProperty();

@@ -13,6 +13,8 @@ public final class ResourceProvider
     public static final String SEARCHPACKAGES_VIEW_NAME = "SearchPackages.fxml";
     public static final String INSTALLEDPACKAGES_VIEW_NAME = "InstalledPackages.fxml";
     public static final String UPGRADEPACKAGES_VIEW_NAME = "UpgradePackages.fxml";
+    public static final String LISTMANAGER_VIEW_NAME = "ListManager.fxml";
+    public static final String PACKAGELIST_VIEW_NAME = "PackageList.fxml";
     public static final String SPLASHSCREEN_VIEW_NAME = "SplashScreen.fxml";
     private static final Image taskbarIcon = new Image(Objects.requireNonNull(App.class.getResourceAsStream(ICONS_ROOT + "taskbarIcon_colorized.png")));
     public static Image getTaskbarIcon()

@@ -1,10 +1,15 @@
 package ch.hftm.oop2_winget_project;
 
+import ch.hftm.oop2_winget_project.Controller.MainWindowController;
+import ch.hftm.oop2_winget_project.Model.PackageList;
 import ch.hftm.oop2_winget_project.Model.WinGetSettings;
 import ch.hftm.oop2_winget_project.Model.WindowManager;
+import ch.hftm.oop2_winget_project.Model.ListManager;
+import ch.hftm.oop2_winget_project.Persistence.Serializer;
 import ch.hftm.oop2_winget_project.Util.ResourceProvider;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -18,6 +23,8 @@ public class App extends Application
     private static App appInstance;
     private static Stage mainStage;
 
+    private static MainWindowController mainWindowController;
+
     /*
     * Appication start order:
     * 1. Execution App class main() method, executes launch()
@@ -26,12 +33,13 @@ public class App extends Application
     * 4. Execution MainWindowController class initialize() -> or whatever fxml will be loaded first
     * */
 
+    //Entry point for Java application. (main > init > start)
     public static void main(String[] args)
     {
         launch();
     }
 
-    @Override
+    @Override // Initializes the JavaFX elements. (main > init > start)
     public void init()
     {
         // Set application instance
@@ -41,9 +49,16 @@ public class App extends Application
         winGetSettings.setWinGetLanguage();
     }
 
-    @Override
+    @Override // Starts up the JavaFX UI. (main > init > star)
     public void start(Stage stage) throws IOException
     {
+        ListManager listManager = ListManager.getInstance(); // Instantiating ListManager
+//        Serializer.deserializeListManager();
+
+        listManager.createPackageList("Favourites"); // Instantiating PackageList for Testing purposes.
+        listManager.createPackageList("Web Browsers"); // Instantiating PackageList for Testing purposes.
+        listManager.createPackageList("Office"); // Instantiating PackageList for Testing purposes.
+
         windowManager = new WindowManager(stage);
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(ResourceProvider.FXML_ROOT + ResourceProvider.SPLASHSCREEN_VIEW_NAME));
         Scene scene = new Scene(fxmlLoader.load());
@@ -57,7 +72,6 @@ public class App extends Application
 
         // Init stage object
         mainStage = stage;
-
         stage.show();
     }
 
@@ -89,5 +103,15 @@ public class App extends Application
     public static Stage getAppStage()
     {
         return mainStage;
+    }
+
+    public static void setMainWindowControllerInstance(MainWindowController ctrl) // Gib mir das BorderPane
+    {
+        mainWindowController = ctrl;
+    }
+
+    public static MainWindowController GetMainWindowController() // Gib mir das BorderPane
+    {
+        return mainWindowController;
     }
 }

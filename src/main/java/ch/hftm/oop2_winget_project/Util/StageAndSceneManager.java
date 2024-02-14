@@ -1,6 +1,7 @@
 package ch.hftm.oop2_winget_project.Util;
 
 import ch.hftm.oop2_winget_project.App;
+import ch.hftm.oop2_winget_project.Controller.MainWindowController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;

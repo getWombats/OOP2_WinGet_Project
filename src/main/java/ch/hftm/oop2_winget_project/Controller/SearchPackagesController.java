@@ -1,22 +1,20 @@
 package ch.hftm.oop2_winget_project.Controller;
 
-import ch.hftm.oop2_winget_project.Util.ListProvider;
-import ch.hftm.oop2_winget_project.Model.Message;
-import ch.hftm.oop2_winget_project.Util.QueryType;
-import ch.hftm.oop2_winget_project.Model.WinGetQuery;
-import ch.hftm.oop2_winget_project.Model.WinGetPackage;
+import ch.hftm.oop2_winget_project.App;
+import ch.hftm.oop2_winget_project.Model.*;
+import ch.hftm.oop2_winget_project.Util.*;
 import ch.hftm.oop2_winget_project.Api.IControllerBase;
-import ch.hftm.oop2_winget_project.Util.ConsoleExitCode;
-import ch.hftm.oop2_winget_project.Util.InputValidator;
 import javafx.application.Platform;
-import javafx.beans.property.BooleanProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.input.KeyCode;
+import javafx.scene.layout.BorderPane;
 import javafx.util.Callback;
+import javafx.util.StringConverter;
 
 import java.io.IOException;
 import java.net.URL;
@@ -42,6 +40,10 @@ public class SearchPackagesController implements IControllerBase, Initializable
     private TextField keywordTextField;
     @FXML
     private Label tableViewPlaceholderLabel;
+    @FXML
+    private ComboBox<PackageList> comboBox_selectPackageList; // The comboBox for PackageList selection
+    @FXML
+    private Button button_addPackageToList;
     private boolean isThreadWorking;
 
     @Override
@@ -56,6 +58,7 @@ public class SearchPackagesController implements IControllerBase, Initializable
         setTableViewData();
         setTableViewSource();
         registerInputServices();
+        initialize_comboBox_selectPackageList();
     }
 
     @FXML
@@ -66,8 +69,22 @@ public class SearchPackagesController implements IControllerBase, Initializable
 //        msg.show(Alert.AlertType.ERROR, "title", "headertext", "message");
 
         // Test notification
-        Message notify = new Message();
-        notify.showNotification("title", "message");
+//        Message notify = new Message();
+//        notify.showNotification("title", "message");
+
+        // GetMainWindowBorderPane
+//        StageAndSceneManager.loadFxmlToBorderPaneLeft(, ResourceProvider.INSTALLEDPACKAGES_VIEW_NAME);
+
+        try
+        {
+            StageAndSceneManager.loadFxmlToBorderPaneLeft(App.GetMainWindowController().getMainWindowBorderPane(), ResourceProvider.INSTALLEDPACKAGES_VIEW_NAME);  // Gib mir das BorderPane
+        }
+        catch(Exception ex)
+        {
+            System.out.println(ex.getCause());
+            System.out.println(ex.getLocalizedMessage());
+            ex.printStackTrace();
+        }
     }
 
     @FXML
@@ -90,7 +107,7 @@ public class SearchPackagesController implements IControllerBase, Initializable
     @Override
     public void setTableViewSource()
     {
-        this.searchTableView.setItems(ListProvider.getSearchPackageList());
+        this.searchTableView.setItems(PackageList.getSearchPackageList());
     }
 
     @Override
@@ -139,7 +156,7 @@ public class SearchPackagesController implements IControllerBase, Initializable
                             System.out.println(data.getPackageName() + " [ID: " + data.getPackageID() + "] will be installed..."); // Test, execute here 'winget install {packageId}'
 
                             // Update list
-                            ListProvider.getInstalledPackageList().add(data);
+                            PackageList.getInstalledPackageList().add(data);
                         });
                     }
 
@@ -182,12 +199,29 @@ public class SearchPackagesController implements IControllerBase, Initializable
             {
                 final TableCell<WinGetPackage, Void> cell = new TableCell<>()
                 {
-                    private final ToggleButton btn = new ToggleButton("test");
+                    private final Button btn = new Button("add Fav");
                     {
                         btn.setOnAction((ActionEvent event) -> {
-                            WinGetPackage data = getTableView().getItems().get(getIndex());
-                            data.setFavorite(btn.isSelected()); // Set package as favorite
-                            System.out.println(data.getPackageName() + " is now favorite: " + data.isFavorite());
+                            WinGetPackage selectedPackage = searchTableView.getSelectionModel().getSelectedItem();
+                            PackageList selectedList = comboBox_selectPackageList.getSelectionModel().getSelectedItem();
+
+                            if (selectedPackage != null && selectedList != null) {
+                                // Check if the selected package is already in the selected list
+                                boolean packageExists = selectedList.getPackages().stream()
+                                        .anyMatch(pkg -> pkg.getPackageID().equals(selectedPackage.getPackageID()));
+
+                                if (!packageExists) {
+                                    // Add the package to the list
+                                    selectedList.getPackages().add(selectedPackage);
+                                    selectedPackage.setFavorite(true);
+                                    System.out.println("Package added to list: " + selectedPackage.getPackageName());
+                                } else {
+                                    System.out.println("Package already exists in the list: " + selectedPackage.getPackageName());
+                                }
+                            } else {
+                                // Handle cases where nothing is selected
+                                System.out.println("No package or list selected.");
+                            }
                         });
                     }
 
@@ -202,7 +236,16 @@ public class SearchPackagesController implements IControllerBase, Initializable
                         else
                         {
                             WinGetPackage data = getTableView().getItems().get(getIndex());
-                            btn.setSelected(data.isFavorite());
+                            if(data.isFavorite())
+                            {
+                                // Set cell content when package is favorite already
+                                Label installedLabel = new Label("is fav");
+                                setGraphic(installedLabel);
+                            }
+                            else
+                            {
+                                setGraphic(btn);
+                            }
                         }
                     }
                 };
@@ -230,7 +273,7 @@ public class SearchPackagesController implements IControllerBase, Initializable
                 WinGetQuery query = new WinGetQuery();
                 try
                 {
-                    query.queryToList(QueryType.SEARCH, searchKeyword, ListProvider.getSearchPackageList());
+                    query.queryToList(QueryType.SEARCH, searchKeyword, PackageList.getSearchPackageList());
                 }
                 catch (IOException | InterruptedException ex)
                 {
@@ -249,6 +292,71 @@ public class SearchPackagesController implements IControllerBase, Initializable
                     isThreadWorking = false;
                 });
             }).start();
+        }
+    }
+
+
+    public void initialize_comboBox_selectPackageList() {
+        ListManager listManager = ListManager.getInstance();
+
+        // Set the ComboBox items to the ObservableList from ListManager
+        comboBox_selectPackageList.setItems(listManager.getLists());
+
+        // Define how the items are displayed in the ComboBox
+        comboBox_selectPackageList.setCellFactory(lv -> new ListCell<PackageList>() {
+            @Override
+            protected void updateItem(PackageList item, boolean empty) {
+                super.updateItem(item, empty);
+                setText(empty ? "" : item.getName());
+            }
+        });
+
+        // Optionally, if you want to display a selected item (when the ComboBox is not expanded)
+        comboBox_selectPackageList.setConverter(new StringConverter<PackageList>() {
+            @Override
+            public String toString(PackageList object) {
+                return object != null ? object.getName() : "";
+            }
+
+            @Override
+            public PackageList fromString(String string) {
+                // This method is not needed for a ComboBox, but it must be overridden.
+                return null;
+            }
+        });
+
+        // Optional: Add a listener to react when the user selects a package list
+        comboBox_selectPackageList.valueProperty().addListener((obs, oldVal, newVal) -> {
+            if (newVal != null) {
+                System.out.println("Selected PackageList: " + newVal.getName());
+                // You can load the selected PackageList into another view/component here.
+            }
+        });
+
+    }
+
+
+
+    @FXML
+    private void button_addPackageToList(ActionEvent event) {
+        WinGetPackage selectedPackage = searchTableView.getSelectionModel().getSelectedItem();
+        PackageList selectedList = comboBox_selectPackageList.getSelectionModel().getSelectedItem();
+
+        if (selectedPackage != null && selectedList != null) {
+            // Check if the selected package is already in the selected list
+            boolean packageExists = selectedList.getPackages().stream()
+                    .anyMatch(pkg -> pkg.getPackageID().equals(selectedPackage.getPackageID()));
+
+            if (!packageExists) {
+                // Add the package to the list
+                selectedList.getPackages().add(selectedPackage);
+                System.out.println("Package added to list: " + selectedPackage.getPackageName());
+            } else {
+                System.out.println("Package already exists in the list: " + selectedPackage.getPackageName());
+            }
+        } else {
+            // Handle cases where nothing is selected
+            System.out.println("No package or list selected.");
         }
     }
 }

@@ -13,6 +13,7 @@ import javafx.stage.Screen;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.random.RandomGenerator;
 
 public class MainWindowController implements Initializable
 {
@@ -48,6 +49,24 @@ public class MainWindowController implements Initializable
     {
         StageAndSceneManager.loadFxmlToBorderPaneLeft(mainWindowBorderPane, ResourceProvider.INSTALLEDPACKAGES_VIEW_NAME);
     }
+
+    @FXML
+    private void menuFavouritePackagesButtonClick()
+    {
+        StageAndSceneManager.loadFxmlToBorderPaneLeft(mainWindowBorderPane, ResourceProvider.INSTALLEDPACKAGES_VIEW_NAME);
+    }
+
+    @FXML
+    private void button_loadList() {
+        StageAndSceneManager.loadFxmlToBorderPaneLeft(mainWindowBorderPane, ResourceProvider.PACKAGELIST_VIEW_NAME);
+    }
+    @FXML
+    private void menuListManagerButtonClick()
+    {
+        StageAndSceneManager.loadFxmlToBorderPaneLeft(mainWindowBorderPane, ResourceProvider.LISTMANAGER_VIEW_NAME);
+    }
+
+
 
     @FXML
     private void minimizeWindowButtonClick()
@@ -130,5 +149,15 @@ public class MainWindowController implements Initializable
     private boolean getMaximizeWindowButtonToggle()
     {
         return maximizeWindowButton.isSelected();
+    }
+
+    public BorderPane getMainWindowBorderPane() {
+        return mainWindowBorderPane;
+    }
+
+
+    public void switchMainWindowToPackageList()
+    {
+        StageAndSceneManager.loadFxmlToBorderPaneLeft(mainWindowBorderPane, ResourceProvider.PACKAGELIST_VIEW_NAME);
     }
 }

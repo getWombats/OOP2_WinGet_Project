@@ -53,11 +53,11 @@ public class App extends Application
     public void start(Stage stage) throws IOException
     {
         ListManager listManager = ListManager.getInstance(); // Instantiating ListManager
-//        Serializer.deserializeListManager();
+        // Serializer.deserializeListManager();
 
-        listManager.createPackageList("Favourites"); // Instantiating PackageList for Testing purposes.
-        listManager.createPackageList("Web Browsers"); // Instantiating PackageList for Testing purposes.
-        listManager.createPackageList("Office"); // Instantiating PackageList for Testing purposes.
+       listManager.createPackageList("Favourites"); // Instantiating PackageList for Testing purposes.
+       listManager.createPackageList("Web Browsers"); // Instantiating PackageList for Testing purposes.
+       listManager.createPackageList("Office"); // Instantiating PackageList for Testing purposes.
 
         windowManager = new WindowManager(stage);
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(ResourceProvider.FXML_ROOT + ResourceProvider.SPLASHSCREEN_VIEW_NAME));

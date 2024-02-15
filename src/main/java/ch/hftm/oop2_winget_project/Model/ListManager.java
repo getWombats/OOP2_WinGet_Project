@@ -2,7 +2,7 @@ package ch.hftm.oop2_winget_project.Model;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import ch.hftm.oop2_winget_project.Persistence.Serializer;
+// import ch.hftm.oop2_winget_project.Persistence.Serializer;
 import java.io.Serializable;
 
 /**
@@ -40,12 +40,12 @@ public class ListManager implements Serializable {
     public void createPackageList(String packageListName){
         PackageList newPackageList = new PackageList(packageListName);
         lists.add(newPackageList);
-//        Serializer.serializeListmanager(this);  // Save the ListManager to Disk.
+        // Serializer.serializeListmanager(this);  // Save the ListManager to Disk.
     }
 
     public void deletePackageList(PackageList packageList) {
         lists.remove(packageList);
-//        Serializer.serializeListmanager(this); // Save the ListManager to Disk.
+        // Serializer.serializeListmanager(this); // Save the ListManager to Disk.
     }
 
     public ObservableList<PackageList> getLists() {

@@ -9,13 +9,8 @@ import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import ch.hftm.oop2_winget_project.Util.ResourceProvider;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.control.*;
-import javafx.scene.layout.BorderPane;
 import javafx.util.Duration;
-import ch.hftm.oop2_winget_project.Controller.MainWindowController;
-import java.io.IOException;
 
 
 public class ListManagerController {
@@ -47,7 +42,7 @@ public class ListManagerController {
         listSizeColumn.setCellValueFactory(cellData -> cellData.getValue().getSizeProperty().asObject());
 
         // Bind the data of listManager to the TableView
-        listManagerTableView.setItems(listManager.getLists());
+        listManagerTableView.setItems(listManager.getListsProperty());
 
         setUpDoubleClickOnRow();
 

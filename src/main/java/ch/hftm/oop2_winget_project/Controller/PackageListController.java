@@ -38,10 +38,10 @@ public class PackageListController {
         tableView_Packages.setItems(currentPackageList.getPackages());
 
         // Initialize cell value factories, assuming WinGetPackage has appropriate properties
-        column_name.setCellValueFactory(cellData -> cellData.getValue().packageNameProperty());
-        column_id.setCellValueFactory(cellData -> cellData.getValue().packageIDProperty());
-        column_version.setCellValueFactory(cellData -> cellData.getValue().packageVersionProperty());
-        column_source.setCellValueFactory(cellData -> cellData.getValue().packageSourceProperty());
+        column_name.setCellValueFactory(cellData -> cellData.getValue().getNameProperty());
+        column_id.setCellValueFactory(cellData -> cellData.getValue().getIdProperty());
+        column_version.setCellValueFactory(cellData -> cellData.getValue().getVersionProperty());
+        column_source.setCellValueFactory(cellData -> cellData.getValue().getSourceProperty());
     }
 
 
@@ -50,7 +50,7 @@ public class PackageListController {
         WinGetPackage selectedPackage = tableView_Packages.getSelectionModel().getSelectedItem();
         if (selectedPackage != null) {
             currentPackageList.getPackages().remove(selectedPackage);
-            System.out.println("Package removed: " + selectedPackage.getPackageName());
+            System.out.println("Package removed: " + selectedPackage.getName());
         } else {
             System.out.println("No package selected or no current list available.");
         }

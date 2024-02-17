@@ -1,11 +1,9 @@
 package ch.hftm.oop2_winget_project;
 
 import ch.hftm.oop2_winget_project.Controller.MainWindowController;
-import ch.hftm.oop2_winget_project.Model.PackageList;
-import ch.hftm.oop2_winget_project.Model.WinGetSettings;
-import ch.hftm.oop2_winget_project.Model.WindowManager;
-import ch.hftm.oop2_winget_project.Model.ListManager;
+import ch.hftm.oop2_winget_project.Model.*;
 import ch.hftm.oop2_winget_project.Persistence.Serializer;
+import ch.hftm.oop2_winget_project.Util.DTOConverter;
 import ch.hftm.oop2_winget_project.Util.ResourceProvider;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -14,7 +12,9 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 
 public class App extends Application
 {
@@ -53,11 +53,32 @@ public class App extends Application
     public void start(Stage stage) throws IOException
     {
         ListManager listManager = ListManager.getInstance(); // Instantiating ListManager
-        // Serializer.deserializeListManager();
 
-       listManager.createPackageList("Favourites"); // Instantiating PackageList for Testing purposes.
-       listManager.createPackageList("Web Browsers"); // Instantiating PackageList for Testing purposes.
-       listManager.createPackageList("Office"); // Instantiating PackageList for Testing purposes.
+//        // Deserialize the ListManagerDTO from file
+//        ListManagerDTO listManagerDTO;
+//        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("./UserData/listManagerDTO.ser"))) {
+//            listManagerDTO = (ListManagerDTO) ois.readObject();
+//        } catch (ClassNotFoundException e) {
+//            e.printStackTrace();
+//            // Handle the case where the class definition is not found.
+//            // This could involve initializing a new ListManager instance instead.
+//            listManagerDTO = new ListManagerDTO(); // Or handle this scenario appropriately.
+//        }
+//
+//
+//        // Convert ListManagerDTO back to ListManager
+//        DTOConverter.fromListManagerDTO(listManagerDTO);
+//
+//        // After deserializing and converting back
+//        System.out.println("\nAfter deserialization:");
+//        listManager.getLists().forEach(packageList -> {
+//            System.out.println("PackageList: " + packageList.getName() + ", Packages: " + packageList.getPackages().size());
+//            packageList.getPackages().forEach(winGetPackage -> System.out.println(" - WinGetPackage: " + winGetPackage.getName()));
+//        });
+
+//        listManager.createPackageList("Favourites"); // Instantiating PackageList for Testing purposes.
+//        listManager.createPackageList("Web Browsers"); // Instantiating PackageList for Testing purposes.
+//        listManager.createPackageList("Office"); // Instantiating PackageList for Testing purposes.
 
         windowManager = new WindowManager(stage);
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(ResourceProvider.FXML_ROOT + ResourceProvider.SPLASHSCREEN_VIEW_NAME));

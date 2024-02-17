@@ -1,9 +1,13 @@
 package ch.hftm.oop2_winget_project.Controller;
 
 import ch.hftm.oop2_winget_project.App;
+import ch.hftm.oop2_winget_project.Util.DTOConverter;
+import ch.hftm.oop2_winget_project.Model.ListManager;
+import ch.hftm.oop2_winget_project.Model.ListManagerDTO;
 import ch.hftm.oop2_winget_project.Util.ResourceProvider;
 import ch.hftm.oop2_winget_project.Util.StageAndSceneManager;
 import javafx.fxml.FXML;
+import ch.hftm.oop2_winget_project.Util.DTOConverter;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.input.MouseButton;
@@ -11,9 +15,9 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Screen;
 
+import java.io.*;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.random.RandomGenerator;
 
 public class MainWindowController implements Initializable
 {
@@ -57,9 +61,82 @@ public class MainWindowController implements Initializable
     }
 
     @FXML
-    private void button_loadList() {
-        StageAndSceneManager.loadFxmlToBorderPaneLeft(mainWindowBorderPane, ResourceProvider.PACKAGELIST_VIEW_NAME);
+    private void button_save() {
+        ListManager listManager = ListManager.getInstance();
+
+        // Models:
+        System.out.println("\nModels:");
+        listManager.getLists().forEach(packageList -> {
+            System.out.println("PackageList: " + packageList.getName() + ", Packages: " + packageList.getPackages().size());
+            packageList.getPackages().forEach(winGetPackage -> System.out.println(" - WinGetPackage: " + winGetPackage.getName() + " " +  winGetPackage.getId() + " " + winGetPackage.getVersion() + " " + winGetPackage.getSource()));
+        });
+
+        // Serialize the ListManager to file
+        ListManagerDTO listManagerDTO = DTOConverter.toListManagerDTO(listManager);
+
+        // DTOs
+        System.out.println("\nDTOs:");
+        listManagerDTO.getList().forEach(packageListDTO -> {
+            System.out.println("PackageListDTO: " + packageListDTO.getName() + ", Packages: " + packageListDTO.getPackages().size());
+            packageListDTO.getPackages().forEach(winGetPackageDTO -> System.out.println(" - WinGetPackageDTO: " + winGetPackageDTO.getName() + " " + winGetPackageDTO.getId() + " " + winGetPackageDTO.getVersion() + " " + winGetPackageDTO.getSource()));
+        });
+
+        // Serialize into a .ser
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("./UserData/listManagerDTO.ser"))) {
+            oos.writeObject(listManagerDTO);
+            System.out.println("Serialization successful");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // Before serializing
+        System.out.println("Serialized Result:");
+        listManagerDTO.getList().forEach(packageListDTO -> {
+            System.out.println("PackageListDTO: " + packageListDTO.getName() + ", Packages: " + packageListDTO.getPackages().size());
+            packageListDTO.getPackages().forEach(winGetPackageDTO -> System.out.println(" - WinGetPackageDTO: " + winGetPackageDTO.getName()));
+        });
+
     }
+
+    @FXML
+    private void button_load() {
+
+        ListManager listManager = ListManager.getInstance();
+
+        // Deserialize the ListManagerDTO from file
+        ListManagerDTO listManagerDTO;
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("./UserData/listManagerDTO.ser"))) {
+            listManagerDTO = (ListManagerDTO) ois.readObject();
+        } catch (ClassNotFoundException | FileNotFoundException e) {
+            e.printStackTrace();
+            // Handle the case where the class definition is not found.
+            // This could involve initializing a new ListManager instance instead.
+            listManagerDTO = new ListManagerDTO(); // Or handle this scenario appropriately.
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+
+        // DTOs
+        System.out.println("\nDTOs:");
+        listManagerDTO.getList().forEach(packageListDTO -> {
+            System.out.println("PackageListDTO: " + packageListDTO.getName() + ", Packages: " + packageListDTO.getPackages().size());
+            packageListDTO.getPackages().forEach(winGetPackageDTO -> System.out.println(" - WinGetPackageDTO: " + winGetPackageDTO.getName() + winGetPackageDTO.getId() + winGetPackageDTO.getVersion()+ winGetPackageDTO.getSource()));
+        });
+
+        // Convert ListManagerDTO back to ListManager
+        DTOConverter.fromListManagerDTO(listManagerDTO);
+
+        // Models:
+        System.out.println("\nModels:");
+        listManager.getLists().forEach(packageList -> {
+            System.out.println("PackageList: " + packageList.getName() + ", Packages: " + packageList.getPackages().size());
+            packageList.getPackages().forEach(winGetPackage -> System.out.println(" - WinGetPackage: " + winGetPackage.getName() + winGetPackage.getId() + winGetPackage.getVersion()+ winGetPackage.getSource()));
+        });
+
+
+    }
+
     @FXML
     private void menuListManagerButtonClick()
     {

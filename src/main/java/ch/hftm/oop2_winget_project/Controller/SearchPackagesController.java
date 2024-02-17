@@ -7,12 +7,9 @@ import ch.hftm.oop2_winget_project.Api.IControllerBase;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
-import javafx.scene.layout.BorderPane;
 import javafx.util.Callback;
 import javafx.util.StringConverter;
 
@@ -98,10 +95,10 @@ public class SearchPackagesController implements IControllerBase, Initializable
     {
 //        this.favoriteColumn.setCellFactory(CheckBoxTableCell.forTableColumn(favoriteColumn)); // Test with checkbox
 //        this.favoriteColumn.setCellValueFactory(cellData -> cellData.getValue().isFavoriteProperty()); // Test with checkbox
-        this.nameColumn.setCellValueFactory(cellData -> cellData.getValue().packageNameProperty());
-        this.idColumn.setCellValueFactory(cellData -> cellData.getValue().packageIDProperty());
-        this.versionColumn.setCellValueFactory(cellData -> cellData.getValue().packageVersionProperty());
-        this.sourceColumn.setCellValueFactory(cellData -> cellData.getValue().packageSourceProperty());
+        this.nameColumn.setCellValueFactory(cellData -> cellData.getValue().getNameProperty());
+        this.idColumn.setCellValueFactory(cellData -> cellData.getValue().getIdProperty());
+        this.versionColumn.setCellValueFactory(cellData -> cellData.getValue().getVersionProperty());
+        this.sourceColumn.setCellValueFactory(cellData -> cellData.getValue().getSourceProperty());
     }
 
     @Override
@@ -153,7 +150,7 @@ public class SearchPackagesController implements IControllerBase, Initializable
                             WinGetPackage data = getTableView().getItems().get(getIndex());
                             data.setInstalled(true); // Set package as installed
                             btn.setDisable(true); // Disables button when clicked
-                            System.out.println(data.getPackageName() + " [ID: " + data.getPackageID() + "] will be installed..."); // Test, execute here 'winget install {packageId}'
+                            System.out.println(data.getName() + " [ID: " + data.getId() + "] will be installed..."); // Test, execute here 'winget install {packageId}'
 
                             // Update list
                             PackageList.getInstalledPackageList().add(data);
@@ -208,15 +205,15 @@ public class SearchPackagesController implements IControllerBase, Initializable
                             if (selectedPackage != null && selectedList != null) {
                                 // Check if the selected package is already in the selected list
                                 boolean packageExists = selectedList.getPackages().stream()
-                                        .anyMatch(pkg -> pkg.getPackageID().equals(selectedPackage.getPackageID()));
+                                        .anyMatch(pkg -> pkg.getId().equals(selectedPackage.getId()));
 
                                 if (!packageExists) {
                                     // Add the package to the list
                                     selectedList.getPackages().add(selectedPackage);
                                     selectedPackage.setFavorite(true);
-                                    System.out.println("Package added to list: " + selectedPackage.getPackageName());
+                                    System.out.println("Package added to list: " + selectedPackage.getName());
                                 } else {
-                                    System.out.println("Package already exists in the list: " + selectedPackage.getPackageName());
+                                    System.out.println("Package already exists in the list: " + selectedPackage.getName());
                                 }
                             } else {
                                 // Handle cases where nothing is selected
@@ -236,7 +233,7 @@ public class SearchPackagesController implements IControllerBase, Initializable
                         else
                         {
                             WinGetPackage data = getTableView().getItems().get(getIndex());
-                            if(data.isFavorite())
+                            if(data.getFavorite())
                             {
                                 // Set cell content when package is favorite already
                                 Label installedLabel = new Label("is fav");
@@ -300,7 +297,7 @@ public class SearchPackagesController implements IControllerBase, Initializable
         ListManager listManager = ListManager.getInstance();
 
         // Set the ComboBox items to the ObservableList from ListManager
-        comboBox_selectPackageList.setItems(listManager.getLists());
+        comboBox_selectPackageList.setItems(listManager.getListsProperty());
 
         // Define how the items are displayed in the ComboBox
         comboBox_selectPackageList.setCellFactory(lv -> new ListCell<PackageList>() {
@@ -345,14 +342,14 @@ public class SearchPackagesController implements IControllerBase, Initializable
         if (selectedPackage != null && selectedList != null) {
             // Check if the selected package is already in the selected list
             boolean packageExists = selectedList.getPackages().stream()
-                    .anyMatch(pkg -> pkg.getPackageID().equals(selectedPackage.getPackageID()));
+                    .anyMatch(pkg -> pkg.getId().equals(selectedPackage.getId()));
 
             if (!packageExists) {
                 // Add the package to the list
                 selectedList.getPackages().add(selectedPackage);
-                System.out.println("Package added to list: " + selectedPackage.getPackageName());
+                System.out.println("Package added to list: " + selectedPackage.getName());
             } else {
-                System.out.println("Package already exists in the list: " + selectedPackage.getPackageName());
+                System.out.println("Package already exists in the list: " + selectedPackage.getName());
             }
         } else {
             // Handle cases where nothing is selected

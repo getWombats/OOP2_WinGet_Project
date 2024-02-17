@@ -15,7 +15,7 @@ public class Serializer {
     public static void serializeListmanager(ListManager listManager) {
         try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(filepath))) {
             // Convert ObservableList to ArrayList for serialization
-            List<PackageList> serializableList = new ArrayList<>(listManager.getLists());
+            List<PackageList> serializableList = new ArrayList<>(listManager.getListsProperty());
             out.writeObject(serializableList);
         } catch (IOException e) {
             e.printStackTrace();

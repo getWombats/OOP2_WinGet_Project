@@ -1,7 +1,6 @@
 package ch.hftm.oop2_winget_project.Controller;
 
 import ch.hftm.oop2_winget_project.Api.IControllerBase;
-import ch.hftm.oop2_winget_project.Model.ListManager;
 import ch.hftm.oop2_winget_project.Model.PackageList;
 import ch.hftm.oop2_winget_project.Util.QueryType;
 import ch.hftm.oop2_winget_project.Model.WinGetPackage;
@@ -57,10 +56,10 @@ public class InstalledPackagesController implements IControllerBase, Initializab
     @Override
     public void setTableViewData()
     {
-        this.nameColumn.setCellValueFactory(cellData -> cellData.getValue().packageNameProperty());
-        this.idColumn.setCellValueFactory(cellData -> cellData.getValue().packageIDProperty());
-        this.versionColumn.setCellValueFactory(cellData -> cellData.getValue().packageVersionProperty());
-        this.sourceColumn.setCellValueFactory(cellData -> cellData.getValue().packageSourceProperty());
+        this.nameColumn.setCellValueFactory(cellData -> cellData.getValue().getNameProperty());
+        this.idColumn.setCellValueFactory(cellData -> cellData.getValue().getIdProperty());
+        this.versionColumn.setCellValueFactory(cellData -> cellData.getValue().getVersionProperty());
+        this.sourceColumn.setCellValueFactory(cellData -> cellData.getValue().getSourceProperty());
     }
 
     @Override
@@ -97,7 +96,7 @@ public class InstalledPackagesController implements IControllerBase, Initializab
                         btn.setOnAction((ActionEvent event) -> {
                             WinGetPackage data = getTableView().getItems().get(getIndex());
                             data.setInstalled(false); // Set package as uninstalled
-                            System.out.println(data.getPackageName() + " [ID: " + data.getPackageID() + "] uninstalling package..."); // Test, execute here 'winget remove {packageId}'
+                            System.out.println(data.getName() + " [ID: " + data.getId() + "] uninstalling package..."); // Test, execute here 'winget remove {packageId}'
 
                             // Update list
                             PackageList.getInstalledPackageList().remove(data);

@@ -25,7 +25,8 @@
                </font></Button>
             <Button mnemonicParsing="false" onAction="#menuUpdateButtonClick" prefHeight="70.0" prefWidth="170.0" styleClass="menuButton" stylesheets="@../CSS/MenuButtonStyle.css" text="Update packages" />
             <Button mnemonicParsing="false" onAction="#menuInstalledPackagesButtonClick" prefHeight="70.0" prefWidth="170.0" styleClass="menuButton" stylesheets="@../CSS/MenuButtonStyle.css" text="Installed packages" />
-            <Button mnemonicParsing="false" onAction="#button_loadList" prefHeight="70.0" prefWidth="170.0" styleClass="menuButton" stylesheets="@../CSS/MenuButtonStyle.css" text="Load List" />
+            <Button mnemonicParsing="false" onAction="#button_save" prefHeight="70.0" prefWidth="170.0" styleClass="menuButton" stylesheets="@../CSS/MenuButtonStyle.css" text="Model &gt; DTO" />
+            <Button mnemonicParsing="false" onAction="#button_load" prefHeight="70.0" prefWidth="170.0" styleClass="menuButton" stylesheets="@../CSS/MenuButtonStyle.css" text="DTO &gt; Model" />
             <Button mnemonicParsing="false" onAction="#menuListManagerButtonClick" prefHeight="70.0" prefWidth="170.0" styleClass="menuButton" stylesheets="@../CSS/MenuButtonStyle.css" text="List Manager" />
          </VBox>
       </left>

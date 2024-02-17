@@ -42,6 +42,23 @@
       <artifactId>controlsfx</artifactId>
       <version>11.1.2</version>
     </dependency>
+<!--    For JSON write / read-->
+      <dependency>
+        <groupId>jakarta.json.bind</groupId>
+        <artifactId>jakarta.json.bind-api</artifactId>
+        <version>3.0.0</version>
+      </dependency>
+    <dependency>
+      <groupId>org.eclipse.</groupId>
+      <artifactId>yasson</artifactId>
+      <version>3.0.3</version> <!-- Use the correct version -->
+    </dependency>
+    <dependency>
+      <groupId>org.eclipse</groupId>
+      <artifactId>yasson</artifactId>
+      <version>3.0.3</version> <!-- Replace with the actual latest version -->
+    </dependency>
+
   </dependencies>
 
   <build>

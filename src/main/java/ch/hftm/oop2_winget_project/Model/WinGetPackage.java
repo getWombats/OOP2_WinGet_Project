@@ -1,116 +1,101 @@
 package ch.hftm.oop2_winget_project.Model;
 
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 import java.io.Serializable;
 
-public class WinGetPackage implements Serializable
+public class WinGetPackage
 {
-    private static final long serialVersionUID = 1L; // UID resp. Version for serialization.
-    private final SimpleStringProperty packageName = new SimpleStringProperty();
-    private final SimpleStringProperty packageID = new SimpleStringProperty();
-    private final SimpleStringProperty packageVersion = new SimpleStringProperty();
-    private final SimpleStringProperty packageSource = new SimpleStringProperty();
-//    private final BooleanProperty isFavorite = new SimpleBooleanProperty();
-    private boolean isFavorite;
+    private SimpleStringProperty name = new SimpleStringProperty();
+    private SimpleStringProperty id = new SimpleStringProperty();
+    private SimpleStringProperty version = new SimpleStringProperty();
+    private SimpleStringProperty source = new SimpleStringProperty();
+    private boolean favourite;
     private boolean isInstalled;
 
     public WinGetPackage() {
     }
 
-    public WinGetPackage(String packageName, String packageID, String packageVersion, String packageSource)
-    {
-        this.setPackageName(packageName);
-        this.setPackageID(packageID);
-        this.setPackageVersion(packageVersion);
-        this.setPackageSource(packageSource);
+
+
+    public WinGetPackage(String name, String id, String version, String source) {
+        this.setName(name);
+        this.setId(id);
+        this.setVersion(version);
+        this.setSource(source);
     }
 
-    public String getPackageName()
-    {
-        return packageName.get();
+    // Adjusted Constructor to match DTO fields
+    public WinGetPackage(String name, String id, String version, String source, boolean favourite, boolean isInstalled) {
+        this.name = new SimpleStringProperty(name);
+        this.id = new SimpleStringProperty(id);
+        this.version = new SimpleStringProperty(version);
+        this.source = new SimpleStringProperty(source);
+        this.favourite = favourite;
+        this.isInstalled = isInstalled;
     }
 
-    public SimpleStringProperty packageNameProperty()
-    {
-        return packageName;
+    public String getName() {
+        return this.name.get();
     }
 
-    private void setPackageName(String packageName)
-    {
-        this.packageName.set(packageName);
+    public SimpleStringProperty getNameProperty() {
+        return this.name;
     }
 
-    public String getPackageID()
-    {
-        return packageID.get();
+    public void setName(String name) {
+        this.name.set(name);
     }
 
-    public SimpleStringProperty packageIDProperty() {
-        return packageID;
+    public String getId() {
+        return this.id.get();
     }
 
-    private void setPackageID(String packageID)
-    {
-        this.packageID.set(packageID);
+    public SimpleStringProperty getIdProperty() {
+        return this.id;
     }
 
-    public String getPackageVersion()
-    {
-        return packageVersion.get();
+    public void setId(String id) {
+        this.id.set(id);
     }
 
-    public SimpleStringProperty packageVersionProperty()
-    {
-        return packageVersion;
+    public String getVersion() {
+        return this.version.get();
     }
 
-    private void setPackageVersion(String packageVersion)
-    {
-        this.packageVersion.set(packageVersion);
+    public SimpleStringProperty getVersionProperty() {
+        return this.version;
     }
 
-    public String getPackageSource()
-    {
-        return packageSource.get();
+    public void setVersion(String version) {
+        this.version.set(version);
     }
 
-    public SimpleStringProperty packageSourceProperty()
-    {
-        return packageSource;
+    public String getSource() {
+        return this.source.get();
     }
 
-    private void setPackageSource(String packageSource)
-    {
-        this.packageSource.set(packageSource);
+    public SimpleStringProperty getSourceProperty() {
+        return this.source;
     }
 
-    public boolean isFavorite()
-    {
-        return isFavorite;
-//        return isFavorite.get();
+    public void setSource(String source) {
+        this.source.set(source);
     }
 
-//    public BooleanProperty isFavoriteProperty()
-//    {
-//        return isFavorite;
-//    }
-
-    public void setFavorite(boolean favorite)
-    {
-//        this.isFavorite.set(favorite);
-        isFavorite = favorite;
+    public boolean getFavorite() {
+        return this.favourite;
     }
 
-    public boolean isInstalled()
-    {
-        return isInstalled;
+    public void setFavorite(boolean favourite) {
+        this.favourite = favourite;
     }
 
-    public void setInstalled(boolean installed)
-    {
-        isInstalled = installed;
+    public boolean isInstalled() {
+        return this.isInstalled;
+    }
+
+    public void setInstalled(boolean installed) {
+        this.isInstalled = installed;
     }
 }

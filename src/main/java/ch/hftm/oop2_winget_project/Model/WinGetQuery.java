@@ -112,7 +112,7 @@ public class WinGetQuery
                     {
                         for(WinGetPackage installedPackage : PackageList.getInstalledPackageList())
                         {
-                            if(installedPackage.getPackageID().equals(winGetPackage.getPackageID()))
+                            if(installedPackage.getId().equals(winGetPackage.getId()))
                             {
                                 winGetPackage.setInstalled(true);
                             }

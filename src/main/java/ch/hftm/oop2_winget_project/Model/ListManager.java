@@ -2,8 +2,10 @@ package ch.hftm.oop2_winget_project.Model;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-// import ch.hftm.oop2_winget_project.Persistence.Serializer;
+
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * The ListManager class manages a list of PackageList objects.
@@ -13,15 +15,12 @@ import java.io.Serializable;
  * get the entire list to use elsewhere.
  */
 
-public class ListManager implements Serializable {
-
-//    Instances
-    private static ListManager instance;
+public class ListManager {
 
 //    Variables
-    private static final long serialVersionUID = 1L; // UID resp. Version for serialization.
+    private static ListManager instance;
     private ObservableList<PackageList> lists;
-    private PackageList selectesPackage;
+    private PackageList selectedPackage;
 
 //    Instantiation method
     public static ListManager getInstance() {
@@ -40,35 +39,32 @@ public class ListManager implements Serializable {
     public void createPackageList(String packageListName){
         PackageList newPackageList = new PackageList(packageListName);
         lists.add(newPackageList);
-        // Serializer.serializeListmanager(this);  // Save the ListManager to Disk.
     }
 
     public void deletePackageList(PackageList packageList) {
         lists.remove(packageList);
-        // Serializer.serializeListmanager(this); // Save the ListManager to Disk.
     }
 
-    public ObservableList<PackageList> getLists() {
+    public ObservableList<PackageList> getListsProperty() {
         return lists;
+    }
+
+    public List<PackageList> getLists() {
+        return new ArrayList<>(lists);
     }
 
     public void setLists(ObservableList<PackageList> lists) {
         this.lists = lists;
     }
 
-    public void printPackageListNames() {
-        System.out.println("Package Lists:");
-        for (PackageList packageList : lists) {
-            System.out.println("- " + packageList.getName());
-        }
-    }
+
 
     public void setSelectedPackageList(PackageList selectedPackage) {
-        this.selectesPackage = selectedPackage;
+        this.selectedPackage = selectedPackage;
     }
 
     public PackageList getSelectedPackageList() {
-        return this.selectesPackage;
+        return this.selectedPackage;
     }
 
     // This method ensures that the deserialized object is replaced with the singleton instance.

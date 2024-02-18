@@ -22,7 +22,6 @@ public class CreateBatFile {
                 bw.newLine();
             }
         } catch (IOException e) {
-            System.err.println("Error" + e.getMessage();
         }
     }
 }

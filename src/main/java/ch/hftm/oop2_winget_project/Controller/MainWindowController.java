@@ -7,7 +7,6 @@ import ch.hftm.oop2_winget_project.Model.ListManagerDTO;
 import ch.hftm.oop2_winget_project.Util.ResourceProvider;
 import ch.hftm.oop2_winget_project.Util.StageAndSceneManager;
 import javafx.fxml.FXML;
-import ch.hftm.oop2_winget_project.Util.DTOConverter;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.input.MouseButton;
@@ -67,8 +66,8 @@ public class MainWindowController implements Initializable
         // Models:
         System.out.println("\nModels:");
         listManager.getLists().forEach(packageList -> {
-            System.out.println("PackageList: " + packageList.getName() + ", Packages: " + packageList.getPackages().size());
-            packageList.getPackages().forEach(winGetPackage -> System.out.println(" - WinGetPackage: " + winGetPackage.getName() + " " +  winGetPackage.getId() + " " + winGetPackage.getVersion() + " " + winGetPackage.getSource()));
+            System.out.println("PackageList: " + packageList.getName() + ", Packages: " + packageList.getFXPackages().size());
+            packageList.getFXPackages().forEach(winGetPackage -> System.out.println(" - WinGetPackage: " + winGetPackage.getName() + " " +  winGetPackage.getId() + " " + winGetPackage.getVersion() + " " + winGetPackage.getSource()));
         });
 
         // Serialize the ListManager to file
@@ -130,8 +129,8 @@ public class MainWindowController implements Initializable
         // Models:
         System.out.println("\nModels:");
         listManager.getLists().forEach(packageList -> {
-            System.out.println("PackageList: " + packageList.getName() + ", Packages: " + packageList.getPackages().size());
-            packageList.getPackages().forEach(winGetPackage -> System.out.println(" - WinGetPackage: " + winGetPackage.getName() + winGetPackage.getId() + winGetPackage.getVersion()+ winGetPackage.getSource()));
+            System.out.println("PackageList: " + packageList.getName() + ", Packages: " + packageList.getFXPackages().size());
+            packageList.getFXPackages().forEach(winGetPackage -> System.out.println(" - WinGetPackage: " + winGetPackage.getName() + winGetPackage.getId() + winGetPackage.getVersion()+ winGetPackage.getSource()));
         });
 
 

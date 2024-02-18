@@ -1,11 +1,9 @@
 package ch.hftm.oop2_winget_project.Model;
 
-import javafx.beans.binding.Bindings;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -14,28 +12,31 @@ public class PackageList {
 
 // Variables
     private String id;
-    private StringProperty name;
-    private IntegerProperty size;
-    private ListProperty<WinGetPackage> packages;
+    private SimpleStringProperty name;
+    private SimpleIntegerProperty size;
+    private ObservableList<WinGetPackage> packages;
 
 
 //    Constructors
-    public PackageList(String packageListName){
+    public PackageList(String name){
         this.id = UUID.randomUUID().toString(); // Create random UUID to identify List.
-        this.name = new SimpleStringProperty(packageListName);
+        this.name = new SimpleStringProperty(name);
         this.size = new SimpleIntegerProperty(0);
-        this.packages = new SimpleListProperty<>(FXCollections.observableArrayList());
+        this.packages = FXCollections.observableArrayList();
         // Bind the size property to the size of the packages observable list.
-        this.size.bind(Bindings.size(this.packages).asObject());
+//        this.size.bind(Bindings.size(this.packages).asObject());
 
         System.out.println("New Package: (UUID Name)\n" + getId() + " \"" + getName() + "\"");
     }
 
     // Constructor to match DTO fields
-    public PackageList(String id, String name, List<WinGetPackage> packages) {
-        this.id = id;
-        this.name = new SimpleStringProperty(name);
-        this.packages = new SimpleListProperty<>(FXCollections.observableArrayList(packages));
+    public PackageList() {
+        this.id = "";
+        this.name = new SimpleStringProperty();
+        this.size = new SimpleIntegerProperty(0);
+        this.packages = FXCollections.observableArrayList();
+        // Bind the size property to the size of the packages observable list.
+//        this.size.bind(Bindings.size(this.packages).asObject());
     }
 
 
@@ -45,6 +46,7 @@ public class PackageList {
     public String getId() {
         return this.id;
     }
+
     public void setId(String id) {
         this.id = id;
     }
@@ -53,50 +55,47 @@ public class PackageList {
         return this.name.get();
     }
 
-    public StringProperty getNameProperty() {
+    public SimpleStringProperty getFXName() {
         return this.name;
     }
-    public void setName(String packageListName) {
-        this.name.set(packageListName);
+
+    public void setName(String name) {
+        this.name.set(name);
     }
 
     public int getSize() {
         return this.size.get();
     }
 
-    public IntegerProperty getSizeProperty() {
+    public SimpleIntegerProperty getFXSize() {
         return this.size;
     }
 
-    public ObservableList<WinGetPackage> getPackages() {
-        return this.packages.get();
-    } // Returns PackageList
-
-    public void setPackages(ObservableList<WinGetPackage> packages) {
-        this.packages = new SimpleListProperty<>(FXCollections.observableArrayList(packages));
+    public void setSize(int id) {
+        this.size.set(id);
     }
 
-//    public void setLists(ObservableList<PackageList> lists) {
-//        this.lists = lists;
-//    }
-
-
-    public ListProperty<WinGetPackage> getPackagesProperty() {
+    public List<WinGetPackage> getPackages() {
+        return new ArrayList<>(packages);
+    }
+    public ObservableList<WinGetPackage> getFXPackages() {
         return this.packages;
-    } // Returns PackageList as Property
+    }
+
+    public void setPackages(ObservableList<WinGetPackage> packages) {
+        this.packages = packages;
+    }
 
 
 //    Manage packages
     public void addPackage(WinGetPackage wgPkg) {
-        packages.add(wgPkg);
+        this.packages.add(wgPkg);
+        this.size.set(this.size.get() +1);
     }
     public void removePackage(WinGetPackage wgPkg) {
         packages.remove(wgPkg);
+        this.size.set(this.size.get() -1);
     }
-    public List<WinGetPackage> getPackageList() {
-        return packages;
-    }
-
 
     //    Predefined lists as static fields
     private static final ObservableList<WinGetPackage> searchPackageList = FXCollections.observableArrayList();

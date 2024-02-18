@@ -43,7 +43,8 @@ public class DTOConverter {
         PackageListDTO dto = new PackageListDTO();
         dto.setId(packageList.getId());
         dto.setName(packageList.getName());
-        List<WinGetPackageDTO> winGetPackageDTOs = packageList.getPackages()
+        dto.setSize(packageList.getSize());
+        List<WinGetPackageDTO> winGetPackageDTOs = packageList.getFXPackages()
                 .stream()
                 .map(DTOConverter::toWinGetPackageDTO)
                 .collect(Collectors.toList());
@@ -57,6 +58,8 @@ public class DTOConverter {
         System.out.println("DTOConverter: PackageListDTO back to PackageList for: " + dto.getName() + "...");
         PackageList packageList = new PackageList(dto.getName());
         packageList.setId(dto.getId());
+//        packageList.setName(dto.getName());
+        packageList.setSize(dto.getSize());
         packageList.setPackages(dto.getPackages().stream()
                 .map(DTOConverter::fromWinGetPackageDTO)
                 .collect(Collectors.toCollection(FXCollections::observableArrayList)));

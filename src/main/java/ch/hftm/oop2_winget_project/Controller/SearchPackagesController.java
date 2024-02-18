@@ -95,10 +95,10 @@ public class SearchPackagesController implements IControllerBase, Initializable
     {
 //        this.favoriteColumn.setCellFactory(CheckBoxTableCell.forTableColumn(favoriteColumn)); // Test with checkbox
 //        this.favoriteColumn.setCellValueFactory(cellData -> cellData.getValue().isFavoriteProperty()); // Test with checkbox
-        this.nameColumn.setCellValueFactory(cellData -> cellData.getValue().getNameProperty());
-        this.idColumn.setCellValueFactory(cellData -> cellData.getValue().getIdProperty());
-        this.versionColumn.setCellValueFactory(cellData -> cellData.getValue().getVersionProperty());
-        this.sourceColumn.setCellValueFactory(cellData -> cellData.getValue().getSourceProperty());
+        this.nameColumn.setCellValueFactory(cellData -> cellData.getValue().getFXName());
+        this.idColumn.setCellValueFactory(cellData -> cellData.getValue().getFXId());
+        this.versionColumn.setCellValueFactory(cellData -> cellData.getValue().getFXVersion());
+        this.sourceColumn.setCellValueFactory(cellData -> cellData.getValue().getFXSource());
     }
 
     @Override
@@ -204,12 +204,12 @@ public class SearchPackagesController implements IControllerBase, Initializable
 
                             if (selectedPackage != null && selectedList != null) {
                                 // Check if the selected package is already in the selected list
-                                boolean packageExists = selectedList.getPackages().stream()
+                                boolean packageExists = selectedList.getFXPackages().stream()
                                         .anyMatch(pkg -> pkg.getId().equals(selectedPackage.getId()));
 
                                 if (!packageExists) {
                                     // Add the package to the list
-                                    selectedList.getPackages().add(selectedPackage);
+                                    selectedList.getFXPackages().add(selectedPackage);
                                     selectedPackage.setFavorite(true);
                                     System.out.println("Package added to list: " + selectedPackage.getName());
                                 } else {
@@ -297,7 +297,7 @@ public class SearchPackagesController implements IControllerBase, Initializable
         ListManager listManager = ListManager.getInstance();
 
         // Set the ComboBox items to the ObservableList from ListManager
-        comboBox_selectPackageList.setItems(listManager.getListsProperty());
+        comboBox_selectPackageList.setItems(listManager.getFXLists());
 
         // Define how the items are displayed in the ComboBox
         comboBox_selectPackageList.setCellFactory(lv -> new ListCell<PackageList>() {
@@ -341,12 +341,13 @@ public class SearchPackagesController implements IControllerBase, Initializable
 
         if (selectedPackage != null && selectedList != null) {
             // Check if the selected package is already in the selected list
-            boolean packageExists = selectedList.getPackages().stream()
+            boolean packageExists = selectedList.getFXPackages().stream()
                     .anyMatch(pkg -> pkg.getId().equals(selectedPackage.getId()));
 
             if (!packageExists) {
                 // Add the package to the list
-                selectedList.getPackages().add(selectedPackage);
+//                selectedList.getFXPackages().add(selectedPackage);
+                selectedList.addPackage(selectedPackage);
                 System.out.println("Package added to list: " + selectedPackage.getName());
             } else {
                 System.out.println("Package already exists in the list: " + selectedPackage.getName());

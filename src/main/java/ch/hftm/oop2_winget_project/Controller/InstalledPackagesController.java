@@ -56,10 +56,10 @@ public class InstalledPackagesController implements IControllerBase, Initializab
     @Override
     public void setTableViewData()
     {
-        this.nameColumn.setCellValueFactory(cellData -> cellData.getValue().getNameProperty());
-        this.idColumn.setCellValueFactory(cellData -> cellData.getValue().getIdProperty());
-        this.versionColumn.setCellValueFactory(cellData -> cellData.getValue().getVersionProperty());
-        this.sourceColumn.setCellValueFactory(cellData -> cellData.getValue().getSourceProperty());
+        this.nameColumn.setCellValueFactory(cellData -> cellData.getValue().getFXName());
+        this.idColumn.setCellValueFactory(cellData -> cellData.getValue().getFXId());
+        this.versionColumn.setCellValueFactory(cellData -> cellData.getValue().getFXVersion());
+        this.sourceColumn.setCellValueFactory(cellData -> cellData.getValue().getFXSource());
     }
 
     @Override

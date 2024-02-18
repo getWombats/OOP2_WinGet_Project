@@ -14,11 +14,11 @@ public class PackageListDTO implements Serializable {
     private static final long serialVersionUID = 1L;
     private String id;
     private String name;
+    private int size;
     private List<WinGetPackageDTO> packages;
 
 //    Constructors
     public PackageListDTO() {
-
     }
 
 //    Methods
@@ -33,6 +33,12 @@ public class PackageListDTO implements Serializable {
     }
     public void setName(String name) {
         this.name = name;
+    }
+    public int getSize() {
+        return this.size;
+    }
+    public void setSize(int size) {
+        this.size = size;
     }
     public List<WinGetPackageDTO> getPackages() {
         return this.packages;

@@ -38,16 +38,17 @@ public class ListManagerController {
         listManager = ListManager.getInstance(); //Getting the single instance of ListManager.
 
         // Set up the cell value factories for each column
-        nameColumn.setCellValueFactory(cellData -> cellData.getValue().getNameProperty());
-        listSizeColumn.setCellValueFactory(cellData -> cellData.getValue().getSizeProperty().asObject());
+        nameColumn.setCellValueFactory(cellData -> cellData.getValue().getFXName());
+        System.out.println("Hello");
+        listSizeColumn.setCellValueFactory(cellData -> cellData.getValue().getFXSize().asObject());
 
         // Bind the data of listManager to the TableView
-        listManagerTableView.setItems(listManager.getListsProperty());
+        listManagerTableView.setItems(listManager.getFXLists());
 
         setUpDoubleClickOnRow();
 
         // Delete button countdown
-        countdownTimer = new Timeline(new KeyFrame(Duration.seconds(3), this::deletePackageList));
+        countdownTimer = new Timeline(new KeyFrame(Duration.seconds(1), this::deletePackageList));
         countdownTimer.setCycleCount(1); // Only run once
         countdownTimer.setOnFinished(event -> countdownTimer.stop()); // Stop the timer when finished
     }

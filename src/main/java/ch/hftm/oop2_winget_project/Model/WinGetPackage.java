@@ -2,8 +2,6 @@ package ch.hftm.oop2_winget_project.Model;
 
 import javafx.beans.property.SimpleStringProperty;
 
-import java.io.Serializable;
-
 public class WinGetPackage
 {
     private SimpleStringProperty name = new SimpleStringProperty();
@@ -15,8 +13,6 @@ public class WinGetPackage
 
     public WinGetPackage() {
     }
-
-
 
     public WinGetPackage(String name, String id, String version, String source) {
         this.setName(name);
@@ -39,7 +35,7 @@ public class WinGetPackage
         return this.name.get();
     }
 
-    public SimpleStringProperty getNameProperty() {
+    public SimpleStringProperty getFXName() {
         return this.name;
     }
 
@@ -51,7 +47,7 @@ public class WinGetPackage
         return this.id.get();
     }
 
-    public SimpleStringProperty getIdProperty() {
+    public SimpleStringProperty getFXId() {
         return this.id;
     }
 
@@ -63,7 +59,7 @@ public class WinGetPackage
         return this.version.get();
     }
 
-    public SimpleStringProperty getVersionProperty() {
+    public SimpleStringProperty getFXVersion() {
         return this.version;
     }
 
@@ -75,7 +71,7 @@ public class WinGetPackage
         return this.source.get();
     }
 
-    public SimpleStringProperty getSourceProperty() {
+    public SimpleStringProperty getFXSource() {
         return this.source;
     }
 

@@ -3,7 +3,6 @@ package ch.hftm.oop2_winget_project.Model;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,7 +44,7 @@ public class ListManager {
         lists.remove(packageList);
     }
 
-    public ObservableList<PackageList> getListsProperty() {
+    public ObservableList<PackageList> getFXLists() {
         return lists;
     }
 

@@ -34,14 +34,14 @@ public class PackageListController {
         listManager = ListManager.getInstance(); //Getting the single instance of ListManager.
         currentPackageList = listManager.getSelectedPackageList();
         System.out.println(listManager.getSelectedPackageList());
-        System.out.println("Packages in the list: " + currentPackageList.getPackages().size());
-        tableView_Packages.setItems(currentPackageList.getPackages());
+        System.out.println("Packages in the list: " + currentPackageList.getFXPackages().size());
+        tableView_Packages.setItems(currentPackageList.getFXPackages());
 
         // Initialize cell value factories, assuming WinGetPackage has appropriate properties
-        column_name.setCellValueFactory(cellData -> cellData.getValue().getNameProperty());
-        column_id.setCellValueFactory(cellData -> cellData.getValue().getIdProperty());
-        column_version.setCellValueFactory(cellData -> cellData.getValue().getVersionProperty());
-        column_source.setCellValueFactory(cellData -> cellData.getValue().getSourceProperty());
+        column_name.setCellValueFactory(cellData -> cellData.getValue().getFXName());
+        column_id.setCellValueFactory(cellData -> cellData.getValue().getFXId());
+        column_version.setCellValueFactory(cellData -> cellData.getValue().getFXVersion());
+        column_source.setCellValueFactory(cellData -> cellData.getValue().getFXSource());
     }
 
 
@@ -49,7 +49,7 @@ public class PackageListController {
     private void button_removePackageFromList() {
         WinGetPackage selectedPackage = tableView_Packages.getSelectionModel().getSelectedItem();
         if (selectedPackage != null) {
-            currentPackageList.getPackages().remove(selectedPackage);
+            currentPackageList.getFXPackages().remove(selectedPackage);
             System.out.println("Package removed: " + selectedPackage.getName());
         } else {
             System.out.println("No package selected or no current list available.");

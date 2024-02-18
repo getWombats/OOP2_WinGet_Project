@@ -54,28 +54,6 @@ public class App extends Application
     {
         ListManager listManager = ListManager.getInstance(); // Instantiating ListManager
 
-//        // Deserialize the ListManagerDTO from file
-//        ListManagerDTO listManagerDTO;
-//        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("./UserData/listManagerDTO.ser"))) {
-//            listManagerDTO = (ListManagerDTO) ois.readObject();
-//        } catch (ClassNotFoundException e) {
-//            e.printStackTrace();
-//            // Handle the case where the class definition is not found.
-//            // This could involve initializing a new ListManager instance instead.
-//            listManagerDTO = new ListManagerDTO(); // Or handle this scenario appropriately.
-//        }
-//
-//
-//        // Convert ListManagerDTO back to ListManager
-//        DTOConverter.fromListManagerDTO(listManagerDTO);
-//
-//        // After deserializing and converting back
-//        System.out.println("\nAfter deserialization:");
-//        listManager.getLists().forEach(packageList -> {
-//            System.out.println("PackageList: " + packageList.getName() + ", Packages: " + packageList.getPackages().size());
-//            packageList.getPackages().forEach(winGetPackage -> System.out.println(" - WinGetPackage: " + winGetPackage.getName()));
-//        });
-
 //        listManager.createPackageList("Favourites"); // Instantiating PackageList for Testing purposes.
 //        listManager.createPackageList("Web Browsers"); // Instantiating PackageList for Testing purposes.
 //        listManager.createPackageList("Office"); // Instantiating PackageList for Testing purposes.

@@ -5,10 +5,15 @@ import ch.hftm.oop2_winget_project.Model.*;
 import ch.hftm.oop2_winget_project.Util.*;
 import ch.hftm.oop2_winget_project.Api.IControllerBase;
 import javafx.application.Platform;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.CheckBoxTableCell;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 import javafx.util.Callback;
 import javafx.util.StringConverter;
@@ -22,7 +27,7 @@ public class SearchPackagesController implements IControllerBase, Initializable
     @FXML
     private TableView<WinGetPackage> searchTableView;
     @FXML
-    private TableColumn<WinGetPackage, Void> favoriteColumn;
+    private TableColumn<WinGetPackage, Boolean> favoriteColumn;
     @FXML
     private TableColumn<WinGetPackage, String> idColumn;
     @FXML
@@ -51,7 +56,7 @@ public class SearchPackagesController implements IControllerBase, Initializable
         searchTableView.setPlaceholder(tableViewPlaceholderLabel);
 
         addButtonToTableView();
-        addFavoriteToggleToTableView();
+        addFavoriteCheckboxToTableView();
         setTableViewData();
         setTableViewSource();
         registerInputServices();
@@ -68,20 +73,6 @@ public class SearchPackagesController implements IControllerBase, Initializable
         // Test notification
 //        Message notify = new Message();
 //        notify.showNotification("title", "message");
-
-        // GetMainWindowBorderPane
-//        StageAndSceneManager.loadFxmlToBorderPaneLeft(, ResourceProvider.INSTALLEDPACKAGES_VIEW_NAME);
-
-        try
-        {
-            StageAndSceneManager.loadFxmlToBorderPaneLeft(App.GetMainWindowController().getMainWindowBorderPane(), ResourceProvider.INSTALLEDPACKAGES_VIEW_NAME);  // Gib mir das BorderPane
-        }
-        catch(Exception ex)
-        {
-            System.out.println(ex.getCause());
-            System.out.println(ex.getLocalizedMessage());
-            ex.printStackTrace();
-        }
     }
 
     @FXML
@@ -93,7 +84,7 @@ public class SearchPackagesController implements IControllerBase, Initializable
     @Override
     public void setTableViewData()
     {
-//        this.favoriteColumn.setCellFactory(CheckBoxTableCell.forTableColumn(favoriteColumn)); // Test with checkbox
+//        this.favoriteColumn.setCellFactory(CheckBoxTableCellTest.forTableColumn(favoriteColumn)); // Test with checkbox
 //        this.favoriteColumn.setCellValueFactory(cellData -> cellData.getValue().isFavoriteProperty()); // Test with checkbox
         this.nameColumn.setCellValueFactory(cellData -> cellData.getValue().getFXName());
         this.idColumn.setCellValueFactory(cellData -> cellData.getValue().getFXId());
@@ -187,69 +178,61 @@ public class SearchPackagesController implements IControllerBase, Initializable
         actionColumn.setCellFactory(cellFactory);
     }
 
-    public void addFavoriteToggleToTableView()
+    private void addFavoriteCheckboxToTableView()
     {
-        Callback<TableColumn<WinGetPackage, Void>, TableCell<WinGetPackage, Void>> cellFactory = new Callback<>()
+        favoriteColumn.setCellValueFactory(pkg -> pkg.getValue().isFavoriteProperty());
+        favoriteColumn.setCellFactory(column -> new CheckBoxTableCell<>()
         {
             @Override
-            public TableCell<WinGetPackage, Void> call(final TableColumn<WinGetPackage, Void> param)
+            public void updateItem(Boolean item, boolean empty)
             {
-                final TableCell<WinGetPackage, Void> cell = new TableCell<>()
+                super.updateItem(item, empty);
+
+                if (empty)
                 {
-                    private final Button btn = new Button("add Fav");
+                    setGraphic(null);
+                }
+                else
+                {
+                    CheckBox checkBox = new CheckBox();
+                    WinGetPackage model = getTableView().getItems().get(getIndex());
+
+                    if(model.isFavorite())
                     {
-                        btn.setOnAction((ActionEvent event) -> {
-                            WinGetPackage selectedPackage = searchTableView.getSelectionModel().getSelectedItem();
-                            PackageList selectedList = comboBox_selectPackageList.getSelectionModel().getSelectedItem();
-
-                            if (selectedPackage != null && selectedList != null) {
-                                // Check if the selected package is already in the selected list
-                                boolean packageExists = selectedList.getFXPackages().stream()
-                                        .anyMatch(pkg -> pkg.getId().equals(selectedPackage.getId()));
-
-                                if (!packageExists) {
-                                    // Add the package to the list
-                                    selectedList.getFXPackages().add(selectedPackage);
-                                    selectedPackage.setFavorite(true);
-                                    System.out.println("Package added to list: " + selectedPackage.getName());
-                                } else {
-                                    System.out.println("Package already exists in the list: " + selectedPackage.getName());
-                                }
-                            } else {
-                                // Handle cases where nothing is selected
-                                System.out.println("No package or list selected.");
-                            }
-                        });
+                        checkBox.setSelected(true);
                     }
 
-                    @Override
-                    public void updateItem(Void item, boolean empty)
-                    {
-                        super.updateItem(item, empty);
-                        if (empty)
+                    checkBox.selectedProperty().setValue(model.isFavorite()); // Bind checkbox state to item value
+                    checkBox.selectedProperty().addListener((obs, wasSelected, isNowSelected) -> {
+                        model.setFavorite(isNowSelected);
+
+                        if (isNowSelected)
                         {
-                            setGraphic(null);
+                            onFavoriteCheckboxChecked(model);
                         }
                         else
                         {
-                            WinGetPackage data = getTableView().getItems().get(getIndex());
-                            if(data.getFavorite())
-                            {
-                                // Set cell content when package is favorite already
-                                Label installedLabel = new Label("is fav");
-                                setGraphic(installedLabel);
-                            }
-                            else
-                            {
-                                setGraphic(btn);
-                            }
+                            onFavoriteCheckboxUnchecked(model);
                         }
-                    }
-                };
-                return cell;
+                    });
+                    setGraphic(checkBox);
+                }
             }
-        };
-        favoriteColumn.setCellFactory(cellFactory);
+        });
+    }
+
+    private void onFavoriteCheckboxChecked(WinGetPackage item)
+    {
+        System.out.println("Checked: " + item.getName());
+        item.setFavorite(true);
+        comboBox_selectPackageList.getSelectionModel().getSelectedItem().addPackage(item);
+    }
+
+    private void onFavoriteCheckboxUnchecked(WinGetPackage item)
+    {
+        System.out.println("Unchecked: " + item.getName());
+        item.setFavorite(false);
+        comboBox_selectPackageList.getSelectionModel().getSelectedItem().addPackage(item);
     }
 
     private void searchPackages()
@@ -293,7 +276,6 @@ public class SearchPackagesController implements IControllerBase, Initializable
         }
     }
 
-
     public void initialize_comboBox_selectPackageList() {
         ListManager listManager = ListManager.getInstance();
 
@@ -330,30 +312,34 @@ public class SearchPackagesController implements IControllerBase, Initializable
                 // You can load the selected PackageList into another view/component here.
             }
         });
-
     }
 
-
-
     @FXML
-    private void button_addPackageToList(ActionEvent event) {
+    private void button_addPackageToList(ActionEvent event)
+    {
         WinGetPackage selectedPackage = searchTableView.getSelectionModel().getSelectedItem();
         PackageList selectedList = comboBox_selectPackageList.getSelectionModel().getSelectedItem();
 
-        if (selectedPackage != null && selectedList != null) {
+        if (selectedPackage != null && selectedList != null)
+        {
             // Check if the selected package is already in the selected list
             boolean packageExists = selectedList.getFXPackages().stream()
                     .anyMatch(pkg -> pkg.getId().equals(selectedPackage.getId()));
 
-            if (!packageExists) {
+            if (!packageExists)
+            {
                 // Add the package to the list
 //                selectedList.getFXPackages().add(selectedPackage);
                 selectedList.addPackage(selectedPackage);
                 System.out.println("Package added to list: " + selectedPackage.getName());
-            } else {
+            }
+            else
+            {
                 System.out.println("Package already exists in the list: " + selectedPackage.getName());
             }
-        } else {
+        }
+        else
+        {
             // Handle cases where nothing is selected
             System.out.println("No package or list selected.");
         }

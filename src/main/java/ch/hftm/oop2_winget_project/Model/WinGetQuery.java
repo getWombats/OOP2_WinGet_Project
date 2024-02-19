@@ -22,26 +22,29 @@ public class WinGetQuery
     private final String columnHeaderMatchText = App.getAppInstance().getWinGetSettings().getColumns().get("columnMatch");
     private final String columnHeaderSourceText = App.getAppInstance().getWinGetSettings().getColumns().get("columnSource");
     private final Pattern VALIDLINE_REGEX = Pattern.compile("(.*[0-9a-zA-Z]+.*)");
+    private int headerCounter = 0;
+    private int columnSeparatorIndexId = -1;
+    private int columnSeparatorIndexVersion = -1;
+    private int columnSeparatorIndexAvailableOrMatch = -1;
+    private int columnSeparatorIndexSource = -1;
+    private int maxPackageLineLength = -1;
     private long consoleExitCode;
+    private QueryType queryType;
+    private List<String> rawDataList = Collections.synchronizedList(new ArrayList());
 
-    public void queryToList(QueryType queryType, String keyWord, ObservableList<WinGetPackage> packageList) throws IOException, InterruptedException
+    public WinGetQuery(QueryType qt)
     {
-        List<String> rawDataList = new ArrayList<>();
+        this.queryType = qt;
+    }
 
+    public void queryToList(String keyWord) throws IOException, InterruptedException
+    {
         ProcessBuilder processBuilder = new ProcessBuilder("winget", queryType.toString(), keyWord);
         processBuilder.redirectErrorStream(true);
         Process process = processBuilder.start();
 
         BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-
         String readerLine;
-
-        int headerCounter = 0;
-        int columnSeparatorIndexId = -1;
-        int columnSeparatorIndexVersion = -1;
-        int columnSeparatorIndexAvailableOrMatch = -1;
-        int columnSeparatorIndexSource = -1;
-        int maxPackageLineLength = -1;
 
         while ((readerLine = reader.readLine()) != null)
         {
@@ -50,81 +53,88 @@ public class WinGetQuery
         reader.close();
 
         consoleExitCode = process.waitFor();
+    }
 
-        if(consoleExitCode != ConsoleExitCode.NO_PACKAGE_FOUND.getValue())
+    public void CreatePackageList(ObservableList<WinGetPackage> packageList)
+    {
+        for(String line : rawDataList)
         {
-            for(String line : rawDataList)
+            // Get index when each column begins as separator if line is table header, only executes once
+            if(headerCounter < 1 && isHeaderLine(line))
             {
-                // Get index when each column begins as separator if line is table header, only executes once
-                if(isHeaderLine(line))
+                columnSeparatorIndexId = line.toLowerCase().indexOf(columnHeaderIdText);
+                columnSeparatorIndexVersion = line.toLowerCase().indexOf(columnHeaderVersionText);
+
+                if(line.toLowerCase().contains(columnHeaderMatchText))
                 {
-                    columnSeparatorIndexId = line.toLowerCase().indexOf(columnHeaderIdText);
-                    columnSeparatorIndexVersion = line.toLowerCase().indexOf(columnHeaderVersionText);
-
-                    if(line.toLowerCase().contains(columnHeaderMatchText))
-                    {
-                        columnSeparatorIndexAvailableOrMatch = line.toLowerCase().indexOf(columnHeaderMatchText);
-                    }
-                    else if (line.toLowerCase().contains(columnHeaderAvailableText))
-                    {
-                        columnSeparatorIndexAvailableOrMatch = line.toLowerCase().indexOf(columnHeaderAvailableText);
-                    }
-
-                    columnSeparatorIndexSource = line.toLowerCase().indexOf(columnHeaderSourceText);
-                    maxPackageLineLength = columnSeparatorIndexSource + SourceType.MSSTORE.toString().length();
-
-                    headerCounter++;
+                    columnSeparatorIndexAvailableOrMatch = line.toLowerCase().indexOf(columnHeaderMatchText);
+                }
+                else if (line.toLowerCase().contains(columnHeaderAvailableText))
+                {
+                    columnSeparatorIndexAvailableOrMatch = line.toLowerCase().indexOf(columnHeaderAvailableText);
                 }
 
-                // Get actual package information
-                if(isPackageLine(line))
+                columnSeparatorIndexSource = line.toLowerCase().indexOf(columnHeaderSourceText);
+                maxPackageLineLength = columnSeparatorIndexSource + SourceType.MSSTORE.toString().length();
+
+                headerCounter++;
+            }
+
+            // Get actual package information
+            if(isPackageLine(line))
+            {
+                // Fix some weird asia packages
+                if(UniCodeChecker.containsHanScript(line))
                 {
-                    // Fix some weird asia packages
-                    if(UniCodeChecker.containsHanScript(line))
-                    {
-                        int missingLength = maxPackageLineLength - line.length() - 1;
-
-                        StringBuilder uglyPatch = new StringBuilder();
-                        uglyPatch.append(" ".repeat(Math.max(0, missingLength)));
-
-                        line = line.substring(0, columnSeparatorIndexId-missingLength) + uglyPatch + line.substring(columnSeparatorIndexId-missingLength);
-                    }
-
-                    String packageVersion;
-                    if(columnSeparatorIndexAvailableOrMatch > -1)
-                    {
-                        packageVersion = line.substring(columnSeparatorIndexVersion, columnSeparatorIndexAvailableOrMatch).trim();
-                    }
-                    else
-                    {
-                        packageVersion = line.substring(columnSeparatorIndexVersion, columnSeparatorIndexSource).trim();
-                    }
-
-                    WinGetPackage winGetPackage = new WinGetPackage(
-                            line.substring(0, columnSeparatorIndexId).trim(), // Package Name
-                            line.substring(columnSeparatorIndexId, columnSeparatorIndexVersion).trim(), // Package ID
-                            packageVersion,
-                            line.substring(columnSeparatorIndexSource).trim() // Package Source
-                    );
-
-                    // Compare search results with installed packages to set relating packages as installed
-                    if(queryType == QueryType.SEARCH)
-                    {
-                        for(WinGetPackage installedPackage : PackageList.getInstalledPackageList())
-                        {
-                            if(installedPackage.getId().equals(winGetPackage.getId()))
-                            {
-                                winGetPackage.setInstalled(true);
-                            }
-                        }
-                    }
-
-                    // Lock the list object for safe list populating when working on other threads
-                    synchronized(packageList)
-                    {
-                        packageList.add(winGetPackage);
-                    }
+                    line = ManipulateHanLine(line);
                 }
+
+                String packageVersion;
+                if(columnSeparatorIndexAvailableOrMatch > -1)
+                {
+                    packageVersion = line.substring(columnSeparatorIndexVersion, columnSeparatorIndexAvailableOrMatch).trim();
+                }
+                else
+                {
+                    packageVersion = line.substring(columnSeparatorIndexVersion, columnSeparatorIndexSource).trim();
+                }
+
+                WinGetPackage winGetPackage = new WinGetPackage(
+                        line.substring(0, columnSeparatorIndexId).trim(), // Package Name
+                        line.substring(columnSeparatorIndexId, columnSeparatorIndexVersion).trim(), // Package ID
+                        packageVersion,
+                        line.substring(columnSeparatorIndexSource).trim() // Package Source
+                );
+
+                // Compare search results with installed packages to set relating packages as installed
+                if(queryType == QueryType.SEARCH)
+                {
+                    SetInstalledPackage(winGetPackage);
+                }
+
+                packageList.add(winGetPackage);
+            }
+        }
+    }
+
+    private String ManipulateHanLine(String line)
+    {
+        int missingLength = maxPackageLineLength - line.length() - 1;
+
+        StringBuilder uglyPatch = new StringBuilder();
+        uglyPatch.append(" ".repeat(Math.max(0, missingLength)));
+
+        return line.substring(0, columnSeparatorIndexId-missingLength) + uglyPatch + line.substring(columnSeparatorIndexId-missingLength);
+    }
+
+    private void SetInstalledPackage(WinGetPackage winGetPackage)
+    {
+        for(WinGetPackage installedPackage : PackageList.getInstalledPackageList())
+        {
+            if(installedPackage.getId().equals(winGetPackage.getId()))
+            {
+                winGetPackage.setInstalled(true);
+                break;
             }
         }
     }

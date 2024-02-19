@@ -145,10 +145,10 @@ public class InstalledPackagesController implements IControllerBase, Initializab
 
             isThreadWorking = true;
             new Thread(() -> {
-                WinGetQuery query = new WinGetQuery();
+                WinGetQuery query = new WinGetQuery(QueryType.LIST);
                 try
                 {
-                    query.queryToList(QueryType.LIST, "", PackageList.getInstalledPackageList());
+                    query.queryToList("");
                 }
                 catch (IOException | InterruptedException ex)
                 {
@@ -158,6 +158,7 @@ public class InstalledPackagesController implements IControllerBase, Initializab
                 Platform.runLater(() -> {
                     if (query.getConsoleExitCode() == ConsoleExitCode.OK.getValue())
                     {
+                        query.CreatePackageList(PackageList.getInstalledPackageList());
                         refreshTableViewContent();
                     }
                     else

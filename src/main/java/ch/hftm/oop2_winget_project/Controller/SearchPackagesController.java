@@ -267,10 +267,10 @@ public class SearchPackagesController implements IControllerBase, Initializable
 
             isThreadWorking = true;
             new Thread(() -> {
-                WinGetQuery query = new WinGetQuery();
+                WinGetQuery query = new WinGetQuery(QueryType.SEARCH);
                 try
                 {
-                    query.queryToList(QueryType.SEARCH, searchKeyword, PackageList.getSearchPackageList());
+                    query.queryToList(searchKeyword);
                 }
                 catch (IOException | InterruptedException ex)
                 {
@@ -280,6 +280,7 @@ public class SearchPackagesController implements IControllerBase, Initializable
                 Platform.runLater(() -> {
                     if (query.getConsoleExitCode() == ConsoleExitCode.OK.getValue())
                     {
+                        query.CreatePackageList(PackageList.getSearchPackageList());
                         refreshTableViewContent();
                     }
                     else

@@ -11,17 +11,20 @@ public class CreateBatchFile {
 
     public static void createInstallScript(PackageList packageList) {
 
-//        String scriptPath = "install_packages.bat";
         String userHome = System.getProperty("user.home");
         String scriptPath = userHome + File.separator + "Desktop\\WinGet_InstallScript.bat";
 
 
         try(BufferedWriter bw = new BufferedWriter((new FileWriter(scriptPath)))) {
+
+            // Turns output in command line off.
             bw.write("@echo off");
 
+            // Formatting for welcome Ascii-Art because of unsupported characters.
             bw.newLine();
             bw.write("for /f \"delims=: tokens=*\" %%A in ('findstr /b ::: \"%~f0\"') do @echo(%%A\n");
 
+            // Ascii-Art
             bw.newLine();
             bw.write(":::  __        ___        ____      _     ___           _        _ _           ");
             bw.newLine();
@@ -32,6 +35,7 @@ public class CreateBatchFile {
             bw.write(":::    \\ V  V / | | | | | |_| |  __/ |_   | || | | \\__ \\ || (_| | | |  __/ |        Andres Soria");
             bw.newLine();
             bw.write(":::     \\_/\\_/  |_|_| |_|\\____|\\___|\\__| |___|_| |_|___/\\__\\__,_|_|_|\\___|_|        Luca Buetzberger");
+
 
             bw.newLine();
             bw.write("echo.");

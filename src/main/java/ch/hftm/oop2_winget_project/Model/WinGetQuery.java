@@ -32,9 +32,18 @@ public class WinGetQuery
     private QueryType queryType;
     private List<String> rawDataList = Collections.synchronizedList(new ArrayList());
 
+    private List<WinGetPackage> favoriteList;
+
+
     public WinGetQuery(QueryType qt)
     {
         this.queryType = qt;
+    }
+
+    public WinGetQuery(QueryType qt, List<WinGetPackage> favList)
+    {
+        this.queryType = qt;
+        this.favoriteList = favList;
     }
 
     public void queryToList(String keyWord) throws IOException, InterruptedException
@@ -110,6 +119,14 @@ public class WinGetQuery
                 if(queryType == QueryType.SEARCH)
                 {
                     SetInstalledPackage(winGetPackage);
+
+                    if(favoriteList != null)
+                    {
+                        SetFavoritePackage(winGetPackage);
+                    }
+                    else{
+                        System.out.println("favoritList is null :(");
+                    }
                 }
 
                 packageList.add(winGetPackage);
@@ -134,6 +151,18 @@ public class WinGetQuery
             if(installedPackage.getId().equals(winGetPackage.getId()))
             {
                 winGetPackage.setInstalled(true);
+                break;
+            }
+        }
+    }
+
+    private void SetFavoritePackage(WinGetPackage winGetPackage)
+    {
+        for(WinGetPackage installedPackage : favoriteList) // where are favorite lists?
+        {
+            if(installedPackage.getId().equals(winGetPackage.getId()))
+            {
+                winGetPackage.setFavorite(true);
                 break;
             }
         }

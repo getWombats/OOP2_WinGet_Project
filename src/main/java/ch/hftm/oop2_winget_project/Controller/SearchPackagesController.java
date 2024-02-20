@@ -250,7 +250,16 @@ public class SearchPackagesController implements IControllerBase, Initializable
 
             isThreadWorking = true;
             new Thread(() -> {
-                WinGetQuery query = new WinGetQuery(QueryType.SEARCH);
+                WinGetQuery query;
+                if(comboBox_selectPackageList.getSelectionModel().getSelectedItem() != null)
+                {
+                    query = new WinGetQuery(QueryType.SEARCH, comboBox_selectPackageList.getSelectionModel().getSelectedItem().getPackages());
+                }
+                else
+                {
+                    query = new WinGetQuery(QueryType.SEARCH);
+                }
+
                 try
                 {
                     query.queryToList(searchKeyword);

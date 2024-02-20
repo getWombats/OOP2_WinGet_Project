@@ -36,9 +36,13 @@ public class CreateBatchFile {
             bw.newLine();
             bw.write("echo.");
             bw.newLine();
-            bw.write("echo Do you want to install all the following packages? (Select Y for Yes or N for No)");
+            bw.write("timeout /t 1 /nobreak >nul");
+            bw.newLine();
+            bw.write("echo This script contains the following packages: ");
             bw.newLine();
             bw.write("echo.");
+            bw.newLine();
+            bw.write("timeout /t 1 /nobreak >nul");
 
             bw.newLine();
             bw.write("echo Name     PackageID     Version     Source");
@@ -52,17 +56,49 @@ public class CreateBatchFile {
             bw.newLine();
             bw.write("echo.");
             bw.newLine();
-            bw.write("choice /C YN /N /M \"(Y/N).");
-//            Adding wait time
+            bw.write(":menue");
             bw.newLine();
-            bw.write("if %errorlevel%==1 goto yes");
+            bw.write("timeout /t 1 /nobreak >nul");
             bw.newLine();
-            bw.write("if %errorlevel%==2 goto end");
+            bw.write("echo What actions do you want to perform?");
+            bw.newLine();
+            bw.write("echo 1. Install packages");
+            bw.newLine();
+            bw.write("echo 2. Update packages");
+            bw.newLine();
+            bw.write("echo 3. Remove packages");
+            bw.newLine();
+            bw.write("echo 4. Cancel");
+            bw.newLine();
+            bw.write("echo.");
+            bw.newLine();
+            bw.write("choice /C 1234 /N /M \"Enter your choice... (1, 2, 3 or 4)");
+            bw.newLine();
+            bw.write("if /i %errorlevel%==1 goto install");
+            bw.newLine();
+            bw.write("if /i %errorlevel%==2 goto update");
+            bw.newLine();
+            bw.write("if /i %errorlevel%==3 goto remove");
+            bw.newLine();
+            bw.write("if /i %errorlevel%==4 goto end");
+            bw.newLine();
+            bw.write("echo.");
 
 
             bw.newLine();
-            bw.write(":yes");
-
+            bw.write(":install");
+            bw.newLine();
+            bw.write("choice /C YN /N /M \"You are about to install new packages. Continue? (Yes/Y or No/N)");
+            bw.newLine();
+            bw.write("echo.");
+            bw.newLine();
+            bw.write("if /i %errorlevel%==1 goto doinstall");
+            bw.newLine();
+            bw.write("if /i %errorlevel%==2 goto menue");
+            bw.newLine();
+            bw.write("echo.");
+            bw.newLine();
+            bw.write(":doinstall");
             for (WinGetPackage pkg : packageList.getPackages()) {
                 String packageId = pkg.getId();
                 bw.newLine();
@@ -71,12 +107,61 @@ public class CreateBatchFile {
             bw.newLine();
             bw.write("goto end");
 
+
+            bw.newLine();
+            bw.write(":update");
+            bw.newLine();
+            bw.write("choice /C YN /N /M \"You are about to update existing packages. Continue? (Yes/Y or No/N)");
+            bw.newLine();
+            bw.write("echo.");
+            bw.newLine();
+            bw.write("if /i %errorlevel%==1 goto doupdate");
+            bw.newLine();
+            bw.write("if /i %errorlevel%==2 goto menue");
+            bw.newLine();
+            bw.write("echo.");
+            bw.newLine();
+            bw.write(":doupdate");
+            for (WinGetPackage pkg : packageList.getPackages()) {
+                String packageId = pkg.getId();
+                bw.newLine();
+                bw.write(String.format("winget update --id=" + packageId + " --silent --accept-package-agreements --accept-source-agreements"));
+            }
+            bw.newLine();
+            bw.write("goto end");
+
+            bw.newLine();
+            bw.write(":remove");
+            bw.newLine();
+            bw.write("choice /C YN /N /M \"You are about to remove packages. Continue? (Yes/Y or No/N)");
+            bw.newLine();
+            bw.write("echo.");
+            bw.newLine();
+            bw.write("if /i %errorlevel%==1 goto doremove");
+            bw.newLine();
+            bw.write("if /i %errorlevel%==2 goto menue");
+            bw.newLine();
+            bw.write("echo.");
+            bw.newLine();
+            bw.write(":doremove");
+            for (WinGetPackage pkg : packageList.getPackages()) {
+                String packageId = pkg.getId();
+                bw.newLine();
+                bw.write(String.format("winget remove --id=" + packageId + " --silent"));
+            }
+            bw.newLine();
+            bw.write("goto end");
+
+
+
             bw.newLine();
             bw.write(":end");
             bw.newLine();
-            bw.write("echo Script completed.");
+            bw.write("echo Exiting script...");
             bw.newLine();
-            bw.write("pause");
+            bw.write("timeout /t 3 /nobreak >nul");
+            bw.newLine();
+            bw.write("exit");
 
         } catch (IOException e) {
             e.printStackTrace();

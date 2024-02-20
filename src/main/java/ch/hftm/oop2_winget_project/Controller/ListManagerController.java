@@ -12,6 +12,8 @@ import ch.hftm.oop2_winget_project.Util.ResourceProvider;
 import javafx.scene.control.*;
 import javafx.util.Duration;
 
+import static ch.hftm.oop2_winget_project.Util.CreateBatchFile.createInstallScript;
+
 
 public class ListManagerController {
 
@@ -66,6 +68,17 @@ public class ListManagerController {
         if (!name.isBlank()) {
             listManager.createPackageList(name);
             System.out.println("Created new PackageList: " + name);
+        }
+    }
+
+    @FXML
+    private void buttoncreateBatchFile_onAction(){
+        PackageList selectedPackageList = listManagerTableView.getSelectionModel().getSelectedItem();
+        if (selectedPackageList != null) {
+            createInstallScript(selectedPackageList);
+            System.out.println("Batch file created for: " + selectedPackageList.getName());
+        } else {
+            System.out.println("No PackageList selected.");
         }
     }
 

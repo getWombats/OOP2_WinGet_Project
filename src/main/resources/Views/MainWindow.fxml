@@ -19,15 +19,15 @@
             <padding>
                <Insets top="100.0" />
             </padding>
-            <Button mnemonicParsing="false" onAction="#menuSearchButtonClick" prefHeight="70.0" prefWidth="170.0" styleClass="menuButton" stylesheets="@../CSS/MenuButtonStyle.css" text="Search packages" textFill="WHITE">
+            <Button mnemonicParsing="false" onAction="#menuSearchButtonClick" prefHeight="70.0" prefWidth="170.0" styleClass="menuButton" stylesheets="@../CSS/DarkTheme.css" text="Search packages" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font></Button>
-            <Button mnemonicParsing="false" onAction="#menuUpdateButtonClick" prefHeight="70.0" prefWidth="170.0" styleClass="menuButton" stylesheets="@../CSS/MenuButtonStyle.css" text="Update packages" />
-            <Button mnemonicParsing="false" onAction="#menuInstalledPackagesButtonClick" prefHeight="70.0" prefWidth="170.0" styleClass="menuButton" stylesheets="@../CSS/MenuButtonStyle.css" text="Installed packages" />
-            <Button mnemonicParsing="false" onAction="#button_save" prefHeight="70.0" prefWidth="170.0" styleClass="menuButton" stylesheets="@../CSS/MenuButtonStyle.css" text="Model &gt; DTO" />
-            <Button mnemonicParsing="false" onAction="#button_load" prefHeight="70.0" prefWidth="170.0" styleClass="menuButton" stylesheets="@../CSS/MenuButtonStyle.css" text="DTO &gt; Model" />
-            <Button mnemonicParsing="false" onAction="#menuListManagerButtonClick" prefHeight="70.0" prefWidth="170.0" styleClass="menuButton" stylesheets="@../CSS/MenuButtonStyle.css" text="List Manager" />
+            <Button mnemonicParsing="false" onAction="#menuUpdateButtonClick" prefHeight="70.0" prefWidth="170.0" styleClass="menuButton" stylesheets="@../CSS/DarkTheme.css" text="Update packages" />
+            <Button mnemonicParsing="false" onAction="#menuInstalledPackagesButtonClick" prefHeight="70.0" prefWidth="170.0" styleClass="menuButton" stylesheets="@../CSS/DarkTheme.css" text="Installed packages" />
+            <Button mnemonicParsing="false" onAction="#button_save" prefHeight="70.0" prefWidth="170.0" styleClass="menuButton" stylesheets="@../CSS/DarkTheme.css" text="Model &gt; DTO" />
+            <Button mnemonicParsing="false" onAction="#button_load" prefHeight="70.0" prefWidth="170.0" styleClass="menuButton" stylesheets="@../CSS/DarkTheme.css" text="DTO &gt; Model" />
+            <Button mnemonicParsing="false" onAction="#menuListManagerButtonClick" prefHeight="70.0" prefWidth="170.0" styleClass="menuButton" stylesheets="@../CSS/DarkTheme.css" text="List Manager" />
          </VBox>
       </left>
       <center>

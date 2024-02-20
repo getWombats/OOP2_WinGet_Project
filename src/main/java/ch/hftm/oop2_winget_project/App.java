@@ -2,19 +2,14 @@ package ch.hftm.oop2_winget_project;
 
 import ch.hftm.oop2_winget_project.Controller.MainWindowController;
 import ch.hftm.oop2_winget_project.Model.*;
-import ch.hftm.oop2_winget_project.Persistence.Serializer;
-import ch.hftm.oop2_winget_project.Util.DTOConverter;
 import ch.hftm.oop2_winget_project.Util.ResourceProvider;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.ObjectInputStream;
 
 public class App extends Application
 {

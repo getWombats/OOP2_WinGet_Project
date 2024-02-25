@@ -1,8 +1,8 @@
 package ch.hftm.oop2_winget_project.Controller;
 
 import ch.hftm.oop2_winget_project.Model.ListManager;
-import ch.hftm.oop2_winget_project.Model.WinGetPackage;
 import ch.hftm.oop2_winget_project.Model.PackageList;
+import ch.hftm.oop2_winget_project.Model.WinGetPackage;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
@@ -49,7 +49,7 @@ public class PackageListController {
     private void button_removePackageFromList() {
         WinGetPackage selectedPackage = tableView_Packages.getSelectionModel().getSelectedItem();
         if (selectedPackage != null) {
-            currentPackageList.getFXPackages().remove(selectedPackage);
+            currentPackageList.removePackage(selectedPackage);
             System.out.println("Package removed: " + selectedPackage.getName());
         } else {
             System.out.println("No package selected or no current list available.");

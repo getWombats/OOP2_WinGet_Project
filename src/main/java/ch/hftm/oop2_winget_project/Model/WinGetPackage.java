@@ -10,7 +10,6 @@ public class WinGetPackage
     private SimpleStringProperty id = new SimpleStringProperty();
     private SimpleStringProperty version = new SimpleStringProperty();
     private SimpleStringProperty source = new SimpleStringProperty();
-    private final BooleanProperty isFavorite = new SimpleBooleanProperty();
     private boolean isInstalled;
 
     public WinGetPackage() {
@@ -24,12 +23,11 @@ public class WinGetPackage
     }
 
     // Adjusted Constructor to match DTO fields
-    public WinGetPackage(String name, String id, String version, String source, boolean favourite, boolean isInstalled) {
+    public WinGetPackage(String name, String id, String version, String source, boolean isInstalled) {
         this.name = new SimpleStringProperty(name);
         this.id = new SimpleStringProperty(id);
         this.version = new SimpleStringProperty(version);
         this.source = new SimpleStringProperty(source);
-        this.setFavorite(favourite); // = favourite;
         this.isInstalled = isInstalled;
     }
 
@@ -80,29 +78,6 @@ public class WinGetPackage
     public void setSource(String source) {
         this.source.set(source);
     }
-
-    public boolean isFavorite()
-    {
-        return isFavorite.get();
-    }
-
-    public BooleanProperty isFavoriteProperty()
-    {
-        return isFavorite;
-    }
-
-    public void setFavorite(boolean favorite)
-    {
-        this.isFavorite.set(favorite);
-    }
-
-//    public boolean getFavorite() {
-//        return this.favourite;
-//    }
-//
-//    public void setFavorite(boolean favourite) {
-//        this.favourite = favourite;
-//    }
 
     public boolean isInstalled() {
         return this.isInstalled;

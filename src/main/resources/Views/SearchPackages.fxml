@@ -26,14 +26,14 @@
         </HBox>
     </top>
     <center>
-        <TableView fx:id="searchTableView" editable="true" styleClass="searchTableView" stylesheets="@../CSS/DarkTheme.css" BorderPane.alignment="TOP_LEFT">
+        <TableView fx:id="tableView" editable="true" styleClass="searchTableView" stylesheets="@../CSS/DarkTheme.css" BorderPane.alignment="TOP_LEFT">
             <columns>
-                <TableColumn fx:id="favoriteColumn" editable="false" minWidth="30.0" prefWidth="50.0" resizable="false" sortable="false" />
-                <TableColumn fx:id="nameColumn" editable="false" minWidth="220.0" prefWidth="-1.0" resizable="false" text="Package Name" />
-                <TableColumn fx:id="idColumn" editable="false" minWidth="220.0" prefWidth="-1.0" resizable="false" text="Package ID" />
-                <TableColumn fx:id="versionColumn" editable="false" minWidth="350.0" prefWidth="-1.0" resizable="false" text="Version" />
-                <TableColumn fx:id="sourceColumn" editable="false" minWidth="150.0" prefWidth="-1.0" resizable="false" text="Source" />
-            <TableColumn fx:id="actionColumn" minWidth="130.0" prefWidth="-1.0" resizable="false" />
+                <TableColumn fx:id="column_favourite" editable="false" minWidth="30.0" prefWidth="50.0" resizable="false" sortable="false" />
+                <TableColumn fx:id="column_name" editable="false" minWidth="220.0" prefWidth="-1.0" resizable="false" text="Package Name" />
+                <TableColumn fx:id="column_id" editable="false" minWidth="220.0" prefWidth="-1.0" resizable="false" text="Package ID" />
+                <TableColumn fx:id="column_version" editable="false" minWidth="350.0" prefWidth="-1.0" resizable="false" text="Version" />
+                <TableColumn fx:id="column_source" editable="false" minWidth="150.0" prefWidth="-1.0" resizable="false" text="Source" />
+            <TableColumn fx:id="column_button_install" minWidth="130.0" prefWidth="-1.0" resizable="false" />
             </columns>
          <BorderPane.margin>
             <Insets />

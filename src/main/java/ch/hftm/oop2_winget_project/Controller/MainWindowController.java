@@ -1,9 +1,6 @@
 package ch.hftm.oop2_winget_project.Controller;
 
 import ch.hftm.oop2_winget_project.App;
-import ch.hftm.oop2_winget_project.Util.DTOConverter;
-import ch.hftm.oop2_winget_project.Model.ListManager;
-import ch.hftm.oop2_winget_project.Model.ListManagerDTO;
 import ch.hftm.oop2_winget_project.Util.ResourceProvider;
 import ch.hftm.oop2_winget_project.Util.StageAndSceneManager;
 import javafx.fxml.FXML;
@@ -14,7 +11,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Screen;
 
-import java.io.*;
 import java.net.URL;
 import java.util.ResourceBundle;
 

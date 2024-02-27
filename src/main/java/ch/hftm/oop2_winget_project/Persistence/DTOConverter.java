@@ -1,4 +1,4 @@
-package ch.hftm.oop2_winget_project.Util;
+package ch.hftm.oop2_winget_project.Persistence;
 import ch.hftm.oop2_winget_project.Model.ListManager;
 import ch.hftm.oop2_winget_project.Model.ListManagerDTO;
 import ch.hftm.oop2_winget_project.Model.PackageList;

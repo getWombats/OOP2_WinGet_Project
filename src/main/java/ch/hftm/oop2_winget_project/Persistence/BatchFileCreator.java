@@ -1,4 +1,4 @@
-package ch.hftm.oop2_winget_project.Util;
+package ch.hftm.oop2_winget_project.Persistence;
 
 import ch.hftm.oop2_winget_project.Model.WinGetPackage;
 import ch.hftm.oop2_winget_project.Model.PackageList;
@@ -7,7 +7,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class CreateBatchFile {
+public class BatchFileCreator {
 
     public static void createInstallScript(PackageList packageList) {
 

@@ -2,14 +2,8 @@ package ch.hftm.oop2_winget_project.Persistence;
 
 import ch.hftm.oop2_winget_project.Model.ListManager;
 import ch.hftm.oop2_winget_project.Model.ListManagerDTO;
-import ch.hftm.oop2_winget_project.Model.PackageList;
-import ch.hftm.oop2_winget_project.Util.DTOConverter;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Serializer {
     private static String filepath = "./UserData/listManagerDTO.ser";

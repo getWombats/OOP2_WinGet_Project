@@ -12,7 +12,7 @@ import ch.hftm.oop2_winget_project.Util.ResourceProvider;
 import javafx.scene.control.*;
 import javafx.util.Duration;
 
-import static ch.hftm.oop2_winget_project.Util.CreateBatchFile.createInstallScript;
+import static ch.hftm.oop2_winget_project.Persistence.BatchFileCreator.createInstallScript;
 
 
 public class ListManagerController {

@@ -2,7 +2,6 @@ package ch.hftm.oop2_winget_project;
 
 import ch.hftm.oop2_winget_project.Controller.MainWindowController;
 import ch.hftm.oop2_winget_project.Model.*;
-import ch.hftm.oop2_winget_project.Util.DTOConverter;
 import ch.hftm.oop2_winget_project.Persistence.Serializer;
 import ch.hftm.oop2_winget_project.Util.ResourceProvider;
 import javafx.application.Application;

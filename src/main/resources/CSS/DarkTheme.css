@@ -38,6 +38,7 @@
     -fx-table-cell-border-color: transparent;
     -fx-table-header-border-color: transparent;
     -fx-padding: 5;
+    -fx-text-fill: white;
 }
 
 .table-view .column-header-background {
@@ -118,8 +119,26 @@
     -fx-background-color: #512bd4;
 }
 
+.table-row-cell:filled .label {
+    -fx-padding: 5 15 5 35;
+    -fx-border-color: #1d1d1d;
+    -fx-border-width: 0;
+    -fx-background-radius: 0;
+    -fx-background-color: transparent; /* #1d1d1d */
+    -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+    -fx-font-size: 10pt;
+    -fx-text-fill: #d8d8d8;
+    -fx-background-insets: 0 0 0 0, 0, 1, 2;
+
+    -fx-background-image: url(../Icons/check.png);
+    -fx-background-size: 15px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: 15%;
+}
+
 .table-row-cell:filled {
     -fx-font-size: 10pt;
+    -fx-text-fill: white;
 }
 
 .table-view .table-cell {
@@ -129,7 +148,7 @@
 
 .text-field {
     -fx-background-color: #282828; /* #595959 */
-    -fx-border-color: #e2e2e2;
+    -fx-border-color: #737373;
     -fx-border-width: 1;
     -fx-text-fill: #d8d8d8;
     -fx-font-size: 10pt;
@@ -138,7 +157,7 @@
 
 .button {
     -fx-padding: 5 22 5 22;
-    -fx-border-color: #e2e2e2;
+    -fx-border-color: #737373;
     -fx-border-width: 1;
     -fx-background-radius: 0;
     -fx-background-color: #1d1d1d;
@@ -259,6 +278,12 @@
     -fx-background-color: #282828;
 }
 
+.searchTableView .check-box {
+    -fx-padding: 15px;
+    -fx-border-insets: 15px;
+    -fx-background-insets: 15px;
+}
+
 .searchTableView .check-box .box {
 	-fx-background-color: transparent;
 	-fx-border-color: transparent;
@@ -281,26 +306,29 @@
 }
 
 .combo-box {
-        -fx-background-color: #1d1d1d;
-        -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
-        -fx-font-size: 10pt;
-        -fx-text-fill: white;
-        -fx-background-insets: 0 0 0 0, 0, 1, 2;
+    -fx-background-color: #282828;
  }
+
+ .combo-box .list-cell {
+     -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+     -fx-font-size: 10pt;
+     -fx-text-fill: #d8d8d8;
+     -fx-background-insets: 0 0 0 0, 0, 1, 2;
+  }
 
 .combo-box-popup .list-view {
         -fx-background-color: #1d1d1d;
         -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
         -fx-font-size: 10pt;
-        -fx-text-fill: white;
+        -fx-text-fill: #d8d8d8;
         -fx-background-insets: 0 0 0 0, 0, 1, 2;
  }
 
 .combo-box-popup .list-view .list-cell {
-        -fx-background-color: #1d1d1d;
+        -fx-background-color: #282828;
         -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
         -fx-font-size: 10pt;
-        -fx-text-fill: white;
+        -fx-text-fill: #d8d8d8;
         -fx-background-insets: 0 0 0 0, 0, 1, 2;
  }
 
@@ -317,5 +345,9 @@
  }
 
  .menuButton:hover {
+     -fx-background-color: #4d4dff;
+ }
+
+ .progress-indicator:indeterminate .segment {
      -fx-background-color: #4d4dff;
  }

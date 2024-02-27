@@ -22,12 +22,16 @@ public class ListManager {
     private PackageList selectedPackage;
 
 //    Instantiation method
-    public static ListManager getInstance() {
-        if (instance == null) {
-            instance = new ListManager();
+public static ListManager getInstance() {
+    if (instance == null) {
+        synchronized (ListManagerDTO.class) { // Synchronized to prevent multiple threads checking, returning null and creating multiple instances.
+            if (instance == null) {
+                instance = new ListManager();
+            }
         }
-        return instance;
     }
+    return instance;
+}
 
 //    Constructors
     private ListManager() {

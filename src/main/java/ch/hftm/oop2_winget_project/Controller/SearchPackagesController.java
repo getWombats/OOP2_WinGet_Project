@@ -1,6 +1,7 @@
 package ch.hftm.oop2_winget_project.Controller;
 
 import ch.hftm.oop2_winget_project.Model.*;
+import ch.hftm.oop2_winget_project.Persistence.Serializer;
 import ch.hftm.oop2_winget_project.Util.*;
 import ch.hftm.oop2_winget_project.Api.IControllerBase;
 import javafx.application.Platform;
@@ -250,8 +251,10 @@ public class SearchPackagesController implements IControllerBase, Initializable
                         if (selectedPackageList != null) {
                             if (isNowSelected) {
                                 selectedPackageList.addPackage(model);
+                                Serializer.serializeListManager();
                             } else {
                                 selectedPackageList.removePackage(model);
+                                Serializer.serializeListManager();
                             }
                         }
                     });

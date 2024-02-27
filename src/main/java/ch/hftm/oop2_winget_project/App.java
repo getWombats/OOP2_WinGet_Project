@@ -2,6 +2,8 @@ package ch.hftm.oop2_winget_project;
 
 import ch.hftm.oop2_winget_project.Controller.MainWindowController;
 import ch.hftm.oop2_winget_project.Model.*;
+import ch.hftm.oop2_winget_project.Util.DTOConverter;
+import ch.hftm.oop2_winget_project.Persistence.Serializer;
 import ch.hftm.oop2_winget_project.Util.ResourceProvider;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -13,12 +15,14 @@ import java.io.IOException;
 
 public class App extends Application
 {
-    private WinGetSettings winGetSettings;
-    private WindowManager windowManager;
     private static App appInstance;
     private static Stage mainStage;
-
     private static MainWindowController mainWindowController;
+    private WindowManager windowManager;
+    private WinGetSettings winGetSettings;
+    public ListManager listManager;
+    public ListManagerDTO listManagerDTO;
+
 
     /*
     * Appication start order:
@@ -42,12 +46,16 @@ public class App extends Application
 
         winGetSettings = new WinGetSettings();
         winGetSettings.setWinGetLanguage();
+
     }
 
     @Override // Starts up the JavaFX UI. (main > init > star)
     public void start(Stage stage) throws IOException
     {
-        ListManager listManager = ListManager.getInstance(); // Instantiating ListManager
+        listManager = ListManager.getInstance(); // Instantiating ListManager
+        listManagerDTO = ListManagerDTO.getInstance(); // Instantiating ListManager
+
+        Serializer.deserializeListManager(); // Converts .ser into listManager
 
 //        listManager.createPackageList("Favourites"); // Instantiating PackageList for Testing purposes.
 //        listManager.createPackageList("Web Browsers"); // Instantiating PackageList for Testing purposes.
@@ -73,30 +81,25 @@ public class App extends Application
     {
         return appInstance;
     }
-
-    public WinGetSettings getWinGetSettings()
+    public static Stage getAppStage()
     {
-        return winGetSettings;
+        return mainStage;
     }
-
-    public WindowManager getAppWindowManager()
-    {
-        return windowManager;
-    }
-
-    public void setWindowManager(WindowManager windowManager)
-    {
-        this.windowManager = windowManager;
-    }
-
     public static void setAppStage(Stage stage)
     {
         mainStage = stage;
     }
-
-    public static Stage getAppStage()
+    public void setWindowManager(WindowManager windowManager)
     {
-        return mainStage;
+        this.windowManager = windowManager;
+    }
+    public WindowManager getAppWindowManager()
+    {
+        return windowManager;
+    }
+    public WinGetSettings getWinGetSettings()
+    {
+        return winGetSettings;
     }
 
     public static void setMainWindowControllerInstance(MainWindowController ctrl) // Gib mir das BorderPane

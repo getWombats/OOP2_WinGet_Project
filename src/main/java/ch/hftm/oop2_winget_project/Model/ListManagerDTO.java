@@ -14,7 +14,21 @@ public class ListManagerDTO implements Serializable {
 
 //    Variables
     private static final long serialVersionUID = 1L;
+
+    private static ListManagerDTO instance;
     private List<PackageListDTO> lists;
+
+    //    Instantiation method
+    public static ListManagerDTO getInstance() {
+        if (instance == null) {
+            synchronized (ListManagerDTO.class) { // Synchronized to prevent multiple threads checking, returning null and creating multiple instances.
+                if (instance == null) {
+                    instance = new ListManagerDTO();
+                }
+            }
+        }
+        return instance;
+    }
 
 //    Constructors
     public ListManagerDTO() {

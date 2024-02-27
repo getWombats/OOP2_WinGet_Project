@@ -28,17 +28,19 @@ public class Message
         alert.setTitle(title);
         alert.setHeaderText(headerText);
         alert.setContentText(message);
-        alert.initStyle(StageStyle.UNDECORATED);
+//        alert.initStyle(StageStyle.UNDECORATED);
+        alert.initStyle(StageStyle.DECORATED);
 
         DialogPane dialogPane = alert.getDialogPane();
-//        dialogPane.getStylesheets().add(Objects.requireNonNull(getClass().getResource("DarkTheme.css")).toExternalForm()); // nullPointer?
-//        dialogPane.getStyleClass().add("myDialog");
+//        dialogPane.getStyleClass().add("customDialog");
+//        dialogPane.getStylesheets().add(Message.class.getResource("DarkTheme.css").toExternalForm());
+//        dialogPane.getStyleClass().add("customDialog");
 
         // Positioning
         centerStageX = (windowManager.getStage().getX() + windowManager.getStage().getMinWidth()/2);
         centerStageY = (windowManager.getStage().getY() + windowManager.getStage().getMinHeight()/2);
-        alert.setX(centerStageX - dialogPane.getWidth()/2);
-        alert.setY(centerStageY - dialogPane.getHeight()/2);
+//        alert.setX(centerStageX - dialogPane.getWidth()/2);
+//        alert.setY(centerStageY - dialogPane.getHeight()/2);
 
         alert.showAndWait();
     }

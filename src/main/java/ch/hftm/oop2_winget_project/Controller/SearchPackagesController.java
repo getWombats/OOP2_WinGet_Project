@@ -7,13 +7,17 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.input.KeyCode;
+import javafx.scene.layout.VBox;
 import javafx.util.Callback;
 import javafx.util.StringConverter;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -38,6 +42,8 @@ public class SearchPackagesController implements IControllerBase, Initializable
     @FXML
     private Label tableViewPlaceholderLabel;
     @FXML
+    private VBox placeholderContent;
+    @FXML
     private ComboBox<PackageList> comboBox_selectPackageList; // The comboBox for PackageList selection
     @FXML
     private Button button_addPackageToList;
@@ -47,9 +53,9 @@ public class SearchPackagesController implements IControllerBase, Initializable
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
+        placeholderContent = new VBox(10);
         tableViewPlaceholderLabel = new Label();
-        tableViewPlaceholderLabel.setText("Enter search keyword");
-        tableView.setPlaceholder(tableViewPlaceholderLabel);
+        setTableViewPlaceholder("Enter search keyword", false);
 
         addButtonToTableView();
         addFavoriteCheckboxToTableView();
@@ -128,6 +134,7 @@ public class SearchPackagesController implements IControllerBase, Initializable
             @Override
             public TableCell<WinGetPackage, Void> call(final TableColumn<WinGetPackage, Void> param)
             {
+                Label installedLabel = new Label("installed");
                 final TableCell<WinGetPackage, Void> cell = new TableCell<>()
                 {
                     private final Button btn = new Button("Install");
@@ -136,10 +143,26 @@ public class SearchPackagesController implements IControllerBase, Initializable
                             WinGetPackage data = getTableView().getItems().get(getIndex());
                             data.setInstalled(true); // Set package as installed
                             btn.setDisable(true); // Disables button when clicked
-                            System.out.println(data.getName() + " [ID: " + data.getId() + "] will be installed..."); // Test, execute here 'winget install {packageId}'
 
-                            // Update list
-                            PackageList.getInstalledPackageList().add(data);
+                            isThreadWorking = true;
+                            setGraphic(new ProgressBar());
+                            new Thread(() -> {
+                                try
+                                {
+                                    installPackage(data.getId());
+                                }
+                                catch (IOException ex)
+                                {
+                                    System.out.println(ex.getMessage()); // Replace with ExceptionHandler when implemented
+                                }
+
+                                Platform.runLater(() -> {
+                                    // Update list
+                                    PackageList.getInstalledPackageList().add(data);
+                                    setGraphic(installedLabel);
+                                    isThreadWorking = false;
+                                });
+                            }).start();
                         });
                     }
 
@@ -152,7 +175,6 @@ public class SearchPackagesController implements IControllerBase, Initializable
                             WinGetPackage data = getTableView().getItems().get(getIndex());
                             if(data.isInstalled()) {
                                 // Set cell content when package is installed already
-                                Label installedLabel = new Label("installed");
                                 setGraphic(installedLabel);
                             } else {
                                 setGraphic(btn);
@@ -250,7 +272,7 @@ public class SearchPackagesController implements IControllerBase, Initializable
                 tableView.getItems().clear();
             }
 
-            tableViewPlaceholderLabel.setText("Searching packages...");
+            setTableViewPlaceholder("Searching packages", true);
 
             isThreadWorking = true;
             new Thread(() -> {
@@ -279,6 +301,12 @@ public class SearchPackagesController implements IControllerBase, Initializable
                 });
             }).start();
         }
+    }
+
+    private void installPackage(String packageId) throws IOException {
+        ProcessBuilder processBuilder = new ProcessBuilder("winget", QueryType.INSTALL.toString(), packageId, "--accept-package-agreements", "--accept-source-agreements");
+        processBuilder.redirectErrorStream(true);
+        processBuilder.start();
     }
 
     public void initialize_comboBox_PackageList() {
@@ -342,5 +370,24 @@ public class SearchPackagesController implements IControllerBase, Initializable
 //            // Handle cases where nothing is selected
 //            System.out.println("No package or list selected.");
 //        }
+    }
+
+    private void setTableViewPlaceholder(String labelText, boolean showProgressIndicator){
+        tableViewPlaceholderLabel.setText(labelText);
+        ProgressIndicator progressIndicator = new ProgressIndicator();
+        progressIndicator.setVisible(showProgressIndicator);
+
+        placeholderContent = new VBox(10);
+        placeholderContent.getChildren().addAll(progressIndicator, tableViewPlaceholderLabel);
+        placeholderContent.setAlignment(Pos.CENTER);
+
+        tableView.widthProperty().addListener((obs, oldVal, newVal) -> {
+            placeholderContent.setPrefWidth(newVal.doubleValue());
+        });
+        tableView.heightProperty().addListener((obs, oldVal, newVal) -> {
+            placeholderContent.setPrefHeight(newVal.doubleValue());
+        });
+
+        tableView.setPlaceholder(placeholderContent);
     }
 }

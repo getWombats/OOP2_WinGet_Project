@@ -10,7 +10,9 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.control.*;
+import javafx.scene.layout.VBox;
 import javafx.util.Callback;
 
 import java.io.IOException;
@@ -33,14 +35,16 @@ public class InstalledPackagesController implements IControllerBase, Initializab
     private TableColumn<WinGetPackage, Void> actionColumn;
     @FXML
     private Label tableViewPlaceholderLabel;
+    @FXML
+    private VBox placeholderContent;
     private boolean isThreadWorking;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
+        placeholderContent = new VBox(10);
         tableViewPlaceholderLabel = new Label();
-        tableViewPlaceholderLabel.setText("List all installed packages");
-        installedPackagesTableView.setPlaceholder(tableViewPlaceholderLabel);
+        setTableViewPlaceholder("List all installed packages", false);
 
         addButtonToTableView();
         setTableViewData();
@@ -96,11 +100,25 @@ public class InstalledPackagesController implements IControllerBase, Initializab
                         btn.setOnAction((ActionEvent event) -> {
                             WinGetPackage data = getTableView().getItems().get(getIndex());
                             data.setInstalled(false); // Set package as uninstalled
-                            System.out.println(data.getName() + " [ID: " + data.getId() + "] uninstalling package..."); // Test, execute here 'winget remove {packageId}'
 
-                            // Update list
-                            PackageList.getInstalledPackageList().remove(data);
-                            // Implement item removal from list here, track uninstall process possible?
+                            isThreadWorking = true;
+                            setGraphic(new ProgressBar());
+                            new Thread(() -> {
+                                try
+                                {
+                                    uninstallPackage(data.getId());
+                                }
+                                catch (IOException ex)
+                                {
+                                    System.out.println(ex.getMessage()); // Replace with ExceptionHandler when implemented
+                                }
+
+                                Platform.runLater(() -> {
+                                    // Update list
+                                    PackageList.getInstalledPackageList().remove(data);
+                                    isThreadWorking = false;
+                                });
+                            }).start();
                         });
                     }
 
@@ -114,18 +132,16 @@ public class InstalledPackagesController implements IControllerBase, Initializab
                         }
                         else
                         {
-//                            WinGetPackage data = getTableView().getItems().get(getIndex());
-//                            if(data.isInstalled())
-//                            {
-//                                // Set cell content when package is installed already
-//                                Label installedLabel = new Label("installed");
-//                                setGraphic(installedLabel);
-//                            }
-//                            else
-//                            {
-//                                setGraphic(btn);
-//                            }
-                            setGraphic(btn);
+                            WinGetPackage data = getTableView().getItems().get(getIndex());
+                            if(data.getSource().isEmpty())
+                            {
+                                // Do not show "deinstall" button when source is empty
+                                setGraphic(null);
+                            }
+                            else
+                            {
+                                setGraphic(btn);
+                            }
                         }
                     }
                 };
@@ -141,7 +157,7 @@ public class InstalledPackagesController implements IControllerBase, Initializab
         {
             installedPackagesTableView.getItems().clear();
 
-            tableViewPlaceholderLabel.setText("Loading installed packages...");
+            setTableViewPlaceholder("Loading installed packages", true);
 
             isThreadWorking = true;
             new Thread(() -> {
@@ -169,5 +185,30 @@ public class InstalledPackagesController implements IControllerBase, Initializab
                 });
             }).start();
         }
+    }
+
+    private void setTableViewPlaceholder(String labelText, boolean showProgressIndicator){
+        tableViewPlaceholderLabel.setText(labelText);
+        ProgressIndicator progressIndicator = new ProgressIndicator();
+        progressIndicator.setVisible(showProgressIndicator);
+
+        placeholderContent = new VBox(10);
+        placeholderContent.getChildren().addAll(progressIndicator, tableViewPlaceholderLabel);
+        placeholderContent.setAlignment(Pos.CENTER);
+
+        installedPackagesTableView.widthProperty().addListener((obs, oldVal, newVal) -> {
+            placeholderContent.setPrefWidth(newVal.doubleValue());
+        });
+        installedPackagesTableView.heightProperty().addListener((obs, oldVal, newVal) -> {
+            placeholderContent.setPrefHeight(newVal.doubleValue());
+        });
+
+        installedPackagesTableView.setPlaceholder(placeholderContent);
+    }
+
+    private void uninstallPackage(String packageId) throws IOException {
+        ProcessBuilder processBuilder = new ProcessBuilder("winget", QueryType.UNINSTALL.toString(), packageId);
+        processBuilder.redirectErrorStream(true);
+        processBuilder.start();
     }
 }

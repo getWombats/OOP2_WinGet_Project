@@ -66,6 +66,7 @@ public class SearchPackagesController implements IControllerBase, Initializable
 
         addButtonToTableView();
         addFavoriteCheckboxToTableView();
+        setSourceColumnLabel();
         setTableViewData();
         setTableViewSource();
         registerInputServices();
@@ -143,16 +144,16 @@ public class SearchPackagesController implements IControllerBase, Initializable
             @Override
             public TableCell<WinGetPackage, Void> call(final TableColumn<WinGetPackage, Void> param)
             {
-                Label installedLabel = new Label("installed");
+                Label installedLabel = new Label("Installed");
+                installedLabel.getStyleClass().removeAll("label-installed"); // Reset styles
                 final TableCell<WinGetPackage, Void> cell = new TableCell<>()
                 {
                     private final Button btn = new Button("Install");
                     {
                         btn.setOnAction((ActionEvent event) -> {
                             WinGetPackage data = getTableView().getItems().get(getIndex());
-                            data.setInstalled(true); // Set package as installed
-                            btn.setDisable(true); // Disables button when clicked
 
+                            btn.setDisable(true); // Disables button when clicked and package installs
                             isThreadWorking = true;
                             setGraphic(new ProgressBar());
                             new Thread(() -> {
@@ -168,6 +169,8 @@ public class SearchPackagesController implements IControllerBase, Initializable
                                 Platform.runLater(() -> {
                                     // Update list
                                     PackageList.getInstalledPackageList().add(data);
+                                    data.setInstalled(true); // Set package as installed
+                                    installedLabel.getStyleClass().add("label-installed");
                                     setGraphic(installedLabel);
                                     isThreadWorking = false;
                                 });
@@ -184,8 +187,10 @@ public class SearchPackagesController implements IControllerBase, Initializable
                             WinGetPackage data = getTableView().getItems().get(getIndex());
                             if(data.isInstalled()) {
                                 // Set cell content when package is installed already
+                                installedLabel.getStyleClass().add("label-installed");
                                 setGraphic(installedLabel);
                             } else {
+                                btn.getStyleClass().add("button-install");
                                 setGraphic(btn);
                             }
                         }
@@ -197,47 +202,36 @@ public class SearchPackagesController implements IControllerBase, Initializable
         column_button_install.setCellFactory(cellFactory);
     }
 
-//    private void addFavoriteCheckboxToTableView()
-//    {
-//        favoriteColumn.setCellFactory(column -> new CheckBoxTableCell<>()
-//        {
-//            @Override
-//            public void updateItem(Boolean item, boolean empty)
-//            {
-//                super.updateItem(item, empty);
-//
-//                if (empty)
-//                {
-//                    setGraphic(null);
-//                }
-//                else
-//                {
-//                    CheckBox checkBox = new CheckBox();
-//                    WinGetPackage model = getTableView().getItems().get(getIndex());
-//
-//                    if(model.isFavorite())
-//                    {
-//                        checkBox.setSelected(true);
-//                    }
-//
-//                    checkBox.selectedProperty().setValue(model.isFavorite()); // Bind checkbox state to item value
-//                    checkBox.selectedProperty().addListener((obs, wasSelected, isNowSelected) -> {
-//                        model.setFavorite(isNowSelected);
-//
-//                        if (isNowSelected)
-//                        {
-//                            onFavoriteCheckboxChecked(model);
-//                        }
-//                        else
-//                        {
-//                            onFavoriteCheckboxUnchecked(model);
-//                        }
-//                    });
-//                    setGraphic(checkBox);
-//                }
-//            }
-//        });
-//    }
+    private void setSourceColumnLabel(){
+//        tableView.getScene().getStylesheets().add(getClass().getResource("DarkTheme.css").toExternalForm());
+        column_source.setEditable(true);
+        column_source.setCellFactory(column -> new TableCell<>() {
+            @Override
+            protected void updateItem(String item, boolean empty) {
+                super.updateItem(item, empty);
+                Label sourceLabel = new Label();
+                sourceLabel.getStyleClass().removeAll("label-ms-store", "label-winget");
+                if (item == null || empty) {
+                    setText(null);
+                    setGraphic(null);
+                }
+                else if(item.equals(SourceType.MSSTORE.toString())){
+                    sourceLabel.getStyleClass().add("label-ms-store");
+                    sourceLabel.setText(SourceType.MSSTORE.toString());
+                    setGraphic(sourceLabel);
+                }
+                else if(item.equals(SourceType.WINGET.toString())){
+                    sourceLabel.getStyleClass().add("label-winget");
+                    sourceLabel.setText(SourceType.WINGET.toString());
+                    setGraphic(sourceLabel);
+                }
+                else {
+                    Label nameLabel = new Label(item);
+                    setGraphic(nameLabel);
+                }
+            }
+        });
+    }
 
     private void addFavoriteCheckboxToTableView() {
         column_favourite.setCellFactory(column -> new CheckBoxTableCell<WinGetPackage, Boolean>() {

@@ -7,6 +7,8 @@ import ch.hftm.oop2_winget_project.Model.WinGetPackage;
 import ch.hftm.oop2_winget_project.Model.WinGetQuery;
 import ch.hftm.oop2_winget_project.Util.ConsoleExitCode;
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -18,6 +20,9 @@ import javafx.util.Callback;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class InstalledPackagesController implements IControllerBase, Initializable
 {
@@ -37,6 +42,10 @@ public class InstalledPackagesController implements IControllerBase, Initializab
     private Label tableViewPlaceholderLabel;
     @FXML
     private VBox placeholderContent;
+    @FXML
+    private ComboBox<String> comboBox_filter;
+    @FXML
+    private TextField textfield_filter;
     private boolean isThreadWorking;
 
     @Override
@@ -49,6 +58,12 @@ public class InstalledPackagesController implements IControllerBase, Initializab
         addButtonToTableView();
         setTableViewData();
         setTableViewSource();
+
+//      Initialize filter components
+        comboBox_filter.getItems().addAll("All Attributes", "Name", "ID", "Version", "Source");
+        comboBox_filter.setValue("All Attributes");
+        textfield_filter.textProperty().addListener((observable, oldValue, newValue) -> filterList());
+        comboBox_filter.valueProperty().addListener((observable, oldValue, newValue) -> filterList());
     }
 
     @FXML
@@ -211,4 +226,36 @@ public class InstalledPackagesController implements IControllerBase, Initializab
         processBuilder.redirectErrorStream(true);
         processBuilder.start();
     }
+
+    private void filterList() {
+        String filterText = textfield_filter.getText().toLowerCase();
+        String selectedAttribute = comboBox_filter.getValue();
+
+        if (filterText.isEmpty() || selectedAttribute == null) {
+            installedPackagesTableView.setItems(PackageList.getInstalledPackageList());
+            return;
+        }
+
+        Stream<WinGetPackage> packageStream = PackageList.getInstalledPackageList().stream();
+        Predicate<WinGetPackage> filterPredicate = pkg -> {
+            switch (selectedAttribute) {
+                case "All Attributes":
+                    return (pkg.getName() + " " + pkg.getId() + " " + pkg.getSource() + " " + pkg.getVersion()).toLowerCase().contains(filterText);
+                case "Name":
+                    return pkg.getName().toLowerCase().contains(filterText);
+                case "ID":
+                    return pkg.getId().toLowerCase().contains(filterText);
+                case "Version":
+                    return pkg.getVersion().toLowerCase().contains(filterText);
+                case "Source":
+                    return pkg.getSource().toLowerCase().contains(filterText);
+                default:
+                    return false;
+            }
+        };
+
+        ObservableList<WinGetPackage> filteredList = packageStream.filter(filterPredicate).collect(Collectors.toCollection(FXCollections::observableArrayList));
+        installedPackagesTableView.setItems(filteredList);
+    }
+
 }

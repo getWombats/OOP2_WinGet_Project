@@ -41,7 +41,6 @@ public class ListManagerController {
 
         // Set up the cell value factories for each column
         nameColumn.setCellValueFactory(cellData -> cellData.getValue().getFXName());
-        System.out.println("Hello");
         listSizeColumn.setCellValueFactory(cellData -> cellData.getValue().getFXSize().asObject());
 
         // Bind the data of listManager to the TableView

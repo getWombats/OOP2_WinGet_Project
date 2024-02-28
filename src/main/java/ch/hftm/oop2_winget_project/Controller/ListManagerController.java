@@ -6,11 +6,17 @@ import ch.hftm.oop2_winget_project.Model.PackageList;
 import ch.hftm.oop2_winget_project.Util.StageAndSceneManager;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import ch.hftm.oop2_winget_project.Util.ResourceProvider;
 import javafx.scene.control.*;
 import javafx.util.Duration;
+
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static ch.hftm.oop2_winget_project.Persistence.BatchFileCreator.createInstallScript;
 
@@ -25,14 +31,16 @@ public class ListManagerController {
     private Button button_deletePackageList;
     @FXML
     private TextField textfield_PackageListName;
-
-
     @FXML
-    private TableView<PackageList> listManagerTableView;
+    private TableView<PackageList> tableView_packageLists;
     @FXML
-    private TableColumn<PackageList, String> nameColumn;
+    private TableColumn<PackageList, String> column_name;
     @FXML
-    private TableColumn<PackageList, Integer> listSizeColumn;
+    private TableColumn<PackageList, Integer> column_size;
+    @FXML
+    private ComboBox<String> comboBox_filter;
+    @FXML
+    private TextField textfield_filter;
 
     @FXML
     private void initialize() {
@@ -40,11 +48,11 @@ public class ListManagerController {
         listManager = ListManager.getInstance(); //Getting the single instance of ListManager.
 
         // Set up the cell value factories for each column
-        nameColumn.setCellValueFactory(cellData -> cellData.getValue().getFXName());
-        listSizeColumn.setCellValueFactory(cellData -> cellData.getValue().getFXSize().asObject());
+        column_name.setCellValueFactory(cellData -> cellData.getValue().getFXName());
+        column_size.setCellValueFactory(cellData -> cellData.getValue().getFXSize().asObject());
 
         // Bind the data of listManager to the TableView
-        listManagerTableView.setItems(listManager.getFXLists());
+        tableView_packageLists.setItems(listManager.getFXLists());
 
         setUpDoubleClickOnRow();
 
@@ -52,10 +60,16 @@ public class ListManagerController {
         countdownTimer = new Timeline(new KeyFrame(Duration.seconds(1), this::deletePackageList));
         countdownTimer.setCycleCount(1); // Only run once
         countdownTimer.setOnFinished(event -> countdownTimer.stop()); // Stop the timer when finished
+
+        // Initialize filter components
+        comboBox_filter.getItems().addAll("All Attributes", "Name", "Size");
+        comboBox_filter.setValue("All Attributes");
+        textfield_filter.textProperty().addListener((observable, oldValue, newValue) -> filterList());
+        comboBox_filter.valueProperty().addListener((observable, oldValue, newValue) -> filterList());
     }
 
     private void deletePackageList(ActionEvent actionEvent) {
-        PackageList selectedPackageList = listManagerTableView.getSelectionModel().getSelectedItem();
+        PackageList selectedPackageList = tableView_packageLists.getSelectionModel().getSelectedItem();
         if (selectedPackageList != null) {
             listManager.deletePackageList(selectedPackageList);
         }
@@ -72,7 +86,7 @@ public class ListManagerController {
 
     @FXML
     private void buttoncreateBatchFile_onAction(){
-        PackageList selectedPackageList = listManagerTableView.getSelectionModel().getSelectedItem();
+        PackageList selectedPackageList = tableView_packageLists.getSelectionModel().getSelectedItem();
         if (selectedPackageList != null) {
             createInstallScript(selectedPackageList);
             System.out.println("Batch file created for: " + selectedPackageList.getName());
@@ -101,7 +115,7 @@ public class ListManagerController {
 
 //    Event Handlers / Listeners
     private void setUpDoubleClickOnRow() {
-        listManagerTableView.setRowFactory(tv -> {
+        tableView_packageLists.setRowFactory(tv -> {
             TableRow<PackageList> row = new TableRow<>();
             row.setOnMouseClicked(event -> {
                 if (event.getClickCount() == 2 && (!row.isEmpty())) {
@@ -119,6 +133,37 @@ public class ListManagerController {
             });
             return row;
         });
+    }
 
+    private void filterList() {
+        String filterText = textfield_filter.getText().toLowerCase();
+        String filterAttribute = comboBox_filter.getValue();
+
+        if (filterText.isEmpty() || filterAttribute == null) {
+            tableView_packageLists.setItems(ListManager.getInstance().getFXLists());
+            return;
+        }
+
+        Stream<PackageList> pkgListStream = ListManager.getInstance().getFXLists().stream();
+        Predicate<PackageList> filterPredicate = pkgList -> {
+            switch (filterAttribute) {
+                case "All Attributes":
+                    return (pkgList.getName() + " " + pkgList.getSize()).toLowerCase().contains(filterText);
+                case "Name":
+                    return pkgList.getName().toLowerCase().contains(filterText);
+                case "Size":
+                    return String.valueOf(pkgList.getSize()).toLowerCase().contains(filterText);
+                default:
+                    return false;
+            }
+        };
+
+        ObservableList<PackageList> filteredList = pkgListStream.filter(filterPredicate).collect(Collectors.toCollection(FXCollections::observableArrayList));
+
+//        if(filteredList.isEmpty()){
+//            setTableViewPlaceholder("No Packages found", false);
+//        }
+
+        tableView_packageLists.setItems(filteredList);
     }
 }

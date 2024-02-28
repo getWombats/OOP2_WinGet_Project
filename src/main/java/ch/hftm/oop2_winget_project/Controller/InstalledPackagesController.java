@@ -15,8 +15,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.util.Callback;
 
@@ -30,7 +28,7 @@ import java.util.stream.Stream;
 public class InstalledPackagesController implements IControllerBase, Initializable
 {
     @FXML
-    private TableView<WinGetPackage> installedPackagesTableView;
+    private TableView<WinGetPackage> tableView_installedPackages;
     @FXML
     private TableColumn<WinGetPackage, String> idColumn;
     @FXML
@@ -66,7 +64,7 @@ public class InstalledPackagesController implements IControllerBase, Initializab
         setTableViewData();
         setTableViewSource();
 
-//      Initialize filter components
+        // Initialize filter components
         comboBox_filter.getItems().addAll("All Attributes", "Name", "ID", "Version", "Source");
         comboBox_filter.setValue("All Attributes");
         textfield_filter.textProperty().addListener((observable, oldValue, newValue) -> filterList());
@@ -91,20 +89,20 @@ public class InstalledPackagesController implements IControllerBase, Initializab
     @Override
     public void setTableViewSource()
     {
-        this.installedPackagesTableView.setItems(PackageList.getInstalledPackageList());
+        this.tableView_installedPackages.setItems(PackageList.getInstalledPackageList());
     }
 
     @Override
     public void refreshTableViewContent()
     {
-        installedPackagesTableView.setItems(null);
+        tableView_installedPackages.setItems(null);
         setTableViewSource();
     }
 
     @Override
     public WinGetPackage getObjectFromSelection()
     {
-        return installedPackagesTableView.getSelectionModel().getSelectedItem();
+        return tableView_installedPackages.getSelectionModel().getSelectedItem();
     }
 
     @Override
@@ -221,7 +219,7 @@ public class InstalledPackagesController implements IControllerBase, Initializab
     {
         if (!isThreadWorking)
         {
-            installedPackagesTableView.getItems().clear();
+            tableView_installedPackages.getItems().clear();
 
             setTableViewPlaceholder("Loading installed packages", true);
 
@@ -262,14 +260,14 @@ public class InstalledPackagesController implements IControllerBase, Initializab
         placeholderContent.getChildren().addAll(progressIndicator, tableViewPlaceholderLabel);
         placeholderContent.setAlignment(Pos.CENTER);
 
-        installedPackagesTableView.widthProperty().addListener((obs, oldVal, newVal) -> {
+        tableView_installedPackages.widthProperty().addListener((obs, oldVal, newVal) -> {
             placeholderContent.setPrefWidth(newVal.doubleValue());
         });
-        installedPackagesTableView.heightProperty().addListener((obs, oldVal, newVal) -> {
+        tableView_installedPackages.heightProperty().addListener((obs, oldVal, newVal) -> {
             placeholderContent.setPrefHeight(newVal.doubleValue());
         });
 
-        installedPackagesTableView.setPlaceholder(placeholderContent);
+        tableView_installedPackages.setPlaceholder(placeholderContent);
     }
 
     private void uninstallPackage(String packageId) throws IOException {
@@ -283,11 +281,11 @@ public class InstalledPackagesController implements IControllerBase, Initializab
         String selectedAttribute = comboBox_filter.getValue();
 
         if (filterText.isEmpty() || selectedAttribute == null) {
-            installedPackagesTableView.setItems(PackageList.getInstalledPackageList());
+            tableView_installedPackages.setItems(PackageList.getInstalledPackageList());
             return;
         }
 
-        Stream<WinGetPackage> packageStream = PackageList.getInstalledPackageList().stream();
+        Stream<WinGetPackage> pkgStream = PackageList.getInstalledPackageList().stream();
         Predicate<WinGetPackage> filterPredicate = pkg -> {
             switch (selectedAttribute) {
                 case "All Attributes":
@@ -305,13 +303,12 @@ public class InstalledPackagesController implements IControllerBase, Initializab
             }
         };
 
-        ObservableList<WinGetPackage> filteredList = packageStream.filter(filterPredicate).collect(Collectors.toCollection(FXCollections::observableArrayList));
+        ObservableList<WinGetPackage> filteredList = pkgStream.filter(filterPredicate).collect(Collectors.toCollection(FXCollections::observableArrayList));
 
         if(filteredList.isEmpty()){
             setTableViewPlaceholder("No Packages found", false);
         }
 
-        installedPackagesTableView.setItems(filteredList);
+        tableView_installedPackages.setItems(filteredList);
     }
-
 }

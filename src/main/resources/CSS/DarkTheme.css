@@ -77,7 +77,7 @@
     -fx-border-width: 0px;
 }
 
-.searchTableView .button {
+.searchTableView .button-install {
     -fx-padding: 5 15 5 35;
     -fx-border-color: #1d1d1d;
     -fx-border-width: 1;
@@ -86,16 +86,19 @@
     -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
     -fx-font-size: 10pt;
     -fx-text-fill: #d8d8d8;
-    -fx-background-insets: 0 0 0 0, 0, 1, 2;
 
     -fx-background-image: url(../Icons/download.png);
-    -fx-background-size: 12px;
+    -fx-background-size: 15px;
     -fx-background-repeat: no-repeat;
     -fx-background-position: 20%;
 }
 
-.installedTableView .button {
-    -fx-padding: 5 15 5 35;
+.searchTableView .button-install:hover {
+    -fx-background-color: #512bd4;
+}
+
+.installedTableView .button-uninstall {
+    -fx-padding: 5 14 5 35;
     -fx-border-color: #1d1d1d;
     -fx-border-width: 1;
     -fx-background-radius: 0;
@@ -103,20 +106,15 @@
     -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
     -fx-font-size: 10pt;
     -fx-text-fill: #d8d8d8;
-    -fx-background-insets: 0 0 0 0, 0, 1, 2;
 
     -fx-background-image: url(../Icons/delete.png);
     -fx-background-size: 20px;
     -fx-background-repeat: no-repeat;
-    -fx-background-position: 15%;
+    -fx-background-position: 12 center;
 }
 
-.installedTableView .button:hover {
+.installedTableView .button-uninstall:hover {
     -fx-background-color: #990000;
-}
-
-.searchTableView .button:hover {
-    -fx-background-color: #512bd4;
 }
 
 .table-row-cell:filled .label {
@@ -128,12 +126,42 @@
     -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
     -fx-font-size: 10pt;
     -fx-text-fill: #d8d8d8;
-    -fx-background-insets: 0 0 0 0, 0, 1, 2;
+}
+
+.table-row-cell:filled .label-installed {
+    -fx-background-color: transparent;
+    -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+    -fx-font-size: 10pt;
+    -fx-text-fill: #d8d8d8;
 
     -fx-background-image: url(../Icons/check.png);
     -fx-background-size: 15px;
     -fx-background-repeat: no-repeat;
-    -fx-background-position: 15%;
+    -fx-background-position: 13 center;
+}
+
+.table-row-cell:filled .label-ms-store {
+    -fx-background-color: transparent;
+    -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+    -fx-font-size: 10pt;
+    -fx-text-fill: #d8d8d8;
+
+    -fx-background-image: url(../Icons/msstoreIcon.png);
+    -fx-background-size: 25px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: left center;
+}
+
+.table-row-cell:filled .label-winget {
+    -fx-background-color: transparent;
+    -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+    -fx-font-size: 10pt;
+    -fx-text-fill: #d8d8d8;
+
+    -fx-background-image: url(../Icons/wingetIconBright.png);
+    -fx-background-size: 22px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: left center;
 }
 
 .table-row-cell:filled {
@@ -276,7 +304,7 @@
  }
 
  .menuButton:hover {
-     -fx-background-color: #4d4dff;
+     -fx-background-color: #512bd4; /* #4d4dff */
  }
 
 /* Progress Indicator in Tables */

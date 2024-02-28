@@ -6,6 +6,7 @@ import ch.hftm.oop2_winget_project.Util.QueryType;
 import ch.hftm.oop2_winget_project.Model.WinGetPackage;
 import ch.hftm.oop2_winget_project.Model.WinGetQuery;
 import ch.hftm.oop2_winget_project.Util.ConsoleExitCode;
+import ch.hftm.oop2_winget_project.Util.SourceType;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -56,6 +57,7 @@ public class InstalledPackagesController implements IControllerBase, Initializab
         setTableViewPlaceholder("List all installed packages", false);
 
         addButtonToTableView();
+        setSourceColumnLabel();
         setTableViewData();
         setTableViewSource();
 
@@ -168,6 +170,36 @@ public class InstalledPackagesController implements IControllerBase, Initializab
         };
         actionColumn.setCellFactory(cellFactory);
     }
+
+    private void setSourceColumnLabel(){
+        sourceColumn.setCellFactory(column -> new TableCell<>() {
+            @Override
+            protected void updateItem(String item, boolean empty) {
+                super.updateItem(item, empty);
+                Label sourceLabel = new Label();
+                sourceLabel.getStyleClass().removeAll("label-ms-store", "label-winget");
+                if (item == null || empty) {
+                    setText(null);
+                    setGraphic(null);
+                }
+                else if(item.equals(SourceType.MSSTORE.toString())){
+                    sourceLabel.getStyleClass().add("label-ms-store");
+                    sourceLabel.setText(SourceType.MSSTORE.toString());
+                    setGraphic(sourceLabel);
+                }
+                else if(item.equals(SourceType.WINGET.toString())){
+                    sourceLabel.getStyleClass().add("label-winget");
+                    sourceLabel.setText(SourceType.WINGET.toString());
+                    setGraphic(sourceLabel);
+                }
+                else {
+                    Label nameLabel = new Label(item);
+                    setGraphic(nameLabel);
+                }
+            }
+        });
+    }
+
 
     private void showInstalledPackages()
     {

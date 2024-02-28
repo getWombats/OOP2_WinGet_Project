@@ -95,8 +95,6 @@ public class SearchPackagesController implements IControllerBase, Initializable
     @Override
     public void setTableViewData()
     {
-//        this.favoriteColumn.setCellFactory(CheckBoxTableCellTest.forTableColumn(favoriteColumn)); // Test with checkbox
-//        this.favoriteColumn.setCellValueFactory(cellData -> cellData.getValue().isFavoriteProperty()); // Test with checkbox
         this.column_name.setCellValueFactory(cellData -> cellData.getValue().getFXName());
         this.column_id.setCellValueFactory(cellData -> cellData.getValue().getFXId());
         this.column_version.setCellValueFactory(cellData -> cellData.getValue().getFXVersion());

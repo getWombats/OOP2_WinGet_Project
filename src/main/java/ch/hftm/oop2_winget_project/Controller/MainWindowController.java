@@ -40,7 +40,7 @@ public class MainWindowController implements Initializable
     @FXML
     private void menuUpdateButtonClick()
     {
-//        StageAndSceneManager.loadFxmlToBorderPaneLeft(mainWindowBorderPane, ResourceProvider.UPGRADEPACKAGES_VIEW_NAME);
+        StageAndSceneManager.loadFxmlToBorderPaneLeft(mainWindowBorderPane, ResourceProvider.UPGRADEPACKAGES_VIEW_NAME);
     }
 
     @FXML
@@ -87,7 +87,6 @@ public class MainWindowController implements Initializable
     private void closeWindowButtonClick()
     {
         App.getAppStage().close();
-//        Platform.exit();
     }
 
     private void registerInputServices()

@@ -34,8 +34,6 @@ public class ListManagerController {
     @FXML
     private Button button_rename;
     @FXML
-    private TextField textField_PackageListName;
-    @FXML
     private TableView<PackageList> tableView_packageLists;
     @FXML
     private TableColumn<PackageList, String> column_name;
@@ -134,11 +132,6 @@ public class ListManagerController {
     @FXML
     private void createPackageListButton_onAction(){
         listManager.createPackageList("-New List");
-//        String name = textField_PackageListName.getText();
-//        if (!name.isBlank()) {
-//            listManager.createPackageList(name);
-//            System.out.println("Created new PackageList: " + name);
-//        }
     }
 
     @FXML

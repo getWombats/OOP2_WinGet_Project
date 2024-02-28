@@ -3,6 +3,7 @@ package ch.hftm.oop2_winget_project.Controller;
 import ch.hftm.oop2_winget_project.App;
 import ch.hftm.oop2_winget_project.Model.ListManager;
 import ch.hftm.oop2_winget_project.Model.PackageList;
+import ch.hftm.oop2_winget_project.Persistence.Serializer;
 import ch.hftm.oop2_winget_project.Util.StageAndSceneManager;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -12,6 +13,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import ch.hftm.oop2_winget_project.Util.ResourceProvider;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.util.Duration;
 
 import java.util.function.Predicate;
@@ -47,9 +49,33 @@ public class ListManagerController {
 
         listManager = ListManager.getInstance(); //Getting the single instance of ListManager.
 
-        // Set up the cell value factories for each column
+
+
+        // Set up the cell value factories for each column.
         column_name.setCellValueFactory(cellData -> cellData.getValue().getFXName());
         column_size.setCellValueFactory(cellData -> cellData.getValue().getFXSize().asObject());
+
+        // Code for renaming on double click
+//        tableView_packageLists.setEditable(true); // Make the TableView editable.
+//        column_name.setEditable(true); // Make the column editable.
+//        // This gets called when the editing of the name is committed.
+//        column_name.setCellFactory(TextFieldTableCell.forTableColumn());
+//        column_name.setOnEditCommit(event -> {
+//            final String newName = event.getNewValue() != null ? event.getNewValue().trim() : "";
+//            PackageList packageList = event.getRowValue(); // Get the actual PackageList object being edited
+//
+//            if (!newName.isEmpty()) {
+//                packageList.setName(newName); // Update the name if new name is not empty
+//                Serializer.serializeListManager();
+//            } else {
+//                // If the new name is invalid or empty, revert to the old name
+//                packageList.setName(event.getOldValue());
+//                // No need to use set on the items list directly since we're modifying the object itself
+//                // Just refresh the table if necessary to show the reverted name
+//                tableView_packageLists.refresh();
+//            }
+//        });
+
 
         // Bind the data of listManager to the TableView
         tableView_packageLists.setItems(listManager.getFXLists());

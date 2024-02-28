@@ -1,3 +1,6 @@
+/*---------------------------------------------------*/
+/*                  Misc                            */
+/*-------------------------------------------------*/
 .background {
     -fx-background-color: #1d1d1d;
 }
@@ -13,8 +16,7 @@
 .label {
     -fx-font-size: 10pt;
     -fx-font-family: "Segoe UI Semibold";
-    -fx-text-fill: white;
-    -fx-opacity: 0.6;
+    -fx-text-fill: #8d8d8d;
 }
 
 .label-bright {
@@ -31,6 +33,79 @@
     -fx-opacity: 1;
 }
 
+.text-field {
+    -fx-background-color: #282828;
+    -fx-border-color: #737373;
+    -fx-border-width: 1;
+    -fx-text-fill: #d8d8d8;
+    -fx-font-size: 10pt;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-highlight-fill: #512bd4;
+}
+
+.button {
+    -fx-padding: 5 22 5 22;
+    -fx-border-color: #737373;
+    -fx-border-width: 1;
+    -fx-background-radius: 0;
+    -fx-background-color: #1d1d1d;
+    -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+    -fx-font-size: 10pt;
+    -fx-text-fill: #d8d8d8;
+}
+
+.button:hover {
+    -fx-background-color: #4d4dff;
+}
+
+.refreshButton {
+    -fx-padding: 5 22 5 40;
+    -fx-background-image: url(../Icons/refresh.png);
+    -fx-background-size: 20px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: 10%;
+}
+
+.searchButton {
+    -fx-padding: 5 22 5 40;
+    -fx-background-image: url(../Icons/search.png);
+    -fx-background-size: 20px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: 10%;
+}
+
+/* Favorite List ComboBox */
+.combo-box {
+    -fx-background-color: #282828;
+ }
+
+ .combo-box .list-cell {
+     -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+     -fx-font-size: 10pt;
+     -fx-text-fill: #d8d8d8;
+  }
+
+.combo-box-popup .list-view {
+        -fx-background-color: #1d1d1d;
+        -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+        -fx-font-size: 10pt;
+        -fx-text-fill: #d8d8d8;
+ }
+
+.combo-box-popup .list-view .list-cell {
+        -fx-background-color: #282828;
+        -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+        -fx-font-size: 10pt;
+        -fx-text-fill: #d8d8d8;
+ }
+
+ .combo-box-popup .list-view .list-cell:hover {
+         -fx-background-color: #512bd4;
+  }
+
+/*---------------------------------------------------*/
+/*                  TableView Styling               */
+/*-------------------------------------------------*/
 .table-view {
     -fx-base: #1d1d1d;
     -fx-control-inner-background: #1d1d1d;
@@ -46,7 +121,7 @@
 }
 
 .table-view .column-header, .table-view .filler {
-    -fx-size: 55;
+    -fx-size: 60;
     -fx-border-width: 0 0 0 0;
     -fx-background-color: transparent;
     -fx-border-color:
@@ -54,29 +129,42 @@
         transparent
         derive(-fx-base, 80%)
         transparent;
-    -fx-border-insets: 0 10 1 0;
 }
 
 .table-view .column-header .label {
-    -fx-font-size: 16pt;
+    -fx-font-size: 14pt; /* Table Header Font Size */
     -fx-font-family: "Segoe UI Light";
     -fx-text-fill: #d8d8d8;
     -fx-alignment: center-left;
     -fx-opacity: 1;
 }
 
+.table-row-cell:filled {
+    -fx-background-color: transparent;
+    -fx-font-size: 10pt;
+    -fx-text-fill: #d8d8d8;
+}
+
+.table-row-cell:filled:selected {
+    -fx-background-color: transparent;
+    -fx-font-size: 10pt;
+    -fx-text-fill: #d8d8d8;
+}
+
 .table-row-cell:filled:focused:selected {
     -fx-background-color: #512bd4;
-    -fx-border-color: transparent;
-    -fx-border-width: 0px;
+    -fx-text-fill: #d8d8d8;
 }
 
 .table-row-cell:filled:hover {
     -fx-background-color: #262626;
-    -fx-border-color: transparent;
-    -fx-border-width: 0px;
 }
 
+.table-row-cell:filled:selected, .table-row-cell:filled > .table-cell:selected {
+    -fx-background: #512bd4;
+}
+
+/* Install Button SearchPackage TableView */
 .searchTableView .button-install {
     -fx-padding: 5 15 5 35;
     -fx-border-color: #1d1d1d;
@@ -97,6 +185,7 @@
     -fx-background-color: #512bd4;
 }
 
+/* Uninstall Button InstalledPackage TableView */
 .installedTableView .button-uninstall {
     -fx-padding: 5 14 5 35;
     -fx-border-color: #1d1d1d;
@@ -117,12 +206,13 @@
     -fx-background-color: #990000;
 }
 
+/* Labels SearchPackage TableView */
 .table-row-cell:filled .label {
     -fx-padding: 5 15 5 35;
     -fx-border-color: #1d1d1d;
     -fx-border-width: 0;
     -fx-background-radius: 0;
-    -fx-background-color: transparent; /* #1d1d1d */
+    -fx-background-color: transparent;
     -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
     -fx-font-size: 10pt;
     -fx-text-fill: #d8d8d8;
@@ -174,67 +264,7 @@
     -fx-border-color: transparent;
 }
 
-.text-field {
-    -fx-background-color: #282828; /* #595959 */
-    -fx-border-color: #737373;
-    -fx-border-width: 1;
-    -fx-text-fill: #d8d8d8;
-    -fx-font-size: 10pt;
-    -fx-font-family: "Segoe UI Semibold";
-}
-
-.button {
-    -fx-padding: 5 22 5 22;
-    -fx-border-color: #737373;
-    -fx-border-width: 1;
-    -fx-background-radius: 0;
-    -fx-background-color: #1d1d1d;
-    -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
-    -fx-font-size: 10pt;
-    -fx-text-fill: #d8d8d8;
-    -fx-background-insets: 0 0 0 0, 0, 1, 2;
-}
-
-.button:hover {
-    -fx-background-color: #4d4dff;
-}
-
-.refreshButton {
-    -fx-padding: 5 22 5 40;
-    -fx-background-image: url(../Icons/refresh.png);
-    -fx-background-size: 20px;
-    -fx-background-repeat: no-repeat;
-    -fx-background-position: 10%;
-}
-
-.searchButton {
-    -fx-padding: 5 22 5 40;
-    -fx-background-image: url(../Icons/search.png);
-    -fx-background-size: 20px;
-    -fx-background-repeat: no-repeat;
-    -fx-background-position: 10%;
-}
-
-/* ProgressBar Splash Screen */
-.progress-bar {
-    -fx-accent: rgba(77, 77, 255, 1);
-}
-
-.progress-bar .bar {
-    -fx-padding: 10px;
-    -fx-background-insets: 0;
-    -fx-background-radius: 0;
-}
-
-.progress-bar > .track {
-    -fx-border-radius: 0;
-    -fx-background-radius: 0;
-    -fx-text-box-border: transparent;
-    -fx-control-inner-background: transparent;
-    -fx-background-color: rgba(38, 38, 38, 0.5);
-}
-
-/* Search Table View Favorite CheckBox */
+/* Favorite CheckBox SearchPackage TableView */
 .searchTableView .check-box {
     -fx-padding: 15px;
     -fx-border-insets: 15px;
@@ -262,54 +292,48 @@
     -fx-background-repeat: no-repeat;
 }
 
-/* Favorite List ComboBox */
-.combo-box {
-    -fx-background-color: #282828;
+/* Progress Indicator in Tables while loading packages */
+ .progress-indicator:indeterminate .segment {
+     -fx-background-color: #4d4dff;
  }
 
- .combo-box .list-cell {
-     -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
-     -fx-font-size: 10pt;
-     -fx-text-fill: #d8d8d8;
-     -fx-background-insets: 0 0 0 0, 0, 1, 2;
-  }
+/*---------------------------------------------------*/
+/*             ProgressBar Splashscreen             */
+/*-------------------------------------------------*/
+.progress-bar {
+    -fx-accent: rgba(77, 77, 255, 1);
+}
 
-.combo-box-popup .list-view {
-        -fx-background-color: #1d1d1d;
-        -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
-        -fx-font-size: 10pt;
-        -fx-text-fill: #d8d8d8;
-        -fx-background-insets: 0 0 0 0, 0, 1, 2;
- }
+.progress-bar .bar {
+    -fx-padding: 10px;
+    -fx-background-insets: 0;
+    -fx-background-radius: 0;
+}
 
-.combo-box-popup .list-view .list-cell {
-        -fx-background-color: #282828;
-        -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
-        -fx-font-size: 10pt;
-        -fx-text-fill: #d8d8d8;
-        -fx-background-insets: 0 0 0 0, 0, 1, 2;
- }
+.progress-bar > .track {
+    -fx-border-radius: 0;
+    -fx-background-radius: 0;
+    -fx-text-box-border: transparent;
+    -fx-control-inner-background: transparent;
+    -fx-background-color: rgba(38, 38, 38, 0.5);
+}
 
-/* Menu Button MainWindow */
+/*---------------------------------------------------*/
+/*          Menu Button MainWindow Left             */
+/*-------------------------------------------------*/
  .menuButton {
      -fx-padding: 5 22 5 22;
      -fx-border-color: transparent;
      -fx-border-width: 0;
      -fx-background-radius: 0;
-     -fx-background-color: #282828; /* #1d1d1d */
+     -fx-background-color: #282828;
      -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
-     -fx-font-size: 11pt;
+     -fx-font-size: 11.5pt;
      -fx-text-fill: #d8d8d8;
-     -fx-background-insets: 0 0 0 0, 0, 1, 2;
  }
 
  .menuButton:hover {
-     -fx-background-color: #512bd4; /* #4d4dff */
- }
-
-/* Progress Indicator in Tables */
- .progress-indicator:indeterminate .segment {
-     -fx-background-color: #4d4dff;
+     -fx-background-color: #512bd4;
  }
 
 /*---------------------------------------------------*/

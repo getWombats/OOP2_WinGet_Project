@@ -39,7 +39,7 @@ public class WinGetQuery
 
     public void queryToList(String keyWord) throws IOException, InterruptedException
     {
-        ProcessBuilder processBuilder = new ProcessBuilder("winget", queryType.toString(), keyWord);
+        ProcessBuilder processBuilder = new ProcessBuilder("winget.exe", queryType.toString(), keyWord, "--accept-source-agreements");
         processBuilder.redirectErrorStream(true);
         Process process = processBuilder.start();
 

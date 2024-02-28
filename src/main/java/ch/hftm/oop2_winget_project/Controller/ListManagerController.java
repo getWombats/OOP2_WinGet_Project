@@ -133,11 +133,12 @@ public class ListManagerController {
 
     @FXML
     private void createPackageListButton_onAction(){
-        String name = textField_PackageListName.getText();
-        if (!name.isBlank()) {
-            listManager.createPackageList(name);
-            System.out.println("Created new PackageList: " + name);
-        }
+        listManager.createPackageList("-New List");
+//        String name = textField_PackageListName.getText();
+//        if (!name.isBlank()) {
+//            listManager.createPackageList(name);
+//            System.out.println("Created new PackageList: " + name);
+//        }
     }
 
     @FXML

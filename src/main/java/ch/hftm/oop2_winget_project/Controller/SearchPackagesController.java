@@ -149,7 +149,7 @@ public class SearchPackagesController implements IControllerBase, Initializable
                     private final Button btn = new Button("Install");
                     {
                         btn.setOnAction((ActionEvent event) -> {
-                            WinGetPackage data = getTableView().getItems().get(getIndex());
+                            WinGetPackage selectedItem = getTableView().getItems().get(getIndex());
 
                             btn.setDisable(true); // Disables button when clicked and package installs
                             isThreadWorking = true;
@@ -157,7 +157,7 @@ public class SearchPackagesController implements IControllerBase, Initializable
                             new Thread(() -> {
                                 try
                                 {
-                                    installPackage(data.getId());
+                                    installPackage(selectedItem.getId());
                                 }
                                 catch (IOException ex)
                                 {
@@ -166,8 +166,8 @@ public class SearchPackagesController implements IControllerBase, Initializable
 
                                 Platform.runLater(() -> {
                                     // Update list
-                                    PackageList.getInstalledPackageList().add(data);
-                                    data.setInstalled(true); // Set package as installed
+                                    PackageList.getInstalledPackageList().add(selectedItem);
+                                    selectedItem.setInstalled(true); // Set package as installed
                                     installedLabel.getStyleClass().add("label-installed");
                                     setGraphic(installedLabel);
                                     isThreadWorking = false;
@@ -182,8 +182,8 @@ public class SearchPackagesController implements IControllerBase, Initializable
                         if (empty) {
                             setGraphic(null);
                         } else {
-                            WinGetPackage data = getTableView().getItems().get(getIndex());
-                            if(data.isInstalled()) {
+                            WinGetPackage selectedItem = getTableView().getItems().get(getIndex());
+                            if(selectedItem.isInstalled()) {
                                 // Set cell content when package is installed already
                                 installedLabel.getStyleClass().add("label-installed");
                                 setGraphic(installedLabel);

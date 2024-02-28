@@ -245,7 +245,6 @@ public class InstalledPackagesController implements IControllerBase, Initializab
                     }
                     else
                     {
-//                        tableViewPlaceholderLabel.setText("Error loading packages");
                         setTableViewPlaceholder("Error loading packages", false);
                     }
                     isThreadWorking = false;
@@ -274,7 +273,7 @@ public class InstalledPackagesController implements IControllerBase, Initializab
     }
 
     private void uninstallPackage(String packageId) throws IOException {
-        ProcessBuilder processBuilder = new ProcessBuilder("winget", QueryType.UNINSTALL.toString(), packageId);
+        ProcessBuilder processBuilder = new ProcessBuilder("winget.exe", QueryType.UNINSTALL.toString(), packageId);
         processBuilder.redirectErrorStream(true);
         processBuilder.start();
     }

@@ -147,16 +147,19 @@ public class InstalledPackagesController implements IControllerBase, Initializab
                         }
                         else
                         {
-                            WinGetPackage data = getTableView().getItems().get(getIndex());
-                            if(data.getSource().isEmpty())
-                            {
-                                // Do not show "deinstall" button when source is empty
-                                setGraphic(null);
-                            }
-                            else
-                            {
-                                setGraphic(btn);
-                            }
+                            btn.getStyleClass().add("button-uninstall");
+                            setGraphic(btn);
+//                            WinGetPackage data = getTableView().getItems().get(getIndex());
+//                            if(data.getSource().isEmpty())
+//                            {
+//                                // Do not show "deinstall" button when source is empty
+//                                setGraphic(null);
+//                            }
+//                            else
+//                            {
+//                                btn.getStyleClass().add("button-uninstall");
+//                                setGraphic(btn);
+//                            }
                         }
                     }
                 };

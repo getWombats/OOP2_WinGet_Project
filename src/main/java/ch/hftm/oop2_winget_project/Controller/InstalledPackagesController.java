@@ -28,7 +28,7 @@ import java.util.stream.Stream;
 public class InstalledPackagesController implements IControllerBase, Initializable
 {
     @FXML
-    private TableView<WinGetPackage> tableView_installedPackages;
+    private TableView<WinGetPackage> installedPackagesTableView;
     @FXML
     private TableColumn<WinGetPackage, String> idColumn;
     @FXML
@@ -89,20 +89,20 @@ public class InstalledPackagesController implements IControllerBase, Initializab
     @Override
     public void setTableViewSource()
     {
-        this.tableView_installedPackages.setItems(PackageList.getInstalledPackageList());
+        this.installedPackagesTableView.setItems(PackageList.getInstalledPackageList());
     }
 
     @Override
     public void refreshTableViewContent()
     {
-        tableView_installedPackages.setItems(null);
+        installedPackagesTableView.setItems(null);
         setTableViewSource();
     }
 
     @Override
     public WinGetPackage getObjectFromSelection()
     {
-        return tableView_installedPackages.getSelectionModel().getSelectedItem();
+        return installedPackagesTableView.getSelectionModel().getSelectedItem();
     }
 
     @Override
@@ -219,7 +219,7 @@ public class InstalledPackagesController implements IControllerBase, Initializab
     {
         if (!isThreadWorking)
         {
-            tableView_installedPackages.getItems().clear();
+            installedPackagesTableView.getItems().clear();
 
             setTableViewPlaceholder("Loading installed packages", true);
 
@@ -260,14 +260,14 @@ public class InstalledPackagesController implements IControllerBase, Initializab
         placeholderContent.getChildren().addAll(progressIndicator, tableViewPlaceholderLabel);
         placeholderContent.setAlignment(Pos.CENTER);
 
-        tableView_installedPackages.widthProperty().addListener((obs, oldVal, newVal) -> {
+        installedPackagesTableView.widthProperty().addListener((obs, oldVal, newVal) -> {
             placeholderContent.setPrefWidth(newVal.doubleValue());
         });
-        tableView_installedPackages.heightProperty().addListener((obs, oldVal, newVal) -> {
+        installedPackagesTableView.heightProperty().addListener((obs, oldVal, newVal) -> {
             placeholderContent.setPrefHeight(newVal.doubleValue());
         });
 
-        tableView_installedPackages.setPlaceholder(placeholderContent);
+        installedPackagesTableView.setPlaceholder(placeholderContent);
     }
 
     private void uninstallPackage(String packageId) throws IOException {
@@ -281,7 +281,7 @@ public class InstalledPackagesController implements IControllerBase, Initializab
         String selectedAttribute = comboBox_filter.getValue();
 
         if (filterText.isEmpty() || selectedAttribute == null) {
-            tableView_installedPackages.setItems(PackageList.getInstalledPackageList());
+            installedPackagesTableView.setItems(PackageList.getInstalledPackageList());
             return;
         }
 
@@ -309,6 +309,6 @@ public class InstalledPackagesController implements IControllerBase, Initializab
             setTableViewPlaceholder("No Packages found", false);
         }
 
-        tableView_installedPackages.setItems(filteredList);
+        installedPackagesTableView.setItems(filteredList);
     }
 }

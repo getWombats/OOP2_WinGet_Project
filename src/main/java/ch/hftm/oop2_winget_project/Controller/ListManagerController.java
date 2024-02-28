@@ -32,6 +32,8 @@ public class ListManagerController {
     @FXML
     private Button button_deletePackageList;
     @FXML
+    private Button button_rename;
+    @FXML
     private TextField textfield_PackageListName;
     @FXML
     private TableView<PackageList> tableView_packageLists;
@@ -49,15 +51,31 @@ public class ListManagerController {
 
         listManager = ListManager.getInstance(); //Getting the single instance of ListManager.
 
-
-
         // Set up the cell value factories for each column.
         column_name.setCellValueFactory(cellData -> cellData.getValue().getFXName());
         column_size.setCellValueFactory(cellData -> cellData.getValue().getFXSize().asObject());
 
-        // Code for renaming on double click
-//        tableView_packageLists.setEditable(true); // Make the TableView editable.
-//        column_name.setEditable(true); // Make the column editable.
+
+        tableView_packageLists.setEditable(true); // Enable editing for the TableView
+        column_name.setEditable(true); // Enable editing for the 'name' column
+        // Ensure the 'name' column uses a TextFieldTableCell for editing
+        column_name.setCellFactory(TextFieldTableCell.forTableColumn());
+        // Set the commit action for editing the 'name' column
+        column_name.setOnEditCommit(event -> {
+            final String newName = event.getNewValue() != null ? event.getNewValue().trim() : "";
+            PackageList packageList = event.getRowValue(); // Get the actual PackageList object being edited
+
+            if (!newName.isEmpty()) {
+                packageList.setName(newName); // Update the name if new name is not empty
+                Serializer.serializeListManager(); // Assuming you have a method to serialize (save) the updated ListManager
+            } else {
+                // If the new name is invalid or empty, revert to the old name
+                packageList.setName(event.getOldValue());
+                tableView_packageLists.refresh(); // Refresh the table to show the reverted/updated name
+            }
+        });
+
+
 //        // This gets called when the editing of the name is committed.
 //        column_name.setCellFactory(TextFieldTableCell.forTableColumn());
 //        column_name.setOnEditCommit(event -> {
@@ -75,6 +93,7 @@ public class ListManagerController {
 //                tableView_packageLists.refresh();
 //            }
 //        });
+
 
 
         // Bind the data of listManager to the TableView
@@ -138,6 +157,15 @@ public class ListManagerController {
         countdownTimer.stop();
     }
 
+    @FXML
+    private void buttonRename_onAction() {
+        int selectedIndex = tableView_packageLists.getSelectionModel().getSelectedIndex();
+        if (selectedIndex >= 0) {
+            // Start edit the selected row in the name column
+            tableView_packageLists.edit(selectedIndex, column_name);
+        }
+    }
+
 
 //    Event Handlers / Listeners
     private void setUpDoubleClickOnRow() {
@@ -160,6 +188,7 @@ public class ListManagerController {
             return row;
         });
     }
+
 
     private void filterList() {
         String filterText = textfield_filter.getText().toLowerCase();

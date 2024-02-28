@@ -17,6 +17,7 @@
                         <Button fx:id="button_createPackageList" mnemonicParsing="false" onAction="#createPackageListButton_onAction" stylesheets="@../CSS/DarkTheme.css" text="Create new List" />
                         <Button fx:id="button_deletePackageList" mnemonicParsing="false" onAction="#deletePackageListButton_onAction" onMousePressed="#deletePackageListButton_MousePressed" onMouseReleased="#deletePackageListButton_MouseReleased" stylesheets="@../CSS/DarkTheme.css" text="Delete List (press 1s)" />
                         <Button fx:id="button_CreateBatchFile" mnemonicParsing="false" onAction="#buttoncreateBatchFile_onAction" stylesheets="@../CSS/DarkTheme.css" text="Create Install Script" />
+                        <Button fx:id="button_rename" mnemonicParsing="false" onAction="#buttonRename_onAction" stylesheets="@../CSS/DarkTheme.css" text="Rename" />
                         <TextField fx:id="textfield_PackageListName" promptText="Name for new List" stylesheets="@../CSS/DarkTheme.css" />
                         <TextField fx:id="textfield_filter" promptText="Filter Packages" stylesheets="@../CSS/DarkTheme.css" />
                         <ComboBox fx:id="comboBox_filter" prefWidth="150.0" stylesheets="@../CSS/DarkTheme.css" />

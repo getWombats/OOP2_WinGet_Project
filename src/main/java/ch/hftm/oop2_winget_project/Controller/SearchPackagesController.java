@@ -305,7 +305,7 @@ public class SearchPackagesController implements IControllerBase, Initializable
     }
 
     private void installPackage(String packageId) throws IOException {
-        ProcessBuilder processBuilder = new ProcessBuilder("winget", QueryType.INSTALL.toString(), packageId, "--accept-package-agreements", "--accept-source-agreements");
+        ProcessBuilder processBuilder = new ProcessBuilder("winget.exe", QueryType.INSTALL.toString(), packageId, "--accept-package-agreements", "--accept-source-agreements");
         processBuilder.redirectErrorStream(true);
         processBuilder.start();
     }

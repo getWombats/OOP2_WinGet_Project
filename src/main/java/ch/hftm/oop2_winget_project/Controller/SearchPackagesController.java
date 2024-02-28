@@ -203,8 +203,6 @@ public class SearchPackagesController implements IControllerBase, Initializable
     }
 
     private void setSourceColumnLabel(){
-//        tableView.getScene().getStylesheets().add(getClass().getResource("DarkTheme.css").toExternalForm());
-        column_source.setEditable(true);
         column_source.setCellFactory(column -> new TableCell<>() {
             @Override
             protected void updateItem(String item, boolean empty) {
@@ -300,7 +298,7 @@ public class SearchPackagesController implements IControllerBase, Initializable
                     }
                     else
                     {
-                        tableViewPlaceholderLabel.setText("No packages found");
+                        setTableViewPlaceholder("No packages found", false);
                     }
                     isThreadWorking = false;
                 });

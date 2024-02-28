@@ -34,7 +34,7 @@ public class ListManagerController {
     @FXML
     private Button button_rename;
     @FXML
-    private TextField textfield_PackageListName;
+    private TextField textField_PackageListName;
     @FXML
     private TableView<PackageList> tableView_packageLists;
     @FXML
@@ -44,22 +44,19 @@ public class ListManagerController {
     @FXML
     private ComboBox<String> comboBox_filter;
     @FXML
-    private TextField textfield_filter;
+    private TextField textField_filter;
 
     @FXML
     private void initialize() {
 
         listManager = ListManager.getInstance(); //Getting the single instance of ListManager.
 
-        // Set up the cell value factories for each column.
-        column_name.setCellValueFactory(cellData -> cellData.getValue().getFXName());
-        column_size.setCellValueFactory(cellData -> cellData.getValue().getFXSize().asObject());
+        // Set up tableView
+        column_name.setCellValueFactory(cellData -> cellData.getValue().getFXName()); // Set cell value for column.
+        column_size.setCellValueFactory(cellData -> cellData.getValue().getFXSize().asObject()); // Set cell value for column.
+        column_name.setCellFactory(TextFieldTableCell.forTableColumn()); // Set cell to textField for editing.
 
 
-        tableView_packageLists.setEditable(true); // Enable editing for the TableView
-        column_name.setEditable(true); // Enable editing for the 'name' column
-        // Ensure the 'name' column uses a TextFieldTableCell for editing
-        column_name.setCellFactory(TextFieldTableCell.forTableColumn());
         // Set the commit action for editing the 'name' column
         column_name.setOnEditCommit(event -> {
             final String newName = event.getNewValue() != null ? event.getNewValue().trim() : "";
@@ -75,7 +72,9 @@ public class ListManagerController {
             }
         });
 
-
+//        private void rename() {
+//
+//        }
 //        // This gets called when the editing of the name is committed.
 //        column_name.setCellFactory(TextFieldTableCell.forTableColumn());
 //        column_name.setOnEditCommit(event -> {
@@ -100,6 +99,7 @@ public class ListManagerController {
         tableView_packageLists.setItems(listManager.getFXLists());
 
         setUpDoubleClickOnRow();
+        keyListener();
 
         // Delete button countdown
         countdownTimer = new Timeline(new KeyFrame(Duration.seconds(1), this::deletePackageList));
@@ -109,8 +109,19 @@ public class ListManagerController {
         // Initialize filter components
         comboBox_filter.getItems().addAll("All Attributes", "Name", "Size");
         comboBox_filter.setValue("All Attributes");
-        textfield_filter.textProperty().addListener((observable, oldValue, newValue) -> filterList());
+        textField_filter.textProperty().addListener((observable, oldValue, newValue) -> filterList());
         comboBox_filter.valueProperty().addListener((observable, oldValue, newValue) -> filterList());
+    }
+
+    // Listener for keyboard inputs.
+    private void keyListener() {
+        tableView_packageLists.setOnKeyPressed(event -> {
+            switch (event.getCode()) {
+                case F2:
+                    buttonRename_onAction();
+                    break;
+            }
+        });
     }
 
     private void deletePackageList(ActionEvent actionEvent) {
@@ -122,7 +133,7 @@ public class ListManagerController {
 
     @FXML
     private void createPackageListButton_onAction(){
-        String name = textfield_PackageListName.getText();
+        String name = textField_PackageListName.getText();
         if (!name.isBlank()) {
             listManager.createPackageList(name);
             System.out.println("Created new PackageList: " + name);
@@ -157,14 +168,35 @@ public class ListManagerController {
         countdownTimer.stop();
     }
 
+//    @FXML
+//    private void buttonRename_onAction() {
+//        int selectedIndex = tableView_packageLists.getSelectionModel().getSelectedIndex();
+//        if (selectedIndex >= 0) {
+//            tableView_packageLists.edit(selectedIndex, column_name); // This should trigger editing
+//        }
+//    }
+
     @FXML
     private void buttonRename_onAction() {
         int selectedIndex = tableView_packageLists.getSelectionModel().getSelectedIndex();
         if (selectedIndex >= 0) {
+            // Temporarily enable editing to rename the selected item
+            tableView_packageLists.setEditable(true);
+            column_name.setEditable(true);
+
             // Start edit the selected row in the name column
             tableView_packageLists.edit(selectedIndex, column_name);
+
+            // Set a listener to revert back to non-editable once editing is done
+            tableView_packageLists.editingCellProperty().addListener((obs, oldCell, newCell) -> {
+                if (newCell == null) { // Editing has ended
+                    tableView_packageLists.setEditable(false);
+                    column_name.setEditable(false);
+                }
+            });
         }
     }
+
 
 
 //    Event Handlers / Listeners
@@ -189,9 +221,8 @@ public class ListManagerController {
         });
     }
 
-
     private void filterList() {
-        String filterText = textfield_filter.getText().toLowerCase();
+        String filterText = textField_filter.getText().toLowerCase();
         String filterAttribute = comboBox_filter.getValue();
 
         if (filterText.isEmpty() || filterAttribute == null) {

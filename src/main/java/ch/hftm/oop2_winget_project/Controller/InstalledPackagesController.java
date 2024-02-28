@@ -15,6 +15,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.util.Callback;
 
@@ -48,6 +50,9 @@ public class InstalledPackagesController implements IControllerBase, Initializab
     @FXML
     private TextField textfield_filter;
     private boolean isThreadWorking;
+
+//    private final Image image = new Image(getClass().getResource("/path/to/resource/image.jpg").toExternalForm());
+//    private ImageView imageView = new ImageView(image);
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
@@ -115,27 +120,38 @@ public class InstalledPackagesController implements IControllerBase, Initializab
                     private final Button btn = new Button("Uninstall");
                     {
                         btn.setOnAction((ActionEvent event) -> {
-                            WinGetPackage data = getTableView().getItems().get(getIndex());
-                            data.setInstalled(false); // Set package as uninstalled
+                            WinGetPackage selectedItem = getTableView().getItems().get(getIndex());
 
-                            isThreadWorking = true;
-                            setGraphic(new ProgressBar());
-                            new Thread(() -> {
-                                try
-                                {
-                                    uninstallPackage(data.getId());
-                                }
-                                catch (IOException ex)
-                                {
-                                    System.out.println(ex.getMessage()); // Replace with ExceptionHandler when implemented
-                                }
+                            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Do you really want to uninstall " + selectedItem.getName() + " ?", ButtonType.YES, ButtonType.CANCEL);
+                            alert.setHeaderText("");
+                            alert.setTitle("Remove Package");
+//                            alert.getDialogPane().setStyle("-fx-background: black;");
+//                            alert.setGraphic(imageView);
+                            alert.showAndWait();
 
-                                Platform.runLater(() -> {
-                                    // Update list
-                                    PackageList.getInstalledPackageList().remove(data);
-                                    isThreadWorking = false;
-                                });
-                            }).start();
+                            if (alert.getResult() == ButtonType.YES) {
+                                isThreadWorking = true;
+                                setGraphic(new ProgressBar());
+                                new Thread(() -> {
+                                    try
+                                    {
+                                        uninstallPackage(selectedItem.getId());
+                                    }
+                                    catch (IOException ex)
+                                    {
+                                        System.out.println(ex.getMessage()); // Replace with ExceptionHandler when implemented
+                                    }
+
+                                    Platform.runLater(() -> {
+                                        selectedItem.setInstalled(false); // Set package as uninstalled
+                                        // Update list
+                                        PackageList.getInstalledPackageList().remove(selectedItem);
+                                        setGraphic(null);
+                                        textfield_filter.clear();
+                                        isThreadWorking = false;
+                                    });
+                                }).start();
+                            }
                         });
                     }
 
@@ -229,7 +245,8 @@ public class InstalledPackagesController implements IControllerBase, Initializab
                     }
                     else
                     {
-                        tableViewPlaceholderLabel.setText("Error loading packages");
+//                        tableViewPlaceholderLabel.setText("Error loading packages");
+                        setTableViewPlaceholder("Error loading packages", false);
                     }
                     isThreadWorking = false;
                 });
@@ -290,6 +307,11 @@ public class InstalledPackagesController implements IControllerBase, Initializab
         };
 
         ObservableList<WinGetPackage> filteredList = packageStream.filter(filterPredicate).collect(Collectors.toCollection(FXCollections::observableArrayList));
+
+        if(filteredList.isEmpty()){
+            setTableViewPlaceholder("No Packages found", false);
+        }
+
         installedPackagesTableView.setItems(filteredList);
     }
 

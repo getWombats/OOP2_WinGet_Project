@@ -70,29 +70,6 @@ public class ListManagerController {
             }
         });
 
-//        private void rename() {
-//
-//        }
-//        // This gets called when the editing of the name is committed.
-//        column_name.setCellFactory(TextFieldTableCell.forTableColumn());
-//        column_name.setOnEditCommit(event -> {
-//            final String newName = event.getNewValue() != null ? event.getNewValue().trim() : "";
-//            PackageList packageList = event.getRowValue(); // Get the actual PackageList object being edited
-//
-//            if (!newName.isEmpty()) {
-//                packageList.setName(newName); // Update the name if new name is not empty
-//                Serializer.serializeListManager();
-//            } else {
-//                // If the new name is invalid or empty, revert to the old name
-//                packageList.setName(event.getOldValue());
-//                // No need to use set on the items list directly since we're modifying the object itself
-//                // Just refresh the table if necessary to show the reverted name
-//                tableView_packageLists.refresh();
-//            }
-//        });
-
-
-
         // Bind the data of listManager to the TableView
         tableView_packageLists.setItems(listManager.getFXLists());
 
@@ -152,6 +129,7 @@ public class ListManagerController {
 //            listManager.deletePackageList(selectedPackageList);
 //        }
     }
+
     @FXML
     private void deletePackageListButton_MousePressed(){
         countdownTimer.play();
@@ -161,14 +139,6 @@ public class ListManagerController {
     private void deletePackageListButton_MouseReleased(){
         countdownTimer.stop();
     }
-
-//    @FXML
-//    private void buttonRename_onAction() {
-//        int selectedIndex = tableView_packageLists.getSelectionModel().getSelectedIndex();
-//        if (selectedIndex >= 0) {
-//            tableView_packageLists.edit(selectedIndex, column_name); // This should trigger editing
-//        }
-//    }
 
     @FXML
     private void buttonRename_onAction() {
@@ -190,8 +160,6 @@ public class ListManagerController {
             });
         }
     }
-
-
 
 //    Event Handlers / Listeners
     private void setUpDoubleClickOnRow() {

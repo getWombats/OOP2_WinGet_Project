@@ -41,6 +41,7 @@
     -fx-font-size: 10pt;
     -fx-font-family: "Segoe UI Semibold";
     -fx-highlight-fill: #512bd4;
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
 }
 
 .button {
@@ -72,11 +73,13 @@
     -fx-background-size: 20px;
     -fx-background-repeat: no-repeat;
     -fx-background-position: 10%;
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
 }
 
 /* Favorite List ComboBox */
 .combo-box {
     -fx-background-color: #282828;
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
  }
 
  .combo-box .list-cell {
@@ -166,11 +169,15 @@
 
 /* Install Button SearchPackage TableView */
 .searchTableView .button-install {
-    -fx-padding: 5 15 5 35;
-    -fx-border-color: #1d1d1d;
+    -fx-padding: 5 25 5 45;
+
+    -fx-border-color: #512bd4;
     -fx-border-width: 1;
-    -fx-background-radius: 0;
+    -fx-border-radius: 10em; /* radius for pill button style */
+
+    -fx-background-radius: 10em; /* radius for pill button style */
     -fx-background-color: #1d1d1d;
+
     -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
     -fx-font-size: 10pt;
     -fx-text-fill: #d8d8d8;
@@ -179,6 +186,8 @@
     -fx-background-size: 15px;
     -fx-background-repeat: no-repeat;
     -fx-background-position: 20%;
+
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,1.0) , 5, 0.0 , 0 , 1 );
 }
 
 .searchTableView .button-install:hover {
@@ -298,6 +307,7 @@
     -fx-background-image: url(../Icons/favoriteUnchecked.png);
     -fx-background-size: 18px;
     -fx-background-repeat: no-repeat;
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0, 0.5) , 5, 0.0 , 0 , 1 );
 }
 
 .searchTableView .check-box:selected .mark {
@@ -311,6 +321,7 @@
     -fx-background-image: url(../Icons/favoriteChecked.png);
     -fx-background-size: 18px;
     -fx-background-repeat: no-repeat;
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0, 0.5) , 5, 0.0 , 0 , 1 );
 }
 
 /* Progress Indicator in Tables while loading packages */

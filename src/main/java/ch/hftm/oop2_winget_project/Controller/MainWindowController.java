@@ -5,6 +5,7 @@ import ch.hftm.oop2_winget_project.Util.ResourceProvider;
 import ch.hftm.oop2_winget_project.Util.StageAndSceneManager;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.AnchorPane;
@@ -22,6 +23,17 @@ public class MainWindowController implements Initializable
     private ToggleButton maximizeWindowButton;
     @FXML
     private AnchorPane titleBar;
+    @FXML
+    private Button buttonSearchPackages;
+    @FXML
+    private Button buttonUpdatePackages;
+    @FXML
+    private Button buttonInstalledPackages;
+    @FXML
+    private Button buttonFavorites;
+
+//    private final String MENU_BUTTON_DEFAULT_STYLE_CLASS = "menuButton";
+//    private final String MENU_BUTTON_ACTIVE_STYLE_CLASS = "menuButton-active";
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
@@ -50,19 +62,17 @@ public class MainWindowController implements Initializable
     }
 
     @FXML
-    private void menuFavouritePackagesButtonClick()
-    {
-        StageAndSceneManager.loadFxmlToBorderPaneLeft(mainWindowBorderPane, ResourceProvider.INSTALLEDPACKAGES_VIEW_NAME);
-    }
-
-
-    @FXML
-    private void menuListManagerButtonClick()
+    private void menuFavouritesButtonClick()
     {
         StageAndSceneManager.loadFxmlToBorderPaneLeft(mainWindowBorderPane, ResourceProvider.LISTMANAGER_VIEW_NAME);
     }
 
-
+//    private void resetButtonStyleClasses(){
+//        buttonSearchPackages.getStyleClass().remove(MENU_BUTTON_ACTIVE_STYLE_CLASS);
+//        buttonUpdatePackages.getStyleClass().remove(MENU_BUTTON_ACTIVE_STYLE_CLASS);
+//        buttonInstalledPackages.getStyleClass().remove(MENU_BUTTON_ACTIVE_STYLE_CLASS);
+//        buttonFavorites.getStyleClass().remove(MENU_BUTTON_ACTIVE_STYLE_CLASS);
+//    }
 
     @FXML
     private void minimizeWindowButtonClick()

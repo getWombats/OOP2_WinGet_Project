@@ -207,8 +207,9 @@ public class InstalledPackagesController implements IControllerBase, Initializab
                     setGraphic(sourceLabel);
                 }
                 else {
-                    Label nameLabel = new Label(item);
-                    setGraphic(nameLabel);
+                    sourceLabel.getStyleClass().add("label-source-unknown");
+                    sourceLabel.setText("N/A");
+                    setGraphic(sourceLabel);
                 }
             }
         });

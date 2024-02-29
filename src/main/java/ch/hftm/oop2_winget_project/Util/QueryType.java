@@ -23,6 +23,13 @@ public enum QueryType
             return "install";
         }
     },
+    UPGRADE {
+        @Override
+        public String toString()
+        {
+            return "upgrade";
+        }
+    },
     UNINSTALL {
         @Override
         public String toString()

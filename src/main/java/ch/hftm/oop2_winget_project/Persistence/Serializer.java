@@ -49,7 +49,6 @@ public class Serializer {
         printModels("Current ListManager: ");
     }
 
-
     private static void printModels(String str) {
         System.out.println("\n" + str);
         ListManager listManager = ListManager.getInstance();
@@ -67,32 +66,4 @@ public class Serializer {
             packageListDTO.getPackages().forEach(winGetPackageDTO -> System.out.println(" - WinGetPackageDTO: " + winGetPackageDTO.getName() + " " + winGetPackageDTO.getId() + " " + winGetPackageDTO.getVersion() + " " + winGetPackageDTO.getSource()));
         });
     }
-
-//    Old Code:
-//    public static void serializeListManager() {
-//        try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(filepath))) {
-//            // Convert ObservableList to ArrayList for serialization
-//            List<PackageList> serializableList = new ArrayList<>(listManager.getFXLists());
-//            out.writeObject(serializableList);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//    }
-
-//     Old Code
-//    public static ListManager deserializeListManager() {
-//        try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(filepath))) {
-//            // Deserialize to ArrayList and then convert to ObservableList
-//            List<PackageList> list = (List<PackageList>) in.readObject();
-//            ObservableList<PackageList> observableList = FXCollections.observableArrayList(list);
-//            ListManager.getInstance().setLists(observableList);
-//            return ListManager.getInstance();
-//        } catch (FileNotFoundException e) {
-//            return ListManager.getInstance();
-//        } catch (IOException | ClassNotFoundException e) {
-//            e.printStackTrace();
-//            return null;
-//        }
-//    }
-
 }

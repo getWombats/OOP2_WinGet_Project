@@ -37,18 +37,27 @@
     -fx-background-color: #282828;
     -fx-border-color: #737373;
     -fx-border-width: 1;
+    -fx-border-radius: 10em; /* radius for pill button style */
+    -fx-background-radius: 10em; /* radius for pill button style */
+    -fx-padding: 5 15 5 15; /* test */
     -fx-text-fill: #d8d8d8;
     -fx-font-size: 10pt;
     -fx-font-family: "Segoe UI Semibold";
     -fx-highlight-fill: #512bd4;
-    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0, 0.6) , 8, 0.0 , 0 , 1 ); /* test */
+}
+
+.text-field:focused {
+    -fx-border-color: #512bd4; /* test */
+    -fx-effect: dropshadow( three-pass-box , rgba(81, 43, 212, 1.0) , 5, 0.0 , 0 , 1 ); /* test */
 }
 
 .button {
     -fx-padding: 5 22 5 22;
     -fx-border-color: #737373;
     -fx-border-width: 1;
-    -fx-background-radius: 0;
+    -fx-border-radius: 10em; /* radius for pill button style */
+    -fx-background-radius: 10em; /* radius for pill button style */
     -fx-background-color: #1d1d1d;
     -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
     -fx-font-size: 10pt;

@@ -28,8 +28,8 @@
     <center>
         <TableView fx:id="tableView_packageLists" prefHeight="200.0" styleClass="installedTableView" stylesheets="@../CSS/DarkTheme.css" BorderPane.alignment="TOP_LEFT">
             <columns>
-                <TableColumn fx:id="column_name" editable="false" minWidth="220.0" prefWidth="-1.0" resizable="false" text="Name" />
-                <TableColumn fx:id="column_size" editable="false" minWidth="220.0" prefWidth="-1.0" resizable="false" text="Packages" />
+                <TableColumn fx:id="column_name" editable="false" minWidth="220.0" prefWidth="-1.0" resizable="false" reorderable="false" text="Name" />
+                <TableColumn fx:id="column_size" editable="false" minWidth="220.0" prefWidth="-1.0" resizable="false" reorderable="false" text="Packages" />
             </columns>
          <columnResizePolicy>
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

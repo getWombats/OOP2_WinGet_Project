@@ -95,7 +95,6 @@ public class WinGetQuery
                     line = ManipulateHanLine(line);
                 }
 
-                System.out.println(line);
                 String packageVersion;
                 if(columnSeparatorIndexAvailableOrMatch > -1)
                 {

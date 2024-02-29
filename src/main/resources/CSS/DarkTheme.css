@@ -44,12 +44,12 @@
     -fx-font-size: 10pt;
     -fx-font-family: "Segoe UI Semibold";
     -fx-highlight-fill: #512bd4;
-    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0, 0.6) , 8, 0.0 , 0 , 1 ); /* test */
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0, 0.6) , 8, 0.0 , 0 , 1 );
 }
 
 .text-field:focused {
     -fx-border-color: #512bd4; /* test */
-    -fx-effect: dropshadow( three-pass-box , rgba(81, 43, 212, 1.0) , 5, 0.0 , 0 , 1 ); /* test */
+    /*-fx-effect: dropshadow( three-pass-box , rgba(81, 43, 212, 1.0) , 5, 0.0 , 0 , 1 );*/
 }
 
 .button {
@@ -66,6 +66,7 @@
 
 .button:hover {
     -fx-background-color: #4d4dff;
+    -fx-border-color: #4d4dff;
 }
 
 .refreshButton {
@@ -87,9 +88,20 @@
 
 /* Favorite List ComboBox */
 .combo-box {
+    -fx-padding: 1 5 1 5;
+    -fx-border-color: #737373;
+    -fx-border-width: 1;
+    -fx-border-radius: 10em; /* radius for pill button style */
+    -fx-background-radius: 10em; /* radius for pill button style */
     -fx-background-color: #282828;
     -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
  }
+
+ .combo-box:focused {
+     -fx-border-color: #512bd4;
+     /*-fx-border-radius: 1em 1em 0 0;*/ /* radius for pill button style */
+     /*-fx-background-radius: 1em 1em 0 0;*/ /* radius for pill button style */
+  }
 
  .combo-box .list-cell {
      -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
@@ -179,24 +191,19 @@
 /* Install Button SearchPackage TableView */
 .searchTableView .button-install {
     -fx-padding: 5 25 5 45;
-
     -fx-border-color: #512bd4;
     -fx-border-width: 1;
     -fx-border-radius: 10em; /* radius for pill button style */
-
     -fx-background-radius: 10em; /* radius for pill button style */
     -fx-background-color: #1d1d1d;
-
     -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
     -fx-font-size: 10pt;
     -fx-text-fill: #d8d8d8;
-
     -fx-background-image: url(../Icons/download.png);
     -fx-background-size: 15px;
     -fx-background-repeat: no-repeat;
     -fx-background-position: 20%;
-
-    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,1.0) , 5, 0.0 , 0 , 1 );
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
 }
 
 .searchTableView .button-install:hover {
@@ -205,10 +212,11 @@
 
 /* Uninstall Button InstalledPackage TableView */
 .installedTableView .button-uninstall {
-    -fx-padding: 5 14 5 35;
-    -fx-border-color: #1d1d1d;
+    -fx-padding: 5 16 5 37;
+    -fx-border-color: #660000;
     -fx-border-width: 1;
-    -fx-background-radius: 0;
+    -fx-border-radius: 10em; /* radius for pill button style */
+    -fx-background-radius: 10em; /* radius for pill button style */
     -fx-background-color: #1d1d1d;
     -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
     -fx-font-size: 10pt;
@@ -222,27 +230,31 @@
 
 .installedTableView .button-uninstall:hover {
     -fx-background-color: #990000;
+    -fx-border-color: #990000;
 }
 
 /* Update Button UpgradePackage TableView */
 .upgradeTableView .button-upgrade {
-    -fx-padding: 5 15 5 35;
+    -fx-padding: 5 18 5 43;
     -fx-border-color: #1d1d1d;
     -fx-border-width: 1;
-    -fx-background-radius: 0;
+    -fx-border-radius: 10em; /* radius for pill button style */
+    -fx-background-radius: 10em; /* radius for pill button style */
     -fx-background-color: #1d1d1d;
     -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
     -fx-font-size: 10pt;
     -fx-text-fill: #d8d8d8;
 
-    -fx-background-image: url(../Icons/download.png);
-    -fx-background-size: 15px;
+    -fx-background-image: url(../Icons/updateIcon.png);
+    -fx-background-size: 19px;
     -fx-background-repeat: no-repeat;
     -fx-background-position: 20%;
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
 }
 
 .upgradeTableView .button-upgrade:hover {
-    -fx-background-color: #512bd4;
+    -fx-background-color: #004d26;
+    -fx-border-color: transparent;
 }
 
 /* Labels SearchPackage TableView */
@@ -296,6 +308,7 @@
 .table-row-cell:filled {
     -fx-font-size: 10pt;
     -fx-text-fill: white;
+    -fx-cell-size: 50px;
 }
 
 .table-view .table-cell {

@@ -33,7 +33,7 @@
                 <TableColumn fx:id="column_id" editable="false" minWidth="220.0" prefWidth="-1.0" resizable="false" reorderable="false" text="ID" />
                 <TableColumn fx:id="column_version" editable="false" minWidth="350.0" prefWidth="-1.0" resizable="false" reorderable="false" text="Version" />
                 <TableColumn fx:id="column_source" editable="false" minWidth="150.0" prefWidth="-1.0" resizable="false" reorderable="false" text="Source" />
-                <TableColumn fx:id="column_button_install" minWidth="130.0" prefWidth="-1.0" resizable="false" />
+                <TableColumn fx:id="column_button_install" editable="false" minWidth="130.0" prefWidth="-1.0" resizable="false" />
             </columns>
          <BorderPane.margin>
             <Insets />

@@ -34,6 +34,7 @@ public class Message
         DialogPane dialogPane = alert.getDialogPane();
 //        dialogPane.getStyleClass().add("customDialog");
 //        dialogPane.getStylesheets().add(Message.class.getResource("DarkTheme.css").toExternalForm());
+        //        tableView.getScene().getStylesheets().add(getClass().getResource("DarkTheme.css").toExternalForm());
 //        dialogPane.getStyleClass().add("customDialog");
 
         // Positioning

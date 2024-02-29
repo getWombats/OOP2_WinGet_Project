@@ -48,7 +48,7 @@
 }
 
 .text-field:focused {
-    -fx-border-color: #512bd4; /* test */
+    -fx-border-color: #512bd4;
     /*-fx-effect: dropshadow( three-pass-box , rgba(81, 43, 212, 1.0) , 5, 0.0 , 0 , 1 );*/
 }
 
@@ -65,8 +65,13 @@
 }
 
 .button:hover {
-    -fx-background-color: #4d4dff;
-    -fx-border-color: #4d4dff;
+    -fx-background-color: #6141d8;
+    -fx-border-color: #6141d8;
+}
+
+.button:pressed {
+    -fx-background-color: #4827be;
+    -fx-border-color: #512bd4;
 }
 
 .refreshButton {
@@ -236,7 +241,7 @@
 /* Update Button UpgradePackage TableView */
 .upgradeTableView .button-upgrade {
     -fx-padding: 5 18 5 43;
-    -fx-border-color: #1d1d1d;
+    -fx-border-color: #512bd4;
     -fx-border-width: 1;
     -fx-border-radius: 10em; /* radius for pill button style */
     -fx-background-radius: 10em; /* radius for pill button style */
@@ -253,8 +258,8 @@
 }
 
 .upgradeTableView .button-upgrade:hover {
-    -fx-background-color: #004d26;
-    -fx-border-color: transparent;
+    -fx-background-color: #512bd4;
+    -fx-background-image: url(../Icons/updateIconHover.png);
 }
 
 /* Labels SearchPackage TableView */
@@ -301,6 +306,18 @@
 
     -fx-background-image: url(../Icons/wingetIconBright.png);
     -fx-background-size: 22px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: left center;
+}
+
+.table-row-cell:filled .label-source-unknown {
+    -fx-background-color: transparent;
+    -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+    -fx-font-size: 10pt;
+    -fx-text-fill: #d8d8d8;
+
+    -fx-background-image: url(../Icons/sourceUnknownIcon.png);
+    -fx-background-size: 24px;
     -fx-background-repeat: no-repeat;
     -fx-background-position: left center;
 }
@@ -385,6 +402,17 @@
      -fx-font-size: 11.5pt;
      -fx-text-fill: #d8d8d8;
  }
+
+  .menuButton-active {
+      -fx-padding: 5 22 5 22;
+      -fx-border-color: transparent;
+      -fx-border-width: 0;
+      -fx-background-radius: 0;
+      -fx-background-color: #512bd4;
+      -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+      -fx-font-size: 11.5pt;
+      -fx-text-fill: #d8d8d8;
+  }
 
  .menuButton:hover {
      -fx-background-color: #512bd4;

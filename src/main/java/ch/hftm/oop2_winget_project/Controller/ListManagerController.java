@@ -86,7 +86,8 @@ public class ListManagerController {
 
     @FXML
     private void createPackageListButton_onAction(){
-        listManager.createPackageList("-New List");
+        listManager.createPackageList("- New List");
+        Serializer.serializeListManager();
     }
 
     @FXML

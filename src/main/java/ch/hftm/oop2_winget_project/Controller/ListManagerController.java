@@ -99,14 +99,16 @@ public class ListManagerController {
     private void selectionListener() {
         tableView_packageLists.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             // Disable buttons if no list is selected or if the selected list is "Favourites" by UUID
+
             if ("favourite-list-uuid".equals(newSelection.getId())) {
                 System.out.println("newSelection:" + newSelection);
                 button_rename.setDisable(true);
                 button_deletePackageList.setDisable(true);
-                button_CreateBatchFile.setDisable(false);
             } else {
                 button_rename.setDisable(false);
                 button_deletePackageList.setDisable(false);
+            }
+            if (newSelection.getSize() != 0) {
                 button_CreateBatchFile.setDisable(false);
             }
         });

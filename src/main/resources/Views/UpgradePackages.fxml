@@ -28,9 +28,9 @@
                 <TableColumn fx:id="nameColumn" editable="false" minWidth="220.0" prefWidth="-1.0" resizable="false" reorderable="false" text="Name" />
                 <TableColumn fx:id="idColumn" editable="false" minWidth="220.0" prefWidth="-1.0" resizable="false" reorderable="false"  text="ID" />
                 <TableColumn fx:id="installedVersionColumn" editable="false" minWidth="190.0" prefWidth="-1.0" resizable="false" reorderable="false"  text="Installed Version" />
-            <TableColumn fx:id="availableVersionColumn" editable="false" minWidth="190.0" prefWidth="-1.0" resizable="false" reorderable="false"  text="Available Version" />
+                <TableColumn fx:id="availableVersionColumn" editable="false" minWidth="190.0" prefWidth="-1.0" resizable="false" reorderable="false"  text="Available Version" />
                 <TableColumn fx:id="sourceColumn" editable="false" minWidth="150.0" prefWidth="-1.0" resizable="false" reorderable="false"  text="Source" />
-            <TableColumn fx:id="actionColumn" minWidth="130.0" prefWidth="-1.0" />
+                <TableColumn fx:id="actionColumn" minWidth="130.0" prefWidth="-1.0" />
             </columns>
          <columnResizePolicy>
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

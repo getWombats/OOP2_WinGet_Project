@@ -1,35 +1,48 @@
 package ch.hftm.oop2_winget_project.Controller;
 
 import ch.hftm.oop2_winget_project.Api.IControllerBase;
+import ch.hftm.oop2_winget_project.Model.PackageList;
 import ch.hftm.oop2_winget_project.Model.WinGetPackage;
+import ch.hftm.oop2_winget_project.Model.WinGetQuery;
+import ch.hftm.oop2_winget_project.Util.ConsoleExitCode;
+import ch.hftm.oop2_winget_project.Util.QueryType;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
-import javafx.scene.control.Label;
-import javafx.scene.control.ProgressIndicator;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class UpgradePackagesController implements IControllerBase, Initializable
 {
     @FXML
-    public TableView upgradePackagesTableView;
+    private TableView<WinGetPackage> upgradePackagesTableView;
     @FXML
-    public TableColumn nameColumn;
+    private TableColumn<WinGetPackage, String> idColumn;
     @FXML
-    public TableColumn idColumn;
+    private TableColumn<WinGetPackage, String> nameColumn;
     @FXML
-    public TableColumn versionColumn;
+    private TableColumn<WinGetPackage, String> sourceColumn;
     @FXML
-    public TableColumn sourceColumn;
+    private TableColumn<WinGetPackage, String> installedVersionColumn;
+    @FXML
+    private TableColumn<WinGetPackage, String> availableVersionColumn;
+    @FXML
+    private TableColumn<WinGetPackage, Void> actionColumn;
     @FXML
     private Label tableViewPlaceholderLabel;
     @FXML
     private VBox placeholderContent;
+    @FXML
+    private TextField textfield_filter;
+    @FXML
+    private ComboBox comboBox_filter;
+
+    private boolean isThreadWorking;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -40,27 +53,68 @@ public class UpgradePackagesController implements IControllerBase, Initializable
 
     @FXML
     private void getAvailableUpdates() {
+        if (!isThreadWorking)
+        {
+            upgradePackagesTableView.getItems().clear();
 
+            setTableViewPlaceholder("Loading available updates", true);
+
+            isThreadWorking = true;
+            new Thread(() -> {
+                WinGetQuery query = new WinGetQuery(QueryType.UPGRADE);
+                try
+                {
+                    query.queryToList(null);
+                }
+                catch (IOException | InterruptedException ex)
+                {
+                    System.out.println(ex.getMessage());
+                }
+
+                Platform.runLater(() -> {
+                    if (query.getConsoleExitCode() == ConsoleExitCode.OK.getValue())
+                    {
+                        query.CreateUpdateList(PackageList.getUpgradePackageList());
+
+                        for(var item : PackageList.getUpgradePackageList()) {
+                            System.out.println(item.getName() + " / ID: " + item.getId() + " / V alt:" + item.getVersion() + " / V neu: " + item.getUpdateVersion());
+                        }
+
+                        refreshTableViewContent();
+                    }
+                    else
+                    {
+                        setTableViewPlaceholder("Error loading packages", false);
+                    }
+                    isThreadWorking = false;
+                });
+            }).start();
+        }
     }
 
     @Override
     public void setTableViewData() {
-
+        this.nameColumn.setCellValueFactory(cellData -> cellData.getValue().getFXName());
+        this.idColumn.setCellValueFactory(cellData -> cellData.getValue().getFXId());
+        this.installedVersionColumn.setCellValueFactory(cellData -> cellData.getValue().getFXVersion());
+        this.availableVersionColumn.setCellValueFactory(cellData -> cellData.getValue().getFXUpdateVersion());
+        this.sourceColumn.setCellValueFactory(cellData -> cellData.getValue().getFXSource());
     }
 
     @Override
     public void setTableViewSource() {
-
+        this.upgradePackagesTableView.setItems(PackageList.getUpgradePackageList());
     }
 
     @Override
     public void refreshTableViewContent() {
-
+        upgradePackagesTableView.setItems(null);
+        setTableViewSource();
     }
 
     @Override
     public WinGetPackage getObjectFromSelection() {
-        return null;
+        return upgradePackagesTableView.getSelectionModel().getSelectedItem();
     }
 
     @Override

@@ -39,7 +39,13 @@ public class WinGetQuery
 
     public void queryToList(String keyWord) throws IOException, InterruptedException
     {
-        ProcessBuilder processBuilder = new ProcessBuilder("winget.exe", queryType.toString(), keyWord, "--accept-source-agreements");
+        ProcessBuilder processBuilder = null;
+
+        switch(queryType){
+            case SEARCH, LIST -> processBuilder = new ProcessBuilder("winget.exe", queryType.toString(), keyWord, "--accept-source-agreements");
+            case UPGRADE -> processBuilder = new ProcessBuilder("winget.exe", queryType.toString(), "--include-unknown", "--accept-source-agreements");
+        }
+
         processBuilder.redirectErrorStream(true);
         Process process = processBuilder.start();
 
@@ -89,6 +95,7 @@ public class WinGetQuery
                     line = ManipulateHanLine(line);
                 }
 
+                System.out.println(line);
                 String packageVersion;
                 if(columnSeparatorIndexAvailableOrMatch > -1)
                 {
@@ -111,6 +118,51 @@ public class WinGetQuery
                 {
                     SetInstalledPackage(winGetPackage);
                 }
+                packageList.add(winGetPackage);
+            }
+        }
+    }
+
+    public void CreateUpdateList(ObservableList<WinGetPackage> packageList)
+    {
+        for(String line : rawDataList)
+        {
+            // Get index when each column begins as separator if line is table header, only executes once
+            if(isHeaderLine(line))
+            {
+                columnSeparatorIndexId = line.toLowerCase().indexOf(columnHeaderIdText);
+                columnSeparatorIndexVersion = line.toLowerCase().indexOf(columnHeaderVersionText);
+
+                if(line.toLowerCase().contains(columnHeaderMatchText))
+                {
+                    columnSeparatorIndexAvailableOrMatch = line.toLowerCase().indexOf(columnHeaderMatchText);
+                }
+                else if (line.toLowerCase().contains(columnHeaderAvailableText))
+                {
+                    columnSeparatorIndexAvailableOrMatch = line.toLowerCase().indexOf(columnHeaderAvailableText);
+                }
+
+                columnSeparatorIndexSource = line.toLowerCase().indexOf(columnHeaderSourceText);
+                maxPackageLineLength = columnSeparatorIndexSource + SourceType.MSSTORE.toString().length();
+            }
+
+            // Get actual package information
+            if(isPackageLine(line) && !line.toLowerCase().contains("aktualisierungen") && !line.toLowerCase().contains("zielgruppenadressierung"))
+            {
+                // Fix some weird asia packages
+                if(UniCodeChecker.containsHanScript(line))
+                {
+                    line = ManipulateHanLine(line);
+                }
+
+                WinGetPackage winGetPackage = new WinGetPackage(
+                        line.substring(0, columnSeparatorIndexId).trim(), // Package Name
+                        line.substring(columnSeparatorIndexId, columnSeparatorIndexVersion).trim(), // Package ID
+                        line.substring(columnSeparatorIndexVersion, columnSeparatorIndexAvailableOrMatch).trim(), // Package version
+                        line.substring(columnSeparatorIndexAvailableOrMatch, columnSeparatorIndexSource).trim(), // Package update version
+                        line.substring(columnSeparatorIndexSource).trim() // Package Source
+                );
+
                 packageList.add(winGetPackage);
             }
         }

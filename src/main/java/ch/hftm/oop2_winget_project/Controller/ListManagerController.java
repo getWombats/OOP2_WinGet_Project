@@ -7,6 +7,7 @@ import ch.hftm.oop2_winget_project.Persistence.Serializer;
 import ch.hftm.oop2_winget_project.Util.StageAndSceneManager;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -16,6 +17,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.util.Duration;
 
+import java.io.IOException;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -76,10 +78,10 @@ public class ListManagerController {
         setUpDoubleClickOnRow();
         keyListener();
 
-        // Delete button countdown
-        countdownTimer = new Timeline(new KeyFrame(Duration.seconds(1), this::deletePackageList));
-        countdownTimer.setCycleCount(1); // Only run once
-        countdownTimer.setOnFinished(event -> countdownTimer.stop()); // Stop the timer when finished
+//        // Delete button countdown
+//        countdownTimer = new Timeline(new KeyFrame(Duration.seconds(1), this::deletePackageList));
+//        countdownTimer.setCycleCount(1); // Only run once
+//        countdownTimer.setOnFinished(event -> countdownTimer.stop()); // Stop the timer when finished
 
         // Initialize filter components
         comboBox_filter.getItems().addAll("All Attributes", "Name", "Size");
@@ -99,12 +101,12 @@ public class ListManagerController {
         });
     }
 
-    private void deletePackageList(ActionEvent actionEvent) {
-        PackageList selectedPackageList = tableView_packageLists.getSelectionModel().getSelectedItem();
-        if (selectedPackageList != null) {
-            listManager.deletePackageList(selectedPackageList);
-        }
-    }
+//    private void deletePackageList(ActionEvent actionEvent) {
+//        PackageList selectedPackageList = tableView_packageLists.getSelectionModel().getSelectedItem();
+//        if (selectedPackageList != null) {
+//            listManager.deletePackageList(selectedPackageList);
+//        }
+//    }
 
     @FXML
     private void createPackageListButton_onAction(){
@@ -124,20 +126,32 @@ public class ListManagerController {
 
     @FXML
     private void deletePackageListButton_onAction(){
-//        PackageList selectedPackageList = listManagerTableView.getSelectionModel().getSelectedItem();
+        PackageList selectedPackageList = tableView_packageLists.getSelectionModel().getSelectedItem();
 //        if (selectedPackageList != null) {
 //            listManager.deletePackageList(selectedPackageList);
 //        }
+
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Do you really want to delete the Package List " + selectedPackageList.getName() + " ?", ButtonType.YES, ButtonType.CANCEL);
+        alert.setHeaderText("");
+        alert.setTitle("Delete Package List");
+//                            alert.getDialogPane().setStyle("-fx-background: black;");
+//                            alert.setGraphic(imageView);
+        alert.showAndWait();
+
+        if (alert.getResult() == ButtonType.YES) {
+            listManager.deletePackageList(selectedPackageList);
+            Serializer.serializeListManager();
+        }
     }
 
     @FXML
     private void deletePackageListButton_MousePressed(){
-        countdownTimer.play();
+//        countdownTimer.play();
     }
 
     @FXML
     private void deletePackageListButton_MouseReleased(){
-        countdownTimer.stop();
+//        countdownTimer.stop();
     }
 
     @FXML

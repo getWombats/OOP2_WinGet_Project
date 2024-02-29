@@ -25,7 +25,7 @@
                </font></Button>
             <Button mnemonicParsing="false" onAction="#menuUpdateButtonClick" prefHeight="70.0" prefWidth="170.0" styleClass="menuButton" stylesheets="@../CSS/DarkTheme.css" text="Update packages" />
             <Button mnemonicParsing="false" onAction="#menuInstalledPackagesButtonClick" prefHeight="70.0" prefWidth="170.0" styleClass="menuButton" stylesheets="@../CSS/DarkTheme.css" text="Installed packages" />
-            <Button mnemonicParsing="false" onAction="#menuListManagerButtonClick" prefHeight="70.0" prefWidth="170.0" styleClass="menuButton" stylesheets="@../CSS/DarkTheme.css" text="List Manager" />
+            <Button mnemonicParsing="false" onAction="#menuListManagerButtonClick" prefHeight="70.0" prefWidth="170.0" styleClass="menuButton" stylesheets="@../CSS/DarkTheme.css" text="Favourites" />
          </VBox>
       </left>
       <center>

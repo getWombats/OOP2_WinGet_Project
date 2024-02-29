@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.text.Font;
 import javafx.util.Callback;
 
 import java.io.IOException;
@@ -42,6 +43,8 @@ public class PackageListController {
     private ComboBox<String> comboBox_filter;
     @FXML
     private TextField textfield_filter;
+    @FXML
+    private Label label_title;
 
     private boolean isThreadWorking;
 
@@ -53,6 +56,9 @@ public class PackageListController {
         currentPackageList = listManager.getSelectedPackageList();
         System.out.println(listManager.getSelectedPackageList());
         System.out.println("Packages in the list: " + currentPackageList.getFXPackages().size());
+
+        label_title.setText(currentPackageList.getName());
+
         tableView_packages.setItems(currentPackageList.getFXPackages());
 
         // Initialize cell value factories, assuming WinGetPackage has appropriate properties

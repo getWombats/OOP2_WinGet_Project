@@ -33,6 +33,13 @@
     -fx-opacity: 1;
 }
 
+.label-title {
+    -fx-font-size: 24px;
+    -fx-font-family: "Segoe UI Light";
+    -fx-text-fill: white;
+    -fx-opacity: 1;
+}
+
 .text-field {
     -fx-background-color: #282828;
     -fx-border-color: #737373;

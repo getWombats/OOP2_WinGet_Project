@@ -3,11 +3,17 @@ package ch.hftm.oop2_winget_project.Controller;
 import ch.hftm.oop2_winget_project.Model.ListManager;
 import ch.hftm.oop2_winget_project.Model.PackageList;
 import ch.hftm.oop2_winget_project.Model.WinGetPackage;
+import ch.hftm.oop2_winget_project.Util.QueryType;
+import ch.hftm.oop2_winget_project.Util.SourceType;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.util.Callback;
 
+import java.io.IOException;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -31,9 +37,13 @@ public class PackageListController {
     @FXML
     private TableColumn<WinGetPackage, String> column_source;
     @FXML
+    private TableColumn<WinGetPackage, Void> column_button_install;
+    @FXML
     private ComboBox<String> comboBox_filter;
     @FXML
     private TextField textfield_filter;
+
+    private boolean isThreadWorking;
 
 
     @FXML
@@ -56,6 +66,9 @@ public class PackageListController {
         comboBox_filter.setValue("All Attributes");
         textfield_filter.textProperty().addListener((observable, oldValue, newValue) -> filterList());
         comboBox_filter.valueProperty().addListener((observable, oldValue, newValue) -> filterList());
+
+        addButtonToTableView();
+        setSourceColumnLabel();
     }
 
 
@@ -104,6 +117,108 @@ public class PackageListController {
 //        }
 
         tableView_packages.setItems(filteredList);
+    }
+
+    private void setSourceColumnLabel() {
+        column_source.setCellFactory(column -> new TableCell<>() {
+            @Override
+            protected void updateItem(String item, boolean empty) {
+                super.updateItem(item, empty);
+                Label sourceLabel = new Label();
+                sourceLabel.getStyleClass().removeAll("label-ms-store", "label-winget");
+                if (item == null || empty) {
+                    setText(null);
+                    setGraphic(null);
+                }
+                else if(item.equals(SourceType.MSSTORE.toString())){
+                    sourceLabel.getStyleClass().add("label-ms-store");
+                    sourceLabel.setText(SourceType.MSSTORE.toString());
+                    setGraphic(sourceLabel);
+                }
+                else if(item.equals(SourceType.WINGET.toString())){
+                    sourceLabel.getStyleClass().add("label-winget");
+                    sourceLabel.setText(SourceType.WINGET.toString());
+                    setGraphic(sourceLabel);
+                }
+                else {
+                    Label nameLabel = new Label(item);
+                    setGraphic(nameLabel);
+                }
+            }
+        });
+    }
+
+
+//    @Override
+    public void addButtonToTableView()
+    {
+        Callback<TableColumn<WinGetPackage, Void>, TableCell<WinGetPackage, Void>> cellFactory = new Callback<>()
+        {
+            @Override
+            public TableCell<WinGetPackage, Void> call(final TableColumn<WinGetPackage, Void> param)
+            {
+                Label installedLabel = new Label("Installed");
+                installedLabel.getStyleClass().removeAll("label-installed"); // Reset styles
+                final TableCell<WinGetPackage, Void> cell = new TableCell<>()
+                {
+                    private final Button btn = new Button("Install");
+                    {
+                        btn.setOnAction((ActionEvent event) -> {
+                            WinGetPackage selectedItem = getTableView().getItems().get(getIndex());
+
+                            btn.setDisable(true); // Disables button when clicked and package installs
+                            isThreadWorking = true;
+                            setGraphic(new ProgressBar());
+                            new Thread(() -> {
+                                try
+                                {
+                                    installPackage(selectedItem.getId());
+                                }
+                                catch (IOException ex)
+                                {
+                                    System.out.println(ex.getMessage()); // Replace with ExceptionHandler when implemented
+                                }
+
+                                Platform.runLater(() -> {
+                                    // Update list
+                                    PackageList.getInstalledPackageList().add(selectedItem);
+                                    selectedItem.setInstalled(true); // Set package as installed
+                                    installedLabel.getStyleClass().add("label-installed");
+                                    setGraphic(installedLabel);
+                                    isThreadWorking = false;
+                                });
+                            }).start();
+                        });
+                    }
+
+                    @Override
+                    public void updateItem(Void item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (empty) {
+                            setGraphic(null);
+                        } else {
+                            WinGetPackage selectedItem = getTableView().getItems().get(getIndex());
+                            if(selectedItem.isInstalled()) {
+                                // Set cell content when package is installed already
+                                installedLabel.getStyleClass().add("label-installed");
+                                setGraphic(installedLabel);
+                            } else {
+                                btn.getStyleClass().add("button-install");
+                                setGraphic(btn);
+                            }
+                        }
+                    }
+                };
+                return cell;
+            }
+        };
+        column_button_install.setCellFactory(cellFactory);
+    }
+
+    private void installPackage(String packageId) throws IOException {
+        ProcessBuilder processBuilder = new ProcessBuilder("winget.exe", QueryType.INSTALL.toString(), packageId, "--accept-package-agreements", "--accept-source-agreements");
+        processBuilder.redirectErrorStream(true);
+        processBuilder.start();
     }
 
 }

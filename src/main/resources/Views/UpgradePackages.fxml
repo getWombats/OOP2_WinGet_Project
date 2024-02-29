@@ -25,8 +25,8 @@
     <center>
         <TableView fx:id="upgradePackagesTableView" prefHeight="200.0" styleClass="upgradeTableView" stylesheets="@../CSS/DarkTheme.css" BorderPane.alignment="TOP_LEFT">
             <columns>
-                <TableColumn fx:id="nameColumn" editable="false" minWidth="220.0" prefWidth="-1.0" resizable="false" text="Package Name" />
-                <TableColumn fx:id="idColumn" editable="false" minWidth="220.0" prefWidth="-1.0" resizable="false" text="Package ID" />
+                <TableColumn fx:id="nameColumn" editable="false" minWidth="220.0" prefWidth="-1.0" resizable="false" text="Name" />
+                <TableColumn fx:id="idColumn" editable="false" minWidth="220.0" prefWidth="-1.0" resizable="false" text="ID" />
                 <TableColumn fx:id="installedVersionColumn" editable="false" minWidth="190.0" prefWidth="-1.0" resizable="false" text="Installed Version" />
             <TableColumn fx:id="availableVersionColumn" editable="false" minWidth="190.0" prefWidth="-1.0" resizable="false" text="Available Version" />
                 <TableColumn fx:id="sourceColumn" editable="false" minWidth="150.0" prefWidth="-1.0" resizable="false" text="Source" />

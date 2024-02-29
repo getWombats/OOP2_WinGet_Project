@@ -25,8 +25,8 @@
     <center>
         <TableView fx:id="installedPackagesTableView" prefHeight="200.0" styleClass="installedTableView" stylesheets="@../CSS/DarkTheme.css" BorderPane.alignment="TOP_LEFT">
             <columns>
-                <TableColumn fx:id="nameColumn" editable="false" minWidth="220.0" prefWidth="-1.0" resizable="false" text="Package Name" />
-                <TableColumn fx:id="idColumn" editable="false" minWidth="220.0" prefWidth="-1.0" resizable="false" text="Package ID" />
+                <TableColumn fx:id="nameColumn" editable="false" minWidth="220.0" prefWidth="-1.0" resizable="false" text="Name" />
+                <TableColumn fx:id="idColumn" editable="false" minWidth="220.0" prefWidth="-1.0" resizable="false" text="ID" />
                 <TableColumn fx:id="versionColumn" editable="false" minWidth="350.0" prefWidth="-1.0" resizable="false" text="Version" />
                 <TableColumn fx:id="sourceColumn" editable="false" minWidth="150.0" prefWidth="-1.0" resizable="false" text="Source" />
             <TableColumn fx:id="actionColumn" minWidth="130.0" prefWidth="-1.0" />

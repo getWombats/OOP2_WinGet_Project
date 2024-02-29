@@ -9,6 +9,7 @@ public class WinGetPackage
     private SimpleStringProperty name = new SimpleStringProperty();
     private SimpleStringProperty id = new SimpleStringProperty();
     private SimpleStringProperty version = new SimpleStringProperty();
+    private SimpleStringProperty updateVersion = new SimpleStringProperty();
     private SimpleStringProperty source = new SimpleStringProperty();
     private boolean isInstalled;
 
@@ -19,6 +20,14 @@ public class WinGetPackage
         this.setName(name);
         this.setId(id);
         this.setVersion(version);
+        this.setSource(source);
+    }
+
+    public WinGetPackage(String name, String id, String version, String updateVersion, String source) {
+        this.setName(name);
+        this.setId(id);
+        this.setVersion(version);
+        this.setUpdateVersion(updateVersion);
         this.setSource(source);
     }
 
@@ -59,12 +68,24 @@ public class WinGetPackage
         return this.version.get();
     }
 
+    public String getUpdateVersion() {
+        return this.updateVersion.get();
+    }
+
     public SimpleStringProperty getFXVersion() {
         return this.version;
     }
 
+    public SimpleStringProperty getFXUpdateVersion() {
+        return this.updateVersion;
+    }
+
     public void setVersion(String version) {
         this.version.set(version);
+    }
+
+    public void setUpdateVersion(String updateVersion) {
+        this.updateVersion.set(updateVersion);
     }
 
     public String getSource() {

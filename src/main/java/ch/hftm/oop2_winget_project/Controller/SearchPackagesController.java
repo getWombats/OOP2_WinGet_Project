@@ -8,24 +8,16 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.CheckBoxTableCell;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.util.Callback;
-import javafx.util.Pair;
 import javafx.util.StringConverter;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.net.URL;
-import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class SearchPackagesController implements IControllerBase, Initializable
@@ -373,7 +365,7 @@ public class SearchPackagesController implements IControllerBase, Initializable
 //        }
     }
 
-    private void setTableViewPlaceholder(String labelText, boolean showProgressIndicator){
+    private void setTableViewPlaceholder(String labelText, boolean showProgressIndicator) {
         tableViewPlaceholderLabel.setText(labelText);
         ProgressIndicator progressIndicator = new ProgressIndicator();
         progressIndicator.setVisible(showProgressIndicator);

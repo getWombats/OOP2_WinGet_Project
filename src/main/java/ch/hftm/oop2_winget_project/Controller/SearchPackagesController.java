@@ -315,6 +315,14 @@ public class SearchPackagesController implements IControllerBase, Initializable
             }
         });
 
+        // Set the default selection to the package list with the specific ID
+        PackageList favouriteList = listManager.getFXLists().stream()
+                .filter(pkgList -> "favourite-list-uuid".equals(pkgList.getId()))
+                .findFirst()
+                .orElse(null);
+        comboBox_selectPackageList.getSelectionModel().select(favouriteList);
+        selectedPackageList = favouriteList;
+
         // Displays the selected item in the comboBox when it is not expanded.
         comboBox_selectPackageList.setConverter(new StringConverter<PackageList>() {
             @Override

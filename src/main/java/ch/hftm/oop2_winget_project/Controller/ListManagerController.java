@@ -28,11 +28,6 @@ import static ch.hftm.oop2_winget_project.Persistence.BatchFileCreator.createIns
 public class ListManagerController {
 
     private ListManager listManager;
-    private Timeline countdownTimer;
-    @FXML
-    private Button button_createPackageList;
-    @FXML
-    private Button button_deletePackageList;
     @FXML
     private Button button_rename;
     @FXML
@@ -78,11 +73,6 @@ public class ListManagerController {
         setUpDoubleClickOnRow();
         keyListener();
 
-//        // Delete button countdown
-//        countdownTimer = new Timeline(new KeyFrame(Duration.seconds(1), this::deletePackageList));
-//        countdownTimer.setCycleCount(1); // Only run once
-//        countdownTimer.setOnFinished(event -> countdownTimer.stop()); // Stop the timer when finished
-
         // Initialize filter components
         comboBox_filter.getItems().addAll("All Attributes", "Name", "Size");
         comboBox_filter.setValue("All Attributes");
@@ -100,13 +90,6 @@ public class ListManagerController {
             }
         });
     }
-
-//    private void deletePackageList(ActionEvent actionEvent) {
-//        PackageList selectedPackageList = tableView_packageLists.getSelectionModel().getSelectedItem();
-//        if (selectedPackageList != null) {
-//            listManager.deletePackageList(selectedPackageList);
-//        }
-//    }
 
     @FXML
     private void createPackageListButton_onAction(){
@@ -142,16 +125,6 @@ public class ListManagerController {
             listManager.deletePackageList(selectedPackageList);
             Serializer.serializeListManager();
         }
-    }
-
-    @FXML
-    private void deletePackageListButton_MousePressed(){
-//        countdownTimer.play();
-    }
-
-    @FXML
-    private void deletePackageListButton_MouseReleased(){
-//        countdownTimer.stop();
     }
 
     @FXML

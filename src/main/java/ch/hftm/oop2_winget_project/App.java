@@ -56,10 +56,6 @@ public class App extends Application
 
         Serializer.deserializeListManager(); // Converts .ser into listManager
 
-//        listManager.createPackageList("Favourites"); // Instantiating PackageList for Testing purposes.
-//        listManager.createPackageList("Web Browsers"); // Instantiating PackageList for Testing purposes.
-//        listManager.createPackageList("Office"); // Instantiating PackageList for Testing purposes.
-
         windowManager = new WindowManager(stage);
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(ResourceProvider.FXML_ROOT + ResourceProvider.SPLASHSCREEN_VIEW_NAME));
         Scene scene = new Scene(fxmlLoader.load());

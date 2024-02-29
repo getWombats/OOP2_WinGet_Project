@@ -101,6 +101,7 @@ public class PackageList {
     private static final ObservableList<WinGetPackage> searchPackageList = FXCollections.observableArrayList();
     private static final ObservableList<WinGetPackage> installedPackageList = FXCollections.observableArrayList();
     private static final ObservableList<WinGetPackage> favoritePackageList = FXCollections.observableArrayList();
+    private static final ObservableList<WinGetPackage> upgradePackageList = FXCollections.observableArrayList();
 
     public static ObservableList<WinGetPackage> getSearchPackageList() {
         return searchPackageList;
@@ -110,5 +111,8 @@ public class PackageList {
     }
     public static ObservableList<WinGetPackage> getFavoritePackageList() {
         return favoritePackageList;
+    }
+    public static ObservableList<WinGetPackage> getUpgradePackageList() {
+        return upgradePackageList;
     }
 }

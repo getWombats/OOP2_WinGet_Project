@@ -1,4 +1,5 @@
 package ch.hftm.oop2_winget_project.Persistence;
+
 import ch.hftm.oop2_winget_project.Model.ListManager;
 import ch.hftm.oop2_winget_project.Model.ListManagerDTO;
 import ch.hftm.oop2_winget_project.Model.PackageList;
@@ -12,8 +13,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class DTOConverter {
+//  DTO: Data Transfer Object (An object used to transfer data from one system to another).
+//  This class converts the instances of ListManager > PackageList > WinGetPackage to ListManagerDTO > PackageListDTO > WinGetPackageDTO and back.
+//  This conversion was implemented because the model classes contain JavaFX elements, which can not be serialized.
+//  Converting to an DTO model replaces the JavaFX elements with regular attributes and vice-versa if a DTO model gets converted back.
 
-    // Converts ListManager to ListManagerDTO
+    // Converts ListManager to ListManagerDTO.
     public static ListManagerDTO toListManagerDTO(ListManager listManager) {
         System.out.println("\nDTOConverter: ListManager to ListManagerDTO...");
         ListManagerDTO dto = new ListManagerDTO();
@@ -26,7 +31,7 @@ public class DTOConverter {
         return dto;
     }
 
-    // Converts ListManagerDTO back to ListManager
+    // Converts ListManagerDTO back to ListManager.
     public static ListManager fromListManagerDTO(ListManagerDTO dto) {
         System.out.println("DTOConverter: ListManagerDTO back to ListManager...");
         ListManager listManager = ListManager.getInstance();
@@ -37,7 +42,7 @@ public class DTOConverter {
         return listManager;
     }
 
-    // Converts PackageList to PackageListDTO
+    // Converts PackageList to PackageListDTO.
     public static PackageListDTO toPackageListDTO(PackageList packageList) {
         System.out.println("DTOConverter: PackageList to PackageListDTO for: " + packageList.getName() + "...");
         PackageListDTO dto = new PackageListDTO();
@@ -53,7 +58,7 @@ public class DTOConverter {
         return dto;
     }
 
-    // Converts PackageListDTO back to PackageList
+    // Converts PackageListDTO back to PackageList.
     public static PackageList fromPackageListDTO(PackageListDTO dto) {
         System.out.println("DTOConverter: PackageListDTO back to PackageList for: " + dto.getName() + "...");
         PackageList packageList = new PackageList(dto.getName());
@@ -67,7 +72,7 @@ public class DTOConverter {
         return packageList;
     }
 
-    // Converts WinGetPackage to WinGetPackageDTO
+    // Converts WinGetPackage to WinGetPackageDTO.
     public static WinGetPackageDTO toWinGetPackageDTO(WinGetPackage winGetPackage) {
         System.out.println("DTOConverter: WinGetPackage to WinGetPackageDTO for: " + winGetPackage.getName() + "...");
         WinGetPackageDTO dto = new WinGetPackageDTO();
@@ -79,7 +84,7 @@ public class DTOConverter {
         return dto;
     }
 
-    // Converts WinGetPackageDTO back to WinGetPackage
+    // Converts WinGetPackageDTO back to WinGetPackage.
     public static WinGetPackage fromWinGetPackageDTO(WinGetPackageDTO dto) {
         System.out.println("DTOConverter: WinGetPackageDTO back to WinGetPackage for: " + dto.getName() + "...");
         WinGetPackage winGetPackage = new WinGetPackage();

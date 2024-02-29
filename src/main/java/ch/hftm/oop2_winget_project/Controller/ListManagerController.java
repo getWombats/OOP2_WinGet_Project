@@ -22,7 +22,13 @@ public class ListManagerController {
 
     private ListManager listManager;
     @FXML
+    private Button button_createPackageList;
+    @FXML
     private Button button_rename;
+    @FXML
+    private Button button_deletePackageList;
+    @FXML
+    private Button button_CreateBatchFile;
     @FXML
     private TableView<PackageList> tableView_packageLists;
     @FXML
@@ -44,6 +50,10 @@ public class ListManagerController {
         column_size.setCellValueFactory(cellData -> cellData.getValue().getFXSize().asObject()); // Set cell value for column.
         column_name.setCellFactory(TextFieldTableCell.forTableColumn()); // Set cell to textField for editing.
 
+        // Set up buttons
+        button_rename.setDisable(true);
+        button_deletePackageList.setDisable(true);
+        button_CreateBatchFile.setDisable(true);
 
         // Set the commit action for editing the 'name' column
         column_name.setOnEditCommit(event -> {
@@ -65,6 +75,7 @@ public class ListManagerController {
 
         setUpDoubleClickOnRow();
         keyListener();
+        selectionListener();
 
         // Initialize filter components
         comboBox_filter.getItems().addAll("All Attributes", "Name", "Size");
@@ -80,6 +91,23 @@ public class ListManagerController {
                 case F2:
                     buttonRename_onAction();
                     break;
+            }
+        });
+    }
+
+    // Listener: Checks if item from tableView is selected.
+    private void selectionListener() {
+        tableView_packageLists.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            // Disable buttons if no list is selected or if the selected list is "Favourites" by UUID
+            if ("favourite-list-uuid".equals(newSelection.getId())) {
+                System.out.println("newSelection:" + newSelection);
+                button_rename.setDisable(true);
+                button_deletePackageList.setDisable(true);
+                button_CreateBatchFile.setDisable(false);
+            } else {
+                button_rename.setDisable(false);
+                button_deletePackageList.setDisable(false);
+                button_CreateBatchFile.setDisable(false);
             }
         });
     }
@@ -104,9 +132,6 @@ public class ListManagerController {
     @FXML
     private void deletePackageListButton_onAction(){
         PackageList selectedPackageList = tableView_packageLists.getSelectionModel().getSelectedItem();
-//        if (selectedPackageList != null) {
-//            listManager.deletePackageList(selectedPackageList);
-//        }
 
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Do you really want to delete the Package List " + selectedPackageList.getName() + " ?", ButtonType.YES, ButtonType.CANCEL);
         alert.setHeaderText("");
@@ -123,8 +148,10 @@ public class ListManagerController {
 
     @FXML
     private void buttonRename_onAction() {
+
+        PackageList selectedPackageList = tableView_packageLists.getSelectionModel().getSelectedItem();
         int selectedIndex = tableView_packageLists.getSelectionModel().getSelectedIndex();
-        if (selectedIndex >= 0) {
+        if (selectedIndex >= 0 && !selectedPackageList.getId().equals("favourite-list-uuid")) {
             // Temporarily enable editing to rename the selected item
             tableView_packageLists.setEditable(true);
             column_name.setEditable(true);

@@ -23,20 +23,24 @@ public class PackageList {
         this.name = new SimpleStringProperty(name);
         this.size = new SimpleIntegerProperty(0);
         this.packages = FXCollections.observableArrayList();
-        // Bind the size property to the size of the packages observable list.
-//        this.size.bind(Bindings.size(this.packages).asObject());
 
         System.out.println("New Package: (UUID Name)\n" + getId() + " \"" + getName() + "\"");
     }
 
     // Constructor to match DTO fields
-    public PackageList() {
-        this.id = "";
-        this.name = new SimpleStringProperty();
+//    public PackageList() {
+//        this.id = "";
+//        this.name = new SimpleStringProperty();
+//        this.size = new SimpleIntegerProperty(0);
+//        this.packages = FXCollections.observableArrayList();
+//    }
+
+    // Constructor used for creating favourite list with special uuid and name.
+    public PackageList(String name, String id){
+        this.id = id;
+        this.name = new SimpleStringProperty(name);
         this.size = new SimpleIntegerProperty(0);
         this.packages = FXCollections.observableArrayList();
-        // Bind the size property to the size of the packages observable list.
-//        this.size.bind(Bindings.size(this.packages).asObject());
     }
 
 

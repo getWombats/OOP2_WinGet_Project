@@ -63,7 +63,7 @@ public class DTOConverter {
         System.out.println("DTOConverter: PackageListDTO back to PackageList for: " + dto.getName() + "...");
         PackageList packageList = new PackageList(dto.getName());
         packageList.setId(dto.getId());
-//        packageList.setName(dto.getName());
+        packageList.setName(dto.getName());
         packageList.setSize(dto.getSize());
         packageList.setPackages(dto.getPackages().stream()
                 .map(DTOConverter::fromWinGetPackageDTO)

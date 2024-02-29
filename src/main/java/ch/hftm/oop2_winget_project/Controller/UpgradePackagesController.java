@@ -6,12 +6,15 @@ import ch.hftm.oop2_winget_project.Model.WinGetPackage;
 import ch.hftm.oop2_winget_project.Model.WinGetQuery;
 import ch.hftm.oop2_winget_project.Util.ConsoleExitCode;
 import ch.hftm.oop2_winget_project.Util.QueryType;
+import ch.hftm.oop2_winget_project.Util.SourceType;
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
+import javafx.util.Callback;
 
 import java.io.IOException;
 import java.net.URL;
@@ -49,6 +52,11 @@ public class UpgradePackagesController implements IControllerBase, Initializable
         placeholderContent = new VBox(10);
         tableViewPlaceholderLabel = new Label();
         setTableViewPlaceholder("List all available updates for installed packages", false);
+
+        addButtonToTableView();
+        setSourceColumnLabel();
+        setTableViewData();
+        setTableViewSource();
     }
 
     @FXML
@@ -77,7 +85,10 @@ public class UpgradePackagesController implements IControllerBase, Initializable
                         query.CreateUpdateList(PackageList.getUpgradePackageList());
 
                         for(var item : PackageList.getUpgradePackageList()) {
-                            System.out.println(item.getName() + " / ID: " + item.getId() + " / V alt:" + item.getVersion() + " / V neu: " + item.getUpdateVersion());
+                            System.out.println(item.getName() + " / ID: " + item.getId());
+                            System.out.println("Installed version:" + item.getVersion());
+                            System.out.println("Available version: " + item.getUpdateVersion());
+                            System.out.println();
                         }
 
                         refreshTableViewContent();
@@ -119,7 +130,57 @@ public class UpgradePackagesController implements IControllerBase, Initializable
 
     @Override
     public void addButtonToTableView() {
+        Callback<TableColumn<WinGetPackage, Void>, TableCell<WinGetPackage, Void>> cellFactory = new Callback<>()
+        {
+            @Override
+            public TableCell<WinGetPackage, Void> call(final TableColumn<WinGetPackage, Void> param)
+            {
+                final TableCell<WinGetPackage, Void> cell = new TableCell<>()
+                {
+                    private final Button btn = new Button("Update");
+                    {
+                        btn.setOnAction((ActionEvent event) -> {
+                            WinGetPackage selectedItem = getTableView().getItems().get(getIndex());
 
+                            btn.setDisable(true); // Disables button when clicked and package updates
+                            isThreadWorking = true;
+                            setGraphic(new ProgressBar());
+                            new Thread(() -> {
+                                try
+                                {
+                                    upgradePackage(selectedItem.getId());
+                                }
+                                catch (IOException ex)
+                                {
+                                    System.out.println(ex.getMessage()); // Replace with ExceptionHandler when implemented
+                                }
+
+                                Platform.runLater(() -> {
+                                    // Update list
+                                    PackageList.getInstalledPackageList().add(selectedItem);
+                                    selectedItem.setInstalled(true); // Set package as installed
+                                    isThreadWorking = false;
+                                });
+                            }).start();
+                        });
+                    }
+
+                    @Override
+                    public void updateItem(Void item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (empty) {
+                            setGraphic(null);
+                        } else {
+//                            WinGetPackage selectedItem = getTableView().getItems().get(getIndex());
+                            btn.getStyleClass().add("button-upgrade");
+                            setGraphic(btn);
+                        }
+                    }
+                };
+                return cell;
+            }
+        };
+        actionColumn.setCellFactory(cellFactory);
     }
 
     private void setTableViewPlaceholder(String labelText, boolean showProgressIndicator){
@@ -139,5 +200,40 @@ public class UpgradePackagesController implements IControllerBase, Initializable
         });
 
         upgradePackagesTableView.setPlaceholder(placeholderContent);
+    }
+
+    private void setSourceColumnLabel(){
+        sourceColumn.setCellFactory(column -> new TableCell<>() {
+            @Override
+            protected void updateItem(String item, boolean empty) {
+                super.updateItem(item, empty);
+                Label sourceLabel = new Label();
+                sourceLabel.getStyleClass().removeAll("label-ms-store", "label-winget");
+                if (item == null || empty) {
+                    setText(null);
+                    setGraphic(null);
+                }
+                else if(item.equals(SourceType.MSSTORE.toString())){
+                    sourceLabel.getStyleClass().add("label-ms-store");
+                    sourceLabel.setText(SourceType.MSSTORE.toString());
+                    setGraphic(sourceLabel);
+                }
+                else if(item.equals(SourceType.WINGET.toString())){
+                    sourceLabel.getStyleClass().add("label-winget");
+                    sourceLabel.setText(SourceType.WINGET.toString());
+                    setGraphic(sourceLabel);
+                }
+                else {
+                    Label nameLabel = new Label(item);
+                    setGraphic(nameLabel);
+                }
+            }
+        });
+    }
+
+    private void upgradePackage(String packageId) throws IOException {
+        ProcessBuilder processBuilder = new ProcessBuilder("winget.exe", QueryType.UPGRADE.toString(), packageId, "--accept-package-agreements", "--accept-source-agreements");
+        processBuilder.redirectErrorStream(true);
+        processBuilder.start();
     }
 }

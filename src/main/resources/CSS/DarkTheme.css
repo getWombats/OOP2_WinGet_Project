@@ -206,6 +206,27 @@
     -fx-background-color: #990000;
 }
 
+/* Update Button UpgradePackage TableView */
+.upgradeTableView .button-upgrade {
+    -fx-padding: 5 15 5 35;
+    -fx-border-color: #1d1d1d;
+    -fx-border-width: 1;
+    -fx-background-radius: 0;
+    -fx-background-color: #1d1d1d;
+    -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+    -fx-font-size: 10pt;
+    -fx-text-fill: #d8d8d8;
+
+    -fx-background-image: url(../Icons/download.png);
+    -fx-background-size: 15px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: 20%;
+}
+
+.upgradeTableView .button-upgrade:hover {
+    -fx-background-color: #512bd4;
+}
+
 /* Labels SearchPackage TableView */
 .table-row-cell:filled .label {
     -fx-padding: 5 15 5 35;

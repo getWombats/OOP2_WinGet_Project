@@ -156,9 +156,10 @@ public class UpgradePackagesController implements IControllerBase, Initializable
                                 }
 
                                 Platform.runLater(() -> {
-                                    // Update list
-                                    PackageList.getInstalledPackageList().add(selectedItem);
-                                    selectedItem.setInstalled(true); // Set package as installed
+                                    // Update installed packages list
+                                    setNewPackageVersion(selectedItem);
+                                    // Remove package from list after update
+                                    PackageList.getUpgradePackageList().remove(selectedItem);
                                     isThreadWorking = false;
                                 });
                             }).start();
@@ -171,7 +172,6 @@ public class UpgradePackagesController implements IControllerBase, Initializable
                         if (empty) {
                             setGraphic(null);
                         } else {
-//                            WinGetPackage selectedItem = getTableView().getItems().get(getIndex());
                             btn.getStyleClass().add("button-upgrade");
                             setGraphic(btn);
                         }
@@ -231,8 +231,17 @@ public class UpgradePackagesController implements IControllerBase, Initializable
         });
     }
 
+    private void setNewPackageVersion(WinGetPackage pkg){
+        for(var installedPackage : PackageList.getInstalledPackageList()){
+            if(installedPackage.getId().equals(pkg.getId())){
+                installedPackage.setVersion(pkg.getUpdateVersion());
+                break;
+            }
+        }
+    }
+
     private void upgradePackage(String packageId) throws IOException {
-        ProcessBuilder processBuilder = new ProcessBuilder("winget.exe", QueryType.UPGRADE.toString(), packageId, "--accept-package-agreements", "--accept-source-agreements");
+        ProcessBuilder processBuilder = new ProcessBuilder("winget.exe", QueryType.UPGRADE.toString(), "--id", packageId, "--accept-package-agreements", "--accept-source-agreements");
         processBuilder.redirectErrorStream(true);
         processBuilder.start();
     }

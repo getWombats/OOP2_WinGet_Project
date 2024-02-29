@@ -74,7 +74,7 @@ public class InstalledPackagesController implements IControllerBase, Initializab
     @FXML
     private void refreshButtonClick()
     {
-        showInstalledPackages();
+        getInstalledPackages();
     }
 
     @Override
@@ -215,7 +215,7 @@ public class InstalledPackagesController implements IControllerBase, Initializab
     }
 
 
-    private void showInstalledPackages()
+    private void getInstalledPackages()
     {
         if (!isThreadWorking)
         {

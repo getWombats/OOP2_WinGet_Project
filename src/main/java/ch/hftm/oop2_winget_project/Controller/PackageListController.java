@@ -3,6 +3,7 @@ package ch.hftm.oop2_winget_project.Controller;
 import ch.hftm.oop2_winget_project.Model.ListManager;
 import ch.hftm.oop2_winget_project.Model.PackageList;
 import ch.hftm.oop2_winget_project.Model.WinGetPackage;
+import ch.hftm.oop2_winget_project.Persistence.Serializer;
 import ch.hftm.oop2_winget_project.Util.QueryType;
 import ch.hftm.oop2_winget_project.Util.SourceType;
 import javafx.application.Platform;
@@ -88,6 +89,7 @@ public class PackageListController {
         } else {
             System.out.println("No package selected or no current list available.");
         }
+        Serializer.serializeListManager();
     }
 
     private void filterList() {

@@ -88,6 +88,9 @@ public class ListManagerController {
                 case F2:
                     buttonRename_onAction();
                     break;
+                case DELETE:
+                    deletePackageListButton_onAction();
+                    break;
             }
         });
     }

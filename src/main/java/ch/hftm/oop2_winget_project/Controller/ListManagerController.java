@@ -42,15 +42,26 @@ public class ListManagerController {
 
     @FXML
     private void initialize() {
-
         listManager = ListManager.getInstance(); //Getting the single instance of ListManager.
+        initializeTableViewData();
+        initializeUIElements();
+        initializeDoubleClickOnRow();
+        initializeKeyListener();
+        initializeSelectionListener();
+        initializeFilter();
+    }
 
-        // Set up tableView
+    // Set up tableView
+    private void initializeTableViewData() {
         column_name.setCellValueFactory(cellData -> cellData.getValue().getFXName()); // Set cell value for column.
         column_size.setCellValueFactory(cellData -> cellData.getValue().getFXSize().asObject()); // Set cell value for column.
         column_name.setCellFactory(TextFieldTableCell.forTableColumn()); // Set cell to textField for editing.
+        tableView_packageLists.setItems(listManager.getFXLists()); // Bind the data of listManager to the TableView.
+    }
 
-        // Set up buttons
+    // Set up buttons
+    private void initializeUIElements() {
+
         button_rename.setDisable(true);
         button_delete.setDisable(true);
         button_batchScript.setDisable(true);
@@ -59,7 +70,6 @@ public class ListManagerController {
         column_name.setOnEditCommit(event -> {
             final String newName = event.getNewValue() != null ? event.getNewValue().trim() : "";
             PackageList packageList = event.getRowValue(); // Get the actual PackageList object being edited
-
             if (!newName.isEmpty()) {
                 packageList.setName(newName); // Update the name if new name is not empty
                 Serializer.serializeListManager(); // Assuming you have a method to serialize (save) the updated ListManager
@@ -69,19 +79,10 @@ public class ListManagerController {
                 tableView_packageLists.refresh(); // Refresh the table to show the reverted/updated name
             }
         });
-
-        // Bind the data of listManager to the TableView
-        tableView_packageLists.setItems(listManager.getFXLists());
-
-        setUpDoubleClickOnRow();
-        keyListener();
-        selectionListener();
-
-        initializeFilter();
     }
 
     // Listener for keyboard inputs.
-    private void keyListener() {
+    private void initializeKeyListener() {
         tableView_packageLists.setOnKeyPressed(event -> {
             switch (event.getCode()) {
                 case F2:
@@ -91,8 +92,8 @@ public class ListManagerController {
         });
     }
 
-    // Listener: Checks if item from tableView is selected.
-    private void selectionListener() {
+    // Listener for selected TableRows.
+    private void initializeSelectionListener() {
         tableView_packageLists.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             // Disable buttons if no list is selected or if the selected list is "Favourites" by UUID
 
@@ -176,7 +177,7 @@ public class ListManagerController {
     }
 
 //    Event Handlers / Listeners
-    private void setUpDoubleClickOnRow() {
+    private void initializeDoubleClickOnRow() {
         tableView_packageLists.setRowFactory(tv -> {
             TableRow<PackageList> row = new TableRow<>();
             row.setOnMouseClicked(event -> {

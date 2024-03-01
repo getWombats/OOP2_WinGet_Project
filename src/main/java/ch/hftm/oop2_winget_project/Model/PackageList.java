@@ -18,6 +18,10 @@ public class PackageList {
 
 
 //    Constructors
+//    public PackageList() {
+//        this.packages = FXCollections.observableArrayList();
+//    }
+
     public PackageList(String name){
         this.id = UUID.randomUUID().toString(); // Create random UUID to identify List.
         this.name = new SimpleStringProperty(name);

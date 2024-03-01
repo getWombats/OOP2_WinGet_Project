@@ -61,18 +61,19 @@ public class PackageListController {
 
         tableView_packages.setItems(currentPackageList.getFXPackages());
 
-        // Initialize cell value factories, assuming WinGetPackage has appropriate properties
-        column_name.setCellValueFactory(cellData -> cellData.getValue().getFXName());
-        column_id.setCellValueFactory(cellData -> cellData.getValue().getFXId());
-        column_version.setCellValueFactory(cellData -> cellData.getValue().getFXVersion());
-        column_source.setCellValueFactory(cellData -> cellData.getValue().getFXSource());
-
+        initializeTableViewData();
         addButtonToTableView();
         setSourceColumnLabel();
         initializeFilter();
     }
 
-    // Initialize filter components
+    private void initializeTableViewData() {
+        column_name.setCellValueFactory(cellData -> cellData.getValue().getFXName());
+        column_id.setCellValueFactory(cellData -> cellData.getValue().getFXId());
+        column_version.setCellValueFactory(cellData -> cellData.getValue().getFXVersion());
+        column_source.setCellValueFactory(cellData -> cellData.getValue().getFXSource());
+    }
+        // Initialize filter components
     private void initializeFilter() {
         comboBox_filter.getItems().addAll("All Attributes", "Name", "ID", "Version", "Source");
         comboBox_filter.setValue("All Attributes");

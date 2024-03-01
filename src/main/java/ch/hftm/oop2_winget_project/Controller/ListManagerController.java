@@ -77,11 +77,7 @@ public class ListManagerController {
         keyListener();
         selectionListener();
 
-        // Initialize filter components
-        comboBox_filter.getItems().addAll("All Attributes", "Name", "Size");
-        comboBox_filter.setValue("All Attributes");
-        textField_filter.textProperty().addListener((observable, oldValue, newValue) -> filterList());
-        comboBox_filter.valueProperty().addListener((observable, oldValue, newValue) -> filterList());
+        initializeFilter();
     }
 
     // Listener for keyboard inputs.
@@ -112,6 +108,14 @@ public class ListManagerController {
                 button_batchScript.setDisable(false);
             }
         });
+    }
+
+    // Initialize filter components
+    private void initializeFilter() {
+        comboBox_filter.getItems().addAll("All Attributes", "Name", "Size");
+        comboBox_filter.setValue("All Attributes");
+        textField_filter.textProperty().addListener((observable, oldValue, newValue) -> filterList());
+        comboBox_filter.valueProperty().addListener((observable, oldValue, newValue) -> filterList());
     }
 
     @FXML

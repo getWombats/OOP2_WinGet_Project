@@ -15,7 +15,7 @@
                 <HBox prefHeight="200.0" spacing="20.0">
                     <children>
                         <Button mnemonicParsing="false" onAction="#getAvailableUpdates" styleClass="refreshButton" stylesheets="@../CSS/DarkTheme.css" text="Show available Updates" />
-                        <TextField fx:id="textfield_filter" promptText="Filter Packages" stylesheets="@../CSS/DarkTheme.css" />
+                        <TextField fx:id="textField_filter" promptText="Filter Packages" stylesheets="@../CSS/DarkTheme.css" />
                         <ComboBox fx:id="comboBox_filter" prefWidth="150.0" stylesheets="@../CSS/DarkTheme.css" />
                     </children>
                 </HBox>

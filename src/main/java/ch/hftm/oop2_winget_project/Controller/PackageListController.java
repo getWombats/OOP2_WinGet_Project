@@ -66,16 +66,18 @@ public class PackageListController {
         column_version.setCellValueFactory(cellData -> cellData.getValue().getFXVersion());
         column_source.setCellValueFactory(cellData -> cellData.getValue().getFXSource());
 
-        // Initialize filter components
+        addButtonToTableView();
+        setSourceColumnLabel();
+        initializeFilter();
+    }
+
+    // Initialize filter components
+    private void initializeFilter() {
         comboBox_filter.getItems().addAll("All Attributes", "Name", "ID", "Version", "Source");
         comboBox_filter.setValue("All Attributes");
         textField_filter.textProperty().addListener((observable, oldValue, newValue) -> filterList());
         comboBox_filter.valueProperty().addListener((observable, oldValue, newValue) -> filterList());
-
-        addButtonToTableView();
-        setSourceColumnLabel();
     }
-
 
     @FXML
     private void button_removePackageFromList() {
@@ -93,11 +95,11 @@ public class PackageListController {
         String selectedAttribute = comboBox_filter.getValue();
 
         if (filterText.isEmpty() || selectedAttribute == null) {
-            tableView_packages.setItems(PackageList.getInstalledPackageList());
+            tableView_packages.setItems(currentPackageList.getFXPackages());
             return;
         }
 
-        Stream<WinGetPackage> pkgStream = PackageList.getInstalledPackageList().stream();
+        Stream<WinGetPackage> pkgStream = currentPackageList.getFXPackages().stream();
         Predicate<WinGetPackage> filterPredicate = pkg -> {
             switch (selectedAttribute) {
                 case "All Attributes":

@@ -8,6 +8,8 @@ import ch.hftm.oop2_winget_project.Util.ConsoleExitCode;
 import ch.hftm.oop2_winget_project.Util.QueryType;
 import ch.hftm.oop2_winget_project.Util.SourceType;
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -19,6 +21,9 @@ import javafx.util.Callback;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class UpgradePackagesController implements IControllerBase, Initializable
 {
@@ -41,9 +46,9 @@ public class UpgradePackagesController implements IControllerBase, Initializable
     @FXML
     private VBox placeholderContent;
     @FXML
-    private TextField textfield_filter;
+    private TextField textField_filter;
     @FXML
-    private ComboBox comboBox_filter;
+    private ComboBox<String> comboBox_filter;
 
     private boolean isThreadWorking;
 
@@ -57,6 +62,17 @@ public class UpgradePackagesController implements IControllerBase, Initializable
         setSourceColumnLabel();
         setTableViewData();
         setTableViewSource();
+        initializeFilter();
+
+
+    }
+
+    // Initialize filter components
+    private void initializeFilter() {
+        comboBox_filter.getItems().addAll("All Attributes", "Name", "ID", "Version", "Source");
+        comboBox_filter.setValue("All Attributes");
+        textField_filter.textProperty().addListener((observable, oldValue, newValue) -> filterList());
+        comboBox_filter.valueProperty().addListener((observable, oldValue, newValue) -> filterList());
     }
 
     @FXML
@@ -244,5 +260,41 @@ public class UpgradePackagesController implements IControllerBase, Initializable
         ProcessBuilder processBuilder = new ProcessBuilder("winget.exe", QueryType.UPGRADE.toString(), "--id", packageId, "--accept-package-agreements", "--accept-source-agreements");
         processBuilder.redirectErrorStream(true);
         processBuilder.start();
+    }
+
+    private void filterList() {
+        String filterText = textField_filter.getText().toLowerCase();
+        String selectedAttribute = comboBox_filter.getValue();
+
+        if (filterText.isEmpty() || selectedAttribute == null) {
+            tableView_upgradePackages.setItems(PackageList.getUpgradePackageList());
+            return;
+        }
+
+        Stream<WinGetPackage> pkgStream = PackageList.getUpgradePackageList().stream();
+        Predicate<WinGetPackage> filterPredicate = pkg -> {
+            switch (selectedAttribute) {
+                case "All Attributes":
+                    return (pkg.getName() + " " + pkg.getId() + " " + pkg.getSource() + " " + pkg.getVersion()).toLowerCase().contains(filterText);
+                case "Name":
+                    return pkg.getName().toLowerCase().contains(filterText);
+                case "ID":
+                    return pkg.getId().toLowerCase().contains(filterText);
+                case "Version":
+                    return pkg.getVersion().toLowerCase().contains(filterText);
+                case "Source":
+                    return pkg.getSource().toLowerCase().contains(filterText);
+                default:
+                    return false;
+            }
+        };
+
+        ObservableList<WinGetPackage> filteredList = pkgStream.filter(filterPredicate).collect(Collectors.toCollection(FXCollections::observableArrayList));
+
+        if(filteredList.isEmpty()){
+            setTableViewPlaceholder("No Packages found", false);
+        }
+
+        tableView_upgradePackages.setItems(filteredList);
     }
 }

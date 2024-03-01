@@ -63,8 +63,14 @@ public class InstalledPackagesController implements IControllerBase, Initializab
         setSourceColumnLabel();
         setTableViewData();
         setTableViewSource();
+        initializeFilter();
 
-        // Initialize filter components
+
+
+    }
+
+    // Initialize filter components
+    private void initializeFilter() {
         comboBox_filter.getItems().addAll("All Attributes", "Name", "ID", "Version", "Source");
         comboBox_filter.setValue("All Attributes");
         textField_filter.textProperty().addListener((observable, oldValue, newValue) -> filterList());

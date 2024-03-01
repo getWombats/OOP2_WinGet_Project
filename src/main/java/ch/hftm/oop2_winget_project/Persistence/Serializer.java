@@ -22,9 +22,9 @@ public class Serializer {
     public static void serializeListManager() {
         ListManager listManager = ListManager.getInstance();
 
-        printModels("Current ListManager: ");
+        // printModels("Current ListManager: "); // For debugging.
         ListManagerDTO listManagerDTO = DTOConverter.toListManagerDTO(listManager); // Convert ListManager to ListManagerDTO.
-        printDTOs("Current ListManagerDTO: ");
+        // printDTOs("Current ListManagerDTO: "); // For debugging.
 
         // Serialize the listManager to .ser file.
         LOGGER.log(Level.INFO, "Serialization of ListManager starting.");
@@ -38,7 +38,6 @@ public class Serializer {
 
     // Deserializes (loads) the listManager.
     public static void deserializeListManager() {
-
         ListManagerDTO listManagerDTO = ListManagerDTO.getInstance();
 
         // Deserialize the ListManagerDTO from .ser file.
@@ -51,13 +50,12 @@ public class Serializer {
         } catch (IOException e) {
             LOGGER.log(Level.WARNING, "Deserialization of ListManagerDTO failed: {0}", e.getMessage());
         }
-
-        printDTOs("Current ListManagerDTO: ");
+        // printDTOs("Current ListManagerDTO: "); // For debugging.
         DTOConverter.fromListManagerDTO(listManagerDTO); // Convert ListManagerDTO to ListManager.
-        printModels("Current ListManager: ");
+        // printModels("Current ListManager: "); // For debugging.
     }
 
-    // Prints out the model instances.
+    // Prints out the model instances. For debugging.
     private static void printModels(String str) {
         System.out.println("\n" + str);
         ListManager listManager = ListManager.getInstance();
@@ -67,7 +65,7 @@ public class Serializer {
         });
     }
 
-    // Prints out the DTO instances.
+    // Prints out the DTO instances. For debugging.
     private static void printDTOs(String str) {
         System.out.println("\n" + str);
         ListManagerDTO listManagerDTO = ListManagerDTO.getInstance();

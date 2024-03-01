@@ -61,6 +61,7 @@ public class PackageListController {
         initializeUIElements();
         addButtonToTableView();
         setSourceColumnLabel();
+        initializeKeyListener();
         initializeFilter();
     }
 
@@ -73,6 +74,16 @@ public class PackageListController {
     }
     private void initializeUIElements() {
         label_title.setText(currentPackageList.getName());
+    }
+
+    private void initializeKeyListener() {
+        tableView_packages.setOnKeyPressed(event -> {
+            switch (event.getCode()) {
+                case DELETE:
+                    button_removePackageFromList();
+                    break;
+            }
+        });
     }
         // Initialize filter components
     private void initializeFilter() {

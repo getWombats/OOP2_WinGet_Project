@@ -57,11 +57,8 @@ public class PackageListController {
         System.out.println(listManager.getSelectedPackageList());
         System.out.println("Packages in the list: " + currentPackageList.getFXPackages().size());
 
-        label_title.setText(currentPackageList.getName());
-
-        tableView_packages.setItems(currentPackageList.getFXPackages());
-
         initializeTableViewData();
+        initializeUIElements();
         addButtonToTableView();
         setSourceColumnLabel();
         initializeFilter();
@@ -72,6 +69,10 @@ public class PackageListController {
         column_id.setCellValueFactory(cellData -> cellData.getValue().getFXId());
         column_version.setCellValueFactory(cellData -> cellData.getValue().getFXVersion());
         column_source.setCellValueFactory(cellData -> cellData.getValue().getFXSource());
+        tableView_packages.setItems(currentPackageList.getFXPackages());
+    }
+    private void initializeUIElements() {
+        label_title.setText(currentPackageList.getName());
     }
         // Initialize filter components
     private void initializeFilter() {

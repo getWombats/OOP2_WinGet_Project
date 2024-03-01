@@ -22,13 +22,13 @@ public class ListManagerController {
 
     private ListManager listManager;
     @FXML
-    private Button button_createPackageList;
+    private Button button_create;
     @FXML
     private Button button_rename;
     @FXML
-    private Button button_deletePackageList;
+    private Button button_delete;
     @FXML
-    private Button button_CreateBatchFile;
+    private Button button_batchScript;
     @FXML
     private TableView<PackageList> tableView_packageLists;
     @FXML
@@ -52,8 +52,8 @@ public class ListManagerController {
 
         // Set up buttons
         button_rename.setDisable(true);
-        button_deletePackageList.setDisable(true);
-        button_CreateBatchFile.setDisable(true);
+        button_delete.setDisable(true);
+        button_batchScript.setDisable(true);
 
         // Set the commit action for editing the 'name' column
         column_name.setOnEditCommit(event -> {
@@ -103,13 +103,13 @@ public class ListManagerController {
             if ("favourite-list-uuid".equals(newSelection.getId())) {
                 System.out.println("newSelection:" + newSelection);
                 button_rename.setDisable(true);
-                button_deletePackageList.setDisable(true);
+                button_delete.setDisable(true);
             } else {
                 button_rename.setDisable(false);
-                button_deletePackageList.setDisable(false);
+                button_delete.setDisable(false);
             }
             if (newSelection.getSize() != 0) {
-                button_CreateBatchFile.setDisable(false);
+                button_batchScript.setDisable(false);
             }
         });
     }

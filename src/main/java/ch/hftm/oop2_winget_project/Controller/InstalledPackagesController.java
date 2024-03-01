@@ -28,17 +28,17 @@ import java.util.stream.Stream;
 public class InstalledPackagesController implements IControllerBase, Initializable
 {
     @FXML
-    private TableView<WinGetPackage> installedPackagesTableView;
+    private TableView<WinGetPackage> tableView_installedPackages;
     @FXML
-    private TableColumn<WinGetPackage, String> idColumn;
+    private TableColumn<WinGetPackage, String> column_id;
     @FXML
-    private TableColumn<WinGetPackage, String> nameColumn;
+    private TableColumn<WinGetPackage, String> column_name;
     @FXML
-    private TableColumn<WinGetPackage, String> sourceColumn;
+    private TableColumn<WinGetPackage, String> column_source;
     @FXML
-    private TableColumn<WinGetPackage, String> versionColumn;
+    private TableColumn<WinGetPackage, String> column_version;
     @FXML
-    private TableColumn<WinGetPackage, Void> actionColumn;
+    private TableColumn<WinGetPackage, Void> column_action;
     @FXML
     private Label tableViewPlaceholderLabel;
     @FXML
@@ -46,7 +46,7 @@ public class InstalledPackagesController implements IControllerBase, Initializab
     @FXML
     private ComboBox<String> comboBox_filter;
     @FXML
-    private TextField textfield_filter;
+    private TextField textField_filter;
     private boolean isThreadWorking;
 
 //    private final Image image = new Image(getClass().getResource("/path/to/resource/image.jpg").toExternalForm());
@@ -67,7 +67,7 @@ public class InstalledPackagesController implements IControllerBase, Initializab
         // Initialize filter components
         comboBox_filter.getItems().addAll("All Attributes", "Name", "ID", "Version", "Source");
         comboBox_filter.setValue("All Attributes");
-        textfield_filter.textProperty().addListener((observable, oldValue, newValue) -> filterList());
+        textField_filter.textProperty().addListener((observable, oldValue, newValue) -> filterList());
         comboBox_filter.valueProperty().addListener((observable, oldValue, newValue) -> filterList());
     }
 
@@ -80,29 +80,29 @@ public class InstalledPackagesController implements IControllerBase, Initializab
     @Override
     public void setTableViewData()
     {
-        this.nameColumn.setCellValueFactory(cellData -> cellData.getValue().getFXName());
-        this.idColumn.setCellValueFactory(cellData -> cellData.getValue().getFXId());
-        this.versionColumn.setCellValueFactory(cellData -> cellData.getValue().getFXVersion());
-        this.sourceColumn.setCellValueFactory(cellData -> cellData.getValue().getFXSource());
+        this.column_name.setCellValueFactory(cellData -> cellData.getValue().getFXName());
+        this.column_id.setCellValueFactory(cellData -> cellData.getValue().getFXId());
+        this.column_version.setCellValueFactory(cellData -> cellData.getValue().getFXVersion());
+        this.column_source.setCellValueFactory(cellData -> cellData.getValue().getFXSource());
     }
 
     @Override
     public void setTableViewSource()
     {
-        this.installedPackagesTableView.setItems(PackageList.getInstalledPackageList());
+        this.tableView_installedPackages.setItems(PackageList.getInstalledPackageList());
     }
 
     @Override
     public void refreshTableViewContent()
     {
-        installedPackagesTableView.setItems(null);
+        tableView_installedPackages.setItems(null);
         setTableViewSource();
     }
 
     @Override
     public WinGetPackage getObjectFromSelection()
     {
-        return installedPackagesTableView.getSelectionModel().getSelectedItem();
+        return tableView_installedPackages.getSelectionModel().getSelectedItem();
     }
 
     @Override
@@ -145,7 +145,7 @@ public class InstalledPackagesController implements IControllerBase, Initializab
                                         // Update list
                                         PackageList.getInstalledPackageList().remove(selectedItem);
                                         setGraphic(null);
-                                        textfield_filter.clear();
+                                        textField_filter.clear();
                                         isThreadWorking = false;
                                     });
                                 }).start();
@@ -182,11 +182,11 @@ public class InstalledPackagesController implements IControllerBase, Initializab
                 return cell;
             }
         };
-        actionColumn.setCellFactory(cellFactory);
+        column_action.setCellFactory(cellFactory);
     }
 
     private void setSourceColumnLabel(){
-        sourceColumn.setCellFactory(column -> new TableCell<>() {
+        column_source.setCellFactory(column -> new TableCell<>() {
             @Override
             protected void updateItem(String item, boolean empty) {
                 super.updateItem(item, empty);
@@ -220,7 +220,7 @@ public class InstalledPackagesController implements IControllerBase, Initializab
     {
         if (!isThreadWorking)
         {
-            installedPackagesTableView.getItems().clear();
+            tableView_installedPackages.getItems().clear();
 
             setTableViewPlaceholder("Loading installed packages", true);
 
@@ -261,14 +261,14 @@ public class InstalledPackagesController implements IControllerBase, Initializab
         placeholderContent.getChildren().addAll(progressIndicator, tableViewPlaceholderLabel);
         placeholderContent.setAlignment(Pos.CENTER);
 
-        installedPackagesTableView.widthProperty().addListener((obs, oldVal, newVal) -> {
+        tableView_installedPackages.widthProperty().addListener((obs, oldVal, newVal) -> {
             placeholderContent.setPrefWidth(newVal.doubleValue());
         });
-        installedPackagesTableView.heightProperty().addListener((obs, oldVal, newVal) -> {
+        tableView_installedPackages.heightProperty().addListener((obs, oldVal, newVal) -> {
             placeholderContent.setPrefHeight(newVal.doubleValue());
         });
 
-        installedPackagesTableView.setPlaceholder(placeholderContent);
+        tableView_installedPackages.setPlaceholder(placeholderContent);
     }
 
     private void uninstallPackage(String packageId) throws IOException {
@@ -278,11 +278,11 @@ public class InstalledPackagesController implements IControllerBase, Initializab
     }
 
     private void filterList() {
-        String filterText = textfield_filter.getText().toLowerCase();
+        String filterText = textField_filter.getText().toLowerCase();
         String selectedAttribute = comboBox_filter.getValue();
 
         if (filterText.isEmpty() || selectedAttribute == null) {
-            installedPackagesTableView.setItems(PackageList.getInstalledPackageList());
+            tableView_installedPackages.setItems(PackageList.getInstalledPackageList());
             return;
         }
 
@@ -310,6 +310,6 @@ public class InstalledPackagesController implements IControllerBase, Initializab
             setTableViewPlaceholder("No Packages found", false);
         }
 
-        installedPackagesTableView.setItems(filteredList);
+        tableView_installedPackages.setItems(filteredList);
     }
 }

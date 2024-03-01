@@ -14,9 +14,9 @@
             <children>
                 <HBox prefHeight="200.0" spacing="20.0">
                     <children>
-                        <Button fx:id="button_createPackageList" mnemonicParsing="false" onAction="#createPackageListButton_onAction" stylesheets="@../CSS/DarkTheme.css" text="Create List" />
-                        <Button fx:id="button_deletePackageList" mnemonicParsing="false" onAction="#deletePackageListButton_onAction" stylesheets="@../CSS/DarkTheme.css" text="Delete" />
-                        <Button fx:id="button_CreateBatchFile" mnemonicParsing="false" onAction="#buttoncreateBatchFile_onAction" stylesheets="@../CSS/DarkTheme.css" text="Create Install Script" />
+                        <Button fx:id="button_create" mnemonicParsing="false" onAction="#createPackageListButton_onAction" stylesheets="@../CSS/DarkTheme.css" text="Create List" />
+                        <Button fx:id="button_delete" mnemonicParsing="false" onAction="#deletePackageListButton_onAction" stylesheets="@../CSS/DarkTheme.css" text="Delete" />
+                        <Button fx:id="button_batchScript" mnemonicParsing="false" onAction="#buttoncreateBatchFile_onAction" stylesheets="@../CSS/DarkTheme.css" text="Create Install Script" />
                         <Button fx:id="button_rename" mnemonicParsing="false" onAction="#buttonRename_onAction" stylesheets="@../CSS/DarkTheme.css" text="Rename" />
                         <TextField fx:id="textField_filter" promptText="Filter Packages" stylesheets="@../CSS/DarkTheme.css" />
                         <ComboBox fx:id="comboBox_filter" prefWidth="150.0" stylesheets="@../CSS/DarkTheme.css" />

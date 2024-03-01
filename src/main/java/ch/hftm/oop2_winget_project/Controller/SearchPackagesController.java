@@ -23,19 +23,19 @@ import java.util.ResourceBundle;
 public class SearchPackagesController implements IControllerBase, Initializable
 {
     @FXML
-    private TableView<WinGetPackage> tableView;
+    private TableView<WinGetPackage> tableView_searchPackages;
     @FXML
     private TableColumn<WinGetPackage, Boolean> column_favourite;
     @FXML
-    private TableColumn<WinGetPackage, String> column_name;
-    @FXML
     private TableColumn<WinGetPackage, String> column_id;
+    @FXML
+    private TableColumn<WinGetPackage, String> column_name;
     @FXML
     private TableColumn<WinGetPackage, String> column_source;
     @FXML
     private TableColumn<WinGetPackage, String> column_version;
     @FXML
-    private TableColumn<WinGetPackage, Void> column_button_install;
+    private TableColumn<WinGetPackage, Void> column_action;
     @FXML
     private TextField keywordTextField;
     @FXML
@@ -96,13 +96,13 @@ public class SearchPackagesController implements IControllerBase, Initializable
     @Override
     public void setTableViewSource()
     {
-        this.tableView.setItems(PackageList.getSearchPackageList());
+        this.tableView_searchPackages.setItems(PackageList.getSearchPackageList());
     }
 
     @Override
     public void refreshTableViewContent()
     {
-        tableView.setItems(null);
+        tableView_searchPackages.setItems(null);
         setTableViewSource();
     }
 
@@ -123,7 +123,7 @@ public class SearchPackagesController implements IControllerBase, Initializable
     @Override
     public WinGetPackage getObjectFromSelection()
     {
-        return tableView.getSelectionModel().getSelectedItem();
+        return tableView_searchPackages.getSelectionModel().getSelectedItem();
     }
 
     @Override
@@ -189,7 +189,7 @@ public class SearchPackagesController implements IControllerBase, Initializable
                 return cell;
             }
         };
-        column_button_install.setCellFactory(cellFactory);
+        column_action.setCellFactory(cellFactory);
     }
 
     private void setSourceColumnLabel(){
@@ -260,9 +260,9 @@ public class SearchPackagesController implements IControllerBase, Initializable
 
         if (!searchKeyword.isEmpty() && !isThreadWorking)
         {
-            if (tableView.getItems() != null)
+            if (tableView_searchPackages.getItems() != null)
             {
-                tableView.getItems().clear();
+                tableView_searchPackages.getItems().clear();
             }
 
             setTableViewPlaceholder("Searching packages", true);
@@ -339,7 +339,7 @@ public class SearchPackagesController implements IControllerBase, Initializable
         // Listener: Updates the tableView based on the selected packageList in the combobox. (Because of the Favourite checkbox)
         comboBox_selectPackageList.valueProperty().addListener((obs, oldVal, newVal) -> {
             selectedPackageList = newVal;
-            tableView.refresh();
+            tableView_searchPackages.refresh();
         });
     }
 
@@ -382,13 +382,13 @@ public class SearchPackagesController implements IControllerBase, Initializable
         placeholderContent.getChildren().addAll(progressIndicator, tableViewPlaceholderLabel);
         placeholderContent.setAlignment(Pos.CENTER);
 
-        tableView.widthProperty().addListener((obs, oldVal, newVal) -> {
+        tableView_searchPackages.widthProperty().addListener((obs, oldVal, newVal) -> {
             placeholderContent.setPrefWidth(newVal.doubleValue());
         });
-        tableView.heightProperty().addListener((obs, oldVal, newVal) -> {
+        tableView_searchPackages.heightProperty().addListener((obs, oldVal, newVal) -> {
             placeholderContent.setPrefHeight(newVal.doubleValue());
         });
 
-        tableView.setPlaceholder(placeholderContent);
+        tableView_searchPackages.setPlaceholder(placeholderContent);
     }
 }

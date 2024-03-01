@@ -11,7 +11,6 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.text.Font;
 import javafx.util.Callback;
 
 import java.io.IOException;
@@ -30,19 +29,19 @@ public class PackageListController {
     @FXML
     private TableView<WinGetPackage> tableView_packages;
     @FXML
-    private TableColumn<WinGetPackage, String> column_name;
-    @FXML
     private TableColumn<WinGetPackage, String> column_id;
     @FXML
-    private TableColumn<WinGetPackage, String> column_version;
+    private TableColumn<WinGetPackage, String> column_name;
     @FXML
     private TableColumn<WinGetPackage, String> column_source;
     @FXML
-    private TableColumn<WinGetPackage, Void> column_button_install;
+    private TableColumn<WinGetPackage, String> column_version;
+    @FXML
+    private TableColumn<WinGetPackage, Void> column_install;
     @FXML
     private ComboBox<String> comboBox_filter;
     @FXML
-    private TextField textfield_filter;
+    private TextField textField_filter;
     @FXML
     private Label label_title;
 
@@ -70,7 +69,7 @@ public class PackageListController {
         // Initialize filter components
         comboBox_filter.getItems().addAll("All Attributes", "Name", "ID", "Version", "Source");
         comboBox_filter.setValue("All Attributes");
-        textfield_filter.textProperty().addListener((observable, oldValue, newValue) -> filterList());
+        textField_filter.textProperty().addListener((observable, oldValue, newValue) -> filterList());
         comboBox_filter.valueProperty().addListener((observable, oldValue, newValue) -> filterList());
 
         addButtonToTableView();
@@ -90,7 +89,7 @@ public class PackageListController {
     }
 
     private void filterList() {
-        String filterText = textfield_filter.getText().toLowerCase();
+        String filterText = textField_filter.getText().toLowerCase();
         String selectedAttribute = comboBox_filter.getValue();
 
         if (filterText.isEmpty() || selectedAttribute == null) {
@@ -218,7 +217,7 @@ public class PackageListController {
                 return cell;
             }
         };
-        column_button_install.setCellFactory(cellFactory);
+        column_install.setCellFactory(cellFactory);
     }
 
     private void installPackage(String packageId) throws IOException {

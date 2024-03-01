@@ -23,19 +23,19 @@ import java.util.ResourceBundle;
 public class UpgradePackagesController implements IControllerBase, Initializable
 {
     @FXML
-    private TableView<WinGetPackage> upgradePackagesTableView;
+    private TableView<WinGetPackage> tableView_upgradePackages;
     @FXML
-    private TableColumn<WinGetPackage, String> idColumn;
+    private TableColumn<WinGetPackage, String> column_id;
     @FXML
-    private TableColumn<WinGetPackage, String> nameColumn;
+    private TableColumn<WinGetPackage, String> column_name;
     @FXML
-    private TableColumn<WinGetPackage, String> sourceColumn;
+    private TableColumn<WinGetPackage, String> column_source;
     @FXML
-    private TableColumn<WinGetPackage, String> installedVersionColumn;
+    private TableColumn<WinGetPackage, String> column_installedVersion;
     @FXML
-    private TableColumn<WinGetPackage, String> availableVersionColumn;
+    private TableColumn<WinGetPackage, String> column_availableVersion;
     @FXML
-    private TableColumn<WinGetPackage, Void> actionColumn;
+    private TableColumn<WinGetPackage, Void> column_action;
     @FXML
     private Label tableViewPlaceholderLabel;
     @FXML
@@ -63,7 +63,7 @@ public class UpgradePackagesController implements IControllerBase, Initializable
     private void getAvailableUpdates() {
         if (!isThreadWorking)
         {
-            upgradePackagesTableView.getItems().clear();
+            tableView_upgradePackages.getItems().clear();
 
             setTableViewPlaceholder("Loading available updates", true);
 
@@ -105,27 +105,27 @@ public class UpgradePackagesController implements IControllerBase, Initializable
 
     @Override
     public void setTableViewData() {
-        this.nameColumn.setCellValueFactory(cellData -> cellData.getValue().getFXName());
-        this.idColumn.setCellValueFactory(cellData -> cellData.getValue().getFXId());
-        this.installedVersionColumn.setCellValueFactory(cellData -> cellData.getValue().getFXVersion());
-        this.availableVersionColumn.setCellValueFactory(cellData -> cellData.getValue().getFXUpdateVersion());
-        this.sourceColumn.setCellValueFactory(cellData -> cellData.getValue().getFXSource());
+        this.column_name.setCellValueFactory(cellData -> cellData.getValue().getFXName());
+        this.column_id.setCellValueFactory(cellData -> cellData.getValue().getFXId());
+        this.column_installedVersion.setCellValueFactory(cellData -> cellData.getValue().getFXVersion());
+        this.column_availableVersion.setCellValueFactory(cellData -> cellData.getValue().getFXUpdateVersion());
+        this.column_source.setCellValueFactory(cellData -> cellData.getValue().getFXSource());
     }
 
     @Override
     public void setTableViewSource() {
-        this.upgradePackagesTableView.setItems(PackageList.getUpgradePackageList());
+        this.tableView_upgradePackages.setItems(PackageList.getUpgradePackageList());
     }
 
     @Override
     public void refreshTableViewContent() {
-        upgradePackagesTableView.setItems(null);
+        tableView_upgradePackages.setItems(null);
         setTableViewSource();
     }
 
     @Override
     public WinGetPackage getObjectFromSelection() {
-        return upgradePackagesTableView.getSelectionModel().getSelectedItem();
+        return tableView_upgradePackages.getSelectionModel().getSelectedItem();
     }
 
     @Override
@@ -180,7 +180,7 @@ public class UpgradePackagesController implements IControllerBase, Initializable
                 return cell;
             }
         };
-        actionColumn.setCellFactory(cellFactory);
+        column_action.setCellFactory(cellFactory);
     }
 
     private void setTableViewPlaceholder(String labelText, boolean showProgressIndicator){
@@ -192,18 +192,18 @@ public class UpgradePackagesController implements IControllerBase, Initializable
         placeholderContent.getChildren().addAll(progressIndicator, tableViewPlaceholderLabel);
         placeholderContent.setAlignment(Pos.CENTER);
 
-        upgradePackagesTableView.widthProperty().addListener((obs, oldVal, newVal) -> {
+        tableView_upgradePackages.widthProperty().addListener((obs, oldVal, newVal) -> {
             placeholderContent.setPrefWidth(newVal.doubleValue());
         });
-        upgradePackagesTableView.heightProperty().addListener((obs, oldVal, newVal) -> {
+        tableView_upgradePackages.heightProperty().addListener((obs, oldVal, newVal) -> {
             placeholderContent.setPrefHeight(newVal.doubleValue());
         });
 
-        upgradePackagesTableView.setPlaceholder(placeholderContent);
+        tableView_upgradePackages.setPlaceholder(placeholderContent);
     }
 
     private void setSourceColumnLabel(){
-        sourceColumn.setCellFactory(column -> new TableCell<>() {
+        column_source.setCellFactory(column -> new TableCell<>() {
             @Override
             protected void updateItem(String item, boolean empty) {
                 super.updateItem(item, empty);

@@ -4,6 +4,8 @@ import ch.hftm.oop2_winget_project.Model.ListManager;
 import ch.hftm.oop2_winget_project.Model.ListManagerDTO;
 
 import java.io.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 public class Serializer {
@@ -12,9 +14,9 @@ public class Serializer {
 //  does so for all PackageLists and their WinGetPackages.
 //  Because those model classes contain JavaFX attributes, they need to get converted into DTO models without Java FX specific elements.
 //  The DTOConverter class handles the conversion between model and DTO instances.
+
+    private static final Logger LOGGER = Logger.getLogger(DTOConverter.class.getName());
     private static String filepath = "./UserData/listManagerDTO.ser";
-
-
 
     // Serializes (saves) the listManager.
     public static void serializeListManager() {
@@ -25,24 +27,29 @@ public class Serializer {
         printDTOs("Current ListManagerDTO: ");
 
         // Serialize the listManager to .ser file.
+        LOGGER.log(Level.INFO, "Serialization of ListManager starting.");
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(filepath))) {
             oos.writeObject(listManagerDTO);
+            LOGGER.log(Level.INFO, "Serialization of ListManager successful.");
         } catch (IOException e) {
-            e.printStackTrace();
+            LOGGER.log(Level.WARNING, "Serialization of ListManager failed: {0}", e.getMessage());
         }
     }
 
     // Deserializes (loads) the listManager.
     public static void deserializeListManager() {
+
         ListManagerDTO listManagerDTO = ListManagerDTO.getInstance();
 
         // Deserialize the ListManagerDTO from .ser file.
+        LOGGER.log(Level.INFO, "Deserialization of ListManagerDTO starting.");
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(filepath))) {
             listManagerDTO = (ListManagerDTO) ois.readObject();
+            LOGGER.log(Level.INFO, "Deserialization of ListManagerDTO successful.");
         } catch (ClassNotFoundException | FileNotFoundException e) {
-            e.printStackTrace();
+            LOGGER.log(Level.WARNING, "Deserialization of ListManagerDTO failed: {0}", e.getMessage());
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            LOGGER.log(Level.WARNING, "Deserialization of ListManagerDTO failed: {0}", e.getMessage());
         }
 
         printDTOs("Current ListManagerDTO: ");

@@ -58,7 +58,7 @@ public class DTOConverter {
 
     // Converts PackageList to PackageListDTO.
     public static PackageListDTO toPackageListDTO(PackageList packageList) {
-        LOGGER.log(Level.INFO, "Converting PackageList to PackageListDTO for: '{0}'", packageList != null ? packageList.getName() : "null");
+        LOGGER.log(Level.INFO, "Conversion PackageList to PackageListDTO for {0} starting.", packageList != null ? packageList.getName() : "null");
         try {
             PackageListDTO packageListDTO = new PackageListDTO();
             packageListDTO.setId(packageList.getId());
@@ -69,7 +69,7 @@ public class DTOConverter {
                     .map(DTOConverter::toWinGetPackageDTO)
                     .collect(Collectors.toList());
             packageListDTO.setPackages(winGetPackageDTOs);
-            LOGGER.log(Level.INFO, "Conversion PackageList to PackageListDTO for '{0}' successful.", packageList.getName());
+            LOGGER.log(Level.INFO, "Conversion PackageList to PackageListDTO for {0} successful.", packageList.getName());
             return packageListDTO;
         } catch (Exception e) {
             LOGGER.log(Level.WARNING, "Conversion PackageList to PackageListDTO failed: {0}", e.getMessage());
@@ -79,7 +79,7 @@ public class DTOConverter {
 
     // Converts PackageListDTO back to PackageList.
     public static PackageList fromPackageListDTO(PackageListDTO packageListDTO) {
-        LOGGER.log(Level.INFO, "Converting PackageListDTO to PackageList for: '{0}'", packageListDTO != null ? packageListDTO.getName() : "null");
+        LOGGER.log(Level.INFO, "Conversion PackageListDTO to PackageList for {0} starting.", packageListDTO != null ? packageListDTO.getName() : "null");
         try {
             PackageList packageList = new PackageList(packageListDTO.getName());
             packageList.setId(packageListDTO.getId());
@@ -88,7 +88,7 @@ public class DTOConverter {
             packageList.setPackages(packageListDTO.getPackages().stream()
                     .map(DTOConverter::fromWinGetPackageDTO)
                     .collect(Collectors.toCollection(FXCollections::observableArrayList)));
-            LOGGER.log(Level.INFO, "Conversion PackageList to PackageListDTO for '{0}' successful.", packageListDTO.getName());
+            LOGGER.log(Level.INFO, "Conversion PackageList to PackageListDTO for {0} successful.", packageListDTO.getName());
             return packageList;
         } catch (Exception e) {
             LOGGER.log(Level.WARNING, "Conversion PackageListDTO to PackageList failed: {0}", e.getMessage());
@@ -99,14 +99,14 @@ public class DTOConverter {
 
     // Converts WinGetPackage to WinGetPackageDTO.
     public static WinGetPackageDTO toWinGetPackageDTO(WinGetPackage winGetPackage) {
-        LOGGER.log(Level.INFO, "Converting WinGetPackage to WinGetPackageDTO for: '{0}'", winGetPackage != null ? winGetPackage.getName() : "null");
+        LOGGER.log(Level.INFO, "Conversion WinGetPackage to WinGetPackageDTO for {0} starting.", winGetPackage != null ? winGetPackage.getName() : "null");
         try {
             WinGetPackageDTO winGetPackageDTO = new WinGetPackageDTO();
             winGetPackageDTO.setName(winGetPackage.getName());
             winGetPackageDTO.setId(winGetPackage.getId());
             winGetPackageDTO.setVersion(winGetPackage.getVersion());
             winGetPackageDTO.setSource(winGetPackage.getSource());
-            LOGGER.log(Level.INFO, "Conversion WinGetPackage to WinGetPackageDTO for '{0}' successful.", winGetPackage.getName());
+            LOGGER.log(Level.INFO, "Conversion WinGetPackage to WinGetPackageDTO for {0} successful.", winGetPackage.getName());
             return winGetPackageDTO;
         } catch (Exception e) {
             LOGGER.log(Level.WARNING, "Conversion WinGetPackage to WinGetPackageDTO failed: {0}", e.getMessage());
@@ -116,14 +116,14 @@ public class DTOConverter {
 
     // Converts WinGetPackageDTO back to WinGetPackage.
     public static WinGetPackage fromWinGetPackageDTO(WinGetPackageDTO winGetPackageDTO) {
-        LOGGER.log(Level.INFO, "Converting WinGetPackageDTO to WinGetPackage for: '{0}'", winGetPackageDTO != null ? winGetPackageDTO.getName() : "null");
+        LOGGER.log(Level.INFO, "Conversion WinGetPackageDTO to WinGetPackage for {0} starting.", winGetPackageDTO != null ? winGetPackageDTO.getName() : "null");
         try {
             WinGetPackage winGetPackage = new WinGetPackage();
             winGetPackage.setName(winGetPackageDTO.getName());
             winGetPackage.setId(winGetPackageDTO.getId());
             winGetPackage.setVersion(winGetPackageDTO.getVersion());
             winGetPackage.setSource(winGetPackageDTO.getSource());
-            LOGGER.log(Level.INFO, "Conversion WinGetPackageDTO to WinGetPackage for '{0}' successful.", winGetPackageDTO.getName());
+            LOGGER.log(Level.INFO, "Conversion WinGetPackageDTO to WinGetPackage for {0} successful.", winGetPackageDTO.getName());
             return winGetPackage;
         } catch (Exception e) {
             LOGGER.log(Level.WARNING, "Conversion WinGetPackageDTO to WinGetPackage failed: {0}", e.getMessage());

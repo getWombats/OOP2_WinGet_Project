@@ -1,102 +1,111 @@
 package Persistence;
 
-import ch.hftm.oop2_winget_project.Model.ListManager;
-import ch.hftm.oop2_winget_project.Model.PackageList;
-import ch.hftm.oop2_winget_project.Model.WinGetPackage;
-import ch.hftm.oop2_winget_project.Model.ListManagerDTO;
-import ch.hftm.oop2_winget_project.Model.PackageListDTO;
-import ch.hftm.oop2_winget_project.Model.WinGetPackageDTO;
-
-import ch.hftm.oop2_winget_project.Persistence.DTOConverter;
-import javafx.collections.FXCollections;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import ch.hftm.oop2_winget_project.Model.*;
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.util.Arrays;
+import ch.hftm.oop2_winget_project.Persistence.DTOConverter;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import javafx.collections.FXCollections;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class DTOConverterTest {
+
     private ListManager listManager;
     private ListManagerDTO listManagerDTO;
+    private PackageList packageList;
+    private PackageListDTO packageListDTO;
+    private WinGetPackage winGetPackage;
+    private WinGetPackageDTO winGetPackageDTO;
 
     @BeforeEach
     void setUp() {
-        // Set up your test objects here
-
-//        listManager = ListManager.getInstance();
-//        listManager.createPackageList(packageList);
-
-        WinGetPackage winGetPackage = new WinGetPackage();
-        winGetPackage.setName("TestPackage");
-        winGetPackage.setId("1");
-        winGetPackage.setVersion("1.0");
-        winGetPackage.setSource("TestSource");
-
-        PackageList packageList = new PackageList("TestList");
-        packageList.addPackage(winGetPackage);
-
-
-
-        WinGetPackageDTO winGetPackageDTO = new WinGetPackageDTO();
-        winGetPackageDTO.setName("TestPackage");
-        winGetPackageDTO.setId("1");
-        winGetPackageDTO.setVersion("1.0");
-        winGetPackageDTO.setSource("TestSource");
-
-        PackageListDTO packageListDTO = new PackageListDTO();
-        packageListDTO.setName("TestList");
-        packageListDTO.setPackages(FXCollections.observableArrayList(Arrays.asList(winGetPackageDTO)));
-
+        // Initialize test objects.
+        listManager = ListManager.getInstance();
         listManagerDTO = new ListManagerDTO();
-        listManagerDTO.setList(FXCollections.observableArrayList(Arrays.asList(packageListDTO)));
+
+        packageList = new PackageList("TestPackageList");
+        packageListDTO = new PackageListDTO();
+        packageListDTO.setName("TestPackageListDTO");
+
+        winGetPackage = new WinGetPackage("TestName", "TestId", "TestVersion", "TestSource");
+        winGetPackageDTO = new WinGetPackageDTO();
+        winGetPackageDTO.setName("TestNameDTO");
+
+        // Populate the models
+        packageList.addPackage(winGetPackage);
+        listManager.createPackageList("TestPackageList");
+
+        // Populate the DTOs
+//        packageListDTO.setPackages(FXCollections.observableArrayList(winGetPackageDTO));
+//        listManagerDTO.setList(FXCollections.observableArrayList(packageListDTO));
+
+        List<WinGetPackageDTO> winGetPackageDTOList = new ArrayList<>();
+        winGetPackageDTOList.add(winGetPackageDTO);
+        packageListDTO.setPackages(winGetPackageDTOList);
+
+        List<PackageListDTO> packageListDTOList = new ArrayList<>();
+        packageListDTOList.add(packageListDTO);
+        listManagerDTO.setList(packageListDTOList);
     }
 
     @Test
-    void testToListManagerDTOConversion() {
-        ListManagerDTO convertedDTO = DTOConverter.toListManagerDTO(listManager);
-        assertNotNull(convertedDTO);
-        assertFalse(convertedDTO.getList().isEmpty());
-        assertEquals("TestList", convertedDTO.getList().get(0).getName());
+    void testToListManagerDTO() {
+        ListManagerDTO result = DTOConverter.toListManagerDTO(listManager);
+        assertNotNull(result);
+        assertFalse(result.getList().isEmpty());
+        assertEquals(listManager.getLists().size(), result.getList().size());
+        // Additional assertions based on your data structure and requirements
     }
 
     @Test
-    void testFromListManagerDTOConversion() {
-        ListManager convertedListManager = DTOConverter.fromListManagerDTO(listManagerDTO);
-        assertNotNull(convertedListManager);
-        assertFalse(convertedListManager.getLists().isEmpty());
-        assertEquals("TestList", convertedListManager.getLists().get(0).getName());
+    void testFromListManagerDTO() {
+        ListManager result = DTOConverter.fromListManagerDTO(listManagerDTO);
+        assertNotNull(result);
+        assertFalse(result.getLists().isEmpty());
+        assertEquals(listManagerDTO.getList().size(), result.getLists().size());
+        // Additional assertions
     }
 
     @Test
-    void testToPackageListDTOConversion() {
-        PackageList packageList = listManager.getLists().get(0);
-        PackageListDTO packageListDTO = DTOConverter.toPackageListDTO(packageList);
-        assertNotNull(packageListDTO);
-        assertEquals("TestList", packageListDTO.getName());
-        assertFalse(packageListDTO.getPackages().isEmpty());
+    void testToPackageListDTO() {
+        PackageListDTO result = DTOConverter.toPackageListDTO(packageList);
+        assertNotNull(result);
+        assertEquals(packageList.getName(), result.getName());
+        assertEquals(packageList.getPackages().size(), result.getPackages().size());
+        // Additional assertions
     }
 
     @Test
-    void testFromPackageListDTOConversion() {
-        PackageListDTO packageListDTO = listManagerDTO.getList().get(0);
-        PackageList packageList = DTOConverter.fromPackageListDTO(packageListDTO);
-        assertNotNull(packageList);
-        assertEquals("TestList", packageList.getName());
-        assertFalse(packageList.getFXPackages().isEmpty());
+    void testFromPackageListDTO() {
+        PackageList result = DTOConverter.fromPackageListDTO(packageListDTO);
+        assertNotNull(result);
+        assertEquals(packageListDTO.getName(), result.getName());
+        assertEquals(packageListDTO.getPackages().size(), result.getPackages().size());
+        // Additional assertions
     }
 
     @Test
-    void testToWinGetPackageDTOConversion() {
-        WinGetPackage winGetPackage = listManager.getLists().get(0).getFXPackages().get(0);
-        WinGetPackageDTO winGetPackageDTO = DTOConverter.toWinGetPackageDTO(winGetPackage);
-        assertNotNull(winGetPackageDTO);
-        assertEquals("TestPackage", winGetPackageDTO.getName());
+    void testToWinGetPackageDTO() {
+        WinGetPackageDTO result = DTOConverter.toWinGetPackageDTO(winGetPackage);
+        assertNotNull(result);
+        assertEquals(winGetPackage.getName(), result.getName());
+        assertEquals(winGetPackage.getId(), result.getId());
+        assertEquals(winGetPackage.getVersion(), result.getVersion());
+        assertEquals(winGetPackage.getSource(), result.getSource());
+        // Additional assertions
     }
 
     @Test
-    void testFromWinGetPackageDTOConversion() {
-        WinGetPackageDTO winGetPackageDTO = listManagerDTO.getList().get(0).getPackages().get(0);
-        WinGetPackage winGetPackage = DTOConverter.fromWinGetPackageDTO(winGetPackageDTO);
-        assertNotNull(winGetPackage);
-        assertEquals("TestPackage", winGetPackage.getName());
+    void testFromWinGetPackageDTO() {
+        WinGetPackage result = DTOConverter.fromWinGetPackageDTO(winGetPackageDTO);
+        assertNotNull(result);
+        assertEquals(winGetPackageDTO.getName(), result.getName());
+        assertEquals(winGetPackageDTO.getId(), result.getId());
+        assertEquals(winGetPackageDTO.getVersion(), result.getVersion());
+        assertEquals(winGetPackageDTO.getSource(), result.getSource());
+        // Additional assertions
     }
 }

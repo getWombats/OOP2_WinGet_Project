@@ -1,73 +1,75 @@
 package ch.hftm.oop2_winget_project.Model;
 
 import ch.hftm.oop2_winget_project.App;
+import ch.hftm.oop2_winget_project.Util.ResourceProvider;
 import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.DialogPane;
+import javafx.scene.image.Image;
+import javafx.stage.Screen;
+import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
 import org.controlsfx.control.Notifications;
 
+import java.io.FileInputStream;
 import java.util.Objects;
 
 public class Message
 {
-    private double centerStageX;
-    private double centerStageY;
-    private final WindowManager windowManager = App.getAppInstance().getAppWindowManager();
-    private Alert alert;
+    private static final Image windowTitleIcon = new Image(Objects.requireNonNull(Message.class.getResourceAsStream(ResourceProvider.ICONS_ROOT + "windowIcon16x16.png")));
+    private static final WindowManager windowManager = App.getAppInstance().getAppWindowManager();
 
-    public Message()
+    public static ButtonBar.ButtonData showConfirmationDialog(String dialogText, String titleText)
     {
+        ButtonType confirmButton = new ButtonType("Yes", ButtonBar.ButtonData.YES);
+        ButtonType cancelButton = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
 
-    }
-
-    public void show(Alert.AlertType type, String title,String headerText ,String message)
-    {
-        alert = new Alert(type);
-        alert.setTitle(title);
-        alert.setHeaderText(headerText);
-        alert.setContentText(message);
-//        alert.initStyle(StageStyle.UNDECORATED);
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION,"", cancelButton, confirmButton);
+        alert.setTitle(titleText);
+        alert.setHeaderText(dialogText);
         alert.initStyle(StageStyle.DECORATED);
 
+        Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
+        stage.getIcons().add(windowTitleIcon);
+
         DialogPane dialogPane = alert.getDialogPane();
-//        dialogPane.getStyleClass().add("customDialog");
-//        dialogPane.getStylesheets().add(Message.class.getResource("DarkTheme.css").toExternalForm());
-        //        tableView.getScene().getStylesheets().add(getClass().getResource("DarkTheme.css").toExternalForm());
-//        dialogPane.getStyleClass().add("customDialog");
+        dialogPane.getStylesheets().add(Message.class.getResource("/CSS/DarkTheme.css").toExternalForm());
 
         // Positioning
-        centerStageX = (windowManager.getStage().getX() + windowManager.getStage().getMinWidth()/2);
-        centerStageY = (windowManager.getStage().getY() + windowManager.getStage().getMinHeight()/2);
-//        alert.setX(centerStageX - dialogPane.getWidth()/2);
-//        alert.setY(centerStageY - dialogPane.getHeight()/2);
+        alert.setX(windowManager.getStage().getX() + (windowManager.getStage().getWidth()/2) - (dialogPane.getWidth()/2));
+        alert.setY(windowManager.getStage().getY() + 30);
 
         alert.showAndWait();
+        return alert.getResult().getButtonData();
     }
 
-//    public void show(Alert.AlertType type, String title, String headerText , String message, ButtonType b1, ButtonType b2)
-//    {
-//        alert = new Alert(type, message ,b1, b2);
-//        alert.setTitle(title);
-//        alert.setHeaderText(headerText);
-////        alert.setContentText(message);
-//        alert.initStyle(StageStyle.UNDECORATED);
-//
-//        DialogPane dialogPane = alert.getDialogPane();
-//        dialogPane.getStylesheets().add(Objects.requireNonNull(getClass().getResource("DarkTheme.css")).toExternalForm());
-//        dialogPane.getStyleClass().add("myDialog");
-//
-//        // Positioning
-//        centerStageX = (windowManager.getStage().getX() + windowManager.getStage().getMinWidth()/2);
-//        centerStageY = (windowManager.getStage().getY() + windowManager.getStage().getMinHeight()/2);
-//        alert.setX(centerStageX - dialogPane.getWidth()/2);
-//        alert.setY(centerStageY - dialogPane.getHeight()/2);
-//
-//        alert.showAndWait();
-//    }
+    public static ButtonBar.ButtonData showErrorDialog(String errorMessage)
+    {
+        ButtonType confirmButton = new ButtonType("Ok", ButtonBar.ButtonData.OK_DONE);
 
-    public void showNotification(String title, String message)
+        Alert alert = new Alert(Alert.AlertType.ERROR,"", confirmButton);
+        alert.setTitle("Error");
+        alert.setHeaderText(errorMessage);
+        alert.initStyle(StageStyle.DECORATED);
+
+        Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
+        stage.getIcons().add(windowTitleIcon);
+
+        DialogPane dialogPane = alert.getDialogPane();
+        dialogPane.getStylesheets().add(Message.class.getResource("/CSS/DarkTheme.css").toExternalForm());
+
+        // Positioning
+        alert.setX(windowManager.getStage().getX() + (windowManager.getStage().getWidth()/2) - (dialogPane.getWidth()/2));
+        alert.setY(windowManager.getStage().getY() + 30);
+
+        alert.showAndWait();
+        return alert.getResult().getButtonData();
+    }
+
+    public static void showNotification(String title, String message)
     {
         Notifications.create()
                 .title(title)

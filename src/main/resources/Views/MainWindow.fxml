@@ -9,16 +9,14 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane minHeight="650.0" minWidth="1320.0" style="-fx-border-width: 1; -fx-border-color: #333333;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.hftm.oop2_winget_project.Controller.MainWindowController">
+<AnchorPane minHeight="725.0" minWidth="1345.0" style="-fx-border-width: 1; -fx-border-color: #333333;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.hftm.oop2_winget_project.Controller.MainWindowController">
    <BorderPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
       <left>
-         <VBox prefHeight="200.0" spacing="25.0" styleClass="vBoxMenu" stylesheets="@../CSS/DarkTheme.css" BorderPane.alignment="CENTER">
-            <padding>
-               <Insets top="100.0" />
-            </padding>
+         <VBox alignment="CENTER" spacing="25.0" styleClass="vBoxMenu" stylesheets="@../CSS/DarkTheme.css" BorderPane.alignment="CENTER">
             <Button fx:id="buttonSearchPackages" mnemonicParsing="false" onAction="#menuSearchButtonClick" prefHeight="70.0" prefWidth="170.0" styleClass="menuButton" stylesheets="@../CSS/DarkTheme.css" text="Search packages" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="12.0" />
@@ -26,6 +24,11 @@
             <Button fx:id="buttonUpdatePackages" mnemonicParsing="false" onAction="#menuUpdateButtonClick" prefHeight="70.0" prefWidth="170.0" styleClass="menuButton" stylesheets="@../CSS/DarkTheme.css" text="Update packages" />
             <Button fx:id="buttonInstalledPackages" mnemonicParsing="false" onAction="#menuInstalledPackagesButtonClick" prefHeight="70.0" prefWidth="170.0" styleClass="menuButton" stylesheets="@../CSS/DarkTheme.css" text="Installed packages" />
             <Button fx:id="buttonFavorites" mnemonicParsing="false" onAction="#menuFavouritesButtonClick" prefHeight="70.0" prefWidth="170.0" styleClass="menuButton" stylesheets="@../CSS/DarkTheme.css" text="Favourites" />
+            <Pane prefHeight="110.0" prefWidth="170.0" />
+            <Button mnemonicParsing="false" onAction="#showAboutMessage" styleClass="aboutButton" />
+            <padding>
+               <Insets top="100.0" />
+            </padding>
          </VBox>
       </left>
       <center>

@@ -47,24 +47,28 @@ public class MainWindowController implements Initializable
     private void menuSearchButtonClick()
     {
         StageAndSceneManager.loadFxmlToBorderPaneLeft(mainWindowBorderPane, ResourceProvider.SEARCHPACKAGES_VIEW_NAME);
+        App.getAppStage().setWidth(App.getAppInstance().getAppWindowManager().getDEFAULT_WINDOW_WIDTH());
     }
 
     @FXML
     private void menuUpdateButtonClick()
     {
         StageAndSceneManager.loadFxmlToBorderPaneLeft(mainWindowBorderPane, ResourceProvider.UPGRADEPACKAGES_VIEW_NAME);
+        App.getAppStage().setWidth(1485);
     }
 
     @FXML
     private void menuInstalledPackagesButtonClick()
     {
         StageAndSceneManager.loadFxmlToBorderPaneLeft(mainWindowBorderPane, ResourceProvider.INSTALLEDPACKAGES_VIEW_NAME);
+        App.getAppStage().setWidth(App.getAppInstance().getAppWindowManager().getDEFAULT_WINDOW_WIDTH());
     }
 
     @FXML
     private void menuFavouritesButtonClick()
     {
         StageAndSceneManager.loadFxmlToBorderPaneLeft(mainWindowBorderPane, ResourceProvider.LISTMANAGER_VIEW_NAME);
+        App.getAppStage().setWidth(App.getAppInstance().getAppWindowManager().getDEFAULT_WINDOW_WIDTH());
     }
 
 //    private void resetButtonStyleClasses(){

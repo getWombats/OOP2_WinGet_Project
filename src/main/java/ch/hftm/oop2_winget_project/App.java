@@ -10,7 +10,11 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
+import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.logging.Level;
 
 public class App extends Application
 {
@@ -45,13 +49,13 @@ public class App extends Application
 
         winGetSettings = new WinGetSettings();
         winGetSettings.setWinGetLanguage();
+        initializeLogDirectory();
 
     }
 
     @Override // Starts up the JavaFX UI. (main > init > star)
     public void start(Stage stage) throws IOException
     {
-        initializeLogDirectory();
 
         listManager = ListManager.getInstance(); // Instantiating ListManager
         listManagerDTO = ListManagerDTO.getInstance(); // Instantiating ListManager
@@ -109,7 +113,21 @@ public class App extends Application
         return mainWindowController;
     }
 
-    private static void initializeLogDirectory() {
+    private void initializeLogDirectory() {
 
+        String logPath = winGetSettings.getLogPath();
+
+        File directory = new File(logPath);
+        if (!directory.exists()) {
+            try {
+                Files.createDirectories(Paths.get(logPath));
+//                LOGGER.log(Level.INFO, "WinGetProject directory created successfully.");
+            } catch (IOException e) {
+//                LOGGER.log(Level.WARNING, "Could not create WinGetProject directory: {0}", e.getMessage());
+            }
+        } else {
+//            LOGGER.log(Level.INFO, "WinGetProject directory already exists.");
+        }
+        System.setProperty("winget.logdir", System.getenv("LOCALAPPDATA") + "\\WinGetProject\\log");
     }
 }

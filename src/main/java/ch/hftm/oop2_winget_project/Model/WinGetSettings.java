@@ -60,13 +60,13 @@ public class WinGetSettings
     }
 
     public String getDirectoryPath() {
-
         return this.directoryPath;
-    }
-    public String getSerializePath() {
-        return this.serializePath;
     }
     public String getLogPath() {
         return this.logPath;
+    }
+    public String getSerializePath() {
+        return this.serializePath;
+
     }
 }

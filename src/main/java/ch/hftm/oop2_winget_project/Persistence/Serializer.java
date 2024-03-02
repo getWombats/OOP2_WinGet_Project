@@ -1,7 +1,9 @@
 package ch.hftm.oop2_winget_project.Persistence;
 
+import ch.hftm.oop2_winget_project.App;
 import ch.hftm.oop2_winget_project.Model.ListManager;
 import ch.hftm.oop2_winget_project.Model.ListManagerDTO;
+import ch.hftm.oop2_winget_project.Model.WinGetSettings;
 
 import java.io.*;
 import java.nio.file.Files;
@@ -18,9 +20,9 @@ public class Serializer {
 //  The DTOConverter class handles the conversion between model and DTO instances.
 
     private static final Logger LOGGER = Logger.getLogger(DTOConverter.class.getName());
-//    private static String filepath = "./UserData/listManagerDTO.ser";
-    private static String directoryPath = System.getenv("LOCALAPPDATA") + File.separator + "WinGetProject";
-    private static String filepath = directoryPath + File.separator + "listManagerDTO.ser";
+    private static final WinGetSettings winGetSettings = App.getAppInstance().getWinGetSettings();
+    private static String directoryPath = winGetSettings.getDirectoryPath();
+    private static String filePath = winGetSettings.getSerializePath();
 
 
     // Check if the directory already exists.
@@ -48,7 +50,7 @@ public class Serializer {
 
         // Serialize the listManager to .ser file.
         LOGGER.log(Level.INFO, "Serialization of ListManager starting.");
-        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(filepath))) {
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(filePath))) {
             oos.writeObject(listManagerDTO);
             LOGGER.log(Level.INFO, "Serialization of ListManager successful.");
         } catch (IOException e) {
@@ -62,7 +64,7 @@ public class Serializer {
 
         // Deserialize the ListManagerDTO from .ser file.
         LOGGER.log(Level.INFO, "Deserialization of ListManagerDTO starting.");
-        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(filepath))) {
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(filePath))) {
             listManagerDTO = (ListManagerDTO) ois.readObject();
             LOGGER.log(Level.INFO, "Deserialization of ListManagerDTO successful.");
         } catch (ClassNotFoundException | FileNotFoundException e) {

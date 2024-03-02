@@ -61,7 +61,6 @@ public class ListManagerController {
 
     // Set up buttons
     private void initializeUIElements() {
-
         button_rename.setDisable(true);
         button_delete.setDisable(true);
         button_batchScript.setDisable(true);
@@ -89,7 +88,12 @@ public class ListManagerController {
                     buttonRename_onAction();
                     break;
                 case DELETE:
-                    deletePackageListButton_onAction();
+                    PackageList selectedPackageList = tableView_packageLists.getSelectionModel().getSelectedItem();
+                    if (selectedPackageList != null && "favourite-list-uuid".equals(selectedPackageList.getId())) {
+                        System.out.println("Selected item is the favourites list, which cannot be deleted.");
+                    } else {
+                        deletePackageListButton_onAction();
+                    }
                     break;
             }
         });

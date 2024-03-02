@@ -55,7 +55,6 @@ public class App extends Application
     @Override // Starts up the JavaFX UI. (main > init > star)
     public void start(Stage stage) throws IOException
     {
-
         listManager = ListManager.getInstance(); // Instantiating ListManager
         listManagerDTO = ListManagerDTO.getInstance(); // Instantiating ListManager
 

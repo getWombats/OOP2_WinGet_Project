@@ -2,6 +2,7 @@ package ch.hftm.oop2_winget_project.Model;
 
 import ch.hftm.oop2_winget_project.Util.SystemLanguage;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -13,6 +14,9 @@ public class WinGetSettings
     private String columnHeaderMatchText;
     private String columnHeaderSourceText;
     private Map<String, String> columns = new HashMap<>();
+    private String directoryPath = System.getenv("LOCALAPPDATA") + File.separator + "WinGetProject";
+    private String logPath = directoryPath + File.separator + "log";
+    private String serializePath = directoryPath + File.separator + "listManagerDTO.ser";
 
     public void setWinGetLanguage()
     {
@@ -53,5 +57,16 @@ public class WinGetSettings
     public Map<String, String> getColumns()
     {
         return columns;
+    }
+
+    public String getDirectoryPath() {
+
+        return this.directoryPath;
+    }
+    public String getSerializePath() {
+        return this.serializePath;
+    }
+    public String getLogPath() {
+        return this.logPath;
     }
 }

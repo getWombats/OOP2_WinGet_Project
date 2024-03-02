@@ -51,6 +51,8 @@ public class App extends Application
     @Override // Starts up the JavaFX UI. (main > init > star)
     public void start(Stage stage) throws IOException
     {
+        initializeLogDirectory();
+
         listManager = ListManager.getInstance(); // Instantiating ListManager
         listManagerDTO = ListManagerDTO.getInstance(); // Instantiating ListManager
 
@@ -105,5 +107,9 @@ public class App extends Application
     public static MainWindowController GetMainWindowController() // Gib mir das BorderPane
     {
         return mainWindowController;
+    }
+
+    private static void initializeLogDirectory() {
+
     }
 }

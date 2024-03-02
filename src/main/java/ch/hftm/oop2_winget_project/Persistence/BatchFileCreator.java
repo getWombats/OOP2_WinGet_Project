@@ -2,21 +2,26 @@ package ch.hftm.oop2_winget_project.Persistence;
 
 import ch.hftm.oop2_winget_project.Model.WinGetPackage;
 import ch.hftm.oop2_winget_project.Model.PackageList;
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class BatchFileCreator {
+//  This class creates an .bat install script that can install, upgrade and remove a list of WinGetPackages.
+//  A script is useful if a user wishes to e.g. automate the installation of multiple apps on a computer without having to download this application.
+
+    private static Logger LOGGER = Logger.getLogger(DTOConverter.class.getName());
 
     public static void createInstallScript(PackageList packageList) {
-
         String userHome = System.getProperty("user.home");
         String scriptPath = userHome + File.separator + "Desktop\\WinGet_InstallScript.bat";
 
-
+        LOGGER.log(Level.INFO, "Batch file creation starting.");
         try(BufferedWriter bw = new BufferedWriter((new FileWriter(scriptPath)))) {
-
             // Turns output in command line off.
             bw.write("@echo off");
 
@@ -36,7 +41,7 @@ public class BatchFileCreator {
             bw.newLine();
             bw.write(":::     \\_/\\_/  |_|_| |_|\\____|\\___|\\__| |___|_| |_|___/\\__\\__,_|_|_|\\___|_|        Luca Buetzberger");
 
-
+            // Package Listing
             bw.newLine();
             bw.write("echo.");
             bw.newLine();
@@ -47,7 +52,6 @@ public class BatchFileCreator {
             bw.write("echo.");
             bw.newLine();
             bw.write("timeout /t 1 /nobreak >nul");
-
             bw.newLine();
             bw.write("echo Name     PackageID     Version     Source");
             bw.newLine();
@@ -57,6 +61,7 @@ public class BatchFileCreator {
                 bw.write("echo " + String.format(pkg.getName() + "     " + pkg.getId() + "     " + pkg.getVersion() + "     " + pkg.getSource()));
             }
 
+            // Main Menu
             bw.newLine();
             bw.write("echo.");
             bw.newLine();
@@ -88,7 +93,7 @@ public class BatchFileCreator {
             bw.newLine();
             bw.write("echo.");
 
-
+            // Install confirmation.
             bw.newLine();
             bw.write(":install");
             bw.newLine();
@@ -111,7 +116,7 @@ public class BatchFileCreator {
             bw.newLine();
             bw.write("goto end");
 
-
+            // Update confirmation.
             bw.newLine();
             bw.write(":update");
             bw.newLine();
@@ -134,6 +139,7 @@ public class BatchFileCreator {
             bw.newLine();
             bw.write("goto end");
 
+            // Remove confirmation.
             bw.newLine();
             bw.write(":remove");
             bw.newLine();
@@ -156,8 +162,7 @@ public class BatchFileCreator {
             bw.newLine();
             bw.write("goto end");
 
-
-
+            // End prompt.
             bw.newLine();
             bw.write(":end");
             bw.newLine();
@@ -167,8 +172,9 @@ public class BatchFileCreator {
             bw.newLine();
             bw.write("exit");
 
+            LOGGER.log(Level.INFO, "Batch file creation successful.");
         } catch (IOException e) {
-            e.printStackTrace();
+            LOGGER.log(Level.WARNING, "Batch file creation failed.");
         }
     }
 }

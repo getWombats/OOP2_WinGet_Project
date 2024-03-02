@@ -50,7 +50,6 @@ public class App extends Application
         winGetSettings = new WinGetSettings();
         winGetSettings.setWinGetLanguage();
         initializeLogDirectory();
-
     }
 
     @Override // Starts up the JavaFX UI. (main > init > star)

@@ -152,7 +152,7 @@ public class InstalledPackagesController implements IControllerBase, Initializab
                                     }
                                     catch (IOException ex)
                                     {
-                                        System.out.println(ex.getMessage()); // Replace with ExceptionHandler when implemented
+                                        Message.showErrorDialog(ex.getMessage());
                                     }
 
                                     Platform.runLater(() -> {
@@ -180,17 +180,6 @@ public class InstalledPackagesController implements IControllerBase, Initializab
                         {
                             btn.getStyleClass().add("button-uninstall");
                             setGraphic(btn);
-//                            WinGetPackage data = getTableView().getItems().get(getIndex());
-//                            if(data.getSource().isEmpty())
-//                            {
-//                                // Do not show "deinstall" button when source is empty
-//                                setGraphic(null);
-//                            }
-//                            else
-//                            {
-//                                btn.getStyleClass().add("button-uninstall");
-//                                setGraphic(btn);
-//                            }
                         }
                     }
                 };
@@ -248,7 +237,7 @@ public class InstalledPackagesController implements IControllerBase, Initializab
                 }
                 catch (IOException | InterruptedException ex)
                 {
-                    System.out.println(ex.getMessage());
+                    Message.showErrorDialog(ex.getMessage());
                 }
 
                 Platform.runLater(() -> {

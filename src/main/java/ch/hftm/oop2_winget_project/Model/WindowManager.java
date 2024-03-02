@@ -7,6 +7,7 @@ import javafx.stage.Stage;
 public class WindowManager
 {
     private final int DEFAULT_WINDOW_WIDTH = 1345;
+    private final int DEFAULT_UPDATE_VIEW_WINDOW_WIDTH = 1485;
     private final int DEFAULT_WINDOW_HEIGHT = 725;
     private final int DEFAULT_SPLASHSCREEN_WIDTH = 470;
     private final int DEFAULT_SPLASHSCREEN_HEIGHT = 255;
@@ -16,6 +17,7 @@ public class WindowManager
     private double tempLastWindowPosition_Y;
     private double tempLastWindowWidth;
     private double tempLastWindowHeight;
+    private boolean isFullscreen;
     private Rectangle2D primaryScreenBounds;
     private Stage stage;
 
@@ -24,13 +26,16 @@ public class WindowManager
     {
         this.stage = stage;
         this.primaryScreenBounds = Screen.getPrimary().getVisualBounds();
-//        this.stage.setMinWidth(DEFAULT_WINDOW_WIDTH);
-//        this.stage.setMinHeight(DEFAULT_WINDOW_HEIGHT);
     }
 
     public int getDEFAULT_WINDOW_WIDTH()
     {
         return DEFAULT_WINDOW_WIDTH;
+    }
+
+    public int getDEFAULT_UPDATE_VIEW_WINDOW_WIDTH()
+    {
+        return DEFAULT_UPDATE_VIEW_WINDOW_WIDTH;
     }
 
     public int getDEFAULT_WINDOW_HEIGHT()
@@ -123,15 +128,19 @@ public class WindowManager
         return stage;
     }
 
+    public boolean isWindowFullscreen(){
+        return isFullscreen;
+    }
+
     public void maximizeWindow()
     {
         saveLastWindowPosition();
+        saveLastWindowSize();
         stage.setX(primaryScreenBounds.getMinX());
         stage.setY(primaryScreenBounds.getMinY());
-        stage.setMaxWidth(primaryScreenBounds.getWidth());
-        stage.setMinWidth(primaryScreenBounds.getWidth());
-        stage.setMaxHeight(primaryScreenBounds.getHeight());
-        stage.setMinHeight(primaryScreenBounds.getHeight());
+        stage.setWidth(primaryScreenBounds.getMaxX());
+        stage.setHeight(primaryScreenBounds.getMaxY());
+        isFullscreen = true;
     }
 
     public void minimizeWindow()
@@ -143,15 +152,9 @@ public class WindowManager
     {
         stage.setX(getTempLastWindowPosition_X());
         stage.setY(getTempLastWindowPosition_Y());
-        stage.setMaxWidth(DEFAULT_WINDOW_WIDTH);
-        stage.setMaxHeight(DEFAULT_WINDOW_HEIGHT);
-        stage.setMinWidth(DEFAULT_WINDOW_WIDTH);
-        stage.setMinHeight(DEFAULT_WINDOW_HEIGHT);
-
-//        stage.setMaxWidth(getTempLastWindowWidth());
-//        stage.setMaxHeight(getTempLastWindowHeight());
-//        stage.setMinWidth(getTempLastWindowWidth());
-//        stage.setMinHeight(getTempLastWindowHeight());
+        stage.setWidth(getTempLastWindowWidth());
+        stage.setHeight(getTempLastWindowHeight());
+        isFullscreen = false;
     }
 
     private void saveLastWindowPosition()

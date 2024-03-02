@@ -31,26 +31,28 @@
       <center>
          <BorderPane fx:id="mainWindowBorderPane" styleClass="borderPane" stylesheets="@../CSS/DarkTheme.css" BorderPane.alignment="TOP_LEFT">
             <padding>
-               <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               <Insets left="20.0" right="20.0" top="20.0" />
             </padding>
          </BorderPane>
       </center>
       <top>
-         <AnchorPane fx:id="titleBar" styleClass="titleBar" stylesheets="@../CSS/WindowTitleBarDarkTheme.css" BorderPane.alignment="CENTER">
+         <AnchorPane fx:id="titleBar" styleClass="window-titlebar" stylesheets="@../CSS/DarkTheme.css" BorderPane.alignment="CENTER">
             <children>
-               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="6.0" AnchorPane.topAnchor="3.0">
-                  <image>
-                     <Image url="@../Icons/windowIcon_color.png" />
-                  </image>
-               </ImageView>
                <HBox alignment="TOP_RIGHT" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                   <children>
-                     <Button mnemonicParsing="false" onAction="#minimizeWindowButtonClick" prefHeight="8.0" prefWidth="50.0" styleClass="buttonWindowState" stylesheets="@../CSS/WindowTitleBarDarkTheme.css" />
-                     <ToggleButton fx:id="maximizeWindowButton" mnemonicParsing="false" onAction="#maximizeWindowButtonClick" prefWidth="50.0" />
-                     <Button mnemonicParsing="false" onAction="#closeWindowButtonClick" prefWidth="50.0" styleClass="buttonWindowClose" stylesheets="@../CSS/WindowTitleBarDarkTheme.css" />
+                     <Button mnemonicParsing="false" onAction="#minimizeWindowButtonClick" prefHeight="30.0" prefWidth="50.0" styleClass="button-window-state" />
+                     <ToggleButton fx:id="maximizeWindowButton" mnemonicParsing="false" onAction="#maximizeWindowButtonClick" prefWidth="50.0" styleClass="button-maximize" />
+                     <Button mnemonicParsing="false" onAction="#closeWindowButtonClick" prefWidth="50.0" styleClass="button-close-window" />
                   </children>
                </HBox>
-               <Label text="winget PackageManager GUI" textFill="WHITE" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="5.0" />
+               <Label focusTraversable="false" graphicTextGap="10.0" prefHeight="30.0" text="WinGet UI v1.0" textFill="WHITE" AnchorPane.leftAnchor="8.0">
+                  <graphic>
+                     <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                        <image>
+                           <Image url="@../Icons/windowIcon_color.png" />
+                        </image>
+                     </ImageView>
+                  </graphic></Label>
             </children></AnchorPane>
       </top>
    </BorderPane>

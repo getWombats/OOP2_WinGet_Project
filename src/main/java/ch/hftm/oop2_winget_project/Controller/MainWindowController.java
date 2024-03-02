@@ -32,58 +32,64 @@ public class MainWindowController implements Initializable
     @FXML
     private Button buttonFavorites;
 
-//    private final String MENU_BUTTON_DEFAULT_STYLE_CLASS = "menuButton";
-//    private final String MENU_BUTTON_ACTIVE_STYLE_CLASS = "menuButton-active";
+    private String activeFxml;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
+        maximizeWindowButton.setVisible(false); // Maximize window still buggy, function disabled
+        maximizeWindowButton.setManaged(false); // Maximize window still buggy, function disabled
         registerInputServices();
         // Start with search packages view
         StageAndSceneManager.loadFxmlToBorderPaneLeft(mainWindowBorderPane, ResourceProvider.SEARCHPACKAGES_VIEW_NAME);
+        activeFxml = "searchView";
     }
 
     @FXML
     private void menuSearchButtonClick()
     {
         StageAndSceneManager.loadFxmlToBorderPaneLeft(mainWindowBorderPane, ResourceProvider.SEARCHPACKAGES_VIEW_NAME);
-        App.getAppStage().setWidth(App.getAppInstance().getAppWindowManager().getDEFAULT_WINDOW_WIDTH());
+        activeFxml = "searchView";
+        if(!maximizeWindowButton.isSelected()){
+            App.getAppStage().setWidth(App.getAppInstance().getAppWindowManager().getDEFAULT_WINDOW_WIDTH());
+        }
     }
 
     @FXML
     private void menuUpdateButtonClick()
     {
         StageAndSceneManager.loadFxmlToBorderPaneLeft(mainWindowBorderPane, ResourceProvider.UPGRADEPACKAGES_VIEW_NAME);
-        App.getAppStage().setWidth(1485);
+        activeFxml = "updateView";
+        if(!maximizeWindowButton.isSelected()){
+            App.getAppStage().setWidth(App.getAppInstance().getAppWindowManager().getDEFAULT_UPDATE_VIEW_WINDOW_WIDTH());
+        }
     }
 
     @FXML
     private void menuInstalledPackagesButtonClick()
     {
         StageAndSceneManager.loadFxmlToBorderPaneLeft(mainWindowBorderPane, ResourceProvider.INSTALLEDPACKAGES_VIEW_NAME);
-        App.getAppStage().setWidth(App.getAppInstance().getAppWindowManager().getDEFAULT_WINDOW_WIDTH());
+        activeFxml = "installedView";
+        if(!maximizeWindowButton.isSelected()){
+            App.getAppStage().setWidth(App.getAppInstance().getAppWindowManager().getDEFAULT_WINDOW_WIDTH());
+        }
     }
 
     @FXML
     private void menuFavouritesButtonClick()
     {
         StageAndSceneManager.loadFxmlToBorderPaneLeft(mainWindowBorderPane, ResourceProvider.LISTMANAGER_VIEW_NAME);
-        App.getAppStage().setWidth(App.getAppInstance().getAppWindowManager().getDEFAULT_WINDOW_WIDTH());
+        activeFxml = "favoritesView";
+        if(!maximizeWindowButton.isSelected()){
+            App.getAppStage().setWidth(App.getAppInstance().getAppWindowManager().getDEFAULT_WINDOW_WIDTH());
+        }
     }
-
-//    private void resetButtonStyleClasses(){
-//        buttonSearchPackages.getStyleClass().remove(MENU_BUTTON_ACTIVE_STYLE_CLASS);
-//        buttonUpdatePackages.getStyleClass().remove(MENU_BUTTON_ACTIVE_STYLE_CLASS);
-//        buttonInstalledPackages.getStyleClass().remove(MENU_BUTTON_ACTIVE_STYLE_CLASS);
-//        buttonFavorites.getStyleClass().remove(MENU_BUTTON_ACTIVE_STYLE_CLASS);
-//    }
 
     @FXML
     private void minimizeWindowButtonClick()
     {
         App.getAppInstance().getAppWindowManager().minimizeWindow();
     }
-
     @FXML
     private void maximizeWindowButtonClick()
     {
@@ -93,16 +99,21 @@ public class MainWindowController implements Initializable
         }
         else
         {
-            App.getAppInstance().getAppWindowManager().restoreWindow();
+            if(activeFxml.equals("updateView")){
+                App.getAppStage().setWidth(App.getAppInstance().getAppWindowManager().getDEFAULT_UPDATE_VIEW_WINDOW_WIDTH());
+                App.getAppStage().setHeight(App.getAppInstance().getAppWindowManager().getDEFAULT_WINDOW_HEIGHT());
+                App.getAppStage().setX(App.getAppInstance().getAppWindowManager().getTempLastWindowPosition_X());
+                App.getAppStage().setY(App.getAppInstance().getAppWindowManager().getTempLastWindowPosition_Y());
+            }else{
+                App.getAppInstance().getAppWindowManager().restoreWindow();
+            }
         }
     }
-
     @FXML
     private void closeWindowButtonClick()
     {
         App.getAppStage().close();
     }
-
     private void registerInputServices()
     {
         // Listen for Window movement on titleBar
@@ -159,16 +170,13 @@ public class MainWindowController implements Initializable
     {
         return maximizeWindowButton.isSelected();
     }
-
     public BorderPane getMainWindowBorderPane() {
         return mainWindowBorderPane;
     }
-
     @FXML
     private void showAboutMessage(){
         //
     }
-
     public void switchMainWindowToPackageList()
     {
         StageAndSceneManager.loadFxmlToBorderPaneLeft(mainWindowBorderPane, ResourceProvider.PACKAGELIST_VIEW_NAME);

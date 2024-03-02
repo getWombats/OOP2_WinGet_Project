@@ -1,4 +1,4 @@
-package ch.hftm.oop2_winget_project.Model;
+package ch.hftm.oop2_winget_project.Api;
 
 public abstract class AbstractWinGetPackage {
 

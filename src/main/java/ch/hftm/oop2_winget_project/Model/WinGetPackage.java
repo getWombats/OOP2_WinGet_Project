@@ -1,5 +1,6 @@
 package ch.hftm.oop2_winget_project.Model;
 
+import ch.hftm.oop2_winget_project.Api.AbstractWinGetPackage;
 import javafx.beans.property.SimpleStringProperty;
 
 public class WinGetPackage extends AbstractWinGetPackage

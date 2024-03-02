@@ -19,6 +19,7 @@ public class BatchFileCreator {
     public static void createInstallScript(PackageList packageList) {
         LOGGER.log(Level.INFO, "Batch file creation starting.");
 
+        // Set the script path.
         String scriptPath = "";
         try {
             String userHome = System.getProperty("user.home");

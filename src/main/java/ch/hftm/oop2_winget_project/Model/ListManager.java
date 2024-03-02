@@ -41,7 +41,7 @@ public static ListManager getInstance() {
 //    Methods
     public void createPackageList(String packageListName){
         PackageList newPackageList = new PackageList(packageListName);
-//        PackageList newPackageList = new PackageList("Favourites", "favourite-list-uuid"); // Used for one time favourite creation.
+        // PackageList newPackageList = new PackageList("Favourites", "favourite-list-uuid"); // Used one time for favourite creation.
         lists.add(newPackageList);
     }
 

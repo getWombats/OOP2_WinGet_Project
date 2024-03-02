@@ -552,6 +552,10 @@
     -fx-background-radius: 0;
 }
 
+.button-close-window:pressed {
+    -fx-background-color: #b20101;
+}
+
 /* Window minimize & maximize button style  */
 .button-window-state {
     -fx-padding: 5 15 4 15;
@@ -567,13 +571,16 @@
     -fx-background-position: center;
 }
 
-/* Window minimize & maximize button hover style */
 .button-window-state:hover {
     -fx-background-color: #512bd4;
     -fx-border-color: transparent;
     -fx-border-width: 0;
     -fx-border-radius: 0;
     -fx-background-radius: 0;
+}
+
+.button-window-state:pressed {
+    -fx-background-color: #4827be;
 }
 
 .button-maximize {
@@ -590,11 +597,19 @@
     -fx-background-position: center;
 }
 
+.button-maximize:pressed {
+    -fx-background-color: #4827be;
+}
+
 .button-maximize:selected {
     -fx-background-image: url(../Icons/windowControlMaxToggled.png);
     -fx-background-size: 15px;
     -fx-background-repeat: no-repeat;
     -fx-background-position: center;
+}
+
+.button-maximize:selected:pressed {
+    -fx-background-color: #4827be;
 }
 
 .button-maximize:hover {

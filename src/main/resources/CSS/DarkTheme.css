@@ -108,6 +108,21 @@
     -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
 }
 
+.aboutButton {
+    -fx-padding: 10 20 10 20;
+    -fx-border-color: transparent;
+    -fx-background-image: url(../Icons/infoBubble.png);
+    -fx-background-size: 26px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+    -fx-opacity: 0.5;
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.2) , 5, 0.0 , 0 , 1 );
+}
+
+.aboutButton:hover {
+    -fx-opacity: 1;
+}
+
 /* Favorite List ComboBox */
 .combo-box {
     -fx-padding: 1.5 5 1.5 5;
@@ -438,17 +453,17 @@
 /*---------------------------------------------------*/
 /*                  Message Test                    */
 /*-------------------------------------------------*/
-.customDialog .dialog-pane {
+.dialog-pane {
   -fx-border-color: #333333;
   -fx-border-width: 1.0px;
  }
 
 /* Costumization of The Bar where the buttons are located */
-.customDialog .dialog-pane > .button-bar > .container {
+.dialog-pane > .button-bar > .container {
   -fx-background-color: #1d1d1d;
 }
 
-.customDialog .dialog-pane > .content.label {
+.dialog-pane > .content.label {
   -fx-padding: 0.5em 0.5em 0.5em 0.5em;
   -fx-background-color:  #282828;
   -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
@@ -457,11 +472,11 @@
 }
 
 /* Costumization of DialogPane Header */
-.customDialog .dialog-pane:header .header-panel {
+.dialog-pane:header .header-panel {
   -fx-background-color:  #282828;
 }
 
-.customDialog .dialog-pane:header .header-panel .label {
+.dialog-pane:header .header-panel .label {
   -fx-background-color:  #282828;
   -fx-background-radius: 10px;
   -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
@@ -470,39 +485,39 @@
 }
 
 /* Costumization of Buttons */
-.customDialog .dialog-pane .button {
+.dialog-pane .button {
     -fx-padding: 5 22 5 22;
-    -fx-border-color: #e2e2e2;
+    -fx-border-color: #512bd4;
     -fx-border-width: 1;
-    -fx-background-radius: 0;
+    -fx-border-radius: 10em; /* radius for pill button style */
+    -fx-background-radius: 10em; /* radius for pill button style */
     -fx-background-color: #1d1d1d;
     -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
     -fx-font-size: 10pt;
-    -fx-text-fill: white;
-    -fx-background-insets: 0 0 0 0, 0, 1, 2;
+    -fx-text-fill: #d8d8d8;
  }
 
-.customDialog .dialog-pane .button:hover {
+.dialog-pane .button:hover {
     -fx-background-color: #512bd4;
  }
 
 /* Costumization of Icons */
-.customDialog .alert.warning.dialog-pane {
+.alert.warning.dialog-pane {
     -fx-graphic: url(../Icons/warning.png);
     -fx-background-color: #282828;
 }
 
-.customDialog .alert.error.dialog-pane {
-    -fx-graphic: url(Icons/error.png);
+.alert.error.dialog-pane {
+    -fx-graphic: url(../Icons/error.png);
     -fx-background-color: #282828;
 }
 
-.customDialog .alert.confirmation.dialog-pane {
+.alert.confirmation.dialog-pane {
    -fx-graphic: url(../Icons/confirmation.png);
    -fx-background-color: #282828;
 }
 
-.customDialog .alert.information.dialog-pane {
+.alert.information.dialog-pane {
     -fx-graphic: url(../Icons/information.png);
     -fx-background-color: #282828;
 }

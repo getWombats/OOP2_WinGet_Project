@@ -1,7 +1,11 @@
 package ch.hftm.oop2_winget_project.Controller;
 
 import ch.hftm.oop2_winget_project.App;
+import ch.hftm.oop2_winget_project.Model.Message;
+import ch.hftm.oop2_winget_project.Model.PackageList;
+import ch.hftm.oop2_winget_project.Model.WinGetQuery;
 import ch.hftm.oop2_winget_project.Model.WindowManager;
+import ch.hftm.oop2_winget_project.Util.QueryType;
 import ch.hftm.oop2_winget_project.Util.ResourceProvider;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -30,24 +34,25 @@ public class SplashScreenController implements Initializable
 
     private void applicationLoad()
     {
+//        WinGetQuery query = new WinGetQuery(QueryType.LIST);
         new Thread(() -> {
-            try
-            {
-                // Preload installed packages
-//                WinGetQuery query = new WinGetQuery();
-//                query.queryToList(QueryType.LIST, "", ListProvider.getInstalledPackageList());
-                Thread.sleep(200);
-            }
-            catch (InterruptedException ex)
-            {
-                System.out.println(ex.getMessage());
-            }
-//            catch (IOException ex)
+//            try
 //            {
-//                System.out.println(ex.getMessage());
+//                // Preload installed packages
+//                query.queryToList("");
 //            }
+//            catch (InterruptedException | IOException ex)
+//            {
+//                Message.showErrorDialog(ex.getMessage());
+//            }
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+
+            }
 
             Platform.runLater(() -> {
+//                query.CreatePackageList(PackageList.getInstalledPackageList());
                 Stage stage = new Stage();
 
                 // WindowManager instance for Window Actions
@@ -56,7 +61,7 @@ public class SplashScreenController implements Initializable
                 // Pass new windowManager object to app instance
                 App.getAppInstance().setWindowManager(windowManager);
 
-                FXMLLoader fxmlLoader;// = new FXMLLoader(getClass().getResource(ResourceProvider.FXML_ROOT + ResourceProvider.MAINWINDOW_VIEW_NAME));
+                FXMLLoader fxmlLoader;
                 Parent root;
                 try
                 {
@@ -78,17 +83,13 @@ public class SplashScreenController implements Initializable
 
                     // Show mainWindow
                     stage.show();
-//                ResizeHelper.addResizeListener(stage); // ResizeHelper not implemented
 
                     // Close splash screen
                     splashScreenRootPane.getScene().getWindow().hide();
                 }
                 catch (IOException ex)
                 {
-                    System.out.println(ex.getMessage());
-//                    throw new RuntimeException(e);
-//                    Message errorMessage = new Message();
-//                    errorMessage.show(Alert.AlertType.ERROR, ex.getClass().getName(),"",ex.getMessage());
+                    Message.showErrorDialog(ex.getMessage());
                 }
             });
         }).start();

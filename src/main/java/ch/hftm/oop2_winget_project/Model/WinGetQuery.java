@@ -198,7 +198,6 @@ public class WinGetQuery
     private boolean isPackageLine(String line)
     {
         Matcher matcher = VALIDLINE_REGEX.matcher(line);
-//        return !line.isBlank() && !line.toLowerCase().contains(columnHeaderIdText) && !line.trim().equals("-") && !line.trim().contains("---") && !line.trim().equals("\\") && !line.trim().contains("▒") && !line.trim().contains("█");
         return !line.toLowerCase().contains(columnHeaderIdText) && !line.toLowerCase().contains(columnHeaderVersionText) && !line.toLowerCase().contains(columnHeaderSourceText) && matcher.find() && !line.contains("▒") && !line.contains("█");
     }
 

@@ -148,13 +148,6 @@ public class ListManagerController {
     private void deletePackageListButton_onAction(){
         PackageList selectedPackageList = tableView_packageLists.getSelectionModel().getSelectedItem();
 
-//        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Do you really want to delete the Package List " + selectedPackageList.getName() + " ?", ButtonType.YES, ButtonType.CANCEL);
-//        alert.setHeaderText("");
-//        alert.setTitle("Delete Package List");
-////                            alert.getDialogPane().setStyle("-fx-background: black;");
-////                            alert.setGraphic(imageView);
-//        alert.showAndWait();
-
         if (Message.showConfirmationDialog("Do you really want to delete the Package List " + selectedPackageList.getName() + " ?", "Delete Package List") == ButtonBar.ButtonData.YES) {
             listManager.deletePackageList(selectedPackageList);
             Serializer.serializeListManager();
@@ -230,10 +223,6 @@ public class ListManagerController {
         };
 
         ObservableList<PackageList> filteredList = pkgListStream.filter(filterPredicate).collect(Collectors.toCollection(FXCollections::observableArrayList));
-
-//        if(filteredList.isEmpty()){
-//            setTableViewPlaceholder("No Packages found", false);
-//        }
 
         tableView_packageLists.setItems(filteredList);
     }

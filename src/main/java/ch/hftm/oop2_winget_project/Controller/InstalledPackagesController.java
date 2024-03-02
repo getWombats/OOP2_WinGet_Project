@@ -53,9 +53,6 @@ public class InstalledPackagesController implements IControllerBase, Initializab
     private TextField textField_filter;
     private boolean isThreadWorking;
 
-//    private final Image image = new Image(getClass().getResource("/path/to/resource/image.jpg").toExternalForm());
-//    private ImageView imageView = new ImageView(image);
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
     {

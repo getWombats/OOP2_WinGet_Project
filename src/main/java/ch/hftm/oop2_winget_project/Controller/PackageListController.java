@@ -134,10 +134,6 @@ public class PackageListController {
 
         ObservableList<WinGetPackage> filteredList = pkgStream.filter(filterPredicate).collect(Collectors.toCollection(FXCollections::observableArrayList));
 
-//        if(filteredList.isEmpty()){
-//            setTableViewPlaceholder("No Packages found", false);
-//        }
-
         tableView_packages.setItems(filteredList);
     }
 

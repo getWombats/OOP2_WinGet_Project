@@ -51,9 +51,9 @@
          <left>
             <Label alignment="CENTER" graphicTextGap="20.0" styleClass="label-viewTitle" stylesheets="@../CSS/DarkTheme.css" text="Search Packages" BorderPane.alignment="CENTER">
                <graphic>
-                  <ImageView fitHeight="40.0" fitWidth="200.0" opacity="0.7" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="40.0" fitWidth="200.0" opacity="0.9" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../Icons/searchBig.png" />
+                        <Image url="@../Icons/webSearch.png" />
                      </image>
                   </ImageView>
                </graphic>

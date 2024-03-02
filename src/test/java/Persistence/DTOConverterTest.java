@@ -39,8 +39,8 @@ public class DTOConverterTest {
         listManager.createPackageList("TestPackageList");
 
         // Populate the DTOs
-//        packageListDTO.setPackages(FXCollections.observableArrayList(winGetPackageDTO));
-//        listManagerDTO.setList(FXCollections.observableArrayList(packageListDTO));
+        // packageListDTO.setPackages(FXCollections.observableArrayList(winGetPackageDTO));
+        // listManagerDTO.setList(FXCollections.observableArrayList(packageListDTO));
 
         List<WinGetPackageDTO> winGetPackageDTOList = new ArrayList<>();
         winGetPackageDTOList.add(winGetPackageDTO);

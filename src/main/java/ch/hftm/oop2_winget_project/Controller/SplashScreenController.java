@@ -34,25 +34,20 @@ public class SplashScreenController implements Initializable
 
     private void applicationLoad()
     {
-//        WinGetQuery query = new WinGetQuery(QueryType.LIST);
+        WinGetQuery query = new WinGetQuery(QueryType.LIST);
         new Thread(() -> {
-//            try
-//            {
-//                // Preload installed packages
-//                query.queryToList("");
-//            }
-//            catch (InterruptedException | IOException ex)
-//            {
-//                Message.showErrorDialog(ex.getMessage());
-//            }
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-
+            try
+            {
+                // Preload installed packages
+                query.queryToList("");
+            }
+            catch (InterruptedException | IOException ex)
+            {
+                Message.showErrorDialog(ex.getMessage());
             }
 
             Platform.runLater(() -> {
-//                query.CreatePackageList(PackageList.getInstalledPackageList());
+                query.CreatePackageList(PackageList.getInstalledPackageList());
                 Stage stage = new Stage();
 
                 // WindowManager instance for Window Actions
@@ -79,7 +74,7 @@ public class SplashScreenController implements Initializable
 
                     // Pass new stage object to app instance
                     App.setAppStage(stage);
-                    App.setMainWindowControllerInstance(fxmlLoader.getController()); // Gib mir das BorderPane
+                    App.setMainWindowControllerInstance(fxmlLoader.getController());
 
                     // Show mainWindow
                     stage.show();

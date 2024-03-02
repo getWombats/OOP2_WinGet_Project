@@ -14,8 +14,6 @@ public class WinGetPackageDTO implements Serializable {
     private String packageID;
     private String packageVersion;
     private String packageSource;
-    private boolean isFavorite;
-    private boolean isInstalled;
 
     public WinGetPackageDTO() {
     }
@@ -52,20 +50,4 @@ public class WinGetPackageDTO implements Serializable {
     public void setSource(String packageSource) {
         this.packageSource = packageSource;
     }
-
-//    public boolean isFavorite() {
-//        return isFavorite;
-//    }
-
-//    public void setFavorite(boolean favorite) {
-//        isFavorite = favorite;
-//    }
-
-//    public boolean isInstalled() {
-//        return isInstalled;
-//    }
-
-//    public void setInstalled(boolean installed) {
-//        isInstalled = installed;
-//    }
 }

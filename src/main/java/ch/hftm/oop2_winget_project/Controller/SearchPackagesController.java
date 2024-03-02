@@ -66,7 +66,7 @@ public class SearchPackagesController implements IControllerBase, Initializable
         setTableViewSource();
         registerInputServices();
         initialize_comboBox_PackageList();
-        setCollectionListener();
+        setCollectionListenerForPackageCountLabel();
     }
 
     @FXML
@@ -111,7 +111,7 @@ public class SearchPackagesController implements IControllerBase, Initializable
         keywordTextField.setTextFormatter(InputValidator.createValidator());
     }
 
-    private void setCollectionListener(){
+    private void setCollectionListenerForPackageCountLabel(){
         // Add a ListChangeListener to the ObservableList
         tableViewPackageCountLabel.setVisible(false);
         PackageList.getSearchPackageList().addListener((ListChangeListener<WinGetPackage>) change -> {

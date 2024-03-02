@@ -13,11 +13,11 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 
-<BorderPane xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.hftm.oop2_winget_project.Controller.SearchPackagesController">
+<BorderPane style="-fx-background-color: #1d1d1d;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.hftm.oop2_winget_project.Controller.SearchPackagesController">
     <center>
         <TableView fx:id="tableView_searchPackages" editable="true" styleClass="searchTableView" stylesheets="@../CSS/DarkTheme.css" BorderPane.alignment="TOP_LEFT">
             <columns>
-                <TableColumn fx:id="column_favourite" editable="false" minWidth="30.0" prefWidth="50.0" reorderable="false" resizable="false" sortable="false">
+                <TableColumn fx:id="column_favourite" editable="false" maxWidth="50.0" minWidth="-Infinity" prefWidth="50.0" reorderable="false" resizable="false" sortable="false">
                <graphic>
                   <ImageView fitHeight="20.0" fitWidth="20.0" opacity="0.7" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -25,9 +25,9 @@
                      </image>
                   </ImageView>
                </graphic></TableColumn>
-                <TableColumn fx:id="column_name" editable="false" minWidth="220.0" prefWidth="-1.0" reorderable="false" resizable="false" text="Name" />
-                <TableColumn fx:id="column_id" editable="false" minWidth="220.0" prefWidth="-1.0" reorderable="false" resizable="false" text="ID" />
-                <TableColumn fx:id="column_version" editable="false" minWidth="350.0" prefWidth="-1.0" reorderable="false" resizable="false" text="Version" />
+                <TableColumn fx:id="column_name" editable="false" minWidth="280.0" prefWidth="-1.0" reorderable="false" resizable="false" text="Name" />
+                <TableColumn fx:id="column_id" editable="false" minWidth="300.0" prefWidth="-1.0" reorderable="false" resizable="false" text="ID" />
+                <TableColumn fx:id="column_version" editable="false" minWidth="200.0" prefWidth="-1.0" reorderable="false" resizable="false" text="Version" />
                 <TableColumn fx:id="column_source" editable="false" minWidth="150.0" prefWidth="-1.0" reorderable="false" resizable="false" text="Source" />
                 <TableColumn fx:id="column_action" editable="false" minWidth="130.0" prefWidth="-1.0" resizable="false" />
             </columns>
@@ -47,11 +47,11 @@
       </AnchorPane>
    </bottom>
    <top>
-      <BorderPane BorderPane.alignment="CENTER">
+      <BorderPane prefHeight="50.0" BorderPane.alignment="CENTER">
          <left>
             <Label alignment="CENTER" graphicTextGap="20.0" styleClass="label-viewTitle" stylesheets="@../CSS/DarkTheme.css" text="Search Packages" BorderPane.alignment="CENTER">
                <graphic>
-                  <ImageView fitHeight="40.0" fitWidth="200.0" opacity="0.9" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="48.0" fitWidth="48.0" opacity="0.9" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../Icons/webSearch.png" />
                      </image>
@@ -77,10 +77,13 @@
                         <ComboBox fx:id="comboBox_selectPackageList" prefWidth="150.0" promptText="Select List" stylesheets="@../CSS/DarkTheme.css" />
                      </children>
                      <HBox.margin>
-                        <Insets left="50.0" />
+                        <Insets left="95.0" />
                      </HBox.margin>
                   </HBox>
                     </children>
+               <padding>
+                  <Insets right="25.0" top="9.0" />
+               </padding>
                 </HBox>
          </right>
       </BorderPane>

@@ -31,11 +31,14 @@ public class Serializer {
         if (!directory.exists()) {
             try {
                 Files.createDirectories(Paths.get(directoryPath));
+                System.out.println("Serializer: WinGetProject directory created successfully.");
                 LOGGER.log(Level.INFO, "WinGetProject directory created successfully.");
             } catch (IOException e) {
+                System.out.println("Serializer: Could not create WinGetProject directory: " + e.getMessage());
                 LOGGER.log(Level.WARNING, "Could not create WinGetProject directory: {0}", e.getMessage());
             }
         } else {
+            System.out.println("Serializer: WinGetProject directory already exists.");
             LOGGER.log(Level.INFO, "WinGetProject directory already exists.");
         }
     }
@@ -49,11 +52,14 @@ public class Serializer {
         // printDTOs("Current ListManagerDTO: "); // For debugging.
 
         // Serialize the listManager to .ser file.
+        System.out.println("Serializer: Serialization of ListManager starting.");
         LOGGER.log(Level.INFO, "Serialization of ListManager starting.");
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(filePath))) {
             oos.writeObject(listManagerDTO);
+            System.out.println("Serializer: Serialization of ListManager successful.");
             LOGGER.log(Level.INFO, "Serialization of ListManager successful.");
         } catch (IOException e) {
+            System.out.println("Serializer: Serialization of ListManager failed: " + e.getMessage());
             LOGGER.log(Level.WARNING, "Serialization of ListManager failed: {0}", e.getMessage());
         }
     }
@@ -63,13 +69,17 @@ public class Serializer {
         ListManagerDTO listManagerDTO = ListManagerDTO.getInstance();
 
         // Deserialize the ListManagerDTO from .ser file.
+        System.out.println("Serializer: Deserialization of ListManagerDTO starting.");
         LOGGER.log(Level.INFO, "Deserialization of ListManagerDTO starting.");
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(filePath))) {
             listManagerDTO = (ListManagerDTO) ois.readObject();
+            System.out.println("Serializer: Deserialization of ListManagerDTO successful.");
             LOGGER.log(Level.INFO, "Deserialization of ListManagerDTO successful.");
         } catch (ClassNotFoundException | FileNotFoundException e) {
+            System.out.println("Serializer: Deserialization of ListManagerDTO failed: " + e.getMessage());
             LOGGER.log(Level.WARNING, "Deserialization of ListManagerDTO failed: {0}", e.getMessage());
         } catch (IOException e) {
+            System.out.println("Serializer: Deserialization of ListManagerDTO failed: " + e.getMessage());
             LOGGER.log(Level.WARNING, "Deserialization of ListManagerDTO failed: {0}", e.getMessage());
         }
         // printDTOs("Current ListManagerDTO: "); // For debugging.

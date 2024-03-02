@@ -1,12 +1,12 @@
 package ch.hftm.oop2_winget_project.Controller;
 
 import ch.hftm.oop2_winget_project.App;
+import ch.hftm.oop2_winget_project.Model.Message;
 import ch.hftm.oop2_winget_project.Util.ResourceProvider;
 import ch.hftm.oop2_winget_project.Util.StageAndSceneManager;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.ToggleButton;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
@@ -160,6 +160,10 @@ public class MainWindowController implements Initializable
         return mainWindowBorderPane;
     }
 
+    @FXML
+    private void showAboutMessage(){
+        //
+    }
 
     public void switchMainWindowToPackageList()
     {

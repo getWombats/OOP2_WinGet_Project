@@ -25,7 +25,7 @@
                </font></Button>
             <Button fx:id="buttonUpdatePackages" mnemonicParsing="false" onAction="#menuUpdateButtonClick" prefHeight="70.0" prefWidth="170.0" styleClass="menuButton" stylesheets="@../CSS/DarkTheme.css" text="Update Packages" />
             <Button fx:id="buttonInstalledPackages" mnemonicParsing="false" onAction="#menuInstalledPackagesButtonClick" prefHeight="70.0" prefWidth="170.0" styleClass="menuButton" stylesheets="@../CSS/DarkTheme.css" text="Installed Packages" />
-            <Button fx:id="buttonFavorites" mnemonicParsing="false" onAction="#menuFavouritesButtonClick" prefHeight="70.0" prefWidth="170.0" styleClass="menuButton" stylesheets="@../CSS/DarkTheme.css" text="Favourites" />
+            <Button fx:id="buttonFavorites" mnemonicParsing="false" onAction="#menuFavouritesButtonClick" prefHeight="70.0" prefWidth="170.0" styleClass="menuButton" stylesheets="@../CSS/DarkTheme.css" text="Favorites" />
          </VBox>
       </left>
       <center>
@@ -45,7 +45,7 @@
                      <Button alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#closeWindowButtonClick" prefWidth="50.0" styleClass="button-close-window" />
                   </children>
                </HBox>
-               <Label focusTraversable="false" graphicTextGap="10.0" prefHeight="30.0" text="WinGet UI v1.0" textFill="WHITE" AnchorPane.leftAnchor="8.0">
+               <Label focusTraversable="false" graphicTextGap="10.0" prefHeight="30.0" text="winget UI" textFill="WHITE" AnchorPane.leftAnchor="8.0">
                   <graphic>
                      <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                         <image>

@@ -5,8 +5,12 @@ public final class UniCodeChecker
     // Unicode Han = Asia
     public static boolean containsHanScript(String line)
     {
-        return line.codePoints().anyMatch(
-                codepoint ->
-                        Character.UnicodeScript.of(codepoint) == Character.UnicodeScript.HAN);
+        try {
+            return line.codePoints().anyMatch(
+                    codepoint ->
+                            Character.UnicodeScript.of(codepoint) == Character.UnicodeScript.HAN);
+        } catch (NullPointerException e) {
+            return true;
+        }
     }
 }

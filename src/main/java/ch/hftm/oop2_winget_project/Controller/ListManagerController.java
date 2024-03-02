@@ -2,6 +2,7 @@ package ch.hftm.oop2_winget_project.Controller;
 
 import ch.hftm.oop2_winget_project.App;
 import ch.hftm.oop2_winget_project.Model.ListManager;
+import ch.hftm.oop2_winget_project.Model.Message;
 import ch.hftm.oop2_winget_project.Model.PackageList;
 import ch.hftm.oop2_winget_project.Persistence.Serializer;
 import ch.hftm.oop2_winget_project.Util.StageAndSceneManager;
@@ -147,14 +148,14 @@ public class ListManagerController {
     private void deletePackageListButton_onAction(){
         PackageList selectedPackageList = tableView_packageLists.getSelectionModel().getSelectedItem();
 
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Do you really want to delete the Package List " + selectedPackageList.getName() + " ?", ButtonType.YES, ButtonType.CANCEL);
-        alert.setHeaderText("");
-        alert.setTitle("Delete Package List");
-//                            alert.getDialogPane().setStyle("-fx-background: black;");
-//                            alert.setGraphic(imageView);
-        alert.showAndWait();
+//        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Do you really want to delete the Package List " + selectedPackageList.getName() + " ?", ButtonType.YES, ButtonType.CANCEL);
+//        alert.setHeaderText("");
+//        alert.setTitle("Delete Package List");
+////                            alert.getDialogPane().setStyle("-fx-background: black;");
+////                            alert.setGraphic(imageView);
+//        alert.showAndWait();
 
-        if (alert.getResult() == ButtonType.YES) {
+        if (Message.showConfirmationDialog("Do you really want to delete the Package List " + selectedPackageList.getName() + " ?", "Delete Package List") == ButtonBar.ButtonData.YES) {
             listManager.deletePackageList(selectedPackageList);
             Serializer.serializeListManager();
         }

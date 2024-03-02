@@ -1,6 +1,7 @@
 package ch.hftm.oop2_winget_project.Controller;
 
 import ch.hftm.oop2_winget_project.Api.IControllerBase;
+import ch.hftm.oop2_winget_project.Model.Message;
 import ch.hftm.oop2_winget_project.Model.PackageList;
 import ch.hftm.oop2_winget_project.Util.QueryType;
 import ch.hftm.oop2_winget_project.Model.WinGetPackage;
@@ -126,14 +127,7 @@ public class InstalledPackagesController implements IControllerBase, Initializab
                         btn.setOnAction((ActionEvent event) -> {
                             WinGetPackage selectedItem = getTableView().getItems().get(getIndex());
 
-                            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Do you really want to uninstall " + selectedItem.getName() + " ?", ButtonType.YES, ButtonType.CANCEL);
-                            alert.setHeaderText("");
-                            alert.setTitle("Remove Package");
-//                            alert.getDialogPane().setStyle("-fx-background: black;");
-//                            alert.setGraphic(imageView);
-                            alert.showAndWait();
-
-                            if (alert.getResult() == ButtonType.YES) {
+                            if (Message.showConfirmationDialog("Do you really want to uninstall " + selectedItem.getName(), "Confirm uninstall") == ButtonBar.ButtonData.YES) {
                                 isThreadWorking = true;
                                 setGraphic(new ProgressBar());
                                 new Thread(() -> {

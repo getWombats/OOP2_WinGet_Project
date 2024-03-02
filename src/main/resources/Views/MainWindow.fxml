@@ -38,11 +38,11 @@
       <top>
          <AnchorPane fx:id="titleBar" styleClass="window-titlebar" stylesheets="@../CSS/DarkTheme.css" BorderPane.alignment="CENTER">
             <children>
-               <HBox alignment="TOP_RIGHT" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <HBox alignment="TOP_RIGHT" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="1.0">
                   <children>
-                     <Button mnemonicParsing="false" onAction="#minimizeWindowButtonClick" prefHeight="30.0" prefWidth="50.0" styleClass="button-window-state" />
-                     <ToggleButton fx:id="maximizeWindowButton" mnemonicParsing="false" onAction="#maximizeWindowButtonClick" prefWidth="50.0" styleClass="button-maximize" />
-                     <Button mnemonicParsing="false" onAction="#closeWindowButtonClick" prefWidth="50.0" styleClass="button-close-window" />
+                     <Button alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#minimizeWindowButtonClick" prefWidth="50.0" styleClass="button-window-state" />
+                     <ToggleButton fx:id="maximizeWindowButton" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#maximizeWindowButtonClick" prefWidth="50.0" styleClass="button-maximize" />
+                     <Button alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#closeWindowButtonClick" prefWidth="50.0" styleClass="button-close-window" />
                   </children>
                </HBox>
                <Label focusTraversable="false" graphicTextGap="10.0" prefHeight="30.0" text="WinGet UI v1.0" textFill="WHITE" AnchorPane.leftAnchor="8.0">

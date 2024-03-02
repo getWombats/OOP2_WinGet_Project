@@ -6,8 +6,8 @@ import javafx.stage.Stage;
 
 public class WindowManager
 {
-    private final int DEFAULT_WINDOW_WIDTH = 1340;
-    private final int DEFAULT_WINDOW_HEIGHT = 700;
+    private final int DEFAULT_WINDOW_WIDTH = 1345;
+    private final int DEFAULT_WINDOW_HEIGHT = 725;
     private final int DEFAULT_SPLASHSCREEN_WIDTH = 470;
     private final int DEFAULT_SPLASHSCREEN_HEIGHT = 255;
     private double xOffset = 0;

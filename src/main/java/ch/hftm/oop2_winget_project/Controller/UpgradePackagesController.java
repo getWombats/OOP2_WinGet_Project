@@ -100,13 +100,6 @@ public class UpgradePackagesController implements IControllerBase, Initializable
                     {
                         query.CreateUpdateList(PackageList.getUpgradePackageList());
 
-                        for(var item : PackageList.getUpgradePackageList()) {
-                            System.out.println(item.getName() + " / ID: " + item.getId());
-                            System.out.println("Installed version:" + item.getVersion());
-                            System.out.println("Available version: " + item.getUpdateVersion());
-                            System.out.println();
-                        }
-
                         refreshTableViewContent();
                     }
                     else

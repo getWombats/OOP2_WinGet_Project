@@ -5,6 +5,7 @@ import ch.hftm.oop2_winget_project.Persistence.Serializer;
 import ch.hftm.oop2_winget_project.Util.*;
 import ch.hftm.oop2_winget_project.Api.IControllerBase;
 import javafx.application.Platform;
+import javafx.collections.ListChangeListener;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -43,6 +44,8 @@ public class SearchPackagesController implements IControllerBase, Initializable
     @FXML
     private VBox placeholderContent;
     @FXML
+    private Label tableViewPackageCountLabel;
+    @FXML
     private ComboBox<PackageList> comboBox_selectPackageList; // The comboBox for PackageList selection
     @FXML
     private Button button_addPackageToList;
@@ -63,19 +66,7 @@ public class SearchPackagesController implements IControllerBase, Initializable
         setTableViewSource();
         registerInputServices();
         initialize_comboBox_PackageList();
-    }
-
-    @FXML
-    private void testButtonClick()
-    {
-//        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-//        alert.show();
-        // Test message
-        Message msg = new Message();
-        msg.show(Alert.AlertType.INFORMATION, "title", "headertext", "message");
-        // Test notification
-//        Message notify = new Message();
-//        notify.showNotification("title", "message");
+        setCollectionListener();
     }
 
     @FXML
@@ -118,6 +109,20 @@ public class SearchPackagesController implements IControllerBase, Initializable
 
         // Set input validation
         keywordTextField.setTextFormatter(InputValidator.createValidator());
+    }
+
+    private void setCollectionListener(){
+        // Add a ListChangeListener to the ObservableList
+        tableViewPackageCountLabel.setVisible(false);
+        PackageList.getSearchPackageList().addListener((ListChangeListener<WinGetPackage>) change -> {
+            if(PackageList.getSearchPackageList().isEmpty()){
+                tableViewPackageCountLabel.setVisible(false);
+            }
+            else {
+                tableViewPackageCountLabel.setVisible(true);
+                tableViewPackageCountLabel.setText(PackageList.getSearchPackageList().size() + " Packages found");
+            }
+        });
     }
 
     @Override
@@ -341,36 +346,6 @@ public class SearchPackagesController implements IControllerBase, Initializable
             selectedPackageList = newVal;
             tableView_searchPackages.refresh();
         });
-    }
-
-    @FXML
-    private void button_addPackageToList(ActionEvent event)
-    {
-//        WinGetPackage selectedPackage = tableView.getSelectionModel().getSelectedItem();
-//        PackageList selectedList = comboBox_selectPackageList.getSelectionModel().getSelectedItem();
-//
-//        if (selectedPackage != null && selectedList != null)
-//        {
-//            // Check if the selected package is already in the selected list
-//            boolean packageExists = selectedList.getFXPackages().stream()
-//                    .anyMatch(pkg -> pkg.getId().equals(selectedPackage.getId()));
-//
-//            if (!packageExists)
-//            {
-//                // Add the package to the list
-//                selectedList.addPackage(selectedPackage);
-//                System.out.println("Package added to list: " + selectedPackage.getName());
-//            }
-//            else
-//            {
-//                System.out.println("Package already exists in the list: " + selectedPackage.getName());
-//            }
-//        }
-//        else
-//        {
-//            // Handle cases where nothing is selected
-//            System.out.println("No package or list selected.");
-//        }
     }
 
     private void setTableViewPlaceholder(String labelText, boolean showProgressIndicator) {

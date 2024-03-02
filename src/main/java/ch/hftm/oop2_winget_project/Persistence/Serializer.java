@@ -4,6 +4,8 @@ import ch.hftm.oop2_winget_project.Model.ListManager;
 import ch.hftm.oop2_winget_project.Model.ListManagerDTO;
 
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -16,7 +18,25 @@ public class Serializer {
 //  The DTOConverter class handles the conversion between model and DTO instances.
 
     private static final Logger LOGGER = Logger.getLogger(DTOConverter.class.getName());
-    private static String filepath = "./UserData/listManagerDTO.ser";
+//    private static String filepath = "./UserData/listManagerDTO.ser";
+    private static String directoryPath = System.getenv("LOCALAPPDATA") + File.separator + "WinGetProject";
+    private static String filepath = directoryPath + File.separator + "listManagerDTO.ser";
+
+
+    // Check if the directory already exists.
+    static {
+        File directory = new File(directoryPath);
+        if (!directory.exists()) {
+            try {
+                Files.createDirectories(Paths.get(directoryPath));
+                LOGGER.log(Level.INFO, "WinGetProject directory created successfully.");
+            } catch (IOException e) {
+                LOGGER.log(Level.WARNING, "Could not create WinGetProject directory: {0}", e.getMessage());
+            }
+        } else {
+            LOGGER.log(Level.INFO, "WinGetProject directory already exists.");
+        }
+    }
 
     // Serializes (saves) the listManager.
     public static void serializeListManager() {

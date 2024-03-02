@@ -19,6 +19,16 @@
     -fx-text-fill: #8d8d8d;
 }
 
+.badge-pill {
+    -fx-background-color: #333333;
+    -fx-background-radius: 10em;
+    -fx-padding: 1 12 1 12;
+    -fx-text-fill: #d8d8d8;
+    -fx-font-size: 8pt;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0, 0.2) , 8, 0.0 , 0 , 1 );
+}
+
 .label-bright {
     -fx-font-size: 10pt;
     -fx-font-family: "Segoe UI Semibold";
@@ -27,6 +37,13 @@
 }
 
 .label-title {
+    -fx-font-size: 24px;
+    -fx-font-family: "Segoe UI Light";
+    -fx-text-fill: white;
+    -fx-opacity: 1;
+}
+
+.label-viewTitle {
     -fx-font-size: 24px;
     -fx-font-family: "Segoe UI Light";
     -fx-text-fill: white;
@@ -75,7 +92,7 @@
 }
 
 .refreshButton {
-    -fx-padding: 5 22 5 40;
+    -fx-padding: 6 22 6 40;
     -fx-background-image: url(../Icons/refresh.png);
     -fx-background-size: 20px;
     -fx-background-repeat: no-repeat;
@@ -83,7 +100,7 @@
 }
 
 .searchButton {
-    -fx-padding: 5 22 5 40;
+    -fx-padding: 6 22 6 40;
     -fx-background-image: url(../Icons/search.png);
     -fx-background-size: 20px;
     -fx-background-repeat: no-repeat;
@@ -93,7 +110,7 @@
 
 /* Favorite List ComboBox */
 .combo-box {
-    -fx-padding: 1 5 1 5;
+    -fx-padding: 1.5 5 1.5 5;
     -fx-border-color: #737373;
     -fx-border-width: 1;
     -fx-border-radius: 10em; /* radius for pill button style */
@@ -335,9 +352,9 @@
 
 /* Favorite CheckBox SearchPackage TableView */
 .searchTableView .check-box {
-    -fx-padding: 15px;
-    -fx-border-insets: 15px;
-    -fx-background-insets: 15px;
+    -fx-padding: 5px;
+    -fx-border-insets: 5px;
+    -fx-background-insets: 5px;
 }
 
 .searchTableView .check-box .box {
@@ -488,4 +505,89 @@
 .customDialog .alert.information.dialog-pane {
     -fx-graphic: url(../Icons/information.png);
     -fx-background-color: #282828;
+}
+
+
+
+
+
+/* Window TitleBar style  */
+.window-titlebar {
+    -fx-background-color: #0d0d0d;
+}
+
+/* Window close button style  */
+.button-close-window {
+    -fx-padding: 5 15 5 15;
+    -fx-border-color: #404040;
+    -fx-border-width: 0;
+    -fx-border-radius: 0;
+    -fx-background-radius: 0;
+    -fx-background-color: transparent;
+
+    -fx-background-image: url(../Icons/closeWindow.png);
+    -fx-background-size: 20px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: 50%;
+}
+/* Window close button hover style */
+.button-close-window:hover {
+    -fx-background-color: #ca0101;
+    -fx-border-color: #404040;
+    -fx-border-width: 0;
+    -fx-border-radius: 0;
+    -fx-background-radius: 0;
+}
+
+/* Window minimize & maximize button style  */
+.button-window-state {
+    -fx-padding: 5 15 5 15;
+    -fx-border-color: #333333;
+    -fx-border-width: 0;
+    -fx-border-radius: 0;
+    -fx-background-radius: 0;
+    -fx-background-color: transparent;
+
+    -fx-background-image: url(../Icons/windowControlMinimize.png);
+    -fx-background-size: 15px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: 50%;
+}
+
+/* Window minimize & maximize button hover style */
+.button-window-state:hover {
+    -fx-background-color: #4d4dff; /* #039ED3 */
+    -fx-border-color: #333333;
+    -fx-border-width: 0;
+    -fx-border-radius: 0;
+    -fx-background-radius: 0;
+}
+
+.button-maximize {
+    -fx-padding: 5 20 5 20;
+    -fx-border-color: #333333;
+    -fx-border-width: 0;
+    -fx-border-radius: 0;
+    -fx-background-radius: 0;
+    -fx-background-color: transparent;
+
+    -fx-background-image: url(../Icons/windowControlMax.png);
+    -fx-background-size: 15px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: 50%;
+}
+
+.button-maximize:selected {
+    -fx-background-image: url(../Icons/windowControlMaxToggled.png);
+    -fx-background-size: 15px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: 50%;
+}
+
+.button-maximize:hover {
+    -fx-background-color: #4d4dff;
+    -fx-border-color: #333333;
+    -fx-border-width: 0;
+    -fx-border-radius: 0;
+    -fx-background-radius: 0;
 }

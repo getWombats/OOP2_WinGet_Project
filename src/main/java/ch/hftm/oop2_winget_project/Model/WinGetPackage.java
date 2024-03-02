@@ -1,10 +1,8 @@
 package ch.hftm.oop2_winget_project.Model;
 
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 
-public class WinGetPackage
+public class WinGetPackage extends AbstractWinGetPackage
 {
     private SimpleStringProperty name = new SimpleStringProperty();
     private SimpleStringProperty id = new SimpleStringProperty();
@@ -43,7 +41,6 @@ public class WinGetPackage
     public String getName() {
         return this.name.get();
     }
-
     public SimpleStringProperty getFXName() {
         return this.name;
     }
@@ -52,10 +49,10 @@ public class WinGetPackage
         this.name.set(name);
     }
 
+
     public String getId() {
         return this.id.get();
     }
-
     public SimpleStringProperty getFXId() {
         return this.id;
     }
@@ -64,34 +61,32 @@ public class WinGetPackage
         this.id.set(id);
     }
 
+
     public String getVersion() {
         return this.version.get();
     }
-
-    public String getUpdateVersion() {
-        return this.updateVersion.get();
-    }
-
     public SimpleStringProperty getFXVersion() {
         return this.version;
-    }
-
-    public SimpleStringProperty getFXUpdateVersion() {
-        return this.updateVersion;
     }
 
     public void setVersion(String version) {
         this.version.set(version);
     }
 
+    public String getUpdateVersion() {
+        return this.updateVersion.get();
+    }
+    public SimpleStringProperty getFXUpdateVersion() {
+        return this.updateVersion;
+    }
     public void setUpdateVersion(String updateVersion) {
         this.updateVersion.set(updateVersion);
     }
 
+
     public String getSource() {
         return this.source.get();
     }
-
     public SimpleStringProperty getFXSource() {
         return this.source;
     }
@@ -99,6 +94,7 @@ public class WinGetPackage
     public void setSource(String source) {
         this.source.set(source);
     }
+
 
     public boolean isInstalled() {
         return this.isInstalled;

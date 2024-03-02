@@ -31,14 +31,6 @@ public class PackageList {
         System.out.println("New Package: (UUID Name)\n" + getId() + " \"" + getName() + "\"");
     }
 
-    // Constructor to match DTO fields
-//    public PackageList() {
-//        this.id = "";
-//        this.name = new SimpleStringProperty();
-//        this.size = new SimpleIntegerProperty(0);
-//        this.packages = FXCollections.observableArrayList();
-//    }
-
     // Constructor used for creating favourite list with special uuid and name.
     public PackageList(String name, String id){
         this.id = id;
@@ -46,7 +38,6 @@ public class PackageList {
         this.size = new SimpleIntegerProperty(0);
         this.packages = FXCollections.observableArrayList();
     }
-
 
 //    Methods
 //    Manage PackageList Properties
@@ -108,7 +99,6 @@ public class PackageList {
     //    Predefined lists as static fields
     private static final ObservableList<WinGetPackage> searchPackageList = FXCollections.observableArrayList();
     private static final ObservableList<WinGetPackage> installedPackageList = FXCollections.observableArrayList();
-    private static final ObservableList<WinGetPackage> favoritePackageList = FXCollections.observableArrayList();
     private static final ObservableList<WinGetPackage> upgradePackageList = FXCollections.observableArrayList();
 
     public static ObservableList<WinGetPackage> getSearchPackageList() {
@@ -116,9 +106,6 @@ public class PackageList {
     }
     public static ObservableList<WinGetPackage> getInstalledPackageList() {
         return installedPackageList;
-    }
-    public static ObservableList<WinGetPackage> getFavoritePackageList() {
-        return favoritePackageList;
     }
     public static ObservableList<WinGetPackage> getUpgradePackageList() {
         return upgradePackageList;

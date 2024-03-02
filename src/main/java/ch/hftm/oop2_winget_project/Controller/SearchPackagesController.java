@@ -158,7 +158,7 @@ public class SearchPackagesController implements IControllerBase, Initializable
                                 }
                                 catch (IOException ex)
                                 {
-                                    System.out.println(ex.getMessage()); // Replace with ExceptionHandler when implemented
+                                    Message.showErrorDialog(ex.getMessage());
                                 }
 
                                 Platform.runLater(() -> {
@@ -282,7 +282,7 @@ public class SearchPackagesController implements IControllerBase, Initializable
                 }
                 catch (IOException | InterruptedException ex)
                 {
-                    System.out.println(ex.getMessage()); // Replace with ExceptionHandler when implemented
+                    Message.showErrorDialog(ex.getMessage());
                 }
 
                 Platform.runLater(() -> {

@@ -2,6 +2,7 @@ package ch.hftm.oop2_winget_project.Util;
 
 import ch.hftm.oop2_winget_project.App;
 import ch.hftm.oop2_winget_project.Controller.MainWindowController;
+import ch.hftm.oop2_winget_project.Model.Message;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -26,8 +27,7 @@ public final class StageAndSceneManager
         }
         catch(IOException ex)
         {
-            // Exception handler?
-            System.out.println(ex.getMessage());
+            Message.showErrorDialog(ex.getMessage());
             return null;
         }
     }
@@ -40,8 +40,7 @@ public final class StageAndSceneManager
         }
         catch(IOException ex)
         {
-            // Exception handler?
-            System.out.println(ex.getMessage());
+            Message.showErrorDialog(ex.getMessage());
         }
     }
 
@@ -53,8 +52,7 @@ public final class StageAndSceneManager
         }
         catch (IOException ex)
         {
-            // Exception handler?
-            System.out.println(ex.getMessage());
+            Message.showErrorDialog(ex.getMessage());
         }
     }
 
@@ -72,7 +70,7 @@ public final class StageAndSceneManager
         }
         catch (IOException ex)
         {
-            System.out.println(ex.getMessage());
+            Message.showErrorDialog(ex.getMessage());
         }
     }
 

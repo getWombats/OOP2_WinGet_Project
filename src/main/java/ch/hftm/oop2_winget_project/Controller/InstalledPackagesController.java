@@ -10,6 +10,7 @@ import ch.hftm.oop2_winget_project.Util.ConsoleExitCode;
 import ch.hftm.oop2_winget_project.Util.SourceType;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -45,6 +46,8 @@ public class InstalledPackagesController implements IControllerBase, Initializab
     @FXML
     private VBox placeholderContent;
     @FXML
+    private Label tableViewPackageCountLabel;
+    @FXML
     private ComboBox<String> comboBox_filter;
     @FXML
     private TextField textField_filter;
@@ -65,9 +68,7 @@ public class InstalledPackagesController implements IControllerBase, Initializab
         setTableViewData();
         setTableViewSource();
         initializeFilter();
-
-
-
+        setCollectionListenerForPackageCountLabel();
     }
 
     // Initialize filter components
@@ -76,6 +77,20 @@ public class InstalledPackagesController implements IControllerBase, Initializab
         comboBox_filter.setValue("All Attributes");
         textField_filter.textProperty().addListener((observable, oldValue, newValue) -> filterList());
         comboBox_filter.valueProperty().addListener((observable, oldValue, newValue) -> filterList());
+    }
+
+    private void setCollectionListenerForPackageCountLabel(){
+        // Add a ListChangeListener to the ObservableList
+        tableViewPackageCountLabel.setVisible(false);
+        PackageList.getInstalledPackageList().addListener((ListChangeListener<WinGetPackage>) change -> {
+            if(PackageList.getInstalledPackageList().isEmpty()){
+                tableViewPackageCountLabel.setVisible(false);
+            }
+            else {
+                tableViewPackageCountLabel.setVisible(true);
+                tableViewPackageCountLabel.setText(PackageList.getInstalledPackageList().size() + " Packages installed");
+            }
+        });
     }
 
     @FXML

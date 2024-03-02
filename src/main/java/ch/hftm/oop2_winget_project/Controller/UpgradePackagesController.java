@@ -9,6 +9,7 @@ import ch.hftm.oop2_winget_project.Util.QueryType;
 import ch.hftm.oop2_winget_project.Util.SourceType;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -46,6 +47,8 @@ public class UpgradePackagesController implements IControllerBase, Initializable
     @FXML
     private VBox placeholderContent;
     @FXML
+    private Label tableViewPackageCountLabel;
+    @FXML
     private TextField textField_filter;
     @FXML
     private ComboBox<String> comboBox_filter;
@@ -63,8 +66,7 @@ public class UpgradePackagesController implements IControllerBase, Initializable
         setTableViewData();
         setTableViewSource();
         initializeFilter();
-
-
+        setCollectionListenerForPackageCountLabel();
     }
 
     // Initialize filter components
@@ -73,6 +75,20 @@ public class UpgradePackagesController implements IControllerBase, Initializable
         comboBox_filter.setValue("All Attributes");
         textField_filter.textProperty().addListener((observable, oldValue, newValue) -> filterList());
         comboBox_filter.valueProperty().addListener((observable, oldValue, newValue) -> filterList());
+    }
+
+    private void setCollectionListenerForPackageCountLabel(){
+        // Add a ListChangeListener to the ObservableList
+        tableViewPackageCountLabel.setVisible(false);
+        PackageList.getUpgradePackageList().addListener((ListChangeListener<WinGetPackage>) change -> {
+            if(PackageList.getUpgradePackageList().isEmpty()){
+                tableViewPackageCountLabel.setVisible(false);
+            }
+            else {
+                tableViewPackageCountLabel.setVisible(true);
+                tableViewPackageCountLabel.setText(PackageList.getUpgradePackageList().size() + " Updates available");
+            }
+        });
     }
 
     @FXML

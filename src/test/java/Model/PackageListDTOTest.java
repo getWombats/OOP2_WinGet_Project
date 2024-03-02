@@ -5,6 +5,7 @@ import ch.hftm.oop2_winget_project.Model.WinGetPackageDTO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -15,46 +16,56 @@ class PackageListDTOTest {
 
     @BeforeEach
     void setUp() {
+        // Initialize PackageListDTO object; Used in multiple tests.
         packageListDTO = new PackageListDTO();
     }
 
     @Test
-    void testIdProperty() {
-        String expectedId = "UniqueID123";
-        packageListDTO.setId(expectedId);
-        assertEquals(expectedId, packageListDTO.getId(), "The ID should be set and retrieved correctly.");
+    void testDefaultConstructor() {
+        assertNull(packageListDTO.getId(), "Default ID should be null");
+        assertNull(packageListDTO.getName(), "Default name should be null");
+        assertEquals(0, packageListDTO.getSize(), "Default size should be 0");
+        assertNull(packageListDTO.getPackages(), "Default packages should be null");
     }
 
     @Test
-    void testNameProperty() {
-        String expectedName = "TestPackageList";
-        packageListDTO.setName(expectedName);
-        assertEquals(expectedName, packageListDTO.getName(), "The name should be set and retrieved correctly.");
+    void testIdGetterSetter() {
+        String newId = "NewId";
+        packageListDTO.setId(newId);
+        assertEquals(newId, packageListDTO.getId(), "The ID should be 'NewId'");
     }
 
     @Test
-    void testSizeProperty() {
-        int expectedSize = 10;
-        packageListDTO.setSize(expectedSize);
-        assertEquals(expectedSize, packageListDTO.getSize(), "The size should be set and retrieved correctly.");
+    void testNameGetterSetter() {
+        String newName = "NewName";
+        packageListDTO.setName(newName);
+        assertEquals(newName, packageListDTO.getName(), "The name should be 'NewName'");
     }
 
     @Test
-    void testPackagesProperty() {
-        List<WinGetPackageDTO> expectedPackages = new ArrayList<>();
-        expectedPackages.add(new WinGetPackageDTO()); // Add a default package for testing
-        packageListDTO.setPackages(expectedPackages);
-
-        assertNotNull(packageListDTO.getPackages(), "The packages list should not be null.");
-        assertEquals(1, packageListDTO.getPackages().size(), "The packages list should contain one package.");
-        assertEquals(expectedPackages, packageListDTO.getPackages(), "The packages should be set and retrieved correctly.");
+    void testSizeGetterSetter() {
+        int newSize = 10;
+        packageListDTO.setSize(newSize);
+        assertEquals(newSize, packageListDTO.getSize(), "The size should be 10");
     }
 
     @Test
-    void testDTOInitialization() {
-        assertNull(packageListDTO.getId(), "Initially, the ID should be null.");
-        assertNull(packageListDTO.getName(), "Initially, the name should be null.");
-        assertEquals(0, packageListDTO.getSize(), "Initially, the size should be 0.");
-        assertNull(packageListDTO.getPackages(), "Initially, the packages should be null.");
+    void testPackagesGetterSetter() {
+        WinGetPackageDTO packageOne = new WinGetPackageDTO();
+        packageOne.setName("PackageOne");
+        packageOne.setId("1");
+        packageOne.setVersion("1.0");
+        packageOne.setSource("SourceOne");
+
+        WinGetPackageDTO packageTwo = new WinGetPackageDTO();
+        packageTwo.setName("PackageTwo");
+        packageTwo.setId("2");
+        packageTwo.setVersion("2.0");
+        packageTwo.setSource("SourceTwo");
+
+        List<WinGetPackageDTO> newPackages = new ArrayList<>(Arrays.asList(packageOne, packageTwo));
+        packageListDTO.setPackages(newPackages);
+        assertEquals(newPackages, packageListDTO.getPackages(), "The packages list should match the set list");
+        assertEquals(2, packageListDTO.getPackages().size(), "The packages list size should be 2");
     }
 }

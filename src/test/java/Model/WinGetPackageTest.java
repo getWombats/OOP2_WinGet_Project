@@ -14,17 +14,17 @@ public class WinGetPackageTest {
 
     @BeforeEach
     void setUp() {
-        // Initialize your WinGetPackage object here; you can reuse this object in multiple tests.
+        // Initialize WinGetPackage object; Used in multiple tests.
         winGetPackage = new WinGetPackage("TestName", "TestId", "TestVersion", "TestSource", true);
     }
 
     @Test
     void testDefaultConstructor() {
         WinGetPackage packageDefault = new WinGetPackage();
-        assertEquals("", packageDefault.getName(), "Default name should be empty");
-        assertEquals("", packageDefault.getId(), "Default ID should be empty");
-        assertEquals("", packageDefault.getVersion(), "Default version should be empty");
-        assertEquals("", packageDefault.getSource(), "Default source should be empty");
+        assertNull(packageDefault.getName(), "Default name should be null");
+        assertNull(packageDefault.getId(), "Default ID should be null");
+        assertNull(packageDefault.getVersion(), "Default version should be null");
+        assertNull(packageDefault.getSource(), "Default source should be null");
         assertEquals(false, packageDefault.isInstalled(), "Default installed status should be false");
     }
 

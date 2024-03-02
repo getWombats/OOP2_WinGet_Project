@@ -10,11 +10,13 @@ import java.util.UUID;
 
 public class PackageList {
 
+
     // Variables
     private String id;
     private SimpleStringProperty name;
     private SimpleIntegerProperty size;
     private ObservableList<WinGetPackage> packages;
+
 
     // Constructors
     public PackageList() {
@@ -38,55 +40,74 @@ public class PackageList {
         this.packages = FXCollections.observableArrayList();
     }
 
+
     // Getters, Setters
     public String getId() {
         return this.id;
     }
+
     public void setId(String id) {
         this.id = id;
     }
 
+
     public String getName(){
         return this.name.get();
     }
+
     public void setName(String name) {
         this.name.set(name);
     }
+
     public SimpleStringProperty getFXName() {
         return this.name;
     }
 
+    public void setFXName(SimpleStringProperty name) {
+        this.name = name;
+    }
+
+
     public int getSize() {
         return this.size.get();
     }
+
     public void setSize(int id) {
         this.size.set(id);
     }
+
     public SimpleIntegerProperty getFXSize() {
         return this.size;
     }
+
     public void setFXSize(SimpleIntegerProperty size) {
         this.size = size;
     }
 
+
     public List<WinGetPackage> getPackages() {
         return new ArrayList<>(packages);
     }
+
     public void setPackages(List<WinGetPackage> packages) {
         this.packages.setAll(packages);
     }
+
     public ObservableList<WinGetPackage> getFXPackages() {
         return this.packages;
     }
+
     public void setFXPackages(ObservableList<WinGetPackage> packages) {
         this.packages = packages;
     }
+
 
     // Manage packages
     public void addPackage(WinGetPackage wgPkg) {
         this.packages.add(wgPkg);
         this.size.set(this.size.get() +1);
     }
+
     public void removePackage(WinGetPackage wgPkg) {
         packages.remove(wgPkg);
         this.size.set(this.size.get() -1);

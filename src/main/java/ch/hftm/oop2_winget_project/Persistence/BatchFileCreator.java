@@ -17,10 +17,16 @@ public class BatchFileCreator {
     private static Logger LOGGER = Logger.getLogger(DTOConverter.class.getName());
 
     public static void createInstallScript(PackageList packageList) {
-        String userHome = System.getProperty("user.home");
-        String scriptPath = userHome + File.separator + "Desktop\\WinGet_InstallScript.bat";
-
         LOGGER.log(Level.INFO, "Batch file creation starting.");
+
+        String scriptPath = "";
+        try {
+            String userHome = System.getProperty("user.home");
+            scriptPath = userHome + File.separator + "Desktop\\WinGet_InstallScript.bat";
+        } catch (Exception e) {
+            LOGGER.log(Level.SEVERE, "Target directory not accessible: {0}", e.getMessage());
+        }
+
         try(BufferedWriter bw = new BufferedWriter((new FileWriter(scriptPath)))) {
             // Turns output in command line off.
             bw.write("@echo off");

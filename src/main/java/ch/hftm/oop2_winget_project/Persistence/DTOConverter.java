@@ -49,7 +49,7 @@ public class DTOConverter {
         LOGGER.log(Level.INFO, "Conversion ListManagerDTO to ListManager starting.");
         try {
             ListManager listManager = ListManager.getInstance();
-            listManager.setLists(FXCollections.observableArrayList(listManagerDTO.getList().stream()
+            listManager.setFXLists(FXCollections.observableArrayList(listManagerDTO.getList().stream()
                     .map(DTOConverter::fromPackageListDTO)
                     .collect(Collectors.toList())));
             System.out.println("DTOConverter: Conversion ListManagerDTO to ListManager for successful.");
@@ -95,7 +95,7 @@ public class DTOConverter {
             packageList.setId(packageListDTO.getId());
             packageList.setName(packageListDTO.getName());
             packageList.setSize(packageListDTO.getSize());
-            packageList.setPackages(packageListDTO.getPackages().stream()
+            packageList.setFXPackages(packageListDTO.getPackages().stream()
                     .map(DTOConverter::fromWinGetPackageDTO)
                     .collect(Collectors.toCollection(FXCollections::observableArrayList)));
             System.out.println("DTOConverter: Conversion PackageListDTO to PackageList for " + packageListDTO.getName() + " successful.");

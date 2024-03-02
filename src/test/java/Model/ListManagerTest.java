@@ -14,7 +14,7 @@ class ListManagerTest {
     void setUp() {
         // Reset ListManager for each test.
         listManager = ListManager.getInstance();
-        listManager.setLists(FXCollections.observableArrayList());
+        listManager.setFXLists(FXCollections.observableArrayList());
     }
 
     @Test

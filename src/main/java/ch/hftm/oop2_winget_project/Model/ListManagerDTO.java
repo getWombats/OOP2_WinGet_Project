@@ -11,14 +11,12 @@ public class ListManagerDTO implements Serializable {
 //    It is used to convert complex data types that are not serializable into simpler datatypes that are serializable.
 //    JavaFX Observables are not seralizable.
 
-
 //    Variables
     private static final long serialVersionUID = 1L;
-
     private static ListManagerDTO instance;
     private List<PackageListDTO> lists;
 
-    //    Instantiation method
+    // Instantiation
     public static ListManagerDTO getInstance() {
         if (instance == null) {
             synchronized (ListManagerDTO.class) { // Synchronized to prevent multiple threads checking, returning null and creating multiple instances.
@@ -30,16 +28,15 @@ public class ListManagerDTO implements Serializable {
         return instance;
     }
 
-//    Constructors
+    // Constructors
     public ListManagerDTO() {
         this.lists = new ArrayList<>();
     }
 
-//    Methods
+    // Methods
     public List<PackageListDTO> getList() {
         return this.lists;
     }
-
     public void setList(List<PackageListDTO> list) {
         this.lists = list;
     }

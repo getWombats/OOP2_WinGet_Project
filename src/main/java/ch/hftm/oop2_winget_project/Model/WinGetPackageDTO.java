@@ -9,20 +9,21 @@ public class WinGetPackageDTO implements Serializable {
 //    It is used to convert complex data types that are not serializable into simpler datatypes that are serializable.
 //    JavaFX Observables are not seralizable.
 
+    // Variables
     private static final long serialVersionUID = 1L;
     private String packageName;
     private String packageID;
     private String packageVersion;
     private String packageSource;
 
+    // Constructors
     public WinGetPackageDTO() {
     }
 
-    // Getters and Setters
+    // Getters, Setters
     public String getName() {
         return packageName;
     }
-
     public void setName(String packageName) {
         this.packageName = packageName;
     }
@@ -30,7 +31,6 @@ public class WinGetPackageDTO implements Serializable {
     public String getId() {
         return packageID;
     }
-
     public void setId(String packageID) {
         this.packageID = packageID;
     }
@@ -38,7 +38,6 @@ public class WinGetPackageDTO implements Serializable {
     public String getVersion() {
         return packageVersion;
     }
-
     public void setVersion(String packageVersion) {
         this.packageVersion = packageVersion;
     }
@@ -46,7 +45,6 @@ public class WinGetPackageDTO implements Serializable {
     public String getSource() {
         return packageSource;
     }
-
     public void setSource(String packageSource) {
         this.packageSource = packageSource;
     }

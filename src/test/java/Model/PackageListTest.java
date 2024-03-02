@@ -45,7 +45,7 @@ class PackageListTest {
         WinGetPackage newPkg = new WinGetPackage("NewPackage", "NewID", "2.0", "NewSource");
         newPackages.add(newPkg);
 
-        packageList.setPackages(newPackages);
+        packageList.setFXPackages(newPackages);
 
         assertEquals(1, packageList.getSize());
         assertEquals(newPkg, packageList.getPackages().get(0));

@@ -10,36 +10,39 @@ public class PackageListDTO implements Serializable {
 //    It is used to convert complex data types that are not serializable into simpler datatypes that are serializable.
 //    JavaFX Observables are not seralizable.
 
-//    Variables
+    // Variables
     private static final long serialVersionUID = 1L;
     private String id;
     private String name;
     private int size;
     private List<WinGetPackageDTO> packages;
 
-//    Constructors
+    // Constructors
     public PackageListDTO() {
     }
 
-//    Methods
+    // Getters, Setters
     public String getId() {
         return this.id;
     }
     public void setId(String id) {
         this.id = id;
     }
+
     public String getName() {
         return this.name;
     }
     public void setName(String name) {
         this.name = name;
     }
+
     public int getSize() {
         return this.size;
     }
     public void setSize(int size) {
         this.size = size;
     }
+
     public List<WinGetPackageDTO> getPackages() {
         return this.packages;
     }

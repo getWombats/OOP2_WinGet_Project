@@ -10,17 +10,16 @@ import java.util.UUID;
 
 public class PackageList {
 
-// Variables
+    // Variables
     private String id;
     private SimpleStringProperty name;
     private SimpleIntegerProperty size;
     private ObservableList<WinGetPackage> packages;
 
-
-//    Constructors
-//    public PackageList() {
-//        this.packages = FXCollections.observableArrayList();
-//    }
+    // Constructors
+    public PackageList() {
+        this.packages = FXCollections.observableArrayList();
+    }
 
     public PackageList(String name){
         this.id = UUID.randomUUID().toString(); // Create random UUID to identify List.
@@ -28,10 +27,10 @@ public class PackageList {
         this.size = new SimpleIntegerProperty(0);
         this.packages = FXCollections.observableArrayList();
 
-        System.out.println("New Package: (UUID Name)\n" + getId() + " \"" + getName() + "\"");
+        System.out.println("PackageList: New PackageList: (UUID Name)\n" + getId() + " \"" + getName() + "\"");
     }
 
-    // Constructor used for creating favourite list with special uuid and name.
+    // For creating favourite list with special uuid and name.
     public PackageList(String name, String id){
         this.id = id;
         this.name = new SimpleStringProperty(name);
@@ -39,13 +38,10 @@ public class PackageList {
         this.packages = FXCollections.observableArrayList();
     }
 
-//    Methods
-//    Manage PackageList Properties
-
+    // Getters, Setters
     public String getId() {
         return this.id;
     }
-
     public void setId(String id) {
         this.id = id;
     }
@@ -53,40 +49,40 @@ public class PackageList {
     public String getName(){
         return this.name.get();
     }
-
-    public SimpleStringProperty getFXName() {
-        return this.name;
-    }
-
     public void setName(String name) {
         this.name.set(name);
+    }
+    public SimpleStringProperty getFXName() {
+        return this.name;
     }
 
     public int getSize() {
         return this.size.get();
     }
-
+    public void setSize(int id) {
+        this.size.set(id);
+    }
     public SimpleIntegerProperty getFXSize() {
         return this.size;
     }
-
-    public void setSize(int id) {
-        this.size.set(id);
+    public void setFXSize(SimpleIntegerProperty size) {
+        this.size = size;
     }
 
     public List<WinGetPackage> getPackages() {
         return new ArrayList<>(packages);
     }
+    public void setPackages(List<WinGetPackage> packages) {
+        this.packages.setAll(packages);
+    }
     public ObservableList<WinGetPackage> getFXPackages() {
         return this.packages;
     }
-
-    public void setPackages(ObservableList<WinGetPackage> packages) {
+    public void setFXPackages(ObservableList<WinGetPackage> packages) {
         this.packages = packages;
     }
 
-
-//    Manage packages
+    // Manage packages
     public void addPackage(WinGetPackage wgPkg) {
         this.packages.add(wgPkg);
         this.size.set(this.size.get() +1);
@@ -96,7 +92,7 @@ public class PackageList {
         this.size.set(this.size.get() -1);
     }
 
-    //    Predefined lists as static fields
+    // Predefined lists as static fields
     private static final ObservableList<WinGetPackage> searchPackageList = FXCollections.observableArrayList();
     private static final ObservableList<WinGetPackage> installedPackageList = FXCollections.observableArrayList();
     private static final ObservableList<WinGetPackage> upgradePackageList = FXCollections.observableArrayList();

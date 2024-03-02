@@ -3,8 +3,10 @@ package ch.hftm.oop2_winget_project.Model;
 import ch.hftm.oop2_winget_project.Api.AbstractWinGetPackage;
 import javafx.beans.property.SimpleStringProperty;
 
-public class WinGetPackage extends AbstractWinGetPackage
-{
+public class WinGetPackage extends AbstractWinGetPackage {
+
+
+    // Variables
     private SimpleStringProperty name = new SimpleStringProperty();
     private SimpleStringProperty id = new SimpleStringProperty();
     private SimpleStringProperty version = new SimpleStringProperty();
@@ -12,6 +14,8 @@ public class WinGetPackage extends AbstractWinGetPackage
     private SimpleStringProperty source = new SimpleStringProperty();
     private boolean isInstalled;
 
+
+    //Constructors
     public WinGetPackage() {
     }
 
@@ -39,61 +43,90 @@ public class WinGetPackage extends AbstractWinGetPackage
         this.isInstalled = isInstalled;
     }
 
+
+    // Getters, Setters
     public String getName() {
         return this.name.get();
-    }
-    public SimpleStringProperty getFXName() {
-        return this.name;
     }
 
     public void setName(String name) {
         this.name.set(name);
     }
 
+    public SimpleStringProperty getFXName() {
+        return this.name;
+    }
+
+    public void setFXName(SimpleStringProperty name) {
+        this.name = name;
+    }
+
 
     public String getId() {
         return this.id.get();
-    }
-    public SimpleStringProperty getFXId() {
-        return this.id;
     }
 
     public void setId(String id) {
         this.id.set(id);
     }
 
+    public SimpleStringProperty getFXId() {
+        return this.id;
+    }
+
+    public void setFXID(SimpleStringProperty id) {
+        this.id = id;
+    }
+
 
     public String getVersion() {
         return this.version.get();
-    }
-    public SimpleStringProperty getFXVersion() {
-        return this.version;
     }
 
     public void setVersion(String version) {
         this.version.set(version);
     }
 
+    public SimpleStringProperty getFXVersion() {
+        return this.version;
+    }
+
+    public void setFXVersion(SimpleStringProperty version) {
+        this.version = version;
+    }
+
+
     public String getUpdateVersion() {
         return this.updateVersion.get();
     }
+
+    public void setUpdateVersion(String updateVersion) {
+        this.updateVersion.set(updateVersion);
+    }
+
     public SimpleStringProperty getFXUpdateVersion() {
         return this.updateVersion;
     }
-    public void setUpdateVersion(String updateVersion) {
-        this.updateVersion.set(updateVersion);
+
+    public void setFXUpdateVersion(SimpleStringProperty updateVersion) {
+        this.updateVersion = updateVersion;
     }
 
 
     public String getSource() {
         return this.source.get();
     }
+
+    public void setSource(String source) {
+        this.source.set(source);
+    }
+
     public SimpleStringProperty getFXSource() {
         return this.source;
     }
 
-    public void setSource(String source) {
-        this.source.set(source);
+    public void setFXSource(SimpleStringProperty source) {
+        this.source = source;
     }
 
 

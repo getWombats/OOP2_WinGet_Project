@@ -2,7 +2,7 @@
 <a name="readme-top"></a>
 <br />
 <div align="center">
-    <img src="src/main/resources/Icons/taskbarIcon_colorized.png" alt="Logo" width="80" height="80">
+    <img src="src/main/resources/Icons/taskbarIcon_colorized.png" alt="Logo" width="100" height="100">
   <h3 align="center">OOP2 Project: wingetUI</h3>
 </div>
 
@@ -17,6 +17,8 @@ This project is intended to implement the contents of the course IN212 "object o
 ### The Application is built with
 * [![Java][Java]][Java-url]
 * [![JavaFX][JavaFX]][JavaFX-url]
+
+### (JRE 21 required)
 
 # Handcrafted with love ❤️
 ## Search software you want to install

@@ -76,6 +76,7 @@ public class Serializer {
             System.out.println("Serializer: Deserialization of ListManagerDTO successful.");
             LOGGER.log(Level.INFO, "Deserialization of ListManagerDTO successful.");
         } catch (ClassNotFoundException | FileNotFoundException e) {
+
             System.out.println("Serializer: Deserialization of ListManagerDTO failed: " + e.getMessage());
             LOGGER.log(Level.WARNING, "Deserialization of ListManagerDTO failed: {0}", e.getMessage());
         } catch (IOException e) {

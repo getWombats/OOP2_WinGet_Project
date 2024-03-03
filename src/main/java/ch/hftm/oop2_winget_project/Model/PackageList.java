@@ -38,6 +38,8 @@ public class PackageList {
         this.name = new SimpleStringProperty(name);
         this.size = new SimpleIntegerProperty(0);
         this.packages = FXCollections.observableArrayList();
+
+        System.out.println("PackageList: New Favourite Package List: (UUID Name)\n" + getId() + " \"" + getName() + "\"");
     }
 
 

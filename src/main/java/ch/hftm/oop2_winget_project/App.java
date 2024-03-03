@@ -59,6 +59,7 @@ public class App extends Application
         listManagerDTO = ListManagerDTO.getInstance(); // Instantiating ListManager
 
         Serializer.deserializeListManager(); // Converts .ser into listManager
+        checkIfFavouriteListExists();
 
         windowManager = new WindowManager(stage);
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(ResourceProvider.FXML_ROOT + ResourceProvider.SPLASHSCREEN_VIEW_NAME));
@@ -127,5 +128,20 @@ public class App extends Application
 //            LOGGER.log(Level.INFO, "WinGetProject directory already exists.");
         }
         System.setProperty("winget.logdir", System.getenv("LOCALAPPDATA") + "\\WinGetProject\\log");
+    }
+
+    private void checkIfFavouriteListExists() {
+        boolean listExists = false;
+        for (PackageList list : ListManager.getInstance().getLists()) {
+            if ("favourite-list-uuid".equals(list.getId())) {
+                listExists = true;
+                break; // Exit the loop as we found the matching list
+            }
+        }
+
+        if (!listExists) {
+            listManager.createFavouriteList();
+            Serializer.serializeListManager();
+        }
     }
 }

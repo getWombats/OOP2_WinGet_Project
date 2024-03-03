@@ -62,9 +62,16 @@ public class ListManager {
     // Methods
     public void createPackageList(String packageListName){
         PackageList newPackageList = new PackageList(packageListName);
-        // PackageList newPackageList = new PackageList("Favourites", "favourite-list-uuid"); // Used one time for favourite creation.
         lists.add(newPackageList);
     }
+
+    // Used one time for favourite creation.
+    public void createFavouriteList() {
+        System.out.println("Favlist does not exist");
+        PackageList newPackageList = new PackageList("Favourites", "favourite-list-uuid");
+        lists.add(newPackageList);
+    }
+
     public void deletePackageList(PackageList packageList) {
         lists.remove(packageList);
     }

@@ -54,8 +54,8 @@ public class PackageListController {
 
         listManager = ListManager.getInstance(); //Getting the single instance of ListManager.
         currentPackageList = listManager.getSelectedPackageList();
-        System.out.println(listManager.getSelectedPackageList());
-        System.out.println("Packages in the list: " + currentPackageList.getFXPackages().size());
+//        System.out.println(listManager.getSelectedPackageList());
+//        System.out.println("Packages in the list: " + currentPackageList.getFXPackages().size());
 
         initializeTableViewData();
         initializeUIElements();

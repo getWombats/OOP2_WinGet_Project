@@ -84,6 +84,7 @@
 .button:hover {
     -fx-background-color: #6141d8;
     -fx-border-color: #6141d8;
+    -fx-cursor: hand;
 }
 
 .button:pressed {
@@ -105,6 +106,47 @@
     -fx-background-size: 20px;
     -fx-background-repeat: no-repeat;
     -fx-background-position: 10%;
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+}
+
+.addButton {
+    -fx-padding: 6 22 6 38;
+    -fx-background-image: url(../Icons/addIcon.png);
+    -fx-background-size: 12px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: 18 center;
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+}
+
+.editButton {
+    -fx-padding: 6 22 6 45;
+    -fx-background-image: url(../Icons/editIcon.png);
+    -fx-background-size: 20px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: 18 center;
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+}
+
+.deleteButton {
+    -fx-padding: 6 22 6 43;
+    -fx-background-image: url(../Icons/deleteIcon.png);
+    -fx-background-size: 20px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: 16 center;
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+}
+
+.deleteButton:hover {
+    -fx-background-color: #990000;
+    -fx-border-color: #990000;
+}
+
+.createScriptButton {
+    -fx-padding: 6 22 6 48;
+    -fx-background-image: url(../Icons/bashIcon.png);
+    -fx-background-size: 23px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: 18 center;
     -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
 }
 
@@ -133,6 +175,11 @@
     -fx-background-color: #282828;
     -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
  }
+
+ .combo-box:hover {
+    -fx-background-color: #512bd4;
+    -fx-cursor: hand;
+  }
 
  .combo-box:focused {
      -fx-border-color: #512bd4;
@@ -257,7 +304,7 @@
     -fx-font-size: 10pt;
     -fx-text-fill: #d8d8d8;
 
-    -fx-background-image: url(../Icons/delete.png);
+    -fx-background-image: url(../Icons/deleteIcon.png);
     -fx-background-size: 20px;
     -fx-background-repeat: no-repeat;
     -fx-background-position: 12 center;
@@ -290,6 +337,28 @@
 .upgradeTableView .button-upgrade:hover {
     -fx-background-color: #512bd4;
     -fx-background-image: url(../Icons/updateIconHover.png);
+}
+
+/* Install Button PackageList TableView */
+.tableView_packages .button-install {
+    -fx-padding: 5 25 5 45;
+    -fx-border-color: #512bd4;
+    -fx-border-width: 1;
+    -fx-border-radius: 10em; /* radius for pill button style */
+    -fx-background-radius: 10em; /* radius for pill button style */
+    -fx-background-color: #1d1d1d;
+    -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+    -fx-font-size: 10pt;
+    -fx-text-fill: #d8d8d8;
+    -fx-background-image: url(../Icons/download.png);
+    -fx-background-size: 15px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: 20%;
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+}
+
+.tableView_packages .button-install:hover {
+    -fx-background-color: #512bd4;
 }
 
 /* Labels SearchPackage TableView */

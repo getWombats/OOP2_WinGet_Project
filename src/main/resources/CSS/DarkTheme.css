@@ -1,0 +1,690 @@
+/*---------------------------------------------------*/
+/*                  Misc                            */
+/*-------------------------------------------------*/
+.background {
+    -fx-background-color: #1d1d1d;
+}
+
+.borderPane {
+    -fx-background-color: #1d1d1d;
+}
+
+.vBoxMenu {
+    -fx-background-color: #282828;
+}
+
+.label {
+    -fx-font-size: 10pt;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-text-fill: #8d8d8d;
+}
+
+.badge-pill {
+    -fx-background-color: #333333;
+    -fx-background-radius: 10em;
+    -fx-padding: 1 12 1 12;
+    -fx-text-fill: #d8d8d8;
+    -fx-font-size: 8pt;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0, 0.2) , 8, 0.0 , 0 , 1 );
+}
+
+.label-bright {
+    -fx-font-size: 10pt;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-text-fill: white;
+    -fx-opacity: 1;
+}
+
+.label-title {
+    -fx-font-size: 24px;
+    -fx-font-family: "Segoe UI Light";
+    -fx-text-fill: white;
+    -fx-opacity: 1;
+}
+
+.label-viewTitle {
+    -fx-font-size: 24px;
+    -fx-font-family: "Segoe UI Light";
+    -fx-text-fill: white;
+    -fx-opacity: 1;
+}
+
+.text-field {
+    -fx-background-color: #282828;
+    -fx-border-color: #737373;
+    -fx-border-width: 1;
+    -fx-border-radius: 10em; /* radius for pill button style */
+    -fx-background-radius: 10em; /* radius for pill button style */
+    -fx-padding: 5 15 5 15;
+    -fx-text-fill: #d8d8d8;
+    -fx-font-size: 10pt;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-highlight-fill: #512bd4;
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0, 0.6) , 8, 0.0 , 0 , 1 );
+}
+
+.text-field:focused {
+    -fx-border-color: #512bd4;
+    /*-fx-effect: dropshadow( three-pass-box , rgba(81, 43, 212, 1.0) , 5, 0.0 , 0 , 1 );*/
+}
+
+.button {
+    -fx-padding: 5 22 5 22;
+    -fx-border-color: #737373;
+    -fx-border-width: 1;
+    -fx-border-radius: 10em; /* radius for pill button style */
+    -fx-background-radius: 10em; /* radius for pill button style */
+    -fx-background-color: #1d1d1d;
+    -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+    -fx-font-size: 10pt;
+    -fx-text-fill: #d8d8d8;
+}
+
+.button:hover {
+    -fx-background-color: #6141d8;
+    -fx-border-color: #6141d8;
+    -fx-cursor: hand;
+}
+
+.button:pressed {
+    -fx-background-color: #4827be;
+    -fx-border-color: #512bd4;
+}
+
+.refreshButton {
+    -fx-padding: 6 22 6 40;
+    -fx-background-image: url(../Icons/refresh.png);
+    -fx-background-size: 20px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: 10%;
+}
+
+.searchButton {
+    -fx-padding: 6 22 6 40;
+    -fx-background-image: url(../Icons/search.png);
+    -fx-background-size: 20px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: 10%;
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+}
+
+.addButton {
+    -fx-padding: 6 22 6 38;
+    -fx-background-image: url(../Icons/addIcon.png);
+    -fx-background-size: 12px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: 18 center;
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+}
+
+.editButton {
+    -fx-padding: 6 22 6 45;
+    -fx-background-image: url(../Icons/editIcon.png);
+    -fx-background-size: 20px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: 18 center;
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+}
+
+.deleteButton {
+    -fx-padding: 6 22 6 43;
+    -fx-background-image: url(../Icons/deleteIcon.png);
+    -fx-background-size: 20px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: 16 center;
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+}
+
+.deleteButton:hover {
+    -fx-background-color: #990000;
+    -fx-border-color: #990000;
+}
+
+.createScriptButton {
+    -fx-padding: 6 22 6 48;
+    -fx-background-image: url(../Icons/bashIcon.png);
+    -fx-background-size: 23px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: 18 center;
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+}
+
+.aboutButton {
+    -fx-padding: 10 20 10 20;
+    -fx-border-color: transparent;
+    -fx-background-image: url(../Icons/infoBubble.png);
+    -fx-background-size: 26px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+    -fx-opacity: 0.5;
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.2) , 5, 0.0 , 0 , 1 );
+}
+
+.aboutButton:hover {
+    -fx-opacity: 1;
+}
+
+/* Favorite List ComboBox */
+.combo-box {
+    -fx-padding: 1.5 5 1.5 5;
+    -fx-border-color: #737373;
+    -fx-border-width: 1;
+    -fx-border-radius: 10em; /* radius for pill button style */
+    -fx-background-radius: 10em; /* radius for pill button style */
+    -fx-background-color: #282828;
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+ }
+
+ .combo-box:hover {
+    -fx-background-color: #512bd4;
+    -fx-cursor: hand;
+  }
+
+ .combo-box:focused {
+     -fx-border-color: #512bd4;
+  }
+
+ .combo-box .list-cell {
+     -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+     -fx-font-size: 10pt;
+     -fx-text-fill: #d8d8d8;
+  }
+
+.combo-box-popup .list-view {
+        -fx-background-color: #1d1d1d;
+        -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+        -fx-font-size: 10pt;
+        -fx-text-fill: #d8d8d8;
+ }
+
+.combo-box-popup .list-view .list-cell {
+        -fx-background-color: #282828;
+        -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+        -fx-font-size: 10pt;
+        -fx-text-fill: #d8d8d8;
+ }
+
+ .combo-box-popup .list-view .list-cell:hover {
+         -fx-background-color: #512bd4;
+  }
+
+/*---------------------------------------------------*/
+/*                  TableView Styling               */
+/*-------------------------------------------------*/
+.table-view {
+    -fx-base: #1d1d1d;
+    -fx-control-inner-background: #1d1d1d;
+    -fx-background-color: #1d1d1d;
+    -fx-table-cell-border-color: transparent;
+    -fx-table-header-border-color: transparent;
+    -fx-padding: 5;
+    -fx-text-fill: white;
+}
+
+.table-view .column-header-background {
+    -fx-background-color: transparent;
+}
+
+.table-view .column-header, .table-view .filler {
+    -fx-size: 60;
+    -fx-border-width: 0 0 0 0;
+    -fx-background-color: transparent;
+    -fx-border-color:
+        transparent
+        transparent
+        derive(-fx-base, 80%)
+        transparent;
+}
+
+.table-view .column-header .label {
+    -fx-font-size: 14pt; /* Table Header Font Size */
+    -fx-font-family: "Segoe UI Light";
+    -fx-text-fill: #d8d8d8;
+    -fx-alignment: center-left;
+    -fx-opacity: 1;
+}
+
+.table-row-cell:filled {
+    -fx-background-color: transparent;
+    -fx-font-size: 10pt;
+    -fx-text-fill: #d8d8d8;
+}
+
+.table-row-cell:filled:selected {
+    -fx-background-color: transparent;
+    -fx-font-size: 10pt;
+    -fx-text-fill: #d8d8d8;
+}
+
+.table-row-cell:filled:focused:selected {
+    -fx-background-color: #512bd4;
+    -fx-text-fill: #d8d8d8;
+}
+
+.table-row-cell:filled:hover {
+    -fx-background-color: #262626;
+}
+
+.table-row-cell:filled:selected, .table-row-cell:filled > .table-cell:selected {
+    -fx-background: #512bd4;
+}
+
+/* Install Button SearchPackage TableView */
+.searchTableView .button-install {
+    -fx-padding: 5 25 5 45;
+    -fx-border-color: #512bd4;
+    -fx-border-width: 1;
+    -fx-border-radius: 10em; /* radius for pill button style */
+    -fx-background-radius: 10em; /* radius for pill button style */
+    -fx-background-color: #1d1d1d;
+    -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+    -fx-font-size: 10pt;
+    -fx-text-fill: #d8d8d8;
+    -fx-background-image: url(../Icons/download.png);
+    -fx-background-size: 15px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: 20%;
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+}
+
+.searchTableView .button-install:hover {
+    -fx-background-color: #512bd4;
+}
+
+/* Uninstall Button InstalledPackage TableView */
+.installedTableView .button-uninstall {
+    -fx-padding: 5 16 5 37;
+    -fx-border-color: #660000;
+    -fx-border-width: 1;
+    -fx-border-radius: 10em; /* radius for pill button style */
+    -fx-background-radius: 10em; /* radius for pill button style */
+    -fx-background-color: #1d1d1d;
+    -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+    -fx-font-size: 10pt;
+    -fx-text-fill: #d8d8d8;
+
+    -fx-background-image: url(../Icons/deleteIcon.png);
+    -fx-background-size: 20px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: 12 center;
+}
+
+.installedTableView .button-uninstall:hover {
+    -fx-background-color: #990000;
+    -fx-border-color: #990000;
+}
+
+/* Update Button UpgradePackage TableView */
+.upgradeTableView .button-upgrade {
+    -fx-padding: 5 18 5 43;
+    -fx-border-color: #512bd4;
+    -fx-border-width: 1;
+    -fx-border-radius: 10em; /* radius for pill button style */
+    -fx-background-radius: 10em; /* radius for pill button style */
+    -fx-background-color: #1d1d1d;
+    -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+    -fx-font-size: 10pt;
+    -fx-text-fill: #d8d8d8;
+
+    -fx-background-image: url(../Icons/updateIcon.png);
+    -fx-background-size: 19px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: 20%;
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+}
+
+.upgradeTableView .button-upgrade:hover {
+    -fx-background-color: #512bd4;
+    -fx-background-image: url(../Icons/updateIconHover.png);
+}
+
+/* Install Button PackageList TableView */
+.tableView_packages .button-install {
+    -fx-padding: 5 25 5 45;
+    -fx-border-color: #512bd4;
+    -fx-border-width: 1;
+    -fx-border-radius: 10em; /* radius for pill button style */
+    -fx-background-radius: 10em; /* radius for pill button style */
+    -fx-background-color: #1d1d1d;
+    -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+    -fx-font-size: 10pt;
+    -fx-text-fill: #d8d8d8;
+    -fx-background-image: url(../Icons/download.png);
+    -fx-background-size: 15px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: 20%;
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+}
+
+.tableView_packages .button-install:hover {
+    -fx-background-color: #512bd4;
+}
+
+/* Labels SearchPackage TableView */
+.table-row-cell:filled .label {
+    -fx-padding: 5 15 5 35;
+    -fx-border-color: #1d1d1d;
+    -fx-border-width: 0;
+    -fx-background-radius: 0;
+    -fx-background-color: transparent;
+    -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+    -fx-font-size: 10pt;
+    -fx-text-fill: #d8d8d8;
+}
+
+.table-row-cell:filled .label-installed {
+    -fx-background-color: transparent;
+    -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+    -fx-font-size: 10pt;
+    -fx-text-fill: #d8d8d8;
+
+    -fx-background-image: url(../Icons/check.png);
+    -fx-background-size: 15px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: 13 center;
+}
+
+.table-row-cell:filled .label-ms-store {
+    -fx-background-color: transparent;
+    -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+    -fx-font-size: 10pt;
+    -fx-text-fill: #d8d8d8;
+
+    -fx-background-image: url(../Icons/msstoreIcon.png);
+    -fx-background-size: 25px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: left center;
+}
+
+.table-row-cell:filled .label-winget {
+    -fx-background-color: transparent;
+    -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+    -fx-font-size: 10pt;
+    -fx-text-fill: #d8d8d8;
+
+    -fx-background-image: url(../Icons/wingetIconBright.png);
+    -fx-background-size: 22px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: left center;
+}
+
+.table-row-cell:filled .label-source-unknown {
+    -fx-background-color: transparent;
+    -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+    -fx-font-size: 10pt;
+    -fx-text-fill: #d8d8d8;
+
+    -fx-background-image: url(../Icons/sourceUnknownIcon.png);
+    -fx-background-size: 24px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: left center;
+}
+
+.table-row-cell:filled {
+    -fx-font-size: 10pt;
+    -fx-text-fill: white;
+    -fx-cell-size: 50px;
+}
+
+.table-view .table-cell {
+    -fx-alignment: CENTER-LEFT;
+    -fx-border-color: transparent;
+}
+
+/* Favorite CheckBox SearchPackage TableView */
+.searchTableView .check-box {
+    -fx-padding: 5px;
+    -fx-border-insets: 5px;
+    -fx-background-insets: 5px;
+}
+
+.searchTableView .check-box .box {
+	-fx-background-color: transparent;
+	-fx-border-color: transparent;
+    -fx-background-image: url(../Icons/favoriteUnchecked.png);
+    -fx-background-size: 18px;
+    -fx-background-repeat: no-repeat;
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0, 0.5) , 5, 0.0 , 0 , 1 );
+}
+
+.searchTableView .check-box:selected .mark {
+	-fx-background-color: transparent;
+	-fx-border-color: transparent;
+}
+
+.searchTableView .check-box:selected .box {
+    -fx-background-color: transparent;
+	-fx-border-color: transparent;
+    -fx-background-image: url(../Icons/favoriteChecked.png);
+    -fx-background-size: 18px;
+    -fx-background-repeat: no-repeat;
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0, 0.5) , 5, 0.0 , 0 , 1 );
+}
+
+/* Progress Indicator in Tables while loading packages */
+ .progress-indicator:indeterminate .segment {
+     -fx-background-color: #4d4dff;
+ }
+
+/*---------------------------------------------------*/
+/*             ProgressBar Splashscreen             */
+/*-------------------------------------------------*/
+.progress-bar {
+    -fx-accent: rgba(77, 77, 255, 1);
+}
+
+.progress-bar .bar {
+    -fx-padding: 10px;
+    -fx-background-insets: 0;
+    -fx-background-radius: 0;
+}
+
+.progress-bar > .track {
+    -fx-border-radius: 0;
+    -fx-background-radius: 0;
+    -fx-text-box-border: transparent;
+    -fx-control-inner-background: transparent;
+    -fx-background-color: rgba(38, 38, 38, 0.5);
+}
+
+/*---------------------------------------------------*/
+/*          Menu Button MainWindow Left             */
+/*-------------------------------------------------*/
+ .menuButton {
+     -fx-padding: 5 22 5 22;
+     -fx-border-color: transparent;
+     -fx-border-width: 0;
+     -fx-background-radius: 0;
+     -fx-background-color: #282828;
+     -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+     -fx-font-size: 11.5pt;
+     -fx-text-fill: #d8d8d8;
+ }
+
+  .menuButton-active {
+      -fx-padding: 5 22 5 22;
+      -fx-border-color: transparent;
+      -fx-border-width: 0;
+      -fx-background-radius: 0;
+      -fx-background-color: #512bd4;
+      -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+      -fx-font-size: 11.5pt;
+      -fx-text-fill: #d8d8d8;
+  }
+
+ .menuButton:hover {
+     -fx-background-color: #512bd4;
+ }
+
+/*---------------------------------------------------*/
+/*                  Message / Alert                 */
+/*-------------------------------------------------*/
+.dialog-pane {
+  -fx-border-color: #333333;
+  -fx-border-width: 1.0px;
+ }
+
+/* Costumization of The Bar where the buttons are located */
+.dialog-pane > .button-bar > .container {
+  -fx-background-color: #1d1d1d;
+}
+
+.dialog-pane > .content.label {
+  -fx-padding: 0.5em 0.5em 0.5em 0.5em;
+  -fx-background-color:  #282828;
+  -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+  -fx-font-size: 10pt;
+  -fx-text-fill: white;
+}
+
+/* Costumization of DialogPane Header */
+.dialog-pane:header .header-panel {
+  -fx-background-color:  #282828;
+}
+
+.dialog-pane:header .header-panel .label {
+  -fx-background-color:  #282828;
+  -fx-background-radius: 10px;
+  -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+  -fx-font-size: 12pt;
+  -fx-text-fill: white;
+}
+
+/* Costumization of Buttons */
+.dialog-pane .button {
+    -fx-padding: 5 22 5 22;
+    -fx-border-color: #512bd4;
+    -fx-border-width: 1;
+    -fx-border-radius: 10em; /* radius for pill button style */
+    -fx-background-radius: 10em; /* radius for pill button style */
+    -fx-background-color: #1d1d1d;
+    -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+    -fx-font-size: 10pt;
+    -fx-text-fill: #d8d8d8;
+ }
+
+.dialog-pane .button:hover {
+    -fx-background-color: #512bd4;
+ }
+
+/* Costumization of Icons */
+.alert.warning.dialog-pane {
+    -fx-graphic: url(../Icons/warning.png);
+    -fx-background-color: #282828;
+}
+
+.alert.error.dialog-pane {
+    -fx-graphic: url(../Icons/error.png);
+    -fx-background-color: #282828;
+}
+
+.alert.confirmation.dialog-pane {
+   -fx-graphic: url(../Icons/confirmation.png);
+   -fx-background-color: #282828;
+}
+
+.alert.information.dialog-pane {
+    -fx-graphic: url(../Icons/information.png);
+    -fx-background-color: #282828;
+}
+
+/*---------------------------------------------------*/
+/*             Window Title Bar                     */
+/*-------------------------------------------------*/
+
+/* Window TitleBar style  */
+.window-titlebar {
+    -fx-background-color: #0d0d0d;
+}
+
+/* Window close button style  */
+.button-close-window {
+    -fx-padding: 5 15 4 15;
+    -fx-border-color: #404040;
+    -fx-border-width: 0;
+    -fx-border-radius: 0;
+    -fx-background-radius: 0;
+    -fx-background-color: transparent;
+
+    -fx-background-image: url(../Icons/closeWindow.png);
+    -fx-background-size: 20px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+}
+/* Window close button hover style */
+.button-close-window:hover {
+    -fx-background-color: #ca0101;
+    -fx-border-color: #404040;
+    -fx-border-width: 0;
+    -fx-border-radius: 0;
+    -fx-background-radius: 0;
+}
+
+.button-close-window:pressed {
+    -fx-background-color: #b20101;
+}
+
+/* Window minimize & maximize button style  */
+.button-window-state {
+    -fx-padding: 5 15 4 15;
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+    -fx-border-radius: 0;
+    -fx-background-radius: 0;
+    -fx-background-color: transparent;
+
+    -fx-background-image: url(../Icons/windowControlMinimize.png);
+    -fx-background-size: 15px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+}
+
+.button-window-state:hover {
+    -fx-background-color: #512bd4;
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+    -fx-border-radius: 0;
+    -fx-background-radius: 0;
+}
+
+.button-window-state:pressed {
+    -fx-background-color: #4827be;
+}
+
+.button-maximize {
+    -fx-padding: 5 20 5 20;
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+    -fx-border-radius: 0;
+    -fx-background-radius: 0;
+    -fx-background-color: transparent;
+
+    -fx-background-image: url(../Icons/windowControlMax.png);
+    -fx-background-size: 15px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+}
+
+.button-maximize:pressed {
+    -fx-background-color: #4827be;
+}
+
+.button-maximize:selected {
+    -fx-background-image: url(../Icons/windowControlMaxToggled.png);
+    -fx-background-size: 15px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+}
+
+.button-maximize:selected:pressed {
+    -fx-background-color: #4827be;
+}
+
+.button-maximize:hover {
+    -fx-background-color: #512bd4;
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+    -fx-border-radius: 0;
+    -fx-background-radius: 0;
+}

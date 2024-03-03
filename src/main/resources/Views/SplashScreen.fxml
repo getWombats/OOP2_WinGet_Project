@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<Pane fx:id="splashScreenRootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="255.0" prefWidth="470.0" style="-fx-background-color: #1d1d1d; -fx-border-width: 1; -fx-border-color: #333333;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.hftm.oop2_winget_project.Controller.SplashScreenController">
+   <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#4d4dff" height="113.0" layoutY="142.0" stroke="BLACK" strokeType="INSIDE" visible="false" width="470.0" />
+      <ImageView fitHeight="70.0" fitWidth="70.0" layoutX="81.0" layoutY="57.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Icons/taskbarIcon_colorized.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="181.0" layoutY="55.0" text="winget UI" textFill="#d7d7d7">
+         <font>
+            <Font size="51.0" />
+         </font>
+      </Label>
+      <Label layoutX="81.0" layoutY="140.0" text="OOP2 Project by Luca Bützberger and Andrés Soria" textFill="#363636">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+      <Label layoutX="140.0" layoutY="217.0" prefHeight="25.0" prefWidth="225.0" text="Loading installed packages..." textFill="#363636">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <ProgressBar layoutX="140.0" layoutY="199.0" prefHeight="6.0" prefWidth="190.0" stylesheets="@../CSS/DarkTheme.css" />
+      <Label layoutX="81.0" layoutY="157.0" text="2024" textFill="#363636">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+   </children>
+   <cursor>
+      <Cursor fx:constant="WAIT" />
+   </cursor>
+</Pane>

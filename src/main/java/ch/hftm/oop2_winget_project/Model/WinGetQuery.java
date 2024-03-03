@@ -42,7 +42,8 @@ public class WinGetQuery
         ProcessBuilder processBuilder = null;
 
         switch(queryType){
-            case SEARCH, LIST -> processBuilder = new ProcessBuilder("winget.exe", queryType.toString(), keyWord, "--accept-source-agreements");
+//            case SEARCH, LIST -> processBuilder = new ProcessBuilder("winget.exe", queryType.toString(), keyWord, "--accept-source-agreements");
+            case SEARCH, LIST -> processBuilder = new ProcessBuilder("cmd.exe", "/c", "winget " + queryType + " " + keyWord + " --accept-source-agreements");
             case UPGRADE -> processBuilder = new ProcessBuilder("winget.exe", queryType.toString(), "--include-unknown", "--accept-source-agreements");
         }
 

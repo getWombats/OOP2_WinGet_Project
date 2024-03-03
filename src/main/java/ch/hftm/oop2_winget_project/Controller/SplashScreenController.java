@@ -34,12 +34,14 @@ public class SplashScreenController implements Initializable
 
     private void applicationLoad()
     {
-        WinGetQuery query = new WinGetQuery(QueryType.LIST);
+        WinGetQuery installedPackages = new WinGetQuery(QueryType.LIST);
+        WinGetQuery availableUpdates = new WinGetQuery(QueryType.UPGRADE);
         new Thread(() -> {
             try
             {
                 // Preload installed packages
-                query.queryToList("");
+                installedPackages.queryToList("");
+                availableUpdates.queryToList("");
             }
             catch (InterruptedException | IOException ex)
             {
@@ -47,7 +49,8 @@ public class SplashScreenController implements Initializable
             }
 
             Platform.runLater(() -> {
-                query.CreatePackageList(PackageList.getInstalledPackageList());
+                installedPackages.CreatePackageList(PackageList.getInstalledPackageList());
+                availableUpdates.CreateUpdateList(PackageList.getUpgradePackageList());
                 Stage stage = new Stage();
 
                 // WindowManager instance for Window Actions

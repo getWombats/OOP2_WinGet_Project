@@ -16,7 +16,7 @@
                 <HBox prefHeight="200.0" spacing="20.0">
                     <children>
                         <Label fx:id="label_title" styleClass="label-title" stylesheets="@../CSS/DarkTheme.css" />
-                        <Button fx:id="button_removePackageFromList" mnemonicParsing="false" onAction="#button_removePackageFromList" text="Delete From List" />
+                        <Button fx:id="button_removePackageFromList" mnemonicParsing="false" onAction="#button_removePackageFromList" styleClass="deleteButton" stylesheets="@../CSS/DarkTheme.css" text="Remove Selected Item" />
                         <TextField fx:id="textField_filter" promptText="Filter Packages" stylesheets="@../CSS/DarkTheme.css" />
                         <ComboBox fx:id="comboBox_filter" prefWidth="150.0" stylesheets="@../CSS/DarkTheme.css" />
                     </children>
@@ -25,12 +25,12 @@
         </HBox>
     </top>
     <center>
-        <TableView fx:id="tableView_packages" prefHeight="200.0" styleClass="installedTableView" stylesheets="@../CSS/DarkTheme.css" BorderPane.alignment="TOP_LEFT">
+        <TableView fx:id="tableView_packages" prefHeight="200.0" styleClass="tableView_packages" stylesheets="@../CSS/DarkTheme.css" BorderPane.alignment="TOP_LEFT">
             <columns>
-                <TableColumn fx:id="column_name" editable="false" minWidth="220.0" prefWidth="-1.0" resizable="false" reorderable="false" text="Name" />
-                <TableColumn fx:id="column_id" editable="false" minWidth="220.0" prefWidth="-1.0" resizable="false" reorderable="false" text="ID" />
-                <TableColumn fx:id="column_version" editable="false" minWidth="220.0" prefWidth="-1.0" resizable="false" reorderable="false" text="Version" />
-                <TableColumn fx:id="column_source" editable="false" minWidth="150.0" prefWidth="-1.0" resizable="false" reorderable="false" text="Source" />
+                <TableColumn fx:id="column_name" editable="false" minWidth="220.0" prefWidth="-1.0" reorderable="false" resizable="false" text="Name" />
+                <TableColumn fx:id="column_id" editable="false" minWidth="220.0" prefWidth="-1.0" reorderable="false" resizable="false" text="ID" />
+                <TableColumn fx:id="column_version" editable="false" minWidth="220.0" prefWidth="-1.0" reorderable="false" resizable="false" text="Version" />
+                <TableColumn fx:id="column_source" editable="false" minWidth="150.0" prefWidth="-1.0" reorderable="false" resizable="false" text="Source" />
                 <TableColumn fx:id="column_install" editable="false" minWidth="130.0" prefWidth="-1.0" resizable="false" />
             </columns>
          <columnResizePolicy>

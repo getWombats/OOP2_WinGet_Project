@@ -1,4 +1,5 @@
 module ch.hftm.oop2_winget_project {
+    requires java.base;
     requires javafx.controls;
     requires javafx.fxml;
     requires org.controlsfx.controls;

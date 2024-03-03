@@ -108,7 +108,7 @@ public class SearchPackagesController implements IControllerBase, Initializable
         } );
 
         // Set input validation
-        keywordTextField.setTextFormatter(InputValidator.createValidator());
+//        keywordTextField.setTextFormatter(InputValidator.createValidator());
     }
 
     private void setCollectionListenerForPackageCountLabel(){
